@@ -9,7 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSCodeGENExtension\CSCodeGENExtension.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>bin\Debug\net8.0-windows\FastColoredTextBox.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Form\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
