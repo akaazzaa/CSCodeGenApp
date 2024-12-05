@@ -1,4 +1,4 @@
-﻿namespace CSCodeGENExtension.Klassen
+﻿namespace CSCodeGenApp.Klassen.Template
 {
     public class Parameter
     {

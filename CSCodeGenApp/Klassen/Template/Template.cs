@@ -1,15 +1,13 @@
-﻿namespace CSCodeGENExtension.Klassen
+﻿namespace CSCodeGenApp.Klassen.Template
 {
     public class Template
     {
 
-
-
-        public string ClassName { get; set; } = "public";
+        public string ClassName { get; set; } 
 
         public List<PropertyModel> Properties { get; set; } = new();
 
-        public string NamespaceName { get; set; } = "GeneratedNamespace";
+        public string NamespaceName { get; set; } 
 
         public List<MethodModel> Methods { get; set; } = new();
 

@@ -1,4 +1,5 @@
-﻿using CSCodeGENExtension.Klassen;
+﻿using CSCodeGenApp.Klassen;
+using CSCodeGenApp.Klassen.Template;
 using Newtonsoft.Json;
 
 namespace CSCodeGenApp.Controller
@@ -6,6 +7,15 @@ namespace CSCodeGenApp.Controller
 
     public class TemplateController
     {
+       
+
+        public TemplateController()
+        {
+          
+
+
+        }
+
         public Template CreateNew()
         {
             return new Template();
@@ -25,22 +35,9 @@ namespace CSCodeGenApp.Controller
             return JsonConvert.DeserializeObject<List<Template>>(json);
         }
 
-        public void AddTemplate(Template template)
-        {
-            var templates = LoadTemplates();
-            templates.Add(template);
-            SaveTemplates(templates);
         }
 
-        public static void RemoveTemplate(string templateName)
-        {
-
-        }
-
-        public static void DisplayTemplates()
-        {
-
-        }
+      
         //public string GenerateCode()
         //{
         //    //StringBuilder classBuilder = new StringBuilder();

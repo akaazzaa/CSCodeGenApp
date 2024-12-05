@@ -28,23 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             pnlMain = new Panel();
-            panel1 = new Panel();
-            panel3 = new Panel();
-            panel2 = new Panel();
-            propertiesBindingSource = new BindingSource(components);
-            bsDaten = new BindingSource(components);
-            pnlSideL = new Panel();
+            pnlEditor = new Panel();
             pnlSideR = new Panel();
+            dataGridView1 = new DataGridView();
+            pnlSideL = new Panel();
+            listBox1 = new ListBox();
+            panel1 = new Panel();
             pnlMain.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)propertiesBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
+            pnlSideR.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            pnlSideL.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMain
             // 
+            pnlMain.Controls.Add(pnlEditor);
             pnlMain.Controls.Add(pnlSideR);
             pnlMain.Controls.Add(pnlSideL);
             pnlMain.Controls.Add(panel1);
@@ -52,77 +51,83 @@
             pnlMain.Location = new Point(0, 0);
             pnlMain.Margin = new Padding(4, 3, 4, 3);
             pnlMain.Name = "pnlMain";
-            pnlMain.Size = new Size(1470, 625);
+            pnlMain.Size = new Size(1327, 493);
             pnlMain.TabIndex = 0;
+            // 
+            // pnlEditor
+            // 
+            pnlEditor.BackColor = Color.FromArgb(64, 64, 64);
+            pnlEditor.Dock = DockStyle.Fill;
+            pnlEditor.Location = new Point(200, 30);
+            pnlEditor.Name = "pnlEditor";
+            pnlEditor.Size = new Size(927, 463);
+            pnlEditor.TabIndex = 3;
+            // 
+            // pnlSideR
+            // 
+            pnlSideR.Controls.Add(dataGridView1);
+            pnlSideR.Dock = DockStyle.Right;
+            pnlSideR.Location = new Point(1127, 30);
+            pnlSideR.Name = "pnlSideR";
+            pnlSideR.Size = new Size(200, 463);
+            pnlSideR.TabIndex = 2;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.BackgroundColor = Color.FromArgb(64, 64, 64);
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(200, 463);
+            dataGridView1.TabIndex = 0;
+            // 
+            // pnlSideL
+            // 
+            pnlSideL.Controls.Add(listBox1);
+            pnlSideL.Dock = DockStyle.Left;
+            pnlSideL.Location = new Point(0, 30);
+            pnlSideL.Name = "pnlSideL";
+            pnlSideL.Size = new Size(200, 463);
+            pnlSideL.TabIndex = 1;
+            // 
+            // listBox1
+            // 
+            listBox1.BackColor = Color.FromArgb(64, 64, 64);
+            listBox1.Dock = DockStyle.Fill;
+            listBox1.ForeColor = SystemColors.MenuBar;
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(0, 0);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(200, 463);
+            listBox1.TabIndex = 0;
             // 
             // panel1
             // 
-            panel1.Controls.Add(panel3);
-            panel1.Controls.Add(panel2);
+            panel1.BackColor = Color.FromArgb(64, 64, 64);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1470, 122);
+            panel1.Size = new Size(1327, 30);
             panel1.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 44);
-            panel3.Margin = new Padding(4, 3, 4, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1470, 78);
-            panel3.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Margin = new Padding(4, 3, 4, 3);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1470, 44);
-            panel2.TabIndex = 0;
-            // 
-            // propertiesBindingSource
-            // 
-            propertiesBindingSource.DataMember = "Properties";
-            propertiesBindingSource.DataSource = bsDaten;
-            // 
-            // bsDaten
-            // 
-            bsDaten.DataSource = typeof(Klassen.Template);
-            // 
-            // pnlSideL
-            // 
-            pnlSideL.Dock = DockStyle.Left;
-            pnlSideL.Location = new Point(0, 122);
-            pnlSideL.Name = "pnlSideL";
-            pnlSideL.Size = new Size(200, 503);
-            pnlSideL.TabIndex = 1;
-            // 
-            // pnlSideR
-            // 
-            pnlSideR.Dock = DockStyle.Right;
-            pnlSideR.Location = new Point(1270, 122);
-            pnlSideR.Name = "pnlSideR";
-            pnlSideR.Size = new Size(200, 503);
-            pnlSideR.TabIndex = 2;
             // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1470, 625);
+            ClientSize = new Size(1327, 493);
             Controls.Add(pnlMain);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
             Name = "frmMain";
             Text = "frmMain";
+            Load += frmMain_Load;
             pnlMain.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)propertiesBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsDaten).EndInit();
+            pnlSideR.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            pnlSideL.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -130,11 +135,10 @@
 
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.BindingSource bsDaten;
-        private BindingSource propertiesBindingSource;
         private Panel pnlSideL;
         private Panel pnlSideR;
+        private Panel pnlEditor;
+        private ListBox listBox1;
+        private DataGridView dataGridView1;
     }
 }
