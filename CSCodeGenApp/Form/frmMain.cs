@@ -53,7 +53,7 @@ namespace CSCodeGENExtension
         {
             controller = new TemplateController();
 
-            bsDaten.DataSource = controller.dataModel;
+            
         }
     }
 }
