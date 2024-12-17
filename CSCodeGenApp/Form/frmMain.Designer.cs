@@ -28,24 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             pnlMain = new Panel();
-            pnlEditor = new Panel();
-            pnlSideR = new Panel();
-            dataGridView1 = new DataGridView();
-            pnlSideL = new Panel();
-            listBox1 = new ListBox();
+            tabMain = new TabControl();
             panel1 = new Panel();
+            toolBar = new ToolStrip();
+            btnNeueKlasse = new ToolStripButton();
+            toolStripButton2 = new ToolStripButton();
+            toolStripButton1 = new ToolStripButton();
             pnlMain.SuspendLayout();
-            pnlSideR.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            pnlSideL.SuspendLayout();
+            panel1.SuspendLayout();
+            toolBar.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMain
             // 
-            pnlMain.Controls.Add(pnlEditor);
-            pnlMain.Controls.Add(pnlSideR);
-            pnlMain.Controls.Add(pnlSideL);
+            pnlMain.BackColor = Color.FromArgb(64, 64, 64);
+            pnlMain.Controls.Add(tabMain);
             pnlMain.Controls.Add(panel1);
             pnlMain.Dock = DockStyle.Fill;
             pnlMain.Location = new Point(0, 0);
@@ -54,64 +53,71 @@
             pnlMain.Size = new Size(1327, 493);
             pnlMain.TabIndex = 0;
             // 
-            // pnlEditor
+            // tabMain
             // 
-            pnlEditor.BackColor = Color.FromArgb(64, 64, 64);
-            pnlEditor.Dock = DockStyle.Fill;
-            pnlEditor.Location = new Point(200, 30);
-            pnlEditor.Name = "pnlEditor";
-            pnlEditor.Size = new Size(927, 463);
-            pnlEditor.TabIndex = 3;
-            // 
-            // pnlSideR
-            // 
-            pnlSideR.Controls.Add(dataGridView1);
-            pnlSideR.Dock = DockStyle.Right;
-            pnlSideR.Location = new Point(1127, 30);
-            pnlSideR.Name = "pnlSideR";
-            pnlSideR.Size = new Size(200, 463);
-            pnlSideR.TabIndex = 2;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = Color.FromArgb(64, 64, 64);
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(200, 463);
-            dataGridView1.TabIndex = 0;
-            // 
-            // pnlSideL
-            // 
-            pnlSideL.Controls.Add(listBox1);
-            pnlSideL.Dock = DockStyle.Left;
-            pnlSideL.Location = new Point(0, 30);
-            pnlSideL.Name = "pnlSideL";
-            pnlSideL.Size = new Size(200, 463);
-            pnlSideL.TabIndex = 1;
-            // 
-            // listBox1
-            // 
-            listBox1.BackColor = Color.FromArgb(64, 64, 64);
-            listBox1.Dock = DockStyle.Fill;
-            listBox1.ForeColor = SystemColors.MenuBar;
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(0, 0);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(200, 463);
-            listBox1.TabIndex = 0;
+            tabMain.Dock = DockStyle.Fill;
+            tabMain.Location = new Point(0, 30);
+            tabMain.Name = "tabMain";
+            tabMain.SelectedIndex = 0;
+            tabMain.Size = new Size(1327, 463);
+            tabMain.TabIndex = 0;
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(64, 64, 64);
+            panel1.Controls.Add(toolBar);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(4, 3, 4, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(1327, 30);
             panel1.TabIndex = 0;
+            // 
+            // toolBar
+            // 
+            toolBar.BackColor = Color.FromArgb(64, 64, 64);
+            toolBar.Dock = DockStyle.Fill;
+            toolBar.GripStyle = ToolStripGripStyle.Hidden;
+            toolBar.Items.AddRange(new ToolStripItem[] { btnNeueKlasse, toolStripButton2, toolStripButton1 });
+            toolBar.Location = new Point(0, 0);
+            toolBar.Name = "toolBar";
+            toolBar.Size = new Size(1327, 30);
+            toolBar.TabIndex = 0;
+            toolBar.Text = "toolStrip1";
+            // 
+            // btnNeueKlasse
+            // 
+            btnNeueKlasse.BackColor = Color.FromArgb(64, 64, 64);
+            btnNeueKlasse.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnNeueKlasse.ForeColor = SystemColors.ControlDark;
+            btnNeueKlasse.Image = (Image)resources.GetObject("btnNeueKlasse.Image");
+            btnNeueKlasse.ImageTransparentColor = Color.Magenta;
+            btnNeueKlasse.Name = "btnNeueKlasse";
+            btnNeueKlasse.Size = new Size(74, 27);
+            btnNeueKlasse.Text = "Neue Klasse";
+            btnNeueKlasse.Click += btnNeueKlasse_Click;
+            // 
+            // toolStripButton2
+            // 
+            toolStripButton2.BackColor = Color.FromArgb(64, 64, 64);
+            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton2.ForeColor = SystemColors.ControlDark;
+            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.ImageTransparentColor = Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(102, 27);
+            toolStripButton2.Text = "Klasse bearbeiten";
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.BackColor = Color.FromArgb(64, 64, 64);
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton1.ForeColor = SystemColors.ControlDark;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(74, 27);
+            toolStripButton1.Text = "Neue Klasse";
             // 
             // frmMain
             // 
@@ -125,9 +131,10 @@
             Text = "frmMain";
             Load += frmMain_Load;
             pnlMain.ResumeLayout(false);
-            pnlSideR.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            pnlSideL.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            toolBar.ResumeLayout(false);
+            toolBar.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -135,10 +142,10 @@
 
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel panel1;
-        private Panel pnlSideL;
-        private Panel pnlSideR;
-        private Panel pnlEditor;
-        private ListBox listBox1;
-        private DataGridView dataGridView1;
+        private TabControl tabMain;
+        private ToolStrip toolBar;
+        private ToolStripButton btnNeueKlasse;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton1;
     }
 }
