@@ -1,6 +1,6 @@
-using CSCodeGENExtension;
 
-namespace CSCodeGenApp
+
+namespace CSCodeGen.Ui
 {
     internal static class Program
     {

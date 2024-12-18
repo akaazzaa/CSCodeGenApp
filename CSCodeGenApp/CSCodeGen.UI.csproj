@@ -9,29 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Properties\DataSources\**" />
-    <EmbeddedResource Remove="Properties\DataSources\**" />
-    <None Remove="Properties\DataSources\**" />
+    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Form\frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\frmMain.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="FastColoredTextBox">
       <HintPath>bin\Debug\net8.0-windows\FastColoredTextBox.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

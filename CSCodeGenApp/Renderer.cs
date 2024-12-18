@@ -1,4 +1,4 @@
-﻿namespace CSCodeGenApp
+﻿namespace CSCodeGen.Ui
 {
     class Renderer : ToolStripProfessionalRenderer
     {

@@ -1,4 +1,4 @@
-﻿namespace CSCodeGENExtension
+﻿namespace CSCodeGen.Ui
 {
     partial class frmMain
     {
@@ -36,6 +36,7 @@
             btnNeueKlasse = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
             toolStripButton1 = new ToolStripButton();
+            toolStripButton3 = new ToolStripButton();
             pnlMain.SuspendLayout();
             panel1.SuspendLayout();
             toolBar.SuspendLayout();
@@ -50,7 +51,7 @@
             pnlMain.Location = new Point(0, 0);
             pnlMain.Margin = new Padding(4, 3, 4, 3);
             pnlMain.Name = "pnlMain";
-            pnlMain.Size = new Size(1327, 493);
+            pnlMain.Size = new Size(1327, 537);
             pnlMain.TabIndex = 0;
             // 
             // tabMain
@@ -59,8 +60,8 @@
             tabMain.Location = new Point(0, 30);
             tabMain.Name = "tabMain";
             tabMain.SelectedIndex = 0;
-            tabMain.Size = new Size(1327, 463);
-            tabMain.TabIndex = 0;
+            tabMain.Size = new Size(1327, 507);
+            tabMain.TabIndex = 1;
             // 
             // panel1
             // 
@@ -78,7 +79,7 @@
             toolBar.BackColor = Color.FromArgb(64, 64, 64);
             toolBar.Dock = DockStyle.Fill;
             toolBar.GripStyle = ToolStripGripStyle.Hidden;
-            toolBar.Items.AddRange(new ToolStripItem[] { btnNeueKlasse, toolStripButton2, toolStripButton1 });
+            toolBar.Items.AddRange(new ToolStripItem[] { btnNeueKlasse, toolStripButton2, toolStripButton1, toolStripButton3 });
             toolBar.Location = new Point(0, 0);
             toolBar.Name = "toolBar";
             toolBar.Size = new Size(1327, 30);
@@ -119,11 +120,23 @@
             toolStripButton1.Size = new Size(74, 27);
             toolStripButton1.Text = "Neue Klasse";
             // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton3.ForeColor = SystemColors.ControlDark;
+            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(108, 27);
+            toolStripButton3.Text = "Template Designer";
+            toolStripButton3.Click += toolStripButton3_Click;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1327, 493);
+            BackColor = SystemColors.ButtonFace;
+            ClientSize = new Size(1327, 537);
             Controls.Add(pnlMain);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 3, 4, 3);
@@ -142,10 +155,11 @@
 
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel panel1;
-        private TabControl tabMain;
         private ToolStrip toolBar;
         private ToolStripButton btnNeueKlasse;
         private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButton1;
+        private TabControl tabMain;
+        private ToolStripButton toolStripButton3;
     }
 }

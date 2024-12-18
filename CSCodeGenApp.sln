@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGenApp", "CSCodeGenApp\CSCodeGenApp.csproj", "{99DF7977-CFC4-4C28-A95E-0F2F8DC283D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.UI", "CSCodeGenApp\CSCodeGen.UI.csproj", "{99DF7977-CFC4-4C28-A95E-0F2F8DC283D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Library", "CSCodeGen.Library\CSCodeGen.Library.csproj", "{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Test", "CSCodeGen.Test\CSCodeGen.Test.csproj", "{06F7010E-C95E-4724-90AB-6C631E9FA7BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +19,19 @@ Global
 		{99DF7977-CFC4-4C28-A95E-0F2F8DC283D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DF7977-CFC4-4C28-A95E-0F2F8DC283D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DF7977-CFC4-4C28-A95E-0F2F8DC283D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06F7010E-C95E-4724-90AB-6C631E9FA7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F7010E-C95E-4724-90AB-6C631E9FA7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F7010E-C95E-4724-90AB-6C631E9FA7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F7010E-C95E-4724-90AB-6C631E9FA7BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7525046-7361-4FAF-BA44-4FE68B859721}
 	EndGlobalSection
 EndGlobal
