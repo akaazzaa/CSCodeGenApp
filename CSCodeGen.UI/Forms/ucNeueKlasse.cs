@@ -30,8 +30,8 @@ namespace CSCodeGen.Ui
                 comboBox2.SelectedIndex = 1; 
             }
 
-           
-
+            currentTemplate = TemplateController.Instance.GetTemplate(comboBox1.SelectedIndex);
+            fastColoredTextBox.Text = currentTemplate.DisplayText;
         }
 
         private void btnAddProperties_Click(object sender, EventArgs e)

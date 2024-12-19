@@ -117,13 +117,16 @@
             // 
             gcMethods.AllowUserToAddRows = false;
             gcMethods.AutoGenerateColumns = false;
+            gcMethods.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gcMethods.BorderStyle = BorderStyle.None;
             gcMethods.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gcMethods.Columns.AddRange(new DataGridViewColumn[] { modifiziererDataGridViewTextBoxColumn, rückgabewertDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn1 });
             gcMethods.DataSource = methodsBS;
             gcMethods.Dock = DockStyle.Top;
-            gcMethods.Location = new Point(33, 350);
+            gcMethods.Location = new Point(58, 350);
+            gcMethods.MultiSelect = false;
             gcMethods.Name = "gcMethods";
-            gcMethods.Size = new Size(507, 161);
+            gcMethods.Size = new Size(482, 161);
             gcMethods.TabIndex = 6;
             // 
             // modifiziererDataGridViewTextBoxColumn
@@ -157,7 +160,7 @@
             // 
             lblMethoden.AutoSize = true;
             lblMethoden.Dock = DockStyle.Top;
-            lblMethoden.Location = new Point(33, 335);
+            lblMethoden.Location = new Point(58, 335);
             lblMethoden.Name = "lblMethoden";
             lblMethoden.Size = new Size(62, 15);
             lblMethoden.TabIndex = 5;
@@ -167,13 +170,16 @@
             // 
             gcProps.AllowUserToAddRows = false;
             gcProps.AutoGenerateColumns = false;
+            gcProps.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gcProps.BorderStyle = BorderStyle.None;
             gcProps.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gcProps.Columns.AddRange(new DataGridViewColumn[] { accessTypeDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn });
             gcProps.DataSource = propertiesBS;
             gcProps.Dock = DockStyle.Top;
-            gcProps.Location = new Point(33, 161);
+            gcProps.Location = new Point(58, 161);
+            gcProps.MultiSelect = false;
             gcProps.Name = "gcProps";
-            gcProps.Size = new Size(507, 174);
+            gcProps.Size = new Size(482, 174);
             gcProps.TabIndex = 4;
             // 
             // accessTypeDataGridViewTextBoxColumn
@@ -203,7 +209,7 @@
             // 
             lblProperties.AutoSize = true;
             lblProperties.Dock = DockStyle.Top;
-            lblProperties.Location = new Point(33, 146);
+            lblProperties.Location = new Point(58, 146);
             lblProperties.Name = "lblProperties";
             lblProperties.Size = new Size(60, 15);
             lblProperties.TabIndex = 3;
@@ -212,6 +218,8 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = SystemColors.ButtonShadow;
+            label1.ForeColor = SystemColors.Control;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(103, 15);
@@ -220,85 +228,95 @@
             // 
             // pnlToolbar
             // 
+            pnlToolbar.BackColor = SystemColors.ControlDarkDark;
             pnlToolbar.Controls.Add(pnlToolbar2);
             pnlToolbar.Controls.Add(toolStrip1);
             pnlToolbar.Dock = DockStyle.Left;
             pnlToolbar.Location = new Point(0, 146);
             pnlToolbar.Name = "pnlToolbar";
-            pnlToolbar.Size = new Size(33, 365);
+            pnlToolbar.Size = new Size(58, 365);
             pnlToolbar.TabIndex = 1;
             // 
             // pnlToolbar2
             // 
             pnlToolbar2.Controls.Add(toolStrip2);
             pnlToolbar2.Dock = DockStyle.Bottom;
-            pnlToolbar2.Location = new Point(0, 204);
+            pnlToolbar2.Location = new Point(0, 189);
             pnlToolbar2.Name = "pnlToolbar2";
-            pnlToolbar2.Size = new Size(33, 161);
+            pnlToolbar2.Size = new Size(58, 176);
             pnlToolbar2.TabIndex = 1;
             // 
             // toolStrip2
             // 
+            toolStrip2.BackColor = SystemColors.ControlDarkDark;
+            toolStrip2.Dock = DockStyle.Fill;
             toolStrip2.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip2.Items.AddRange(new ToolStripItem[] { btnAddMethods, btnDeleteMethods });
             toolStrip2.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStrip2.Location = new Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(33, 46);
+            toolStrip2.Size = new Size(58, 176);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
             // btnAddMethods
             // 
+            btnAddMethods.BackColor = SystemColors.ButtonShadow;
             btnAddMethods.DisplayStyle = ToolStripItemDisplayStyle.Text;
             btnAddMethods.Image = (Image)resources.GetObject("btnAddMethods.Image");
             btnAddMethods.ImageTransparentColor = Color.Magenta;
             btnAddMethods.Name = "btnAddMethods";
-            btnAddMethods.Size = new Size(31, 19);
+            btnAddMethods.Size = new Size(56, 19);
             btnAddMethods.Text = "+";
             // 
             // btnDeleteMethods
             // 
+            btnDeleteMethods.BackColor = SystemColors.ButtonShadow;
             btnDeleteMethods.DisplayStyle = ToolStripItemDisplayStyle.Text;
             btnDeleteMethods.Image = (Image)resources.GetObject("btnDeleteMethods.Image");
             btnDeleteMethods.ImageTransparentColor = Color.Magenta;
             btnDeleteMethods.Name = "btnDeleteMethods";
-            btnDeleteMethods.Size = new Size(31, 19);
+            btnDeleteMethods.Size = new Size(56, 19);
             btnDeleteMethods.Text = "-";
             // 
             // toolStrip1
             // 
+            toolStrip1.BackColor = SystemColors.ControlDarkDark;
+            toolStrip1.Dock = DockStyle.Fill;
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.Items.AddRange(new ToolStripItem[] { btnAddProperties, btnDeleteProperties });
             toolStrip1.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(33, 46);
+            toolStrip1.Size = new Size(58, 365);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
             // btnAddProperties
             // 
+            btnAddProperties.BackColor = SystemColors.ButtonShadow;
             btnAddProperties.DisplayStyle = ToolStripItemDisplayStyle.Text;
             btnAddProperties.Image = (Image)resources.GetObject("btnAddProperties.Image");
             btnAddProperties.ImageTransparentColor = Color.Magenta;
             btnAddProperties.Name = "btnAddProperties";
-            btnAddProperties.Size = new Size(31, 19);
+            btnAddProperties.Size = new Size(56, 19);
             btnAddProperties.Text = "+";
             btnAddProperties.Click += btnAddProperties_Click;
             // 
             // btnDeleteProperties
             // 
+            btnDeleteProperties.BackColor = SystemColors.ButtonShadow;
             btnDeleteProperties.DisplayStyle = ToolStripItemDisplayStyle.Text;
             btnDeleteProperties.Image = (Image)resources.GetObject("btnDeleteProperties.Image");
             btnDeleteProperties.ImageTransparentColor = Color.Magenta;
             btnDeleteProperties.Name = "btnDeleteProperties";
-            btnDeleteProperties.Size = new Size(31, 19);
+            btnDeleteProperties.Size = new Size(56, 19);
             btnDeleteProperties.Text = "-";
             btnDeleteProperties.Click += btnDeleteProperties_Click;
             // 
             // pnlFields
             // 
+            pnlFields.BackColor = SystemColors.ControlDarkDark;
             pnlFields.Controls.Add(btnGenerate);
             pnlFields.Controls.Add(comboBox2);
             pnlFields.Controls.Add(comboBox1);
@@ -316,7 +334,8 @@
             // 
             // btnGenerate
             // 
-            btnGenerate.Location = new Point(318, 108);
+            btnGenerate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnGenerate.Location = new Point(462, 108);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(75, 23);
             btnGenerate.TabIndex = 8;
@@ -346,6 +365,7 @@
             // lblTemplate
             // 
             lblTemplate.AutoSize = true;
+            lblTemplate.ForeColor = SystemColors.Control;
             lblTemplate.Location = new Point(19, 24);
             lblTemplate.Name = "lblTemplate";
             lblTemplate.Size = new Size(61, 15);
@@ -371,6 +391,7 @@
             // lblZugriff
             // 
             lblZugriff.AutoSize = true;
+            lblZugriff.ForeColor = SystemColors.Control;
             lblZugriff.Location = new Point(19, 108);
             lblZugriff.Name = "lblZugriff";
             lblZugriff.Size = new Size(43, 15);
@@ -380,6 +401,7 @@
             // lblNamespace
             // 
             lblNamespace.AutoSize = true;
+            lblNamespace.ForeColor = SystemColors.Control;
             lblNamespace.Location = new Point(19, 81);
             lblNamespace.Name = "lblNamespace";
             lblNamespace.Size = new Size(69, 15);
@@ -389,6 +411,7 @@
             // lblName
             // 
             lblName.AutoSize = true;
+            lblName.ForeColor = SystemColors.Control;
             lblName.Location = new Point(19, 53);
             lblName.Name = "lblName";
             lblName.Size = new Size(39, 15);
