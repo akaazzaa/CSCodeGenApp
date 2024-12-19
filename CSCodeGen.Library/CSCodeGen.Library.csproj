@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Controller\TemplateController.cs" />
+    <Compile Include="Klassen\CSDatei\Datei.cs" />
     <Compile Include="Klassen\Template\MethodModel.cs" />
     <Compile Include="Klassen\Template\PropertyModel.cs" />
     <Compile Include="Klassen\Template\Template.cs" />
@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Templates\Templates.json" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

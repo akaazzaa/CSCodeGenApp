@@ -1,45 +1,16 @@
 ﻿
 using CSCodeGen.Library.Controller;
+using CSCodeGen.Library.Klassen.Template;
 using FastColoredTextBoxNS;
 
 namespace CSCodeGen.Ui
 {
     public partial class frmMain : Form
     {
-        private TemplateController controller;
-        private FastColoredTextBox fastColoredTextBox;
-
-
         public frmMain()
         {
             InitializeComponent();
             toolBar.Renderer = new Renderer();
-
-
-
-
-
-            /// To DO::
-            /// Klassen von der Form trennen 
-            /// 
-            /// Models anpassen, hinzufügen was noch fehlt (usings, Property, Variabeln, Auswahl an Datentypen mit einem Enum villeicht.
-            /// 
-            /// Methode zum darstellen von Templates
-            /// - string aus Template erstellen erstellen  
-            /// - In die FCTB schreiben.
-            /// 
-
-            /// Funktion zum erstellen und bearbeiten 
-            /// - Template Designer mit <#<NodeClass>#> umd die per laufzeit durch die hinzugfügten Daten zu tauschen. 
-            /// - Suchen un ersetzten 
-        }
-
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            controller = new TemplateController();
-
-
         }
 
         private void btnNeueKlasse_Click(object sender, EventArgs e)
@@ -47,7 +18,6 @@ namespace CSCodeGen.Ui
             ucNeueKlasse classWindow = new ucNeueKlasse();
             classWindow.Dock = DockStyle.Fill;
             AddNewTab(classWindow);
-
 
         }
 
@@ -60,9 +30,24 @@ namespace CSCodeGen.Ui
             tabMain.TabPages.Add(tabPage);
         }
 
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+
+        }
+
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
+            frmDesigner frmDesigner = new frmDesigner();
+            if(frmDesigner.ShowDialog() == DialogResult.OK)
+            {
 
+            }
         }
     }
 }

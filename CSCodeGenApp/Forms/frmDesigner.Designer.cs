@@ -59,6 +59,7 @@
             // 
             // toolStrip1
             // 
+            toolStrip1.BackColor = Color.FromArgb(64, 64, 64);
             toolStrip1.Dock = DockStyle.Fill;
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2 });
@@ -71,10 +72,11 @@
             // toolStripButton1
             // 
             toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton1.ForeColor = SystemColors.Control;
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(95, 26);
+            toolStripButton1.Size = new Size(96, 26);
             toolStripButton1.Text = "Neues Template";
             // 
             // toolStripButton2

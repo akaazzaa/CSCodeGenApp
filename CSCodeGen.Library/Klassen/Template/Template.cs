@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace CSCodeGen.Library.Klassen.Template
@@ -11,11 +12,11 @@ namespace CSCodeGen.Library.Klassen.Template
         public string AccessType { get; set; }
         public string ClassName { get; set; }
 
-        public List<PropertyModel> Properties { get; set; }
+        public BindingList<PropertyModel> Properties { get; set; }
 
         public string NamespaceName { get; set; }
 
-        public List<MethodModel> Methods { get; set; }
+        public BindingList<MethodModel> Methods { get; set; }
 
         public string DisplayText
         {
@@ -46,8 +47,8 @@ namespace CSCodeGen.Library.Klassen.Template
 
         public Template()
         {
-            Methods = new List<MethodModel>();
-            Properties = new List<PropertyModel>();
+            Methods = new BindingList<MethodModel>();
+            Properties = new BindingList<PropertyModel>();
 
         }
 

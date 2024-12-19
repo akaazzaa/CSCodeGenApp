@@ -32,33 +32,33 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucNeueKlasse));
             pnlMain = new Panel();
             splitContainer1 = new SplitContainer();
-            dataGridView2 = new DataGridView();
-            zugriffDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            gcMethods = new DataGridView();
             modifiziererDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             rückgabewertDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            methodsBindingSource = new BindingSource(components);
+            methodsBS = new BindingSource(components);
+            templateBS = new BindingSource(components);
             lblMethoden = new Label();
-            dataGridView1 = new DataGridView();
+            gcProps = new DataGridView();
             accessTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            propertiesBindingSource = new BindingSource(components);
+            propertiesBS = new BindingSource(components);
             lblProperties = new Label();
             label1 = new Label();
             pnlToolbar = new Panel();
             pnlToolbar2 = new Panel();
             toolStrip2 = new ToolStrip();
-            toolStripButton3 = new ToolStripButton();
-            toolStripButton4 = new ToolStripButton();
+            btnAddMethods = new ToolStripButton();
+            btnDeleteMethods = new ToolStripButton();
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
+            btnAddProperties = new ToolStripButton();
+            btnDeleteProperties = new ToolStripButton();
             pnlFields = new Panel();
+            btnGenerate = new Button();
+            comboBox2 = new ComboBox();
             comboBox1 = new ComboBox();
-            templateBindingSource = new BindingSource(components);
             lblTemplate = new Label();
-            textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             lblZugriff = new Label();
@@ -68,16 +68,16 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)methodsBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)propertiesBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gcMethods).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)methodsBS).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)templateBS).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gcProps).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)propertiesBS).BeginInit();
             pnlToolbar.SuspendLayout();
             pnlToolbar2.SuspendLayout();
             toolStrip2.SuspendLayout();
             toolStrip1.SuspendLayout();
             pnlFields.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)templateBindingSource).BeginInit();
             SuspendLayout();
             // 
             // pnlMain
@@ -97,9 +97,9 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(dataGridView2);
+            splitContainer1.Panel1.Controls.Add(gcMethods);
             splitContainer1.Panel1.Controls.Add(lblMethoden);
-            splitContainer1.Panel1.Controls.Add(dataGridView1);
+            splitContainer1.Panel1.Controls.Add(gcProps);
             splitContainer1.Panel1.Controls.Add(lblProperties);
             splitContainer1.Panel1.Controls.Add(label1);
             splitContainer1.Panel1.Controls.Add(pnlToolbar);
@@ -110,26 +110,21 @@
             // 
             splitContainer1.Panel2.BackColor = Color.FromArgb(255, 255, 192);
             splitContainer1.Size = new Size(989, 511);
-            splitContainer1.SplitterDistance = 477;
+            splitContainer1.SplitterDistance = 540;
             splitContainer1.TabIndex = 0;
             // 
-            // dataGridView2
+            // gcMethods
             // 
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { zugriffDataGridViewTextBoxColumn, modifiziererDataGridViewTextBoxColumn, rückgabewertDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn1 });
-            dataGridView2.DataSource = methodsBindingSource;
-            dataGridView2.Dock = DockStyle.Top;
-            dataGridView2.Location = new Point(33, 350);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(444, 161);
-            dataGridView2.TabIndex = 6;
-            // 
-            // zugriffDataGridViewTextBoxColumn
-            // 
-            zugriffDataGridViewTextBoxColumn.DataPropertyName = "Zugriff";
-            zugriffDataGridViewTextBoxColumn.HeaderText = "Zugriff";
-            zugriffDataGridViewTextBoxColumn.Name = "zugriffDataGridViewTextBoxColumn";
+            gcMethods.AllowUserToAddRows = false;
+            gcMethods.AutoGenerateColumns = false;
+            gcMethods.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gcMethods.Columns.AddRange(new DataGridViewColumn[] { modifiziererDataGridViewTextBoxColumn, rückgabewertDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn1 });
+            gcMethods.DataSource = methodsBS;
+            gcMethods.Dock = DockStyle.Top;
+            gcMethods.Location = new Point(33, 350);
+            gcMethods.Name = "gcMethods";
+            gcMethods.Size = new Size(507, 161);
+            gcMethods.TabIndex = 6;
             // 
             // modifiziererDataGridViewTextBoxColumn
             // 
@@ -149,10 +144,14 @@
             nameDataGridViewTextBoxColumn1.HeaderText = "Name";
             nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
             // 
-            // methodsBindingSource
+            // methodsBS
             // 
-            methodsBindingSource.DataMember = "Methods";
-            methodsBindingSource.DataSource = typeof(Library.Klassen.Template.Template);
+            methodsBS.DataMember = "Methods";
+            methodsBS.DataSource = templateBS;
+            // 
+            // templateBS
+            // 
+            templateBS.DataSource = typeof(Library.Klassen.Template.Template);
             // 
             // lblMethoden
             // 
@@ -164,17 +163,18 @@
             lblMethoden.TabIndex = 5;
             lblMethoden.Text = "Methoden";
             // 
-            // dataGridView1
+            // gcProps
             // 
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { accessTypeDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn });
-            dataGridView1.DataSource = propertiesBindingSource;
-            dataGridView1.Dock = DockStyle.Top;
-            dataGridView1.Location = new Point(33, 161);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(444, 174);
-            dataGridView1.TabIndex = 4;
+            gcProps.AllowUserToAddRows = false;
+            gcProps.AutoGenerateColumns = false;
+            gcProps.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gcProps.Columns.AddRange(new DataGridViewColumn[] { accessTypeDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn });
+            gcProps.DataSource = propertiesBS;
+            gcProps.Dock = DockStyle.Top;
+            gcProps.Location = new Point(33, 161);
+            gcProps.Name = "gcProps";
+            gcProps.Size = new Size(507, 174);
+            gcProps.TabIndex = 4;
             // 
             // accessTypeDataGridViewTextBoxColumn
             // 
@@ -194,10 +194,10 @@
             typeDataGridViewTextBoxColumn.HeaderText = "Type";
             typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
             // 
-            // propertiesBindingSource
+            // propertiesBS
             // 
-            propertiesBindingSource.DataMember = "Properties";
-            propertiesBindingSource.DataSource = typeof(Library.Klassen.Template.Template);
+            propertiesBS.DataMember = "Properties";
+            propertiesBS.DataSource = templateBS;
             // 
             // lblProperties
             // 
@@ -214,9 +214,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(103, 15);
             label1.TabIndex = 2;
-            label1.Text = "label1";
+            label1.Text = "Klasse Eigenschaft";
             // 
             // pnlToolbar
             // 
@@ -240,66 +240,69 @@
             // toolStrip2
             // 
             toolStrip2.GripStyle = ToolStripGripStyle.Hidden;
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripButton3, toolStripButton4 });
+            toolStrip2.Items.AddRange(new ToolStripItem[] { btnAddMethods, btnDeleteMethods });
             toolStrip2.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStrip2.Location = new Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(33, 48);
+            toolStrip2.Size = new Size(33, 46);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButton3
+            // btnAddMethods
             // 
-            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(31, 20);
-            toolStripButton3.Text = "toolStripButton3";
+            btnAddMethods.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnAddMethods.Image = (Image)resources.GetObject("btnAddMethods.Image");
+            btnAddMethods.ImageTransparentColor = Color.Magenta;
+            btnAddMethods.Name = "btnAddMethods";
+            btnAddMethods.Size = new Size(31, 19);
+            btnAddMethods.Text = "+";
             // 
-            // toolStripButton4
+            // btnDeleteMethods
             // 
-            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(31, 20);
-            toolStripButton4.Text = "toolStripButton4";
+            btnDeleteMethods.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnDeleteMethods.Image = (Image)resources.GetObject("btnDeleteMethods.Image");
+            btnDeleteMethods.ImageTransparentColor = Color.Magenta;
+            btnDeleteMethods.Name = "btnDeleteMethods";
+            btnDeleteMethods.Size = new Size(31, 19);
+            btnDeleteMethods.Text = "-";
             // 
             // toolStrip1
             // 
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAddProperties, btnDeleteProperties });
             toolStrip1.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(33, 48);
+            toolStrip1.Size = new Size(33, 46);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btnAddProperties
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(31, 20);
-            toolStripButton1.Text = "toolStripButton1";
+            btnAddProperties.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnAddProperties.Image = (Image)resources.GetObject("btnAddProperties.Image");
+            btnAddProperties.ImageTransparentColor = Color.Magenta;
+            btnAddProperties.Name = "btnAddProperties";
+            btnAddProperties.Size = new Size(31, 19);
+            btnAddProperties.Text = "+";
+            btnAddProperties.Click += btnAddProperties_Click;
             // 
-            // toolStripButton2
+            // btnDeleteProperties
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(31, 20);
-            toolStripButton2.Text = "toolStripButton2";
+            btnDeleteProperties.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnDeleteProperties.Image = (Image)resources.GetObject("btnDeleteProperties.Image");
+            btnDeleteProperties.ImageTransparentColor = Color.Magenta;
+            btnDeleteProperties.Name = "btnDeleteProperties";
+            btnDeleteProperties.Size = new Size(31, 19);
+            btnDeleteProperties.Text = "-";
+            btnDeleteProperties.Click += btnDeleteProperties_Click;
             // 
             // pnlFields
             // 
+            pnlFields.Controls.Add(btnGenerate);
+            pnlFields.Controls.Add(comboBox2);
             pnlFields.Controls.Add(comboBox1);
             pnlFields.Controls.Add(lblTemplate);
-            pnlFields.Controls.Add(textBox3);
             pnlFields.Controls.Add(textBox2);
             pnlFields.Controls.Add(textBox1);
             pnlFields.Controls.Add(lblZugriff);
@@ -308,42 +311,50 @@
             pnlFields.Dock = DockStyle.Top;
             pnlFields.Location = new Point(0, 0);
             pnlFields.Name = "pnlFields";
-            pnlFields.Size = new Size(477, 146);
+            pnlFields.Size = new Size(540, 146);
             pnlFields.TabIndex = 0;
+            // 
+            // btnGenerate
+            // 
+            btnGenerate.Location = new Point(318, 108);
+            btnGenerate.Name = "btnGenerate";
+            btnGenerate.Size = new Size(75, 23);
+            btnGenerate.TabIndex = 8;
+            btnGenerate.Text = "Generate";
+            btnGenerate.UseVisualStyleBackColor = true;
+            // 
+            // comboBox2
+            // 
+            comboBox2.DataBindings.Add(new Binding("Text", templateBS, "AccessType", true, DataSourceUpdateMode.OnPropertyChanged));
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(94, 108);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(218, 23);
+            comboBox2.TabIndex = 7;
             // 
             // comboBox1
             // 
-            comboBox1.DataBindings.Add(new Binding("SelectedValue", templateBindingSource, "TemplateName", true));
-            comboBox1.DataSource = templateBindingSource;
+            comboBox1.DataSource = templateBS;
             comboBox1.DisplayMember = "TemplateName";
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(94, 16);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(218, 23);
             comboBox1.TabIndex = 6;
-            // 
-            // templateBindingSource
-            // 
-            templateBindingSource.DataSource = typeof(Library.Klassen.Template.Template);
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // lblTemplate
             // 
             lblTemplate.AutoSize = true;
             lblTemplate.Location = new Point(19, 24);
             lblTemplate.Name = "lblTemplate";
-            lblTemplate.Size = new Size(60, 15);
+            lblTemplate.Size = new Size(61, 15);
             lblTemplate.TabIndex = 5;
             lblTemplate.Text = "Templates";
             // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(94, 102);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(218, 23);
-            textBox3.TabIndex = 4;
-            // 
             // textBox2
             // 
+            textBox2.DataBindings.Add(new Binding("Text", templateBS, "NamespaceName", true, DataSourceUpdateMode.OnPropertyChanged));
             textBox2.Location = new Point(94, 73);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(218, 23);
@@ -351,7 +362,7 @@
             // 
             // textBox1
             // 
-            textBox1.DataBindings.Add(new Binding("Text", templateBindingSource, "ClassName", true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox1.DataBindings.Add(new Binding("Text", templateBS, "ClassName", true, DataSourceUpdateMode.OnPropertyChanged));
             textBox1.Location = new Point(94, 45);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(218, 23);
@@ -396,10 +407,11 @@
             splitContainer1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)methodsBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)propertiesBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gcMethods).EndInit();
+            ((System.ComponentModel.ISupportInitialize)methodsBS).EndInit();
+            ((System.ComponentModel.ISupportInitialize)templateBS).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gcProps).EndInit();
+            ((System.ComponentModel.ISupportInitialize)propertiesBS).EndInit();
             pnlToolbar.ResumeLayout(false);
             pnlToolbar.PerformLayout();
             pnlToolbar2.ResumeLayout(false);
@@ -410,7 +422,6 @@
             toolStrip1.PerformLayout();
             pnlFields.ResumeLayout(false);
             pnlFields.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)templateBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -423,32 +434,33 @@
         private Label lblNamespace;
         private Label lblName;
         private TextBox textBox1;
-        private TextBox textBox3;
         private TextBox textBox2;
         private Label lblTemplate;
         private ComboBox comboBox1;
         private Panel pnlToolbar;
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
-        private DataGridView dataGridView2;
+        private ToolStripButton btnAddProperties;
+        private ToolStripButton btnDeleteProperties;
+        private DataGridView gcMethods;
         private Label lblMethoden;
-        private DataGridView dataGridView1;
+        private DataGridView gcProps;
         private Label lblProperties;
         private Label label1;
         private Panel pnlToolbar2;
         private ToolStrip toolStrip2;
-        private ToolStripButton toolStripButton3;
-        private ToolStripButton toolStripButton4;
+        private ToolStripButton btnAddMethods;
+        private ToolStripButton btnDeleteMethods;
         private DataGridViewTextBoxColumn zugriffDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn modifiziererDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn rückgabewertDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private BindingSource methodsBindingSource;
+        private BindingSource methodsBS;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private BindingSource propertiesBindingSource;
-        private BindingSource templateBindingSource;
+        private BindingSource propertiesBS;
+        private BindingSource templateBS;
         private DataGridViewTextBoxColumn accessTypeDataGridViewTextBoxColumn;
+        private ComboBox comboBox2;
+        private Button btnGenerate;
     }
 }

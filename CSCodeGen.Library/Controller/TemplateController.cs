@@ -1,46 +1,78 @@
 ﻿using CSCodeGen.Library.Klassen.Template;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CSCodeGen.Library.Controller
 {
 
     public class TemplateController
     {
-
-
-        public TemplateController()
-        {
-
-
-
-        }
-
         private static string dataPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Templates";
         private const string dataName = "Templates.json";
 
-        private const string FilePath = "C:\\Users\\danny.hausmann\\Source\\Repos\\akaazzaa\\CSCodeGenApp\\CSCodeGenApp\\Templates\\json1.json";
+        private static TemplateController _instance;
+        private BindingList<Template> templates;
+      
 
-        private static string GetDataPath()
+        public static TemplateController Instance 
+        {
+            get
+            {
+                    if (_instance == null)
+                    {
+                        _instance = new TemplateController();
+                    }
+                    return _instance;
+            }
+             
+        }
+
+        private TemplateController()  
+        {
+            LoadTemplates();
+            
+        }
+
+        public void Add(Template template)
+        {
+            templates.Add(template);
+        }
+
+        public BindingList<Template> GetTemplates()
+        {
+            return templates;
+        }
+
+      
+
+        private string GetDataPath()
         {
             var path = Path.Combine(dataPath, dataName);
             return path;
         }
 
-        public void SaveTemplates(List<Template> templates)
+        public void SaveTemplates()
         {
             var json = JsonConvert.SerializeObject(templates);
             File.WriteAllText(GetDataPath(), json);
         }
 
-        public List<Template> LoadTemplates()
+        private void LoadTemplates()
         {
-            if (!File.Exists(GetDataPath())) return new List<Template>();
+            if (!File.Exists(GetDataPath())) templates = new BindingList<Template>();
             var json = File.ReadAllText(GetDataPath());
-            return JsonConvert.DeserializeObject<List<Template>>(json);
+            templates =  JsonConvert.DeserializeObject<BindingList<Template>>(json);
         }
 
+        public Template GetTemplate(int selectedIndex)
+        {
+            if (selectedIndex == -1) { return null; }
+            return templates[selectedIndex];
+        }
     }
 
 
