@@ -1,36 +1,32 @@
-﻿using CSCodeGen.Library.Klassen.Template;
-
-namespace CSCodeGen.Test
+﻿namespace CSCodeGen.Test
 {
     internal class Program
     {
-        static List<Template> templates;
+
+
         static void Main(string[] args)
         {
-            templates = new List<Template>();
-            Template test = new Template()
+            var registry = new CommandRegistry();
+            var templateManager = new TemplateManager(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Templates");
+
+            // Befehle registrieren
+            registry.RegisterCommand(new HelpCommand(registry));
+            registry.RegisterCommand(new GenerateFromTemplateCommand(templateManager));
+            registry.RegisterCommand(new ExitCommand());
+
+            Console.WriteLine("Willkommen zu CSCodeGen CLI!");
+            Console.WriteLine("Geben Sie 'help' ein, um verfügbare Befehle anzuzeigen.");
+
+            while (true)
             {
-                TemplateName = "test",
-                AccessType = "public",
-                ClassType = "class",
-                ClassName = "Tester",
-                NamespaceName = "Template.Test",
-                Properties = { new PropertyModel { AccessType = "public", Name = "Alter", Type = "int" } },
-                Methods = { new MethodModel { AccessType = "private", Modifizierer = string.Empty, Name = "GetTest", Rückgabewert = "string" } }
-            };
-
-
-            templates.Add(test);
-            templates.Add(test);
-            templates.Add(test);
-            templates.Add(test);
-            templates.Add(test);
-
-
-            foreach (Template template in templates)
-            {
-                Console.WriteLine(template.DisplayText);
+                Console.Write("CodeGen> ");
+                string? input = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    registry.ExecuteCommand(input);
+                }
             }
         }
     }
 }
+

@@ -28,34 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDesigner));
-            panel1 = new Panel();
-            panel2 = new Panel();
+            pnlMain = new Panel();
+            pnlTextbox = new Panel();
+            listBox1 = new ListBox();
+            templateBindingSource = new BindingSource(components);
+            pnlTool = new Panel();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            pnlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)templateBindingSource).BeginInit();
+            pnlTool.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // pnlMain
             // 
-            panel1.Controls.Add(panel2);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 450);
-            panel1.TabIndex = 0;
+            pnlMain.Controls.Add(pnlTextbox);
+            pnlMain.Controls.Add(listBox1);
+            pnlMain.Controls.Add(pnlTool);
+            pnlMain.Dock = DockStyle.Fill;
+            pnlMain.Location = new Point(0, 0);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new Size(1194, 482);
+            pnlMain.TabIndex = 0;
             // 
-            // panel2
+            // pnlTextbox
             // 
-            panel2.Controls.Add(toolStrip1);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(800, 29);
-            panel2.TabIndex = 0;
+            pnlTextbox.Dock = DockStyle.Left;
+            pnlTextbox.Location = new Point(224, 29);
+            pnlTextbox.Name = "pnlTextbox";
+            pnlTextbox.Size = new Size(770, 453);
+            pnlTextbox.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            listBox1.DataSource = templateBindingSource;
+            listBox1.DisplayMember = "TemplateName";
+            listBox1.Dock = DockStyle.Left;
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(0, 29);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(224, 453);
+            listBox1.TabIndex = 1;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            // 
+            // templateBindingSource
+            // 
+            templateBindingSource.DataSource = typeof(Library.Klassen.Template.Template);
+            // 
+            // pnlTool
+            // 
+            pnlTool.Controls.Add(toolStrip1);
+            pnlTool.Dock = DockStyle.Top;
+            pnlTool.Location = new Point(0, 0);
+            pnlTool.Name = "pnlTool";
+            pnlTool.Size = new Size(1194, 29);
+            pnlTool.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -65,7 +97,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 29);
+            toolStrip1.Size = new Size(1194, 29);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -76,7 +108,7 @@
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(96, 26);
+            toolStripButton1.Size = new Size(95, 26);
             toolStripButton1.Text = "Neues Template";
             // 
             // toolStripButton2
@@ -92,13 +124,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
+            ClientSize = new Size(1194, 482);
+            Controls.Add(pnlMain);
             Name = "frmDesigner";
             Text = "frmDesigner";
-            panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            pnlMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)templateBindingSource).EndInit();
+            pnlTool.ResumeLayout(false);
+            pnlTool.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -106,10 +139,13 @@
 
         #endregion
 
-        private Panel panel1;
-        private Panel panel2;
+        private Panel pnlMain;
+        private Panel pnlTool;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
         private ToolStripButton toolStripButton2;
+        private BindingSource templateBindingSource;
+        private ListBox listBox1;
+        private Panel pnlTextbox;
     }
 }

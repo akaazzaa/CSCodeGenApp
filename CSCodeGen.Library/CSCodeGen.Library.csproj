@@ -46,10 +46,11 @@
   <ItemGroup>
     <Compile Include="Controller\TemplateController.cs" />
     <Compile Include="Klassen\CSDatei\Datei.cs" />
+    <Compile Include="Klassen\TemplatePlaceholder.cs" />
+    <Compile Include="Klassen\Template\ITemplate.cs" />
     <Compile Include="Klassen\Template\MethodModel.cs" />
     <Compile Include="Klassen\Template\PropertyModel.cs" />
     <Compile Include="Klassen\Template\Template.cs" />
-    <Compile Include="Klassen\Textbaustein\Textbaustein.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

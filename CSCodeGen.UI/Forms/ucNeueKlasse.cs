@@ -1,8 +1,6 @@
 ﻿using CSCodeGen.Library.Controller;
 using CSCodeGen.Library.Klassen.Template;
 using FastColoredTextBoxNS;
-using System.Windows.Forms;
-using System;
 
 
 namespace CSCodeGen.Ui
@@ -16,6 +14,7 @@ namespace CSCodeGen.Ui
             InitializeComponent();
 
             //comboBox1.DataSource = TemplateController.Instance.GetTemplates();
+
             templateBS.DataSource = TemplateController.Instance.GetTemplates();
             fastColoredTextBox = Ui.GetFastColoredTextBox();
             splitContainer1.Panel2.Controls.Add(fastColoredTextBox);
@@ -25,12 +24,14 @@ namespace CSCodeGen.Ui
                 comboBox1.SelectedIndex = 1;
             }
 
-            if (comboBox2.Items.Count > 0) 
-            { 
-                comboBox2.SelectedIndex = 1; 
+            if (comboBox2.Items.Count > 0)
+            {
+                comboBox2.SelectedIndex = 1;
             }
 
             currentTemplate = TemplateController.Instance.GetTemplate(comboBox1.SelectedIndex);
+
+            if (currentTemplate == null) { fastColoredTextBox.Text = string.Empty; return; }
             fastColoredTextBox.Text = currentTemplate.DisplayText;
         }
 
@@ -47,23 +48,21 @@ namespace CSCodeGen.Ui
             }
 
             currentTemplate = TemplateController.Instance.GetTemplate(comboBox1.SelectedIndex);
-            
-           
-            
-            if(fastColoredTextBox == null)
+
+
+
+            if (fastColoredTextBox == null)
             {
-                return ;
+                return;
             }
             fastColoredTextBox.Text = currentTemplate.DisplayText;
         }
 
-        
-
         private void btnDeleteProperties_Click(object sender, EventArgs e)
         {
-           if(gcProps.SelectedRows.Count <= 0)
+            if (gcProps.SelectedRows.Count <= 0)
             {
-                return ;
+                return;
             }
 
             var selectedRow = gcProps.SelectedRows[0];
