@@ -1,4 +1,4 @@
-﻿using CSCodeGen.Library.Controller;
+﻿
 namespace CSCodeGen.Test
 {
     internal class Program
@@ -7,7 +7,7 @@ namespace CSCodeGen.Test
 
         static void Main(string[] args)
         {
-            TemplateController.Instance.SaveTemplates();
+
         }
     }
 }
