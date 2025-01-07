@@ -2,22 +2,18 @@
 {
     public class Placeholder
     {
-        public PlaceholderType Type { get; set; }
-        public string Name { get; set; } // Platzhalter-Name, z. B. "classname"
-        public string Value { get; set; } // Dynamischer Wert des Platzhalters
+        public string Name { get; set; }
+        public string DefaultValue { get; set; }
 
-        public Placeholder(PlaceholderType type, string name, string value = "")
+        public Placeholder(string name, string defaultValue = "")
         {
-            Type = type;
             Name = name;
-            Value = value;
+            DefaultValue = defaultValue;
         }
 
         public override string ToString()
         {
-            return $"<{Name}> = {Value}";
+            return $"<{Name}> = {DefaultValue}";
         }
     }
-
-
 }

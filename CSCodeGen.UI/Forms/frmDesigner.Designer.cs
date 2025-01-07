@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDesigner));
             pnlMain = new Panel();
             pnlTextbox = new Panel();
-            listBox1 = new ListBox();
+            lb = new ListBox();
             templateBindingSource = new BindingSource(components);
             pnlTool = new Panel();
             toolStrip1 = new ToolStrip();
@@ -47,7 +47,7 @@
             // pnlMain
             // 
             pnlMain.Controls.Add(pnlTextbox);
-            pnlMain.Controls.Add(listBox1);
+            pnlMain.Controls.Add(lb);
             pnlMain.Controls.Add(pnlTool);
             pnlMain.Dock = DockStyle.Fill;
             pnlMain.Location = new Point(0, 0);
@@ -58,27 +58,22 @@
             // pnlTextbox
             // 
             pnlTextbox.Dock = DockStyle.Left;
-            pnlTextbox.Location = new Point(224, 29);
+            pnlTextbox.Location = new Point(204, 29);
             pnlTextbox.Name = "pnlTextbox";
-            pnlTextbox.Size = new Size(770, 453);
+            pnlTextbox.Size = new Size(778, 453);
             pnlTextbox.TabIndex = 2;
             // 
-            // listBox1
+            // lb
             // 
-            listBox1.DataSource = templateBindingSource;
-            listBox1.DisplayMember = "TemplateName";
-            listBox1.Dock = DockStyle.Left;
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(0, 29);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(224, 453);
-            listBox1.TabIndex = 1;
-           
-            // 
-            // templateBindingSource
-            // 
-           
+            lb.DataSource = templateBindingSource;
+            lb.DisplayMember = "TemplateName";
+            lb.Dock = DockStyle.Left;
+            lb.FormattingEnabled = true;
+            lb.ItemHeight = 15;
+            lb.Location = new Point(0, 29);
+            lb.Name = "lb";
+            lb.Size = new Size(204, 453);
+            lb.TabIndex = 1;
             // 
             // pnlTool
             // 
@@ -110,6 +105,7 @@
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new Size(95, 26);
             toolStripButton1.Text = "Neues Template";
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
             // toolStripButton2
             // 
@@ -145,7 +141,7 @@
         private ToolStripButton toolStripButton1;
         private ToolStripButton toolStripButton2;
         private BindingSource templateBindingSource;
-        private ListBox listBox1;
+        private ListBox lb;
         private Panel pnlTextbox;
     }
 }

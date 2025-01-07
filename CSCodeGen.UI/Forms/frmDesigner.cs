@@ -13,6 +13,9 @@ namespace CSCodeGen.Ui
             fastColoredTextBox = Ui.GetFastColoredTextBox();
         }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
