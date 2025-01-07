@@ -1,7 +1,0 @@
-﻿namespace {{Namespace}}
-{
-    public interface {{InterfaceName}}
-    {
-        {{Methods}}
-    }
-}
