@@ -1,9 +1,4 @@
-﻿
-using CSCodeGen.Library.Controller;
-using CSCodeGen.Library.Klassen.Template;
-using FastColoredTextBoxNS;
-
-namespace CSCodeGen.Ui
+﻿namespace CSCodeGen.Ui
 {
     public partial class frmMain : Form
     {
@@ -44,7 +39,7 @@ namespace CSCodeGen.Ui
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             frmDesigner frmDesigner = new frmDesigner();
-            if(frmDesigner.ShowDialog() == DialogResult.OK)
+            if (frmDesigner.ShowDialog() == DialogResult.OK)
             {
 
             }
