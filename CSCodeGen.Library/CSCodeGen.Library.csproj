@@ -44,9 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainController.cs" />
     <Compile Include="Placeholder.cs" />
+    <Compile Include="PlaceholderController.cs" />
+    <Compile Include="PlaceholderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemplateManager.cs" />
+    <Compile Include="Template.cs" />
+    <Compile Include="TemplateController.cs" />
+    <Compile Include="TemplateRepossitory.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

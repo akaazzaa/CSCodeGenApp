@@ -2,10 +2,12 @@
 {
     public partial class frmMain : Form
     {
+
         public frmMain()
         {
             InitializeComponent();
             toolBar.Renderer = new Renderer();
+
         }
 
         private void btnNeueKlasse_Click(object sender, EventArgs e)
