@@ -9,6 +9,7 @@ namespace CSCodeGen.Ui
         List<Template> templates;
         List<Placeholder> placeholders;
 
+        private Point dragStartPoint;
         public object lb_item = null;
 
 
@@ -66,41 +67,60 @@ namespace CSCodeGen.Ui
 
         private void InsertPlaceholder(Placeholder placeholder)
         {
-            var position = fastColoredTextBox.SelectionStart; // Aktuelle Cursorposition merken
-            fastColoredTextBox.Text = fastColoredTextBox.Text.Insert(position, placeholder.DefaultValue); // Platzhalter einfügen
-            fastColoredTextBox.SelectionStart = position + placeholder.DefaultValue.Length; // Cursorposition hinter den eingefügten Text setzen
+            if (placeholder == null) return;
+
+            // Speichere die aktuelle Cursor-Position
+            int startPosition = fastColoredTextBox.SelectionStart;
+
+            // Platzhalter einfügen
+            fastColoredTextBox.InsertText(placeholder.DefaultValue);
+
+            // Markiere den eingefügten Text
+            fastColoredTextBox.SelectionStart = startPosition;
+            fastColoredTextBox.SelectionLength = placeholder.DefaultValue.Length;
         }
 
         private void listBox2_DragLeave(object sender, EventArgs e)
         {
-            ListBox lb = sender as ListBox;
-
-            lb_item = lb.SelectedItem;
-            lb.Items.Remove(lb.SelectedItem);
+            if (lb_item != null)
+            {
+                listBox2.Items.Remove(lb_item);
+                lb_item = null;
+            }
         }
 
         private void listBox2_DragEnter(object sender, DragEventArgs e)
         {
-            if (lb_item != null)
+
+            if (lb_item != null && !listBox2.Items.Contains(lb_item))
             {
                 listBox2.Items.Add(lb_item);
                 lb_item = null;
+            }
+        }
+        private void listBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Prüfe, ob die Maus weit genug bewegt wurde, um einen Drag-Vorgang zu starten
+            if (e.Button == MouseButtons.Left &&
+                Math.Abs(e.X - dragStartPoint.X) > SystemInformation.DragSize.Width / 2 &&
+                Math.Abs(e.Y - dragStartPoint.Y) > SystemInformation.DragSize.Height / 2)
+            {
+                // Hole das ausgewählte Element
+                int index = listBox2.IndexFromPoint(dragStartPoint);
+                if (index >= 0 && index < listBox2.Items.Count)
+                {
+                    lb_item = listBox2.Items[index];
+                    DoDragDrop(lb_item.ToString(), DragDropEffects.Copy);
+                }
             }
         }
 
 
         private void listBox2_MouseDown(object sender, MouseEventArgs e)
         {
-            lb_item = null;
 
-            if (listBox2.Items.Count == 0)
-            {
-                return;
-            }
+            dragStartPoint = e.Location;
 
-            int index = listBox2.IndexFromPoint(e.X, e.Y);
-            string s = listBox2.Items[index].ToString();
-            DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.All);
         }
 
         private void Form2_DragDrop(object sender, DragEventArgs e)
@@ -108,7 +128,9 @@ namespace CSCodeGen.Ui
             lb_item = null;
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

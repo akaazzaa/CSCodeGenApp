@@ -41,7 +41,8 @@
             pnlTool = new Panel();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
+            btnSave = new ToolStripButton();
+            btnDelete = new ToolStripButton();
             pnlMain.SuspendLayout();
             pnlRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)placeholderBindingSource).BeginInit();
@@ -95,6 +96,7 @@
             listBox2.DragLeave += listBox2_DragLeave;
             listBox2.DoubleClick += listBox2_DoubleClick;
             listBox2.MouseDown += listBox2_MouseDown;
+            listBox2.MouseMove += listBox2_MouseMove;
             // 
             // placeholderBindingSource
             // 
@@ -140,7 +142,7 @@
             toolStrip1.BackColor = Color.FromArgb(64, 64, 64);
             toolStrip1.Dock = DockStyle.Fill;
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, btnSave, btnDelete });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1194, 29);
@@ -158,14 +160,26 @@
             toolStripButton1.Text = "Neues Template";
             toolStripButton1.Click += toolStripButton1_Click;
             // 
-            // toolStripButton2
+            // btnSave
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(23, 26);
-            toolStripButton2.Text = "toolStripButton2";
+            btnSave.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnSave.ForeColor = SystemColors.Control;
+            btnSave.Image = (Image)resources.GetObject("btnSave.Image");
+            btnSave.ImageTransparentColor = Color.Magenta;
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(35, 26);
+            btnSave.Text = "Save";
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnDelete.ForeColor = SystemColors.Control;
+            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
+            btnDelete.ImageTransparentColor = Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(44, 26);
+            btnDelete.Text = "Delete";
             // 
             // frmDesigner
             // 
@@ -194,7 +208,7 @@
         private Panel pnlTool;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton btnSave;
         private Panel pnlEditor;
         private Panel pnlRight;
         private Panel pnlLeft;
@@ -202,5 +216,6 @@
         private ListBox listBox1;
         private BindingSource templateBindingSource1;
         private BindingSource placeholderBindingSource;
+        private ToolStripButton btnDelete;
     }
 }
