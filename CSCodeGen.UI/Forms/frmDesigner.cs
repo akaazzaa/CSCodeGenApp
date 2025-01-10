@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.Library;
+using CSCodeGen.UI.Forms;
 using FastColoredTextBoxNS;
 
 namespace CSCodeGen.Ui
@@ -44,8 +45,15 @@ namespace CSCodeGen.Ui
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             currentTemplate = new Template();
-            templates.Add(currentTemplate);
-            templateBindingSource1.ResetBindings(false);
+
+
+            frmTemName temName = new frmTemName(currentTemplate);
+            if (temName.ShowDialog() == DialogResult.OK)
+            {
+                templates.Add(currentTemplate);
+                templateBindingSource1.ResetBindings(false);
+            }
+
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -130,7 +138,7 @@ namespace CSCodeGen.Ui
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            MainController.Get<TemplateController>().Save(templates);
         }
     }
 }

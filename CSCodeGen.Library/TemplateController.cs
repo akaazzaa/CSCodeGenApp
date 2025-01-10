@@ -17,5 +17,10 @@ namespace CSCodeGen.Library
             return TemplateRepossitory.GetAllTemplates();
         }
 
+        public void Save(List<Template> templates)
+        {
+            TemplateRepossitory.Save(templates);
+        }
+
     }
 }

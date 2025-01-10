@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 
 namespace CSCodeGen.Library
 {
@@ -6,17 +8,24 @@ namespace CSCodeGen.Library
     {
         public List<Template> GetAllTemplates()
         {
-            List<Template> templates = new List<Template>();
+            if (!File.Exists(Const.GetFullPath())) { return new List<Template>(); }
 
-            for (int i = 0; i < 20; i++)
+            var templates = JsonConvert.DeserializeObject<List<Template>>(File.ReadAllText(Const.GetFullPath()));
+
+            if (templates == null || templates.Count == 0)
             {
-                Template template = new Template();
-                template.Name = $"Test{i}";
-                template.Content = $"faifhaifafaifalfnlafafafhipfhapfhapifhff{i}";
-                templates.Add(template);
+                return new List<Template>();
             }
 
             return templates;
+
+
+        }
+
+        public void Save(List<Template> templates)
+        {
+            var json = JsonConvert.SerializeObject(templates);
+            File.WriteAllText(Const.GetFullPath(), json);
         }
     }
 }
