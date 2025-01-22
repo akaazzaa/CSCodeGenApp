@@ -293,7 +293,7 @@
             lblTemplate.ForeColor = SystemColors.Control;
             lblTemplate.Location = new Point(19, 24);
             lblTemplate.Name = "lblTemplate";
-            lblTemplate.Size = new Size(60, 15);
+            lblTemplate.Size = new Size(61, 15);
             lblTemplate.TabIndex = 5;
             lblTemplate.Text = "Templates";
             // 
