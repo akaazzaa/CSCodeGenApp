@@ -1,36 +1,40 @@
-﻿using CSCodeGen.Library.Klassen.Template;
+﻿
+using CSCodeGen.Library;
 
 namespace CSCodeGen.Test
 {
     internal class Program
     {
-        static List<Template> templates;
         static void Main(string[] args)
         {
-            templates = new List<Template>();
-            Template test = new Template()
-            {
-                TemplateName = "test",
-                AccessType = "public",
-                ClassType = "class",
-                ClassName = "Tester",
-                NamespaceName = "Template.Test",
-                Properties = { new PropertyModel { AccessType = "public", Name = "Alter", Type = "int" } },
-                Methods = { new MethodModel { AccessType = "private", Modifizierer = string.Empty, Name = "GetTest", Rückgabewert = "string" } }
-            };
+            TemplateManager templateManager = new TemplateManager();
 
+            // Schritt 1: Erstelle ein Template mit Placeholdern
+            var placeholders = new List<Placeholder>
+        {
+            new Placeholder("namespace", "MyNamespace"),
+            new Placeholder("classname", "MyClass"),
+            new Placeholder("methodname", "MyMethod")
+        };
+            templateManager.CreateTemplate("MyTemplate", placeholders);
 
-            templates.Add(test);
-            templates.Add(test);
-            templates.Add(test);
-            templates.Add(test);
-            templates.Add(test);
+            // Schritt 2: Lade und zeige das Template
+            Console.WriteLine("Template:");
+            string template = templateManager.LoadTemplate("MyTemplate");
+            Console.WriteLine(template);
 
-
-            foreach (Template template in templates)
-            {
-                Console.WriteLine(template.DisplayText);
-            }
+            // Schritt 3: Ersetze Placeholder und zeige das Ergebnis
+            var values = new Dictionary<string, string>
+        {
+            { "namespace", "ExampleNamespace" },
+            { "classname", "ExampleClass" },
+            { "methodname", "ExampleMethod" }
+        };
+            string filledTemplate = templateManager.FillTemplate("MyTemplate", values);
+            Console.WriteLine("\nTemplate nach dem Ersetzen:");
+            Console.WriteLine(filledTemplate);
         }
     }
 }
+
+

@@ -44,16 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\TemplateController.cs" />
-    <Compile Include="Klassen\CSDatei\Datei.cs" />
-    <Compile Include="Klassen\Template\MethodModel.cs" />
-    <Compile Include="Klassen\Template\PropertyModel.cs" />
-    <Compile Include="Klassen\Template\Template.cs" />
-    <Compile Include="Klassen\Textbaustein\Textbaustein.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="MainController.cs" />
+    <Compile Include="Placeholder.cs" />
+    <Compile Include="PlaceholderController.cs" />
+    <Compile Include="PlaceholderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="Template.cs" />
+    <Compile Include="TemplateController.cs" />
+    <Compile Include="TemplateRepossitory.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

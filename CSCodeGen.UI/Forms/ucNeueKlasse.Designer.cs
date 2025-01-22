@@ -28,22 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucNeueKlasse));
             pnlMain = new Panel();
             splitContainer1 = new SplitContainer();
             gcMethods = new DataGridView();
-            modifiziererDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            rückgabewertDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            methodsBS = new BindingSource(components);
-            templateBS = new BindingSource(components);
             lblMethoden = new Label();
             gcProps = new DataGridView();
-            accessTypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            propertiesBS = new BindingSource(components);
             lblProperties = new Label();
             label1 = new Label();
             pnlToolbar = new Panel();
@@ -69,10 +59,7 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gcMethods).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)methodsBS).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)templateBS).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gcProps).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)propertiesBS).BeginInit();
             pnlToolbar.SuspendLayout();
             pnlToolbar2.SuspendLayout();
             toolStrip2.SuspendLayout();
@@ -116,45 +103,15 @@
             // gcMethods
             // 
             gcMethods.AllowUserToAddRows = false;
-            gcMethods.AutoGenerateColumns = false;
             gcMethods.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gcMethods.BorderStyle = BorderStyle.None;
             gcMethods.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gcMethods.Columns.AddRange(new DataGridViewColumn[] { modifiziererDataGridViewTextBoxColumn, rückgabewertDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn1 });
-            gcMethods.DataSource = methodsBS;
             gcMethods.Dock = DockStyle.Top;
             gcMethods.Location = new Point(58, 350);
             gcMethods.MultiSelect = false;
             gcMethods.Name = "gcMethods";
             gcMethods.Size = new Size(482, 161);
             gcMethods.TabIndex = 6;
-            // 
-            // modifiziererDataGridViewTextBoxColumn
-            // 
-            modifiziererDataGridViewTextBoxColumn.DataPropertyName = "Modifizierer";
-            modifiziererDataGridViewTextBoxColumn.HeaderText = "Modifizierer";
-            modifiziererDataGridViewTextBoxColumn.Name = "modifiziererDataGridViewTextBoxColumn";
-            // 
-            // rückgabewertDataGridViewTextBoxColumn
-            // 
-            rückgabewertDataGridViewTextBoxColumn.DataPropertyName = "Rückgabewert";
-            rückgabewertDataGridViewTextBoxColumn.HeaderText = "Rückgabewert";
-            rückgabewertDataGridViewTextBoxColumn.Name = "rückgabewertDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            // 
-            // methodsBS
-            // 
-            methodsBS.DataMember = "Methods";
-            methodsBS.DataSource = templateBS;
-            // 
-            // templateBS
-            // 
-            templateBS.DataSource = typeof(Library.Klassen.Template.Template);
             // 
             // lblMethoden
             // 
@@ -169,41 +126,15 @@
             // gcProps
             // 
             gcProps.AllowUserToAddRows = false;
-            gcProps.AutoGenerateColumns = false;
             gcProps.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gcProps.BorderStyle = BorderStyle.None;
             gcProps.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gcProps.Columns.AddRange(new DataGridViewColumn[] { accessTypeDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn });
-            gcProps.DataSource = propertiesBS;
             gcProps.Dock = DockStyle.Top;
             gcProps.Location = new Point(58, 161);
             gcProps.MultiSelect = false;
             gcProps.Name = "gcProps";
             gcProps.Size = new Size(482, 174);
             gcProps.TabIndex = 4;
-            // 
-            // accessTypeDataGridViewTextBoxColumn
-            // 
-            accessTypeDataGridViewTextBoxColumn.DataPropertyName = "AccessType";
-            accessTypeDataGridViewTextBoxColumn.HeaderText = "AccessType";
-            accessTypeDataGridViewTextBoxColumn.Name = "accessTypeDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            // 
-            // propertiesBS
-            // 
-            propertiesBS.DataMember = "Properties";
-            propertiesBS.DataSource = templateBS;
             // 
             // lblProperties
             // 
@@ -301,7 +232,6 @@
             btnAddProperties.Name = "btnAddProperties";
             btnAddProperties.Size = new Size(56, 19);
             btnAddProperties.Text = "+";
-            btnAddProperties.Click += btnAddProperties_Click;
             // 
             // btnDeleteProperties
             // 
@@ -312,7 +242,6 @@
             btnDeleteProperties.Name = "btnDeleteProperties";
             btnDeleteProperties.Size = new Size(56, 19);
             btnDeleteProperties.Text = "-";
-            btnDeleteProperties.Click += btnDeleteProperties_Click;
             // 
             // pnlFields
             // 
@@ -344,7 +273,6 @@
             // 
             // comboBox2
             // 
-            comboBox2.DataBindings.Add(new Binding("Text", templateBS, "AccessType", true, DataSourceUpdateMode.OnPropertyChanged));
             comboBox2.FormattingEnabled = true;
             comboBox2.Location = new Point(94, 108);
             comboBox2.Name = "comboBox2";
@@ -353,14 +281,11 @@
             // 
             // comboBox1
             // 
-            comboBox1.DataSource = templateBS;
-            comboBox1.DisplayMember = "TemplateName";
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(94, 16);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(218, 23);
             comboBox1.TabIndex = 6;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // lblTemplate
             // 
@@ -368,13 +293,12 @@
             lblTemplate.ForeColor = SystemColors.Control;
             lblTemplate.Location = new Point(19, 24);
             lblTemplate.Name = "lblTemplate";
-            lblTemplate.Size = new Size(61, 15);
+            lblTemplate.Size = new Size(60, 15);
             lblTemplate.TabIndex = 5;
             lblTemplate.Text = "Templates";
             // 
             // textBox2
             // 
-            textBox2.DataBindings.Add(new Binding("Text", templateBS, "NamespaceName", true, DataSourceUpdateMode.OnPropertyChanged));
             textBox2.Location = new Point(94, 73);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(218, 23);
@@ -382,7 +306,6 @@
             // 
             // textBox1
             // 
-            textBox1.DataBindings.Add(new Binding("Text", templateBS, "ClassName", true, DataSourceUpdateMode.OnPropertyChanged));
             textBox1.Location = new Point(94, 45);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(218, 23);
@@ -431,10 +354,7 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gcMethods).EndInit();
-            ((System.ComponentModel.ISupportInitialize)methodsBS).EndInit();
-            ((System.ComponentModel.ISupportInitialize)templateBS).EndInit();
             ((System.ComponentModel.ISupportInitialize)gcProps).EndInit();
-            ((System.ComponentModel.ISupportInitialize)propertiesBS).EndInit();
             pnlToolbar.ResumeLayout(false);
             pnlToolbar.PerformLayout();
             pnlToolbar2.ResumeLayout(false);
@@ -474,15 +394,6 @@
         private ToolStripButton btnAddMethods;
         private ToolStripButton btnDeleteMethods;
         private DataGridViewTextBoxColumn zugriffDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn modifiziererDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn rückgabewertDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private BindingSource methodsBS;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private BindingSource propertiesBS;
-        private BindingSource templateBS;
-        private DataGridViewTextBoxColumn accessTypeDataGridViewTextBoxColumn;
         private ComboBox comboBox2;
         private Button btnGenerate;
     }

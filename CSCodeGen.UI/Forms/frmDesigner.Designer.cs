@@ -28,44 +28,124 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDesigner));
-            panel1 = new Panel();
-            panel2 = new Panel();
+            pnlMain = new Panel();
+            pnlEditor = new Panel();
+            pnlRight = new Panel();
+            listBox2 = new ListBox();
+            placeholderBindingSource = new BindingSource(components);
+            pnlLeft = new Panel();
+            listBox1 = new ListBox();
+            templateBindingSource1 = new BindingSource(components);
+            pnlTool = new Panel();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            btnSave = new ToolStripButton();
+            btnDelete = new ToolStripButton();
+            pnlMain.SuspendLayout();
+            pnlRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)placeholderBindingSource).BeginInit();
+            pnlLeft.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)templateBindingSource1).BeginInit();
+            pnlTool.SuspendLayout();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // pnlMain
             // 
-            panel1.Controls.Add(panel2);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 450);
-            panel1.TabIndex = 0;
+            pnlMain.Controls.Add(pnlEditor);
+            pnlMain.Controls.Add(pnlRight);
+            pnlMain.Controls.Add(pnlLeft);
+            pnlMain.Controls.Add(pnlTool);
+            pnlMain.Dock = DockStyle.Fill;
+            pnlMain.Location = new Point(0, 0);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new Size(1194, 482);
+            pnlMain.TabIndex = 0;
             // 
-            // panel2
+            // pnlEditor
             // 
-            panel2.Controls.Add(toolStrip1);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(800, 29);
-            panel2.TabIndex = 0;
+            pnlEditor.Dock = DockStyle.Fill;
+            pnlEditor.Location = new Point(183, 29);
+            pnlEditor.Name = "pnlEditor";
+            pnlEditor.Size = new Size(814, 453);
+            pnlEditor.TabIndex = 2;
+            // 
+            // pnlRight
+            // 
+            pnlRight.Controls.Add(listBox2);
+            pnlRight.Dock = DockStyle.Right;
+            pnlRight.Location = new Point(997, 29);
+            pnlRight.Name = "pnlRight";
+            pnlRight.Size = new Size(197, 453);
+            pnlRight.TabIndex = 2;
+            // 
+            // listBox2
+            // 
+            listBox2.DataSource = placeholderBindingSource;
+            listBox2.DisplayMember = "Name";
+            listBox2.Dock = DockStyle.Fill;
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new Point(0, 0);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new Size(197, 453);
+            listBox2.TabIndex = 0;
+            listBox2.DragEnter += listBox2_DragEnter;
+            listBox2.DragLeave += listBox2_DragLeave;
+            listBox2.DoubleClick += listBox2_DoubleClick;
+            listBox2.MouseDown += listBox2_MouseDown;
+            listBox2.MouseMove += listBox2_MouseMove;
+            // 
+            // placeholderBindingSource
+            // 
+            placeholderBindingSource.DataSource = typeof(Library.Placeholder);
+            // 
+            // pnlLeft
+            // 
+            pnlLeft.Controls.Add(listBox1);
+            pnlLeft.Dock = DockStyle.Left;
+            pnlLeft.Location = new Point(0, 29);
+            pnlLeft.Name = "pnlLeft";
+            pnlLeft.Size = new Size(183, 453);
+            pnlLeft.TabIndex = 1;
+            // 
+            // listBox1
+            // 
+            listBox1.DataSource = templateBindingSource1;
+            listBox1.DisplayMember = "Name";
+            listBox1.Dock = DockStyle.Fill;
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(0, 0);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(183, 453);
+            listBox1.TabIndex = 0;
+            listBox1.DoubleClick += listBox1_DoubleClick;
+            // 
+            // templateBindingSource1
+            // 
+            templateBindingSource1.DataSource = typeof(Library.Template);
+            // 
+            // pnlTool
+            // 
+            pnlTool.Controls.Add(toolStrip1);
+            pnlTool.Dock = DockStyle.Top;
+            pnlTool.Location = new Point(0, 0);
+            pnlTool.Name = "pnlTool";
+            pnlTool.Size = new Size(1194, 29);
+            pnlTool.TabIndex = 0;
             // 
             // toolStrip1
             // 
             toolStrip1.BackColor = Color.FromArgb(64, 64, 64);
             toolStrip1.Dock = DockStyle.Fill;
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, btnSave, btnDelete });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 29);
+            toolStrip1.Size = new Size(1194, 29);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -76,29 +156,47 @@
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(96, 26);
+            toolStripButton1.Size = new Size(95, 26);
             toolStripButton1.Text = "Neues Template";
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
-            // toolStripButton2
+            // btnSave
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(23, 26);
-            toolStripButton2.Text = "toolStripButton2";
+            btnSave.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnSave.ForeColor = SystemColors.Control;
+            btnSave.Image = (Image)resources.GetObject("btnSave.Image");
+            btnSave.ImageTransparentColor = Color.Magenta;
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(35, 26);
+            btnSave.Text = "Save";
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            btnDelete.ForeColor = SystemColors.Control;
+            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
+            btnDelete.ImageTransparentColor = Color.Magenta;
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(44, 26);
+            btnDelete.Text = "Delete";
             // 
             // frmDesigner
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
+            ClientSize = new Size(1194, 482);
+            Controls.Add(pnlMain);
             Name = "frmDesigner";
             Text = "frmDesigner";
-            panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            DragDrop += Form2_DragDrop;
+            pnlMain.ResumeLayout(false);
+            pnlRight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)placeholderBindingSource).EndInit();
+            pnlLeft.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)templateBindingSource1).EndInit();
+            pnlTool.ResumeLayout(false);
+            pnlTool.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -106,10 +204,18 @@
 
         #endregion
 
-        private Panel panel1;
-        private Panel panel2;
+        private Panel pnlMain;
+        private Panel pnlTool;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
+        private ToolStripButton btnSave;
+        private Panel pnlEditor;
+        private Panel pnlRight;
+        private Panel pnlLeft;
+        private ListBox listBox2;
+        private ListBox listBox1;
+        private BindingSource templateBindingSource1;
+        private BindingSource placeholderBindingSource;
+        private ToolStripButton btnDelete;
     }
 }
