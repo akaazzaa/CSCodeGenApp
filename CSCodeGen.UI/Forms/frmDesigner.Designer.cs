@@ -92,6 +92,7 @@
             listBox2.Name = "listBox2";
             listBox2.Size = new Size(197, 453);
             listBox2.TabIndex = 0;
+            listBox2.MouseClick += listBox2_MouseClick;
             listBox2.DragEnter += listBox2_DragEnter;
             listBox2.DragLeave += listBox2_DragLeave;
             listBox2.DoubleClick += listBox2_DoubleClick;
@@ -156,7 +157,7 @@
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(95, 26);
+            toolStripButton1.Size = new Size(96, 26);
             toolStripButton1.Text = "Neues Template";
             toolStripButton1.Click += toolStripButton1_Click;
             // 

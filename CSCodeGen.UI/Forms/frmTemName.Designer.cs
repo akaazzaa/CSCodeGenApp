@@ -54,6 +54,7 @@
             btnOK.TabIndex = 2;
             btnOK.Text = "OK";
             btnOK.UseVisualStyleBackColor = true;
+            btnOK.Click += btnOK_Click;
             // 
             // txtTemname
             // 
@@ -68,10 +69,9 @@
             lblTemplateName.Dock = DockStyle.Left;
             lblTemplateName.Location = new Point(0, 0);
             lblTemplateName.Name = "lblTemplateName";
-            lblTemplateName.Size = new Size(85, 15);
+            lblTemplateName.Size = new Size(86, 15);
             lblTemplateName.TabIndex = 0;
             lblTemplateName.Text = "Templatename";
-            lblTemplateName.Click += label1_Click;
             // 
             // frmTemName
             // 

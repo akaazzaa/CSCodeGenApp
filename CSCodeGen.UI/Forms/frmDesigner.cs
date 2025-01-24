@@ -9,12 +9,11 @@ namespace CSCodeGen.Ui
         FastColoredTextBox fastColoredTextBox;
         List<Template> templates;
         List<Placeholder> placeholders;
-
         private Point dragStartPoint;
         public object lb_item = null;
-
-
         private Template currentTemplate;
+
+
         public frmDesigner()
         {
             InitializeComponent();
@@ -30,18 +29,15 @@ namespace CSCodeGen.Ui
 
             pnlEditor.Controls.Add(fastColoredTextBox);
 
-
-
+            currentTemplate = (Template)listBox1.Items[0];
+            if (currentTemplate == null) { return; }
+            fastColoredTextBox.Text = currentTemplate.Content;
         }
-
-
-
         private void TextChanged(object? sender, TextChangedEventArgs e)
         {
             if (currentTemplate == null) { return; }
             currentTemplate.Content = fastColoredTextBox.Text;
         }
-
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             currentTemplate = new Template();
@@ -55,7 +51,6 @@ namespace CSCodeGen.Ui
             }
 
         }
-
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
 
@@ -64,15 +59,11 @@ namespace CSCodeGen.Ui
             fastColoredTextBox.Text = currentTemplate.Content;
 
         }
-
         private void listBox2_DoubleClick(object sender, EventArgs e)
         {
             var placeholder = (Placeholder)placeholderBindingSource.Current;
             InsertPlaceholder(placeholder);
         }
-
-
-
         private void InsertPlaceholder(Placeholder placeholder)
         {
             if (placeholder == null) return;
@@ -87,7 +78,6 @@ namespace CSCodeGen.Ui
             fastColoredTextBox.SelectionStart = startPosition;
             fastColoredTextBox.SelectionLength = placeholder.DefaultValue.Length;
         }
-
         private void listBox2_DragLeave(object sender, EventArgs e)
         {
             if (lb_item != null)
@@ -96,7 +86,6 @@ namespace CSCodeGen.Ui
                 lb_item = null;
             }
         }
-
         private void listBox2_DragEnter(object sender, DragEventArgs e)
         {
 
@@ -122,23 +111,24 @@ namespace CSCodeGen.Ui
                 }
             }
         }
-
-
         private void listBox2_MouseDown(object sender, MouseEventArgs e)
         {
 
             dragStartPoint = e.Location;
 
         }
-
         private void Form2_DragDrop(object sender, DragEventArgs e)
         {
             lb_item = null;
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             MainController.Get<TemplateController>().Save(templates);
+        }
+
+        private void listBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

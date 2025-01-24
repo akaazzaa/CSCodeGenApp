@@ -11,9 +11,18 @@ namespace CSCodeGen.UI.Forms
             this.template = template;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        
+
+        private void btnOK_Click(object sender, EventArgs e)
         {
+            if (txtTemname.Text == String.Empty)
+            {
+                MessageBox.Show("Bitte Name eintragen");
+                return;
+            }
             template.Name = txtTemname.Text;
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }
