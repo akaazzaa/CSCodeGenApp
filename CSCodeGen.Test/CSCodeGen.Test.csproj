@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Library.csproj" />
+    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
+    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Logik.csproj" />
   </ItemGroup>
 
 </Project>

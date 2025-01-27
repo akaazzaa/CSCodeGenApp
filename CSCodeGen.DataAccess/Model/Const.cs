@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace CSCodeGen.Library
+namespace CSCodeGen.DataAccess.Model
 {
     public class Const
     {

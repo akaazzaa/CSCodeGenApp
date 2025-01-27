@@ -92,7 +92,7 @@
             listBox2.Name = "listBox2";
             listBox2.Size = new Size(197, 453);
             listBox2.TabIndex = 0;
-            listBox2.MouseClick += listBox2_MouseClick;
+          
             listBox2.DragEnter += listBox2_DragEnter;
             listBox2.DragLeave += listBox2_DragLeave;
             listBox2.DoubleClick += listBox2_DoubleClick;
@@ -101,7 +101,6 @@
             // 
             // placeholderBindingSource
             // 
-            placeholderBindingSource.DataSource = typeof(Library.Placeholder);
             // 
             // pnlLeft
             // 
@@ -127,7 +126,6 @@
             // 
             // templateBindingSource1
             // 
-            templateBindingSource1.DataSource = typeof(Library.Template);
             // 
             // pnlTool
             // 

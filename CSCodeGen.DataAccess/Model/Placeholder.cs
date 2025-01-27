@@ -1,4 +1,4 @@
-﻿namespace CSCodeGen.Library
+﻿namespace CSCodeGen.DataAccess.Model
 {
     public class Placeholder
     {

@@ -1,4 +1,5 @@
-﻿using CSCodeGen.Library;
+﻿
+using CSCodeGen.DataAccess.Model;
 using CSCodeGen.UI.Forms;
 using FastColoredTextBoxNS;
 
@@ -7,8 +8,7 @@ namespace CSCodeGen.Ui
     public partial class frmDesigner : System.Windows.Forms.Form
     {
         FastColoredTextBox fastColoredTextBox;
-        List<Template> templates;
-        List<Placeholder> placeholders;
+      
         private Point dragStartPoint;
         public object lb_item = null;
         private Template currentTemplate;
@@ -18,14 +18,14 @@ namespace CSCodeGen.Ui
         {
             InitializeComponent();
 
-            templates = MainController.Get<TemplateController>().Templates();
-            placeholders = MainController.Get<PlaceholderController>().Placeholder();
+           
 
-            templateBindingSource1.DataSource = templates;
-            placeholderBindingSource.DataSource = placeholders;
+            //templateBindingSource1.DataSource = templates;
+            //placeholderBindingSource.DataSource = placeholders;
 
             fastColoredTextBox = Ui.GetFastColoredTextBox();
             fastColoredTextBox.TextChanged += TextChanged;
+            
 
             pnlEditor.Controls.Add(fastColoredTextBox);
 
@@ -33,6 +33,9 @@ namespace CSCodeGen.Ui
             if (currentTemplate == null) { return; }
             fastColoredTextBox.Text = currentTemplate.Content;
         }
+
+       
+
         private void TextChanged(object? sender, TextChangedEventArgs e)
         {
             if (currentTemplate == null) { return; }
@@ -43,12 +46,12 @@ namespace CSCodeGen.Ui
             currentTemplate = new Template();
 
 
-            frmTemName temName = new frmTemName(currentTemplate);
-            if (temName.ShowDialog() == DialogResult.OK)
-            {
-                templates.Add(currentTemplate);
-                templateBindingSource1.ResetBindings(false);
-            }
+            //frmTemName temName = new frmTemName(currentTemplate);
+            //if (temName.ShowDialog() == DialogResult.OK)
+            //{
+            //    templates.Add(currentTemplate);
+            //    templateBindingSource1.ResetBindings(false);
+            //}
 
         }
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -123,12 +126,9 @@ namespace CSCodeGen.Ui
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MainController.Get<TemplateController>().Save(templates);
+            
         }
 
-        private void listBox2_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
+       
     }
 }

@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿
+
+using CSCodeGen.DataAccess.Model;
+using CSCodeGen.DataAccess.Repository;
+using System.Collections.Generic;
 
 namespace CSCodeGen.Library
 {

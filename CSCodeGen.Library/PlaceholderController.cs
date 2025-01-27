@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using CSCodeGen.DataAccess.Model;
+using CSCodeGen.DataAccess.Repository;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSCodeGen.Library
 {
-    public class PlaceholderController
+    public class PlaceholderController : ControllerBase<Placeholder>
     {
-        PlaceholderRepository placeholderRepository;
 
-        public PlaceholderController()
+        public PlaceholderController(PlaceholderRepository repo) : base(repo)
         {
-            placeholderRepository = new PlaceholderRepository();
+            
         }
 
-        public List<Placeholder> Placeholder()
-        {
-            return placeholderRepository.GetAllPlaceholder();
-        }
+        
     }
 }
