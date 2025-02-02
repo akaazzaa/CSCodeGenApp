@@ -6,25 +6,29 @@ using System.Collections.Generic;
 
 namespace CSCodeGen.Library
 {
-    public class TemplateController
+    public class TemplateController 
     {
-        private TemplateRepossitory TemplateRepossitory;
-
-        public TemplateController()
+        private TemplateRepossitory repository;
+        public TemplateController(TemplateRepossitory repossitory)
         {
-            TemplateRepossitory = new TemplateRepossitory();
-
+            this.repository = repossitory;
         }
 
-        public List<Template> Templates()
+        public List<Template> GetTemplateList()
         {
-            return TemplateRepossitory.GetAllTemplates();
+            return repository.GetAll();
+        }
+        public void Add(Template template)
+        {
+            repository.Add(template);
         }
 
-        public void Save(List<Template> templates)
+        public void Remove(Template template)
         {
-            TemplateRepossitory.Save(templates);
+            repository.Remove(template);
         }
+
+        public virtual void Save() => repository.Save();
 
     }
 }

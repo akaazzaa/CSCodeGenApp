@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControllerBase.cs" />
+    <Compile Include="CoreGlobals.cs" />
     <Compile Include="PlaceholderController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateController.cs" />
@@ -51,6 +51,9 @@
       <Project>{98408e88-a068-4a9b-a4cc-8135d4331345}</Project>
       <Name>CSCodeGen.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

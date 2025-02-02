@@ -1,22 +1,28 @@
-
-
+﻿using CSCodeGen.DataAccess;
+using CSCodeGen.DataAccess.Model;
+using CSCodeGen.DataAccess.Repository;
 using CSCodeGen.Library;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace CSCodeGen.Ui
+namespace CSCodeGen.UI
 {
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
         [STAThread]
         static void Main()
         {
-           
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new frmMain());
+            CoreGlobals.Instance.Init();
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new TemplateDesignerForm());
         }
     }
 }

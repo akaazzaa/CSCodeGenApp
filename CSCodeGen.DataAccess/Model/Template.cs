@@ -1,8 +1,44 @@
-﻿namespace CSCodeGen.DataAccess.Model
+﻿using System.ComponentModel;
+
+namespace CSCodeGen.DataAccess.Model
 {
-    public class Template
+    public class Template : INotifyPropertyChanged
     {
-        public string Name { get; set; } = string.Empty;
-        public string Content { get; set; } = string.Empty;
+        private string name;
+        private string content;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+        public string Content
+        {
+            get
+            {
+                return content;
+            }
+
+            set
+            {
+                content = value;
+                OnPropertyChanged("Content");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string PropertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
     }
 }
