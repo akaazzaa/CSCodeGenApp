@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 
@@ -10,7 +11,7 @@ namespace CSCodeGen.DataAccess.Repository
     public abstract class RepositoryBase<T> : IRepository<T>
     {
         protected readonly IDataStorage<T> _dataStorage;
-        protected List<T> _dataList;
+        protected BindingList<T> _dataList;
 
         protected RepositoryBase(IDataStorage<T> dataStorage)
         {
@@ -18,7 +19,7 @@ namespace CSCodeGen.DataAccess.Repository
             _dataList = _dataStorage.LoadData();
         }
 
-        public virtual List<T> GetAll() => new List<T>(_dataList);
+        public virtual BindingList<T> GetAll() => new BindingList<T>(_dataList);
 
         public virtual void Add(T item)
         {

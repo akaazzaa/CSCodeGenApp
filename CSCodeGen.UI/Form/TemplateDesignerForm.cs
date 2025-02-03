@@ -16,29 +16,31 @@ namespace CSCodeGen.UI
     public partial class TemplateDesignerForm : Form
     {
         Template currentTemplate;
+        BindingList<Placeholder> placeholderList = CoreGlobals.Instance.placeholderController.GetPlaceholderList();
+        BindingList<Template> templateList = CoreGlobals.Instance.templateController.GetTemplateList();
+
         private bool isDoubleClick = false;
-       
+
         public TemplateDesignerForm()
         {
             InitializeComponent();
 
-            listBoxPlaceholder.Click += async (s, e) => await OnButtonClick(s,e);
-            listBoxPlaceholder.DoubleClick += (s, e) => OnButtonDoubleClick(s,e);
+            ListBoxPlaceholder.Click += async (s, e) => await OnButtonClick(s,e);
+            ListBoxPlaceholder.DoubleClick += (s, e) => OnButtonDoubleClick(s,e);
             this.FormClosing += TemplateDesignerForm_FormClosing;
 
-
-            templateBindingSource.DataSource = CoreGlobals.Instance.templateController.GetTemplateList();
-            placeholderBindingSource.DataSource = CoreGlobals.Instance.placeholderController.GetPlaceholderList();
+            templateBindingSource.DataSource = templateList;
+            placeholderBindingSource.DataSource = placeholderList;
             currentTemplate = (Template)templateBindingSource.Current;
-
+        }
+        private void OnButtonDoubleClick(object s, EventArgs e)
+        {
             
         }
-
         private void TemplateDesignerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             CoreGlobals.Instance.Save();
         }
-
         private async Task OnButtonClick(object sender, EventArgs e)
         {
             isDoubleClick = false;
@@ -50,25 +52,17 @@ namespace CSCodeGen.UI
                 currentTemplate.Content = newText;
             }
         }
-
-        private void OnButtonDoubleClick(object sender, EventArgs e)
-        {
-            isDoubleClick = true;
-            PlaceholderForm placeholderForm = new PlaceholderForm(GetPlaceholderFromSender(sender));
-
-            if (placeholderForm.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-        }
-
-       
-
         private Placeholder GetPlaceholderFromSender(object sender)
         {
             ListBox listBox = (ListBox)sender;
 
             return (Placeholder)listBox.SelectedItem;
         }
-    }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+    } 
 }
+

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,16 +18,16 @@ namespace CSCodeGen.DataAccess.Model
             _filePath = filePath;
         }
 
-        public List<T> LoadData()
+        public BindingList<T> LoadData()
         {
             if (!File.Exists(_filePath))
-                return new List<T>();
+                return new BindingList<T>();
 
             var json = File.ReadAllText(_filePath);
-            return JsonConvert.DeserializeObject<List<T>>(json) ?? new List<T>();
+            return JsonConvert.DeserializeObject<BindingList<T>>(json) ?? new BindingList<T>();
         }
 
-        public void SaveData(List<T> data)
+        public void SaveData(BindingList<T> data)
         {
             var json = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(_filePath, json);

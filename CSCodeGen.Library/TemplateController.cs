@@ -3,6 +3,7 @@
 using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Repository;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CSCodeGen.Library
 {
@@ -14,7 +15,7 @@ namespace CSCodeGen.Library
             this.repository = repossitory;
         }
 
-        public List<Template> GetTemplateList()
+        public BindingList<Template> GetTemplateList()
         {
             return repository.GetAll();
         }

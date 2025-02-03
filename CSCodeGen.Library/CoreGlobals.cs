@@ -30,13 +30,11 @@ namespace CSCodeGen.Library
             } 
             
         } 
-
         // Private Konstruktor
         private CoreGlobals() 
         {
             templateStorage = new JsonStorage<Template>(MainDirectoryPath + "/Templates/Template.json" );
             placeholderStorage = new JsonStorage<Placeholder>(MainDirectoryPath + "/Templates/Textbaustein.json" );
-
         }
 
         // Singleton-Instanzzugriff
@@ -56,7 +54,6 @@ namespace CSCodeGen.Library
             }
         }
       
-        
         // Hilfsmethode
         public void Init()
         {

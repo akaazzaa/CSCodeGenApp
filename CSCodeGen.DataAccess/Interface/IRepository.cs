@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Security.Policy;
@@ -12,7 +13,7 @@ namespace CSCodeGen.DataAccess.Repository
     public interface IRepository<T>
     {
         // Gibt alle Daten zurück
-        List<T> GetAll();
+        BindingList<T> GetAll();
 
         // Fügt ein neues Element hinzu
         void Add(T item);

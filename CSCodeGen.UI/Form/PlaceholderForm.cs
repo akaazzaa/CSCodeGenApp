@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.DataAccess.Model;
+using CSCodeGen.Library;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,15 +20,8 @@ namespace CSCodeGen.UI
         {
             InitializeComponent();
 
-            this.placeholder = placeholder;
-            fastColoredTextBox1.Text = placeholder.DefaultValue;
-            
-
+           
         }
 
-        private void PlaceholderForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            placeholder.DefaultValue = fastColoredTextBox1.Text;
-        }
     }
 }

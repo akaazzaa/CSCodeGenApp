@@ -3,6 +3,7 @@ using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Repository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Dynamic;
 using System.Linq;
 
@@ -11,12 +12,14 @@ namespace CSCodeGen.Library
     public class PlaceholderController 
     {
         private PlaceholderRepository repository;
+        public event EventHandler PlaceholderChanged;
+
         public PlaceholderController(PlaceholderRepository repossitory)
         {
             this.repository = repossitory;
         }
 
-        public List<Placeholder> GetPlaceholderList()
+        public BindingList<Placeholder> GetPlaceholderList()
         {
             return repository.GetAll();
         }
@@ -35,8 +38,12 @@ namespace CSCodeGen.Library
         public static string SearchandRepalce(string text,Placeholder placeholder)
         {
             string tmp = string.Empty;
-
             var temp = text.Split();
+
+            if (placeholder == null)
+            {
+                return string.Empty;
+            }
 
             if (string.IsNullOrEmpty(placeholder.Switchpoint))
             {
@@ -58,6 +65,11 @@ namespace CSCodeGen.Library
             }
 
             return tmp;
+        }
+
+        public void OnPlaceholderChanged()
+        {
+            PlaceholderChanged?.Invoke(this,new EventArgs());
         }
     }
 
