@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace CSCodeGen.UI
 {
-    public partial class PlaceholderForm : Form
+    public partial class TextbausteinForm : Form
     {
-        Placeholder placeholder = null;
+        Textbaustein placeholder = null;
 
-        public PlaceholderForm(Placeholder placeholder)
+        public TextbausteinForm(Textbaustein placeholder)
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿namespace CSCodeGen.UI
 {
-    partial class PlaceholderForm
+    partial class TextbausteinForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlaceholderForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextbausteinForm));
             this.fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             this.panelMain = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.fastColoredTextBox1)).BeginInit();

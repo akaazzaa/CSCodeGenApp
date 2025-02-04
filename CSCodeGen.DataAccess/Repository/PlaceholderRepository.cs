@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace CSCodeGen.DataAccess.Repository
 {
-    public class PlaceholderRepository : RepositoryBase<Placeholder>
+    public class PlaceholderRepository : RepositoryBase<Textbaustein>
     {
-        public PlaceholderRepository(IDataStorage<Placeholder> dataStorage) : base(dataStorage)
+        public PlaceholderRepository(IDataStorage<Textbaustein> dataStorage) : base(dataStorage)
         {
 
         }

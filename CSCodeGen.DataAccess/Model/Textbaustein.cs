@@ -1,14 +1,18 @@
-﻿using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Runtime.Remoting.Channels;
 
 namespace CSCodeGen.DataAccess.Model
 {
-    public class Placeholder : INotifyPropertyChanged
+    public class Textbaustein : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        [JsonIgnore]
         public string name;
+        [JsonIgnore]
         public string defaultValue;
+        [JsonIgnore]
         public string switchPoint;
 
 
@@ -56,11 +60,11 @@ namespace CSCodeGen.DataAccess.Model
             }
         }
 
-        public Placeholder()
+        public Textbaustein()
         {
             
         }
-        public Placeholder(string name, string defaultValue = "", string switchpoint = "")
+        public Textbaustein(string name, string defaultValue = "", string switchpoint = "")
         {
             Name = name;
             DefaultValue = defaultValue;

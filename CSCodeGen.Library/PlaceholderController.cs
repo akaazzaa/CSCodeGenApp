@@ -19,23 +19,25 @@ namespace CSCodeGen.Library
             this.repository = repossitory;
         }
 
-        public BindingList<Placeholder> GetPlaceholderList()
+        public BindingList<Textbaustein> GetTextbausteinList()
         {
             return repository.GetAll();
         }
-        public void Add(Placeholder placeholder)
+        public void Add(Textbaustein placeholder)
         {
             repository.Add(placeholder);
         }
 
-        public void Remove(Placeholder placeholder)
+        public void Remove(Textbaustein placeholder)
         {
             repository.Remove(placeholder);
         }
 
-        public virtual void Save() => repository.Save();
+        public void Save() => repository.Save();
 
-        public static string SearchandRepalce(string text,Placeholder placeholder)
+        
+
+        public static string SearchandRepalce(string text,Textbaustein placeholder)
         {
             string tmp = string.Empty;
             var temp = text.Split();
@@ -70,6 +72,30 @@ namespace CSCodeGen.Library
         public void OnPlaceholderChanged()
         {
             PlaceholderChanged?.Invoke(this,new EventArgs());
+        }
+
+
+        /// Das Template wird beim erstellen mit Schlüsselwörtern versehen die, die Positione der Texbausteine sind. 
+        /// Texbausteine haben ein ein Schlüssel wort. wenn ich ein Texbaustein in den Text einfüge wird es and der stelle des jeweiligen schlüsselwortes eingefügt. 
+        /// 
+        /// 
+        /// 
+        
+        public string ReplaceKeywords(string text, Textbaustein textbaustein)
+        {
+            Dictionary<string, string> keywordMappings = new Dictionary<string, string>
+        {
+            { "<{append.variable}>", $"private string {textbaustein.Name};\r" },
+            { "<{append.namespace}>", "textbaustein" },
+        };
+
+            foreach (var keyword in keywordMappings)
+            {
+                text = text.Replace(keyword.Key, keyword.Value);
+            }
+
+            return text;
+
         }
     }
 

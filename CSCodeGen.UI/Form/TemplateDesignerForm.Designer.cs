@@ -32,6 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateDesignerForm));
             this.panelMain = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnDeleteTextbaustein = new System.Windows.Forms.Button();
+            this.btnAddTextbaustein = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnDeleteTemplate = new System.Windows.Forms.Button();
+            this.btnAddTemplate = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SplitContainerMain = new System.Windows.Forms.SplitContainer();
             this.ListBoxTemplates = new System.Windows.Forms.ListBox();
@@ -40,16 +48,10 @@
             this.editor = new FastColoredTextBoxNS.FastColoredTextBox();
             this.ListBoxPlaceholder = new System.Windows.Forms.ListBox();
             this.placeholderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainerMain)).BeginInit();
             this.SplitContainerMain.Panel1.SuspendLayout();
@@ -62,8 +64,6 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.placeholderBindingSource)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -85,6 +85,92 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(96, 523);
             this.panel2.TabIndex = 2;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btnDeleteTextbaustein);
+            this.panel4.Controls.Add(this.btnAddTextbaustein);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 272);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(96, 251);
+            this.panel4.TabIndex = 1;
+            // 
+            // btnDeleteTextbaustein
+            // 
+            this.btnDeleteTextbaustein.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDeleteTextbaustein.Location = new System.Drawing.Point(0, 36);
+            this.btnDeleteTextbaustein.Name = "btnDeleteTextbaustein";
+            this.btnDeleteTextbaustein.Size = new System.Drawing.Size(96, 23);
+            this.btnDeleteTextbaustein.TabIndex = 2;
+            this.btnDeleteTextbaustein.Text = "Delete";
+            this.btnDeleteTextbaustein.UseVisualStyleBackColor = true;
+            this.btnDeleteTextbaustein.Click += new System.EventHandler(this.btnDeleteTextbaustein_Click);
+            // 
+            // btnAddTextbaustein
+            // 
+            this.btnAddTextbaustein.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAddTextbaustein.Location = new System.Drawing.Point(0, 13);
+            this.btnAddTextbaustein.Name = "btnAddTextbaustein";
+            this.btnAddTextbaustein.Size = new System.Drawing.Size(96, 23);
+            this.btnAddTextbaustein.TabIndex = 1;
+            this.btnAddTextbaustein.Text = "Add";
+            this.btnAddTextbaustein.UseVisualStyleBackColor = true;
+            this.btnAddTextbaustein.Click += new System.EventHandler(this.btnAddTextbaustein_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Textbaustein";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnDeleteTemplate);
+            this.panel3.Controls.Add(this.btnAddTemplate);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(96, 72);
+            this.panel3.TabIndex = 0;
+            // 
+            // btnDeleteTemplate
+            // 
+            this.btnDeleteTemplate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDeleteTemplate.Location = new System.Drawing.Point(0, 36);
+            this.btnDeleteTemplate.Name = "btnDeleteTemplate";
+            this.btnDeleteTemplate.Size = new System.Drawing.Size(96, 23);
+            this.btnDeleteTemplate.TabIndex = 2;
+            this.btnDeleteTemplate.Text = "Delete";
+            this.btnDeleteTemplate.UseVisualStyleBackColor = true;
+            this.btnDeleteTemplate.Click += new System.EventHandler(this.btnDeleteTemplate_Click);
+            // 
+            // btnAddTemplate
+            // 
+            this.btnAddTemplate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAddTemplate.Location = new System.Drawing.Point(0, 13);
+            this.btnAddTemplate.Name = "btnAddTemplate";
+            this.btnAddTemplate.Size = new System.Drawing.Size(96, 23);
+            this.btnAddTemplate.TabIndex = 1;
+            this.btnAddTemplate.Text = "Add";
+            this.btnAddTemplate.UseVisualStyleBackColor = true;
+            this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Templates";
             // 
             // panel1
             // 
@@ -115,6 +201,7 @@
             // 
             // ListBoxTemplates
             // 
+            this.ListBoxTemplates.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.templateBindingSource, "Name", true));
             this.ListBoxTemplates.DataSource = this.templateBindingSource;
             this.ListBoxTemplates.DisplayMember = "Name";
             this.ListBoxTemplates.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -124,6 +211,7 @@
             this.ListBoxTemplates.Name = "ListBoxTemplates";
             this.ListBoxTemplates.Size = new System.Drawing.Size(104, 523);
             this.ListBoxTemplates.TabIndex = 0;
+            this.ListBoxTemplates.Click += new System.EventHandler(this.ListBoxTemplates_Click);
             // 
             // templateBindingSource
             // 
@@ -167,7 +255,6 @@
             this.editor.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.editor.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.editor.IsReplaceMode = false;
             this.editor.Location = new System.Drawing.Point(0, 0);
             this.editor.Name = "editor";
@@ -193,90 +280,7 @@
             // 
             // placeholderBindingSource
             // 
-            this.placeholderBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Placeholder);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.button2);
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(96, 72);
-            this.panel3.TabIndex = 0;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.button4);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 272);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(96, 251);
-            this.panel4.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Templates";
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(0, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.Location = new System.Drawing.Point(0, 36);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Textbaustein";
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button3.Location = new System.Drawing.Point(0, 13);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Add";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button4.Location = new System.Drawing.Point(0, 36);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
+            this.placeholderBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Textbaustein);
             // 
             // TemplateDesignerForm
             // 
@@ -288,6 +292,10 @@
             this.Text = "TemplateDesignerForm";
             this.panelMain.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.SplitContainerMain.Panel1.ResumeLayout(false);
             this.SplitContainerMain.Panel2.ResumeLayout(false);
@@ -300,10 +308,6 @@
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.editor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.placeholderBindingSource)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -323,10 +327,10 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDeleteTemplate;
+        private System.Windows.Forms.Button btnAddTemplate;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnDeleteTextbaustein;
+        private System.Windows.Forms.Button btnAddTextbaustein;
     }
 }

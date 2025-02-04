@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Interface\IDataStorage.cs" />
     <Compile Include="Model\JsonStorage.cs" />
-    <Compile Include="Model\Placeholder.cs" />
+    <Compile Include="Model\Textbaustein.cs" />
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Model\XmlStorage.cs" />
     <Compile Include="Repository\PlaceholderRepository.cs" />

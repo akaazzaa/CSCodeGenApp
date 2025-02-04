@@ -20,7 +20,7 @@ namespace CSCodeGen.Library
 
 
         private JsonStorage<Template> templateStorage;
-        private JsonStorage<Placeholder> placeholderStorage;
+        private JsonStorage<Textbaustein> placeholderStorage;
 
         public string MainDirectoryPath 
         { 
@@ -34,7 +34,7 @@ namespace CSCodeGen.Library
         private CoreGlobals() 
         {
             templateStorage = new JsonStorage<Template>(MainDirectoryPath + "/Templates/Template.json" );
-            placeholderStorage = new JsonStorage<Placeholder>(MainDirectoryPath + "/Templates/Textbaustein.json" );
+            placeholderStorage = new JsonStorage<Textbaustein>(MainDirectoryPath + "/Templates/Textbaustein.json" );
         }
 
         // Singleton-Instanzzugriff
