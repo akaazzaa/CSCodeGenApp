@@ -1,101 +1,53 @@
-﻿using CSCodeGen.DataAccess;
-using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Repository;
-using System;
+﻿using CSCodeGen.DataAccess.Model;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
-using System.Linq;
 
 namespace CSCodeGen.Library
 {
-    public class PlaceholderController 
+    public class PlaceholderController
     {
-        private PlaceholderRepository repository;
-        public event EventHandler PlaceholderChanged;
+        private readonly Dictionary<string, Placeholder> _placeholders;
 
-        public PlaceholderController(PlaceholderRepository repossitory)
+        public PlaceholderController()
         {
-            this.repository = repossitory;
-        }
-
-        public BindingList<Textbaustein> GetTextbausteinList()
-        {
-            return repository.GetAll();
-        }
-        public void Add(Textbaustein placeholder)
-        {
-            repository.Add(placeholder);
-        }
-
-        public void Remove(Textbaustein placeholder)
-        {
-            repository.Remove(placeholder);
-        }
-
-        public void Save() => repository.Save();
-
-        
-
-        public static string SearchandRepalce(string text,Textbaustein placeholder)
-        {
-            string tmp = string.Empty;
-            var temp = text.Split();
-
-            if (placeholder == null)
+            _placeholders = new Dictionary<string, Placeholder>()
             {
-                return string.Empty;
+
             }
-
-            if (string.IsNullOrEmpty(placeholder.Switchpoint))
-            {
-                // Event das Fehler ausgibt 
-                CoreGlobals.LogMessage($"{placeholder.Switchpoint}");
-                return null;
-            } 
-
-            for (int i = 0; i < temp.Length; i++)
-            {
-                if (temp[i] == placeholder.Switchpoint)
-                {
-                    temp[i] = placeholder.DefaultValue;
-                }
-
-
-                tmp += temp[i];
-                
-            }
-
-            return tmp;
         }
 
-        public void OnPlaceholderChanged()
+        // Füge einen neuen Platzhalter hinzu oder aktualisiere ihn, wenn er schon existiert
+        public void AddOrUpdatePlaceholder(string name, string defaultValue = "", string switchPoint = "")
         {
-            PlaceholderChanged?.Invoke(this,new EventArgs());
+            if (_placeholders.ContainsKey(name))
+            {
+                // Wenn der Platzhalter bereits existiert, aktualisiere ihn
+                _placeholders[name].DefaultValue = defaultValue;
+                _placeholders[name].SwitchPoint = switchPoint;
+            }
+            else
+            {
+                // Wenn der Platzhalter noch nicht existiert, füge einen neuen hinzu
+                _placeholders[name] = new Placeholder(name, defaultValue, switchPoint);
+            }
         }
 
-
-        /// Das Template wird beim erstellen mit Schlüsselwörtern versehen die, die Positione der Texbausteine sind. 
-        /// Texbausteine haben ein ein Schlüssel wort. wenn ich ein Texbaustein in den Text einfüge wird es and der stelle des jeweiligen schlüsselwortes eingefügt. 
-        /// 
-        /// 
-        /// 
-        
-        public string ReplaceKeywords(string text, Textbaustein textbaustein)
+        // Entferne einen Platzhalter
+        public bool RemovePlaceholder(string name)
         {
-            Dictionary<string, string> keywordMappings = new Dictionary<string, string>
+            return _placeholders.Remove(name);
+        }
+
+        // Hole einen Platzhalter nach Name
+        public Placeholder GetPlaceholder(string name)
         {
-            { "<{append.variable}>", $"private string {textbaustein.Name};\r" },
-            { "<{append.namespace}>", "textbaustein" },
-        };
+            _placeholders.TryGetValue(name, out var placeholder);
+            return placeholder;
+        }
 
-            foreach (var keyword in keywordMappings)
-            {
-                text = text.Replace(keyword.Key, keyword.Value);
-            }
-
-            return text;
-
+        // Gib alle Platzhalter zurück
+        public Dictionary<string, Placeholder> GetAllPlaceholders()
+        {
+            return new Dictionary<string, Placeholder>(_placeholders);
         }
     }
 

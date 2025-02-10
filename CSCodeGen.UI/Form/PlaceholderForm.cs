@@ -14,9 +14,9 @@ namespace CSCodeGen.UI
 {
     public partial class TextbausteinForm : Form
     {
-        Textbaustein placeholder = null;
+        Placeholder placeholder = null;
 
-        public TextbausteinForm(Textbaustein placeholder)
+        public TextbausteinForm(Placeholder placeholder)
         {
             InitializeComponent();
 

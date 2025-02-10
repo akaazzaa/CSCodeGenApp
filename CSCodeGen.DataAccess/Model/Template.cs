@@ -1,44 +1,15 @@
-﻿using System.ComponentModel;
-
-namespace CSCodeGen.DataAccess.Model
+﻿namespace CSCodeGen.DataAccess.Model
 {
-    public class Template : INotifyPropertyChanged
+    public class Template
     {
-        private string name;
-        private string content;
+        public string Name { get; set; }
+        public string Content { get; set; }
 
-        public string Name
+        public Template()
         {
-            get
-            {
-                return name;
-            }
-
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public string Content
-        {
-            get
-            {
-                return content;
-            }
-
-            set
-            {
-                content = value;
-                OnPropertyChanged("Content");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(string PropertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            Content = string.IsNullOrWhiteSpace(Content)
+                ? "namespace {Namespace}\r\n{\r\n    {ClassModifier} class {ClassName}\r\n    {\r\n        {Members}\r\n    }\r\n}"
+                : Content;
         }
     }
 }

@@ -1,28 +1,31 @@
-﻿using CSCodeGen.DataAccess;
-using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Repository;
-using CSCodeGen.Library;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace CSCodeGen.Console.Test
+namespace CSCodeGen
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            
 
-            var json = new JsonStorage<Template>(Path.Combine(CoreGlobals.Instance.MainDirectoryPath, "Templates", "Template.json"));
-            var repo = new TemplateRepossitory(json);
 
-            TemplateController templateController = new TemplateController(repo);
+            // Ursprüngliches Template mit variablen Wörtern
+            string text = "class Name { public string Wert; }";
 
-            
+            // Erstelle ein Template-Objekt
+            Templates template = new Templates(text);
+
+            // Erstelle Platzhalter und füge Ersetzungen hinzu
+            Platzhalter ersetzungen = new Platzhalter();
+            ersetzungen.Hinzufügen("Name", "Person");
+            ersetzungen.Hinzufügen("Wert", "FirstName");
+
+            // Ersetze Platzhalter und erhalte den finalen Code
+            string finalerCode = template.ErsetzePlatzhalter(ersetzungen.Werte);
+
+            // Ausgabe
+            Console.WriteLine(finalerCode);
+
+            Console.Read();
 
 
         }

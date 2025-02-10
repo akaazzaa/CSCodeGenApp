@@ -1,12 +1,6 @@
 ﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Repository;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSCodeGen.Library
 {
@@ -16,25 +10,25 @@ namespace CSCodeGen.Library
         private static readonly object _lock = new object();
 
         public TemplateController templateController;
-        public PlaceholderController placeholderController;
+
 
 
         private JsonStorage<Template> templateStorage;
-        private JsonStorage<Textbaustein> placeholderStorage;
 
-        public string MainDirectoryPath 
-        { 
-            get 
-            { 
-                return Directory.GetCurrentDirectory(); 
-            } 
-            
-        } 
-        // Private Konstruktor
-        private CoreGlobals() 
+
+        public string MainDirectoryPath
         {
-            templateStorage = new JsonStorage<Template>(MainDirectoryPath + "/Templates/Template.json" );
-            placeholderStorage = new JsonStorage<Textbaustein>(MainDirectoryPath + "/Templates/Textbaustein.json" );
+            get
+            {
+                return Directory.GetCurrentDirectory();
+            }
+
+        }
+        // Private Konstruktor
+        private CoreGlobals()
+        {
+            templateStorage = new JsonStorage<Template>(MainDirectoryPath + "/Templates/Template.json");
+
         }
 
         // Singleton-Instanzzugriff
@@ -53,24 +47,24 @@ namespace CSCodeGen.Library
                 }
             }
         }
-      
+
         // Hilfsmethode
         public void Init()
         {
-            templateController = new TemplateController(new TemplateRepossitory(templateStorage));
-            placeholderController = new PlaceholderController(new PlaceholderRepository(placeholderStorage));
+            templateController = new TemplateController(templateStorage);
+
         }
 
-        public static void LogMessage( string message)
+        public static void LogMessage(string message)
         {
-            
+
             Console.WriteLine($"{message}");
         }
 
         public void Save()
         {
             templateController.Save();
-            placeholderController.Save();
+
         }
     }
 }

@@ -1,35 +1,46 @@
 ﻿
 
+using CSCodeGen.DataAccess;
 using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Repository;
-using System.Collections.Generic;
 using System.ComponentModel;
+
 
 namespace CSCodeGen.Library
 {
-    public class TemplateController 
+    public class TemplateController
     {
-        private TemplateRepossitory repository;
-        public TemplateController(TemplateRepossitory repossitory)
+        IDataStorage<Template> _storage;
+        BindingList<Template> _templates = new BindingList<Template>();
+
+        public TemplateController(IDataStorage<Template> dataStorage)
         {
-            this.repository = repossitory;
+            _storage = dataStorage;
+
+            if (_storage != null)
+            {
+                _templates = _storage.LoadData();
+            }
+
         }
 
         public BindingList<Template> GetTemplateList()
         {
-            return repository.GetAll();
+            return _templates;
         }
         public void Add(Template template)
         {
-            repository.Add(template);
+            _templates.Add(template);
         }
 
         public void Remove(Template template)
         {
-            repository.Remove(template);
+            _templates.Remove(template);
         }
 
-        public virtual void Save() => repository.Save();
+        public void Save()
+        {
+            _storage.SaveData(_templates);
+        }
 
     }
 }
