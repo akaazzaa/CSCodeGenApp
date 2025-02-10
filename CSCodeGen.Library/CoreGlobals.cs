@@ -27,8 +27,12 @@ namespace CSCodeGen.Library
         // Private Konstruktor
         private CoreGlobals()
         {
-            templateStorage = new JsonStorage<Template>(MainDirectoryPath + "/Templates/Template.json");
-            textbausteinStorage = new JsonStorage<Textbaustein>(MainDirectoryPath + "/Templates/Textbaustein.json");
+            //
+            //MainDirectoryPath + "/Templates/Template.json"
+            //MainDirectoryPath + "/Templates/Textbaustein.json
+            //
+            templateStorage = new JsonStorage<Template>("C:\\Users\\danny.hausmann\\Source\\Repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Template.json");
+            textbausteinStorage = new JsonStorage<Textbaustein>("C:\\Users\\danny.hausmann\\Source\\Repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Textbaustein.json");
         }
 
         // Singleton-Instanzzugriff

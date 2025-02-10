@@ -1,18 +1,21 @@
 ﻿[
   {
-    "Key": "Begrüßung",
-    "Value": "Hallo und herzlich willkommen!"
+    "Key": "<#{namespace}#>",
+    "Value": "namespace CSCodeGen
+    {
+
+    }"
   },
   {
-    "Key": "Abschied",
+    "Key": "<#{namespace}#>",
     "Value": "Auf Wiedersehen und einen schönen Tag!"
   },
   {
-    "Key": "Datum",
+    "Key": "<#{namespace}#>",
     "Value": "Heute ist {Datum}."
   },
   {
-    "Key": "Benutzer",
+    "Key": "<#{namespace}#>",
     "Value": "Hallo {Name}, wie geht es dir?"
   }
 ]
