@@ -8,6 +8,7 @@ namespace CSCodeGen.DataAccess.Model
         public string Source { get; set; }
         public List<Textbaustein> Keywords { get; set; } = new List<Textbaustein>();
 
+        public Template() { }
         public Template(DataType type)
         {
 

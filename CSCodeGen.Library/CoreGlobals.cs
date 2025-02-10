@@ -13,8 +13,8 @@ namespace CSCodeGen.Library
         public TextbausteinController textbausteinController;
 
 
-        private JsonStorage<Template> templateStorage;
-        private JsonStorage<Textbaustein> textbausteinStorage;
+        private XmlStorage<Template> templateStorage;
+        private XmlStorage<Textbaustein> textbausteinStorage;
 
         public string MainDirectoryPath
         {
@@ -31,8 +31,8 @@ namespace CSCodeGen.Library
             //MainDirectoryPath + "/Templates/Template.json"
             //MainDirectoryPath + "/Templates/Textbaustein.json
             //
-            templateStorage = new JsonStorage<Template>("C:\\Users\\danny.hausmann\\Source\\Repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Template.json");
-            textbausteinStorage = new JsonStorage<Textbaustein>("C:\\Users\\danny.hausmann\\Source\\Repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Textbaustein.json");
+            templateStorage = new XmlStorage<Template>("C:\\Users\\dgami\\source\\repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Template.json");
+            textbausteinStorage = new XmlStorage<Textbaustein>("C:\\Users\\dgami\\source\\repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Textbaustein.json");
         }
 
         // Singleton-Instanzzugriff

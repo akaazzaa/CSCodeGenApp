@@ -1,21 +1,10 @@
-﻿[
-  {
-    "Key": "<#{namespace}#>",
-    "Value": "namespace CSCodeGen
-    {
-         
-    }"
-  },
-  {
-    "Key": "<#{namespace}#>",
-    "Value": "Auf Wiedersehen und einen schönen Tag!"
-  },
-  {
-    "Key": "<#{namespace}#>",
-    "Value": "Heute ist {Datum}."
-  },
-  {
-    "Key": "<#{namespace}#>",
-    "Value": "Hallo {Name}, wie geht es dir?"
-  }
-]
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTextbaustein xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Textbaustein>
+    <Key> &lt;#{namspace}#&gt;</Key>
+    <Value>namespace &lt;#{namespcaceName}#&gt; 
+{
+    &lt;#{sourceType}#&gt;
+}</Value>
+  </Textbaustein>
+</ArrayOfTextbaustein>

@@ -26,7 +26,8 @@ namespace CSCodeGen.DataAccess.Model
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
             using (StreamReader reader = new StreamReader(_filePath))
             {
-                return (BindingList<T>)serializer.Deserialize(reader) ?? new BindingList<T>();
+                List<T> list = (List<T>)serializer.Deserialize(reader) ?? new List<T>();
+                return new BindingList<T>(list);
             }
         }
 
