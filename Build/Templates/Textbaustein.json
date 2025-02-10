@@ -1,1 +1,18 @@
-﻿
+﻿[
+  {
+    "Key": "Begrüßung",
+    "Value": "Hallo und herzlich willkommen!"
+  },
+  {
+    "Key": "Abschied",
+    "Value": "Auf Wiedersehen und einen schönen Tag!"
+  },
+  {
+    "Key": "Datum",
+    "Value": "Heute ist {Datum}."
+  },
+  {
+    "Key": "Benutzer",
+    "Value": "Hallo {Name}, wie geht es dir?"
+  }
+]

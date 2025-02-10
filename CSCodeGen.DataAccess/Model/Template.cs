@@ -1,15 +1,28 @@
-﻿namespace CSCodeGen.DataAccess.Model
+﻿using System.Collections.Generic;
+
+namespace CSCodeGen.DataAccess.Model
 {
     public class Template
     {
         public string Name { get; set; }
-        public string Content { get; set; }
+        public string Source { get; set; }
+        public List<Textbaustein> Keywords { get; set; } = new List<Textbaustein>();
 
-        public Template()
+        public Template(DataType type)
         {
-            Content = string.IsNullOrWhiteSpace(Content)
-                ? "namespace {Namespace}\r\n{\r\n    {ClassModifier} class {ClassName}\r\n    {\r\n        {Members}\r\n    }\r\n}"
-                : Content;
+
+
+
+            Source = "<#{namspace}#>";
+
+
+            //switch (type)
+            //{
+            //    case DataType.Klasse:
+
+            //        Content = 
+            //        break;
+            //}
         }
     }
 }

@@ -9,21 +9,27 @@ namespace CSCodeGen
 
 
             // Ursprüngliches Template mit variablen Wörtern
-            string text = "class Name { public string Wert; }";
+            string text = "<sourceTyp> <className> " +
+                "{ " +
+                "       <zugriff> <type> <variablenName>; " +
+                "}";
 
             // Erstelle ein Template-Objekt
             Templates template = new Templates(text);
 
             // Erstelle Platzhalter und füge Ersetzungen hinzu
             Platzhalter ersetzungen = new Platzhalter();
-            ersetzungen.Hinzufügen("Name", "Person");
-            ersetzungen.Hinzufügen("Wert", "FirstName");
+            ersetzungen.Hinzufügen("<sourceTyp>", "class");
+            ersetzungen.Hinzufügen("<className>", "Person");
+            ersetzungen.Hinzufügen("<zugriff>", "private");
+            ersetzungen.Hinzufügen("<type>", "string");
+            ersetzungen.Hinzufügen("<variablenName>", "FirstName");
 
             // Ersetze Platzhalter und erhalte den finalen Code
-            string finalerCode = template.ErsetzePlatzhalter(ersetzungen.Werte);
+            template.ErsetzePlatzhalter(ersetzungen.Werte);
 
             // Ausgabe
-            Console.WriteLine(finalerCode);
+            Console.WriteLine(template.Inhalt);
 
             Console.Read();
 

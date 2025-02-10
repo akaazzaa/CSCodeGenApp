@@ -47,9 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataType.cs" />
     <Compile Include="Interface\IDataStorage.cs" />
     <Compile Include="Model\JsonStorage.cs" />
-    <Compile Include="Model\Placeholder.cs" />
+    <Compile Include="Model\Textbaustein.cs" />
     <Compile Include="Model\XmlStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Template.cs" />

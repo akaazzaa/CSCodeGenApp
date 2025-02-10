@@ -10,11 +10,11 @@ namespace CSCodeGen.Library
         private static readonly object _lock = new object();
 
         public TemplateController templateController;
-
+        public TextbausteinController textbausteinController;
 
 
         private JsonStorage<Template> templateStorage;
-
+        private JsonStorage<Textbaustein> textbausteinStorage;
 
         public string MainDirectoryPath
         {
@@ -28,7 +28,7 @@ namespace CSCodeGen.Library
         private CoreGlobals()
         {
             templateStorage = new JsonStorage<Template>(MainDirectoryPath + "/Templates/Template.json");
-
+            textbausteinStorage = new JsonStorage<Textbaustein>(MainDirectoryPath + "/Templates/Textbaustein.json");
         }
 
         // Singleton-Instanzzugriff
@@ -52,7 +52,7 @@ namespace CSCodeGen.Library
         public void Init()
         {
             templateController = new TemplateController(templateStorage);
-
+            textbausteinController = new TextbausteinController(textbausteinStorage);
         }
 
         public static void LogMessage(string message)
@@ -64,7 +64,7 @@ namespace CSCodeGen.Library
         public void Save()
         {
             templateController.Save();
-
+            textbausteinController.Save();
         }
     }
 }

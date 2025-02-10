@@ -16,7 +16,7 @@ namespace CSCodeGen.UI
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TemplateDesignerForm());
+            Application.Run(new CreateTextbausteinForm());
         }
     }
 }

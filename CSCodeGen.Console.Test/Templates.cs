@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace CSCodeGen
 {
@@ -7,19 +6,23 @@ namespace CSCodeGen
     {
         public string Inhalt { get; set; }
 
+
+
         public Templates(string inhalt)
         {
             Inhalt = inhalt;
+
         }
 
-        public string ErsetzePlatzhalter(Dictionary<string, string> ersetzungen)
+        public void ErsetzePlatzhalter(Dictionary<string, string> werte)
         {
-            string pattern = @"\b(\w+)\b"; // Jedes einzelne Wort als Platzhalter
-            return Regex.Replace(Inhalt, pattern, match =>
+            foreach (var wert in werte)
             {
-                string key = match.Value;
-                return ersetzungen.ContainsKey(key) ? ersetzungen[key] : key;
-            });
+                if (Inhalt.Contains(wert.Key))
+                {
+                    Inhalt = Inhalt.Replace(wert.Key, wert.Value);
+                }
+            }
         }
     }
 

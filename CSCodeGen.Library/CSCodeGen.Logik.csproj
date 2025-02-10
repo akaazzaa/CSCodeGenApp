@@ -107,9 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreGlobals.cs" />
-    <Compile Include="PlaceholderController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateController.cs" />
+    <Compile Include="TextbausteinController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj">
