@@ -2,6 +2,8 @@
 using System;
 using System.IO;
 
+
+
 namespace CSCodeGen.Library
 {
     public class CoreGlobals
@@ -10,17 +12,13 @@ namespace CSCodeGen.Library
         private static readonly object _lock = new object();
 
         public TemplateController templateController;
-        public TextbausteinController textbausteinController;
-
-
-        private XmlStorage<Template> templateStorage;
-        private XmlStorage<Textbaustein> textbausteinStorage;
+        public XmlStorage storage;
 
         public string MainDirectoryPath
         {
             get
             {
-                return Directory.GetCurrentDirectory();
+                return Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
             }
 
         }
@@ -29,10 +27,9 @@ namespace CSCodeGen.Library
         {
             //
             //MainDirectoryPath + "/Templates/Template.json"
-            //MainDirectoryPath + "/Templates/Textbaustein.json
+            //MainDirectoryPath + "/Templates/Textbaustein.json "C:\\Users\\dgami\\source\\repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Textbaustein.xml"
             //
-            templateStorage = new XmlStorage<Template>("C:\\Users\\dgami\\source\\repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Template.json");
-            textbausteinStorage = new XmlStorage<Textbaustein>("C:\\Users\\dgami\\source\\repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Textbaustein.json");
+
         }
 
         // Singleton-Instanzzugriff
@@ -55,8 +52,10 @@ namespace CSCodeGen.Library
         // Hilfsmethode
         public void Init()
         {
-            templateController = new TemplateController(templateStorage);
-            textbausteinController = new TextbausteinController(textbausteinStorage);
+
+            storage = new XmlStorage(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "CSCodeGen.DataAccess", "Templates"));
+            templateController = new TemplateController(storage);
+
         }
 
         public static void LogMessage(string message)
@@ -65,10 +64,5 @@ namespace CSCodeGen.Library
             Console.WriteLine($"{message}");
         }
 
-        public void Save()
-        {
-            templateController.Save();
-            textbausteinController.Save();
-        }
     }
 }

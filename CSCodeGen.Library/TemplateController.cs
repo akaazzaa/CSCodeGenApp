@@ -1,46 +1,45 @@
-﻿
-
-using CSCodeGen.DataAccess;
-using CSCodeGen.DataAccess.Model;
+﻿using CSCodeGen.DataAccess.Model;
 using System.ComponentModel;
-
 
 namespace CSCodeGen.Library
 {
     public class TemplateController
     {
-        IDataStorage<Template> _storage;
-        BindingList<Template> _templates = new BindingList<Template>();
+        public BindingList<Template> Templates { get; private set; } = new BindingList<Template>();
 
-        public TemplateController(IDataStorage<Template> dataStorage)
+        private XmlStorage _XmlStorage;
+
+        public TemplateController(XmlStorage storage)
         {
-            _storage = dataStorage;
+            _XmlStorage = storage;
+            LoadAllTemplates(); // Beim Erstellen des Controllers direkt die Templates laden
+        }
 
-            if (_storage != null)
+        #region Laden und Speichern 
+        public void SaveTemplate(Template template)
+        {
+            if (template != null && !Templates.Contains(template))
             {
-                _templates = _storage.LoadData();
+                Templates.Add(template);  // Falls nicht vorhanden, hinzufügen
             }
-
+            _XmlStorage.SaveAllTemplates(Templates);
         }
-
-        public BindingList<Template> GetTemplateList()
+        public void LoadAllTemplates()
         {
-            return _templates;
+            Templates = _XmlStorage.LoadAllTemplates();
         }
-        public void Add(Template template)
+        public void SaveAllTemplates()
         {
-            _templates.Add(template);
+            _XmlStorage.SaveAllTemplates(Templates);
         }
-
-        public void Remove(Template template)
+        public void DeleteTemplate(Template template)
         {
-            _templates.Remove(template);
+            if (template != null && Templates.Contains(template))
+            {
+                Templates.Remove(template);
+                SaveAllTemplates(); // Aktualisierte Liste speichern
+            }
         }
-
-        public void Save()
-        {
-            _storage.SaveData(_templates);
-        }
-
+        #endregion
     }
 }
