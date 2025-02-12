@@ -50,6 +50,7 @@
     <Compile Include="Model\Config\Configuration.cs" />
     <Compile Include="Model\Config\KeywordConfiguration.cs" />
     <Compile Include="Model\Keyword.cs" />
+    <Compile Include="Model\Ueberwacht.cs" />
     <Compile Include="Model\XmlStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Template.cs" />

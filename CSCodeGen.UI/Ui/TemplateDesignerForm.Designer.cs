@@ -34,10 +34,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.displayTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.keywordBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel6 = new System.Windows.Forms.Panel();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
@@ -55,6 +51,10 @@
             this.öffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.speichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allesSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.displayTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelMain.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -83,6 +83,7 @@
             // 
             // panel3
             // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -97,18 +98,19 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1006, 501);
+            this.tabControl1.Size = new System.Drawing.Size(1004, 499);
             this.tabControl1.TabIndex = 1;
             // 
             // panel4
             // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.dataGridView1);
             this.panel4.Controls.Add(this.panel6);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1006, 0);
+            this.panel4.Location = new System.Drawing.Point(1004, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(439, 501);
+            this.panel4.Size = new System.Drawing.Size(439, 499);
             this.panel4.TabIndex = 0;
             // 
             // dataGridView1
@@ -119,7 +121,7 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codeDataGridViewTextBoxColumn,
+            this.btnCode,
             this.nameDataGridViewTextBoxColumn,
             this.dataTypeDataGridViewTextBoxColumn,
             this.displayTextDataGridViewTextBoxColumn});
@@ -127,45 +129,8 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 283);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(439, 218);
+            this.dataGridView1.Size = new System.Drawing.Size(437, 214);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // codeDataGridViewTextBoxColumn
-            // 
-            this.codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
-            this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
-            this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-            this.codeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.codeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.codeDataGridViewTextBoxColumn.Text = "Code anschauen";
-            this.codeDataGridViewTextBoxColumn.UseColumnTextForButtonValue = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // dataTypeDataGridViewTextBoxColumn
-            // 
-            this.dataTypeDataGridViewTextBoxColumn.DataPropertyName = "DataType";
-            this.dataTypeDataGridViewTextBoxColumn.HeaderText = "DataType";
-            this.dataTypeDataGridViewTextBoxColumn.Items.AddRange(new object[] {
-            "int ",
-            "bool ",
-            "string",
-            "Date",
-            "char"});
-            this.dataTypeDataGridViewTextBoxColumn.Name = "dataTypeDataGridViewTextBoxColumn";
-            this.dataTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // displayTextDataGridViewTextBoxColumn
-            // 
-            this.displayTextDataGridViewTextBoxColumn.DataPropertyName = "DisplayText";
-            this.displayTextDataGridViewTextBoxColumn.HeaderText = "DisplayText";
-            this.displayTextDataGridViewTextBoxColumn.Name = "displayTextDataGridViewTextBoxColumn";
-            this.displayTextDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // keywordBindingSource
             // 
@@ -173,11 +138,12 @@
             // 
             // panel6
             // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.menuStrip2);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 257);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(439, 26);
+            this.panel6.Size = new System.Drawing.Size(437, 26);
             this.panel6.TabIndex = 2;
             // 
             // menuStrip2
@@ -187,7 +153,7 @@
             this.removeToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(439, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(435, 24);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -206,11 +172,12 @@
             // 
             // panel5
             // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.propertyGrid1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(439, 257);
+            this.panel5.Size = new System.Drawing.Size(437, 257);
             this.panel5.TabIndex = 0;
             // 
             // propertyGrid1
@@ -218,11 +185,12 @@
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(439, 257);
+            this.propertyGrid1.Size = new System.Drawing.Size(435, 255);
             this.propertyGrid1.TabIndex = 0;
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.panel7);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 29);
@@ -232,11 +200,12 @@
             // 
             // panel7
             // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.listBox1);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(175, 501);
+            this.panel7.Size = new System.Drawing.Size(175, 499);
             this.panel7.TabIndex = 0;
             // 
             // listBox1
@@ -247,7 +216,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(175, 501);
+            this.listBox1.Size = new System.Drawing.Size(173, 497);
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
             // 
@@ -257,6 +226,7 @@
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -273,7 +243,7 @@
             this.allesSpeichernToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1615, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1613, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -302,6 +272,44 @@
             this.allesSpeichernToolStripMenuItem.Name = "allesSpeichernToolStripMenuItem";
             this.allesSpeichernToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
             this.allesSpeichernToolStripMenuItem.Text = "Alles Speichern";
+            this.allesSpeichernToolStripMenuItem.Click += new System.EventHandler(this.allesSpeichernToolStripMenuItem_Click);
+            // 
+            // btnCode
+            // 
+            this.btnCode.DataPropertyName = "Code";
+            this.btnCode.HeaderText = "Code";
+            this.btnCode.Name = "btnCode";
+            this.btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.btnCode.Text = "Code anschauen";
+            this.btnCode.UseColumnTextForButtonValue = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // dataTypeDataGridViewTextBoxColumn
+            // 
+            this.dataTypeDataGridViewTextBoxColumn.DataPropertyName = "DataType";
+            this.dataTypeDataGridViewTextBoxColumn.HeaderText = "DataType";
+            this.dataTypeDataGridViewTextBoxColumn.Items.AddRange(new object[] {
+            "int ",
+            "bool ",
+            "string",
+            "Date",
+            "char"});
+            this.dataTypeDataGridViewTextBoxColumn.Name = "dataTypeDataGridViewTextBoxColumn";
+            this.dataTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // displayTextDataGridViewTextBoxColumn
+            // 
+            this.displayTextDataGridViewTextBoxColumn.DataPropertyName = "DisplayText";
+            this.displayTextDataGridViewTextBoxColumn.HeaderText = "DisplayText";
+            this.displayTextDataGridViewTextBoxColumn.Name = "displayTextDataGridViewTextBoxColumn";
+            this.displayTextDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // TemplateDesignerForm
             // 
@@ -313,6 +321,7 @@
             this.Name = "TemplateDesignerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TemplateDesignerForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TemplateDesignerForm_FormClosing);
             this.panelMain.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -349,10 +358,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource keywordBindingSource;
-        private System.Windows.Forms.DataGridViewButtonColumn codeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn displayTextDataGridViewTextBoxColumn;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.ListBox listBox1;
@@ -362,5 +367,9 @@
         private System.Windows.Forms.ToolStripMenuItem öffnenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem speichernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allesSpeichernToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewButtonColumn btnCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dataTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn displayTextDataGridViewTextBoxColumn;
     }
 }

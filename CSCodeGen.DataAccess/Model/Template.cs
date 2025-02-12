@@ -4,48 +4,53 @@ using System.Runtime.CompilerServices;
 
 namespace CSCodeGen.DataAccess.Model
 {
-    public class Template : INotifyPropertyChanged
+    public class Template : Ueberwacht, INotifyPropertyChanged
     {
-
 
         private string _Name;
         private string _Source;
         private string _Description;
 
-
+        // Properties
         [Category("Template")]
         [Description("Name des Templates")]
         public string Name
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
             set
             {
-                _Name = value;
-                NotifyPropertyChanged();
+                if (_Name != value)
+                {
+                    if (_Name != null)
+                    {
+                        MarkAsChanged();
+                    }
 
+                    _Name = value;
+                    NotifyPropertyChanged();
 
+                }
             }
         }
-
 
         [Category("Template")]
         [Description("Beschreibung des Templates")]
         public string Description
         {
-            get
-            {
-                return _Description;
-            }
+            get { return _Description; }
             set
             {
+                if (_Description != value)
+                {
+                    if (_Description != null)
+                    {
+                        MarkAsChanged();
+                    }
 
+                    _Description = value;
+                    NotifyPropertyChanged();
 
-                _Description = value;
-                NotifyPropertyChanged();
-
+                }
             }
         }
 
@@ -58,16 +63,20 @@ namespace CSCodeGen.DataAccess.Model
         [Description("Quellcode des Templates")]
         public string Source
         {
-            get
-            {
-                return _Source;
-            }
+            get { return _Source; }
             set
             {
+                if (_Source != value)
+                {
+                    if (_Source != null)
+                    {
+                        MarkAsChanged();
+                    }
 
-                _Source = value;
-                NotifyPropertyChanged("Source");
+                    _Source = value;
+                    NotifyPropertyChanged();
 
+                }
             }
         }
 
@@ -75,14 +84,11 @@ namespace CSCodeGen.DataAccess.Model
         [Description("Liste der Keywords")]
         public BindingList<Keyword> Keywords { get; set; }
 
-
         public Template()
         {
-            Name = string.Empty;
-            Description = string.Empty;
             CreationDate = DateTime.Now;
-            Source = string.Empty;
             Keywords = new BindingList<Keyword>();
+            IsChanged = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

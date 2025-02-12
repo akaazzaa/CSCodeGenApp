@@ -13,7 +13,10 @@ namespace CSCodeGen.Library
         {
             _XmlStorage = storage;
             LoadAllTemplates(); // Beim Erstellen des Controllers direkt die Templates laden
+
         }
+
+
 
         #region Laden und Speichern 
         public void SaveTemplate(Template template)
