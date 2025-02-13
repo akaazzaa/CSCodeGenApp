@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace CSCodeGen.DataAccess.Model
 {
-    public class Template : Ueberwacht, INotifyPropertyChanged
+    public class Template : Observable, INotifyPropertyChanged
     {
 
         private string _Name;

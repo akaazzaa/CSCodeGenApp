@@ -2,7 +2,7 @@
 
 namespace CSCodeGen.DataAccess.Model
 {
-    public class Ueberwacht
+    public class Observable
     {
         private bool _isChanged = false;
 
