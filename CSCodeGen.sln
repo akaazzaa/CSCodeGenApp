@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Logik", "CSCodeGen.Library\CSCodeGen.Logik.csproj", "{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.Logik", "CSCodeGen.Library\CSCodeGen.Logik.csproj", "{FB84DCFB-FCB7-41A1-9D70-A8B16334DD6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.DataAccess", "CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj", "{98408E88-A068-4A9B-A4CC-8135D4331345}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.DataAccess", "CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj", "{98408E88-A068-4A9B-A4CC-8135D4331345}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Console.Test", "CSCodeGen.Console.Test\CSCodeGen.Console.Test.csproj", "{21ED8EA1-3262-4AF8-8A11-EC3CD9503FAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.Console.Test", "CSCodeGen.Console.Test\CSCodeGen.Console.Test.csproj", "{21ED8EA1-3262-4AF8-8A11-EC3CD9503FAA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{31CF3B2F-F891-4396-9C0D-A17F88BD2F46}"
 EndProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2AAC4CDC-B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{0879BB69-AC82-4A32-A2F9-483AB22428F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.TemplateDesinger", "CSCodeGen.UI\CSCodeGen.TemplateDesinger.csproj", "{6756E006-1B12-4749-BDF1-2C496A13843E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.TemplateDesinger", "CSCodeGen.UI\CSCodeGen.TemplateDesinger.csproj", "{6756E006-1B12-4749-BDF1-2C496A13843E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

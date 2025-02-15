@@ -53,7 +53,7 @@ namespace CSCodeGen.Library
         public void Init()
         {
 
-            storage = new XmlStorage(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "CSCodeGen.DataAccess", "Templates"));
+            storage = new XmlStorage(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "CSCodeGen.DataAccess", "Templates"));
             templateController = new TemplateController(storage);
 
         }

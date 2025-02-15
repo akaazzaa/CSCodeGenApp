@@ -1,128 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6756E006-1B12-4749-BDF1-2C496A13843E}</ProjectGuid>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RootNamespace>CSCodeGen.UI</RootNamespace>
     <AssemblyName>CSCodeGen.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <BaseOutputPath>C:\Users\dgami\source\repos\akaazzaa\CSCodeGenApp\Build</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>..\Build\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FastColoredTextBox, Version=2.16.24.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
-      <HintPath>..\packages\FCTB.2.16.24\lib\FastColoredTextBox.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationClient" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ui\KeywordCodeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ui\KeywordCodeForm.Designer.cs">
-      <DependentUpon>KeywordCodeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Ui\TemplateDesignerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ui\TemplateDesignerForm.Designer.cs">
-      <DependentUpon>TemplateDesignerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Usercontrols\ucEditor.cs">
+    <Compile Update="Usercontrols\ucEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Usercontrols\ucEditor.Designer.cs">
-      <DependentUpon>ucEditor.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Ui\KeywordCodeForm.resx">
-      <DependentUpon>KeywordCodeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ui\TemplateDesignerForm.resx">
-      <DependentUpon>TemplateDesignerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Usercontrols\ucEditor.resx">
-      <DependentUpon>ucEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Config.Configuration.datasource" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Config.KeywordConfiguration.datasource" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Daten.datasource" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Keyword.datasource" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Placeholder.datasource" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Template.datasource" />
-    <None Include="Properties\DataSources\CSCodeGen.DataAccess.Model.Textbaustein.datasource" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
+    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Logik.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj">
-      <Project>{98408e88-a068-4a9b-a4cc-8135d4331345}</Project>
-      <Name>CSCodeGen.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Logik.csproj">
-      <Project>{fb84dcfb-fcb7-41a1-9d70-a8b16334dd6a}</Project>
-      <Name>CSCodeGen.Logik</Name>
-    </ProjectReference>
+    <PackageReference Include="FastColoredTextBox.Net5" Version="2.16.26" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Remove="TemplateDesignerForm.cs" />
+    <Compile Remove="TemplateDesignerForm.Designer.cs" />
+    <EmbeddedResource Remove="TemplateDesignerForm.resx" />
+  </ItemGroup>
 </Project>
