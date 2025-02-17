@@ -1,5 +1,6 @@
 ﻿using CSCodeGen.DataAccess.Model;
 using CSCodeGen.Library;
+using CSCodeGen.UI.Ui;
 using CSCodeGen.UI.Usercontrols;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace CSCodeGen.UI
         private BindingList<Template> templates;
         private Dictionary<TabPage, Template> tabs = new Dictionary<TabPage, Template>();
         private Template currentTemplate;
-        private Keyword currentKeyword;
+
         #endregion
         public TemplateDesignerForm()
         {
@@ -31,10 +32,6 @@ namespace CSCodeGen.UI
 
         }
 
-
-
-
-
         #region Methoden
         private void Save()
         {
@@ -50,13 +47,11 @@ namespace CSCodeGen.UI
         private void AddNewTap()
         {
             TabPage tabPage = new TabPage(currentTemplate.Name);
-            ucEditor ucEditor = new ucEditor(currentTemplate.Source);
+            ucTemplateEditor ucEditor = new ucTemplateEditor(currentTemplate);
             ucEditor.OnClosingTap += UcEditor_OnClosingTap;
-            ucEditor.OnSaving += Save;
-            ucEditor.OnTextChanging += UcEditor_OnTextChanging;
+            ucEditor.OnSaveChanges += () => Save();
 
             tabs[tabPage] = currentTemplate;
-
 
             tabPage.Controls.Add(ucEditor);
             tabControl1.TabPages.Add(tabPage);
@@ -65,10 +60,9 @@ namespace CSCodeGen.UI
 
         }
 
-        private void UcEditor_OnTextChanging(string source)
-        {
-            currentTemplate.Source = source;
-        }
+
+
+
         #endregion
 
         #region Events
@@ -78,14 +72,23 @@ namespace CSCodeGen.UI
         }
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            if (e.RowIndex < 0 && e.ColumnIndex < 0)
             {
-                // Überprüfe, ob die geklickte Zelle zur Button-Spalte gehört
-                if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
-                {
-
-                }
+                return;
             }
+
+            var selectedKeyword = (Keyword)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+
+            if (selectedKeyword == null) { return; }
+
+            // Überprüfe, ob die geklickte Zelle zur Button-Spalte gehört
+            if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                KeywordCodeForm keywordCodeForm = new KeywordCodeForm(selectedKeyword);
+                keywordCodeForm.ShowDialog();
+
+            }
+
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -103,8 +106,7 @@ namespace CSCodeGen.UI
                 return;
             }
 
-            currentKeyword = new Keyword();
-            currentTemplate.Keywords.Add(currentKeyword);
+            currentTemplate.Keywords.Add(new Keyword());
             dataGridView1.Refresh(); // Grid aktualisieren
         }
         private void neuesTemplateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,7 +155,33 @@ namespace CSCodeGen.UI
         }
         private void TemplateDesignerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CoreGlobals.Instance.templateController.SaveAllTemplates();
+            if (templates == null) return;
+
+            int nichtgespeichert = 0;
+            foreach (Template template in templates)
+            {
+                if (template.IsChanged)
+                {
+                    nichtgespeichert++;
+                }
+            }
+
+            if (nichtgespeichert > 0)
+            {
+                DialogResult result = MessageBox.Show(
+               "Änderungen speichern?",
+               "Speichern",
+               MessageBoxButtons.YesNoCancel,
+               MessageBoxIcon.Question
+           );
+
+                if (result == DialogResult.Yes)
+                {
+                    Save();
+                }
+
+            }
+
         }
         private void allesSpeichernToolStripMenuItem_Click(object sender, EventArgs e)
         {

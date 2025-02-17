@@ -1,17 +1,25 @@
 ﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.UI.Usercontrols;
 using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Ui
 {
     public partial class KeywordCodeForm : Form
     {
+        Keyword Keyword;
         public KeywordCodeForm(Keyword current)
         {
             InitializeComponent();
 
-            ucEditor ucEditor = new ucEditor(current.Code);
-            panel1.Controls.Add(ucEditor);
+            Keyword = current;
+
+            ucEditor1.Initialize(current);
+            ucEditor1.CodeChanged += UcEditor1_CodeChanged;
+
+        }
+
+        private void UcEditor1_CodeChanged(object sender, string newCode)
+        {
+            Keyword.Code = newCode;
         }
     }
 }

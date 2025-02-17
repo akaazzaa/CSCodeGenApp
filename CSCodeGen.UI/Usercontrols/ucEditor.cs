@@ -1,98 +1,73 @@
-﻿using CSCodeGen.DataAccess.Model.Config;
+﻿using CSCodeGen.DataAccess.Model;
+using CSCodeGen.DataAccess.Model.Config;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace CSCodeGen.UI.Usercontrols
+
+namespace CSCodeGen.UI
 {
     public partial class ucEditor : UserControl
     {
-        public event Action<TabPage> OnClosingTap;
-        public event Action OnSaving;
-        public event Action<string> OnTextChanging;
-        private bool textChanged = false;
-        string source;
+        private object _currentObject;
+        public event EventHandler<string> CodeChanged;
 
-
-
-        public ucEditor(string source)
+        public ucEditor()
         {
             InitializeComponent();
-
-            // Datasource
-            this.source = source;
-            fastColoredTextBox1.Text = this.source;
-
-            //Events abonnieren
-
             fastColoredTextBox1.TextChanged += FastColoredTextBox1_TextChanged;
-
-            löschenToolStripMenuItem.Click += (s, e) => CloseTab();
-
-
-            LoadKeywords();
-
+            listBox1.DoubleClick += ListBox1_DoubleClick;
         }
 
-        private void FastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        private void ListBox1_DoubleClick(object sender, EventArgs e)
         {
-            source = fastColoredTextBox1.Text;
-            OnTextChanging?.Invoke(source);
-            textChanged = true;
-        }
-
-        #region Methoden
-        private void CloseTab()
-        {
-            if (textChanged) // Falls Änderungen vorhanden sind
+            if (listBox1.SelectedItem != null)
             {
-                DialogResult result = MessageBox.Show(
-                    "Änderungen speichern?",
-                    "Speichern",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question
-                );
-
-                if (result == DialogResult.Yes)
-                {
-                    SaveChanges(); // Speichern und dann schließen
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    return; // Abbrechen, Tab bleibt offen
-                }
-            }
-
-            OnClosingTap?.Invoke(this.Parent as TabPage);
-        }
-        public void SaveChanges()
-        {
-            OnSaving?.Invoke();// Speichert den Text
-        }
-        private void LoadKeywords()
-        {
-            var keywords = typeof(KeywordConfiguration)
-               .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-               .Where(prop => prop.PropertyType == typeof(string))
-               .Select(prop => prop.GetValue(Configuration.Keywords)?.ToString())
-               .ToList();
-
-            lbSchlüssel.DataSource = keywords;
-        }
-        #endregion
-        private void lbSchlüssel_DoubleClick(object sender, System.EventArgs e)
-        {
-            if (lbSchlüssel.SelectedItem != null)
-            {
-                string selectedKeyword = lbSchlüssel.SelectedItem.ToString();
-                // Optional: Füge Prefix und Postfix hinzu – falls gewünscht,
-                // könntest du auch den "DisplayText" aus einer Keyword-Klasse verwenden.
+                string selectedKeyword = listBox1.SelectedItem.ToString();
                 string fullKeyword = $"{Configuration.Prefix}{selectedKeyword}{Configuration.Postfix}";
                 int insertPosition = fastColoredTextBox1.SelectionStart;
                 fastColoredTextBox1.Text = fastColoredTextBox1.Text.Insert(insertPosition, fullKeyword);
             }
         }
+
+        private List<string> LoadKeywords()
+        {
+            var keywords = typeof(KeywordConfiguration)
+              .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+               .Where(prop => prop.PropertyType == typeof(string))
+                .Select(prop => prop.GetValue(Configuration.Keywords)?.ToString())
+                .ToList();
+
+            return keywords;
+        }
+
+        public void Initialize<T>(T obj)
+        {
+            _currentObject = obj;
+
+            if (obj is Template template)
+            {
+                fastColoredTextBox1.Text = template.Source;
+            }
+            else if (obj is Keyword keyword)
+            {
+                fastColoredTextBox1.Text = keyword.Code;
+            }
+
+            listBox1.DataSource = LoadKeywords();
+            listBox1.DisplayMember = "Name"; // Falls dein Objekt eine `Name`-Eigenschaft hat
+
+        }
+
+        private void FastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+            CodeChanged?.Invoke(this, fastColoredTextBox1.Text);
+        }
+
+
+
 
 
     }

@@ -26,6 +26,7 @@ namespace CSCodeGen.Library
                 Templates.Add(template);  // Falls nicht vorhanden, hinzufügen
             }
             _XmlStorage.SaveAllTemplates(Templates);
+            template.IsChanged = false;
         }
         public void LoadAllTemplates()
         {

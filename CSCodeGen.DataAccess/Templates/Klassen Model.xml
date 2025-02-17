@@ -4,12 +4,12 @@
   <Name>Klassen Model</Name>
   <Description>Klassen Model </Description>
   <CreationDate>2025-02-12T09:34:55.4264145+01:00</CreationDate>
-  <Source>affafijiajHalloe jfafafaffafafddddddadadadad
+  <Source>affafijiajad
 
 
 
 
-1234fvbmdfbnödnöbdnbkdmb</Source>
+</Source>
   <Keywords>
     <Keyword>
       <Name>Property</Name>
@@ -19,7 +19,7 @@
     </Keyword>
     <Keyword>
       <Name>Property</Name>
-      <Code />
+      <Code>public bool &lt;#propertieName#&gt; {get; set;}</Code>
       <DataType>bool </DataType>
       <PrefixWithComment>true</PrefixWithComment>
     </Keyword>

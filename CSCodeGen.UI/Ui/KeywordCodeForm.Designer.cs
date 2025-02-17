@@ -28,31 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.SuspendLayout();
+            panel1 = new System.Windows.Forms.Panel();
+            ucEditor1 = new ucEditor();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1096, 438);
-            this.panel1.TabIndex = 0;
+            panel1.Controls.Add(ucEditor1);
+            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            panel1.Location = new System.Drawing.Point(0, 0);
+            panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(1150, 505);
+            panel1.TabIndex = 0;
+            // 
+            // ucEditor1
+            // 
+            ucEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucEditor1.Location = new System.Drawing.Point(0, 0);
+            ucEditor1.Name = "ucEditor1";
+            ucEditor1.Size = new System.Drawing.Size(1150, 505);
+            ucEditor1.TabIndex = 0;
             // 
             // KeywordCodeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 438);
-            this.Controls.Add(this.panel1);
-            this.Name = "KeywordCodeForm";
-            this.Text = "KeywordCodeForm";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1150, 505);
+            Controls.Add(panel1);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "KeywordCodeForm";
+            Text = "KeywordCodeForm";
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private ucEditor ucEditor1;
     }
 }
