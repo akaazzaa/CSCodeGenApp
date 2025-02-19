@@ -20,19 +20,25 @@ namespace CSCodeGen.UI
         public TemplateDesignerForm()
         {
             InitializeComponent();
-
-            // Datasource binding
-            templates = CoreGlobals.Instance.templateController.Templates;
-            templateBindingSource.DataSource = templates;
-
-            //Events
-            tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
-            dataGridView1.CellClick += DataGridView1_CellClick;
-            dataGridView1.CellDoubleClick += DataGridView1_CellDoubleClick;
-
+            Init();
         }
 
         #region Methoden
+
+        private void Init()
+        {
+            // Datasource binding
+            templates = CoreGlobals.Instance.templateController.Templates;
+            bsTemplates.DataSource = templates;
+
+            //Events
+            tcMain.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
+            gvKeywords.CellClick += gvKeywords_CellClick;
+
+        }
+
+
+
         private void Save()
         {
             if (currentTemplate == null) return;
@@ -54,9 +60,9 @@ namespace CSCodeGen.UI
             tabs[tabPage] = currentTemplate;
 
             tabPage.Controls.Add(ucEditor);
-            tabControl1.TabPages.Add(tabPage);
+            tcMain.TabPages.Add(tabPage);
 
-            tabControl1.SelectedTab = tabPage;
+            tcMain.SelectedTab = tabPage;
 
         }
 
@@ -66,23 +72,20 @@ namespace CSCodeGen.UI
         #endregion
 
         #region Events
-        private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-        private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void gvKeywords_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 && e.ColumnIndex < 0)
             {
                 return;
             }
 
-            var selectedKeyword = (Keyword)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            var selectedKeyword = (Keyword)gvKeywords.Rows[e.RowIndex].DataBoundItem;
 
             if (selectedKeyword == null) { return; }
 
             // Überprüfe, ob die geklickte Zelle zur Button-Spalte gehört
-            if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            if (gvKeywords.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
             {
                 KeywordCodeForm keywordCodeForm = new KeywordCodeForm(selectedKeyword);
                 keywordCodeForm.ShowDialog();
@@ -92,9 +95,9 @@ namespace CSCodeGen.UI
         }
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedTab != null && tabs.ContainsKey(tabControl1.SelectedTab))
+            if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
             {
-                Template currentTemplate = tabs[tabControl1.SelectedTab];  // Hole das Template der ausgewählten TabPage
+                Template currentTemplate = tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
                 SetPropertyGrid(currentTemplate);  // Übergib das Template an die Methode
             }
         }
@@ -106,8 +109,11 @@ namespace CSCodeGen.UI
                 return;
             }
 
-            currentTemplate.Keywords.Add(new Keyword());
-            dataGridView1.Refresh(); // Grid aktualisieren
+
+            Keyword newkeyword = currentTemplate.Keywords.AddNew();
+
+            gvKeywords.Refresh(); // Grid aktualisieren
+
         }
         private void neuesTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -125,27 +131,27 @@ namespace CSCodeGen.UI
             }
 
             // Jetzt die TabPage entfernen
-            tabControl1.TabPages.Remove(tabPage);
+            tcMain.TabPages.Remove(tabPage);
 
-            if (tabControl1.TabPages.Count > 0)
+            if (tcMain.TabPages.Count > 0)
             {
-                tabControl1.SelectedTab = tabControl1.TabPages[tabControl1.TabPages.Count - 1];  // Setze den ersten Tab als aktiv
+                tcMain.SelectedTab = tcMain.TabPages[tcMain.TabPages.Count - 1];  // Setze den ersten Tab als aktiv
             }
 
-            propertyGrid1.SelectedObject = null;
-            dataGridView1.DataSource = null;
+            pgTemplate.SelectedObject = null;
+            gvKeywords.DataSource = null;
 
         }
         private void SetPropertyGrid(Template template)
         {
-            propertyGrid1.SelectedObject = template;
-            dataGridView1.DataSource = template.Keywords;
+            pgTemplate.SelectedObject = template;
+            gvKeywords.DataSource = template.Keywords;
         }
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem == null) return;
+            if (listTemplate.SelectedItem == null) return;
 
-            currentTemplate = (Template)listBox1.SelectedItem;
+            currentTemplate = (Template)listTemplate.SelectedItem;
             AddNewTap();
             SetPropertyGrid(currentTemplate);
         }

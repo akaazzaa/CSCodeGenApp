@@ -28,348 +28,348 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.keywordBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.templateBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.neuesTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.öffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.speichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allesSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.displayTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelMain.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.keywordBindingSource)).BeginInit();
-            this.panel6.SuspendLayout();
-            this.menuStrip2.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.templateBindingSource)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            panelMain = new System.Windows.Forms.Panel();
+            panelContent = new System.Windows.Forms.Panel();
+            tcMain = new System.Windows.Forms.TabControl();
+            pnlSidebarRight = new System.Windows.Forms.Panel();
+            gvKeywords = new System.Windows.Forms.DataGridView();
+            bsKeywords = new System.Windows.Forms.BindingSource(components);
+            pnlKeywordMenu = new System.Windows.Forms.Panel();
+            keywordmenu = new System.Windows.Forms.MenuStrip();
+            btnAddKeyword = new System.Windows.Forms.ToolStripMenuItem();
+            btnRemovekeyword = new System.Windows.Forms.ToolStripMenuItem();
+            pnalPropertys = new System.Windows.Forms.Panel();
+            pgTemplate = new System.Windows.Forms.PropertyGrid();
+            pnlSidebar = new System.Windows.Forms.Panel();
+            pnlList = new System.Windows.Forms.Panel();
+            listTemplate = new System.Windows.Forms.ListBox();
+            bsTemplates = new System.Windows.Forms.BindingSource(components);
+            pnlbar = new System.Windows.Forms.Panel();
+            mainMenu = new System.Windows.Forms.MenuStrip();
+            btnNeuesTemplate = new System.Windows.Forms.ToolStripMenuItem();
+            btnÖfnnen = new System.Windows.Forms.ToolStripMenuItem();
+            btnSave = new System.Windows.Forms.ToolStripMenuItem();
+            allesSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
+            gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            gvcbDataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            panelMain.SuspendLayout();
+            panelContent.SuspendLayout();
+            pnlSidebarRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvKeywords).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsKeywords).BeginInit();
+            pnlKeywordMenu.SuspendLayout();
+            keywordmenu.SuspendLayout();
+            pnalPropertys.SuspendLayout();
+            pnlSidebar.SuspendLayout();
+            pnlList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bsTemplates).BeginInit();
+            pnlbar.SuspendLayout();
+            mainMenu.SuspendLayout();
+            SuspendLayout();
             // 
             // panelMain
             // 
-            this.panelMain.Controls.Add(this.panel3);
-            this.panelMain.Controls.Add(this.panel2);
-            this.panelMain.Controls.Add(this.panel1);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1615, 530);
-            this.panelMain.TabIndex = 0;
+            panelMain.Controls.Add(panelContent);
+            panelMain.Controls.Add(pnlSidebar);
+            panelMain.Controls.Add(pnlbar);
+            panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelMain.Location = new System.Drawing.Point(0, 0);
+            panelMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new System.Drawing.Size(1884, 612);
+            panelMain.TabIndex = 0;
             // 
-            // panel3
+            // panelContent
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.tabControl1);
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(170, 29);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1445, 501);
-            this.panel3.TabIndex = 2;
+            panelContent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panelContent.Controls.Add(tcMain);
+            panelContent.Controls.Add(pnlSidebarRight);
+            panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            panelContent.Location = new System.Drawing.Point(198, 30);
+            panelContent.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new System.Drawing.Size(1686, 582);
+            panelContent.TabIndex = 2;
             // 
-            // tabControl1
+            // tcMain
             // 
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1004, 499);
-            this.tabControl1.TabIndex = 1;
+            tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            tcMain.Location = new System.Drawing.Point(0, 0);
+            tcMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tcMain.Name = "tcMain";
+            tcMain.SelectedIndex = 0;
+            tcMain.Size = new System.Drawing.Size(1353, 580);
+            tcMain.TabIndex = 1;
             // 
-            // panel4
+            // pnlSidebarRight
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.dataGridView1);
-            this.panel4.Controls.Add(this.panel6);
-            this.panel4.Controls.Add(this.panel5);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1004, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(439, 499);
-            this.panel4.TabIndex = 0;
+            pnlSidebarRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlSidebarRight.Controls.Add(gvKeywords);
+            pnlSidebarRight.Controls.Add(pnlKeywordMenu);
+            pnlSidebarRight.Controls.Add(pnalPropertys);
+            pnlSidebarRight.Dock = System.Windows.Forms.DockStyle.Right;
+            pnlSidebarRight.Location = new System.Drawing.Point(1353, 0);
+            pnlSidebarRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlSidebarRight.Name = "pnlSidebarRight";
+            pnlSidebarRight.Size = new System.Drawing.Size(331, 580);
+            pnlSidebarRight.TabIndex = 0;
             // 
-            // dataGridView1
+            // gvKeywords
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.btnCode,
-            this.nameDataGridViewTextBoxColumn,
-            this.dataTypeDataGridViewTextBoxColumn,
-            this.displayTextDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.keywordBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 283);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(437, 214);
-            this.dataGridView1.TabIndex = 1;
+            gvKeywords.AllowUserToAddRows = false;
+            gvKeywords.AllowUserToDeleteRows = false;
+            gvKeywords.AllowUserToResizeColumns = false;
+            gvKeywords.AutoGenerateColumns = false;
+            gvKeywords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { btnCode, gvtxtName, gvcbDataType, gvtxtDisplaytext });
+            gvKeywords.DataSource = bsKeywords;
+            gvKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
+            gvKeywords.Location = new System.Drawing.Point(0, 318);
+            gvKeywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gvKeywords.Name = "gvKeywords";
+            gvKeywords.Size = new System.Drawing.Size(329, 260);
+            gvKeywords.TabIndex = 1;
             // 
-            // keywordBindingSource
+            // bsKeywords
             // 
-            this.keywordBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Keyword);
+            bsKeywords.DataSource = typeof(DataAccess.Model.Keyword);
             // 
-            // panel6
+            // pnlKeywordMenu
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.menuStrip2);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 257);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(437, 26);
-            this.panel6.TabIndex = 2;
+            pnlKeywordMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlKeywordMenu.Controls.Add(keywordmenu);
+            pnlKeywordMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlKeywordMenu.Location = new System.Drawing.Point(0, 294);
+            pnlKeywordMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlKeywordMenu.Name = "pnlKeywordMenu";
+            pnlKeywordMenu.Size = new System.Drawing.Size(329, 24);
+            pnlKeywordMenu.TabIndex = 2;
             // 
-            // menuStrip2
+            // keywordmenu
             // 
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.removeToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(435, 24);
-            this.menuStrip2.TabIndex = 0;
-            this.menuStrip2.Text = "menuStrip2";
+            keywordmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAddKeyword, btnRemovekeyword });
+            keywordmenu.Location = new System.Drawing.Point(0, 0);
+            keywordmenu.Name = "keywordmenu";
+            keywordmenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            keywordmenu.Size = new System.Drawing.Size(327, 24);
+            keywordmenu.TabIndex = 0;
+            keywordmenu.Text = "menuStrip2";
             // 
-            // toolStripMenuItem1
+            // btnAddKeyword
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(41, 20);
-            this.toolStripMenuItem1.Text = "Add";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            btnAddKeyword.Name = "btnAddKeyword";
+            btnAddKeyword.Size = new System.Drawing.Size(41, 20);
+            btnAddKeyword.Text = "Add";
+            btnAddKeyword.Click += toolStripMenuItem1_Click;
             // 
-            // removeToolStripMenuItem
+            // btnRemovekeyword
             // 
-            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.removeToolStripMenuItem.Text = "Remove";
+            btnRemovekeyword.Name = "btnRemovekeyword";
+            btnRemovekeyword.Size = new System.Drawing.Size(62, 20);
+            btnRemovekeyword.Text = "Remove";
             // 
-            // panel5
+            // pnalPropertys
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.propertyGrid1);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(437, 257);
-            this.panel5.TabIndex = 0;
+            pnalPropertys.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnalPropertys.Controls.Add(pgTemplate);
+            pnalPropertys.Dock = System.Windows.Forms.DockStyle.Top;
+            pnalPropertys.Location = new System.Drawing.Point(0, 0);
+            pnalPropertys.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnalPropertys.Name = "pnalPropertys";
+            pnalPropertys.Size = new System.Drawing.Size(329, 294);
+            pnalPropertys.TabIndex = 0;
             // 
-            // propertyGrid1
+            // pgTemplate
             // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(435, 255);
-            this.propertyGrid1.TabIndex = 0;
+            pgTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
+            pgTemplate.Location = new System.Drawing.Point(0, 0);
+            pgTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pgTemplate.Name = "pgTemplate";
+            pgTemplate.Size = new System.Drawing.Size(327, 292);
+            pgTemplate.TabIndex = 0;
             // 
-            // panel2
+            // pnlSidebar
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panel7);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 29);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(170, 501);
-            this.panel2.TabIndex = 1;
+            pnlSidebar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlSidebar.Controls.Add(pnlList);
+            pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            pnlSidebar.Location = new System.Drawing.Point(0, 30);
+            pnlSidebar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlSidebar.Name = "pnlSidebar";
+            pnlSidebar.Size = new System.Drawing.Size(198, 582);
+            pnlSidebar.TabIndex = 1;
             // 
-            // panel7
+            // pnlList
             // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.listBox1);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(175, 499);
-            this.panel7.TabIndex = 0;
+            pnlList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlList.Controls.Add(listTemplate);
+            pnlList.Dock = System.Windows.Forms.DockStyle.Left;
+            pnlList.Location = new System.Drawing.Point(0, 0);
+            pnlList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlList.Name = "pnlList";
+            pnlList.Size = new System.Drawing.Size(197, 580);
+            pnlList.TabIndex = 0;
             // 
-            // listBox1
+            // listTemplate
             // 
-            this.listBox1.DataSource = this.templateBindingSource;
-            this.listBox1.DisplayMember = "Name";
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(173, 497);
-            this.listBox1.TabIndex = 0;
-            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_DoubleClick);
+            listTemplate.DataSource = bsTemplates;
+            listTemplate.DisplayMember = "Name";
+            listTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
+            listTemplate.FormattingEnabled = true;
+            listTemplate.ItemHeight = 15;
+            listTemplate.Location = new System.Drawing.Point(0, 0);
+            listTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            listTemplate.Name = "listTemplate";
+            listTemplate.Size = new System.Drawing.Size(195, 578);
+            listTemplate.TabIndex = 0;
+            listTemplate.DoubleClick += listBox1_DoubleClick;
             // 
-            // templateBindingSource
+            // bsTemplates
             // 
-            this.templateBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Template);
+            bsTemplates.DataSource = typeof(DataAccess.Model.Template);
             // 
-            // panel1
+            // pnlbar
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.menuStrip1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1615, 29);
-            this.panel1.TabIndex = 0;
+            pnlbar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlbar.Controls.Add(mainMenu);
+            pnlbar.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlbar.Location = new System.Drawing.Point(0, 0);
+            pnlbar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlbar.Name = "pnlbar";
+            pnlbar.Size = new System.Drawing.Size(1884, 30);
+            pnlbar.TabIndex = 0;
             // 
-            // menuStrip1
+            // mainMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neuesTemplateToolStripMenuItem,
-            this.öffnenToolStripMenuItem,
-            this.speichernToolStripMenuItem,
-            this.allesSpeichernToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1613, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnÖfnnen, btnSave, allesSpeichernToolStripMenuItem });
+            mainMenu.Location = new System.Drawing.Point(0, 0);
+            mainMenu.Name = "mainMenu";
+            mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            mainMenu.Size = new System.Drawing.Size(1882, 24);
+            mainMenu.TabIndex = 0;
+            mainMenu.Text = "menuStrip1";
             // 
-            // neuesTemplateToolStripMenuItem
+            // btnNeuesTemplate
             // 
-            this.neuesTemplateToolStripMenuItem.Name = "neuesTemplateToolStripMenuItem";
-            this.neuesTemplateToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
-            this.neuesTemplateToolStripMenuItem.Text = "Neues Template";
-            this.neuesTemplateToolStripMenuItem.Click += new System.EventHandler(this.neuesTemplateToolStripMenuItem_Click);
+            btnNeuesTemplate.Name = "btnNeuesTemplate";
+            btnNeuesTemplate.Size = new System.Drawing.Size(103, 20);
+            btnNeuesTemplate.Text = "Neues Template";
+            btnNeuesTemplate.Click += neuesTemplateToolStripMenuItem_Click;
             // 
-            // öffnenToolStripMenuItem
+            // btnÖfnnen
             // 
-            this.öffnenToolStripMenuItem.Name = "öffnenToolStripMenuItem";
-            this.öffnenToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.öffnenToolStripMenuItem.Text = "Öffnen";
+            btnÖfnnen.Name = "btnÖfnnen";
+            btnÖfnnen.Size = new System.Drawing.Size(56, 20);
+            btnÖfnnen.Text = "Öffnen";
             // 
-            // speichernToolStripMenuItem
+            // btnSave
             // 
-            this.speichernToolStripMenuItem.Name = "speichernToolStripMenuItem";
-            this.speichernToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.speichernToolStripMenuItem.Text = "Speichern";
-            this.speichernToolStripMenuItem.Click += new System.EventHandler(this.speichernToolStripMenuItem_Click);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(71, 20);
+            btnSave.Text = "Speichern";
+            btnSave.Click += speichernToolStripMenuItem_Click;
             // 
             // allesSpeichernToolStripMenuItem
             // 
-            this.allesSpeichernToolStripMenuItem.Name = "allesSpeichernToolStripMenuItem";
-            this.allesSpeichernToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.allesSpeichernToolStripMenuItem.Text = "Alles Speichern";
-            this.allesSpeichernToolStripMenuItem.Click += new System.EventHandler(this.allesSpeichernToolStripMenuItem_Click);
+            allesSpeichernToolStripMenuItem.Name = "allesSpeichernToolStripMenuItem";
+            allesSpeichernToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            allesSpeichernToolStripMenuItem.Text = "Alles Speichern";
+            allesSpeichernToolStripMenuItem.Click += allesSpeichernToolStripMenuItem_Click;
             // 
             // btnCode
             // 
-            this.btnCode.DataPropertyName = "Code";
-            this.btnCode.HeaderText = "Code";
-            this.btnCode.Name = "btnCode";
-            this.btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.btnCode.Text = "Code anschauen";
-            this.btnCode.UseColumnTextForButtonValue = true;
+            btnCode.DataPropertyName = "Code";
+            btnCode.HeaderText = "Code";
+            btnCode.Name = "btnCode";
+            btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            btnCode.Text = "Code anschauen";
+            btnCode.UseColumnTextForButtonValue = true;
             // 
-            // nameDataGridViewTextBoxColumn
+            // gvtxtName
             // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            gvtxtName.DataPropertyName = "Name";
+            gvtxtName.HeaderText = "Name";
+            gvtxtName.Name = "gvtxtName";
             // 
-            // dataTypeDataGridViewTextBoxColumn
+            // gvcbDataType
             // 
-            this.dataTypeDataGridViewTextBoxColumn.DataPropertyName = "DataType";
-            this.dataTypeDataGridViewTextBoxColumn.HeaderText = "DataType";
-            this.dataTypeDataGridViewTextBoxColumn.Items.AddRange(new object[] {
-            "int ",
-            "bool ",
-            "string",
-            "Date",
-            "char"});
-            this.dataTypeDataGridViewTextBoxColumn.Name = "dataTypeDataGridViewTextBoxColumn";
-            this.dataTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            gvcbDataType.DataPropertyName = "DataType";
+            gvcbDataType.HeaderText = "DataType";
+            gvcbDataType.Items.AddRange(new object[] { "int ", "bool ", "string", "Date", "char" });
+            gvcbDataType.Name = "gvcbDataType";
+            gvcbDataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            gvcbDataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // displayTextDataGridViewTextBoxColumn
+            // gvtxtDisplaytext
             // 
-            this.displayTextDataGridViewTextBoxColumn.DataPropertyName = "DisplayText";
-            this.displayTextDataGridViewTextBoxColumn.HeaderText = "DisplayText";
-            this.displayTextDataGridViewTextBoxColumn.Name = "displayTextDataGridViewTextBoxColumn";
-            this.displayTextDataGridViewTextBoxColumn.ReadOnly = true;
+            gvtxtDisplaytext.DataPropertyName = "DisplayText";
+            gvtxtDisplaytext.HeaderText = "DisplayText";
+            gvtxtDisplaytext.Name = "gvtxtDisplaytext";
+            gvtxtDisplaytext.ReadOnly = true;
             // 
             // TemplateDesignerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1615, 530);
-            this.Controls.Add(this.panelMain);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "TemplateDesignerForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TemplateDesignerForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TemplateDesignerForm_FormClosing);
-            this.panelMain.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.keywordBindingSource)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.templateBindingSource)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1884, 612);
+            Controls.Add(panelMain);
+            MainMenuStrip = mainMenu;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "TemplateDesignerForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "TemplateDesigner";
+            FormClosing += TemplateDesignerForm_FormClosing;
+            panelMain.ResumeLayout(false);
+            panelContent.ResumeLayout(false);
+            pnlSidebarRight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gvKeywords).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsKeywords).EndInit();
+            pnlKeywordMenu.ResumeLayout(false);
+            pnlKeywordMenu.PerformLayout();
+            keywordmenu.ResumeLayout(false);
+            keywordmenu.PerformLayout();
+            pnalPropertys.ResumeLayout(false);
+            pnlSidebar.ResumeLayout(false);
+            pnlList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)bsTemplates).EndInit();
+            pnlbar.ResumeLayout(false);
+            pnlbar.PerformLayout();
+            mainMenu.ResumeLayout(false);
+            mainMenu.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
         private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnlbar;
+        private System.Windows.Forms.Panel panelContent;
+        private System.Windows.Forms.Panel pnlSidebar;
+        private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.Panel pnlSidebarRight;
+        private System.Windows.Forms.DataGridView gvKeywords;
+        private System.Windows.Forms.Panel pnlKeywordMenu;
+        private System.Windows.Forms.MenuStrip keywordmenu;
+        private System.Windows.Forms.ToolStripMenuItem btnAddKeyword;
+        private System.Windows.Forms.ToolStripMenuItem btnRemovekeyword;
+        private System.Windows.Forms.Panel pnalPropertys;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource keywordBindingSource;
-        private System.Windows.Forms.PropertyGrid propertyGrid1;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.ToolStripMenuItem neuesTemplateToolStripMenuItem;
-        private System.Windows.Forms.BindingSource templateBindingSource;
-        private System.Windows.Forms.ToolStripMenuItem öffnenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem speichernToolStripMenuItem;
+        private System.Windows.Forms.BindingSource bsKeywords;
+        private System.Windows.Forms.PropertyGrid pgTemplate;
+        private System.Windows.Forms.Panel pnlList;
+        private System.Windows.Forms.ListBox listTemplate;
+        private System.Windows.Forms.TabControl tcMain;
+        private System.Windows.Forms.ToolStripMenuItem btnNeuesTemplate;
+        private System.Windows.Forms.BindingSource bsTemplates;
+        private System.Windows.Forms.ToolStripMenuItem btnÖfnnen;
+        private System.Windows.Forms.ToolStripMenuItem btnSave;
         private System.Windows.Forms.ToolStripMenuItem allesSpeichernToolStripMenuItem;
         private System.Windows.Forms.DataGridViewButtonColumn btnCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn displayTextDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtName;
+        private System.Windows.Forms.DataGridViewComboBoxColumn gvcbDataType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtDisplaytext;
     }
 }

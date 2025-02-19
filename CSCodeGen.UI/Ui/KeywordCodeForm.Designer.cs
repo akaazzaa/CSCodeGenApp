@@ -59,6 +59,7 @@
             Controls.Add(panel1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "KeywordCodeForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "KeywordCodeForm";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
