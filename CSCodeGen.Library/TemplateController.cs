@@ -16,8 +16,6 @@ namespace CSCodeGen.Library
 
         }
 
-
-
         #region Laden und Speichern 
         public void SaveTemplate(Template template)
         {
@@ -36,14 +34,7 @@ namespace CSCodeGen.Library
         {
             _XmlStorage.SaveAllTemplates(Templates);
         }
-        public void DeleteTemplate(Template template)
-        {
-            if (template != null && Templates.Contains(template))
-            {
-                Templates.Remove(template);
-                SaveAllTemplates(); // Aktualisierte Liste speichern
-            }
-        }
+       
         #endregion
     }
 }

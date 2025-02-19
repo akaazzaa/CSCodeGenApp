@@ -32,13 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucEditor));
             panel1 = new System.Windows.Forms.Panel();
             panel3 = new System.Windows.Forms.Panel();
+            fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             panel2 = new System.Windows.Forms.Panel();
             listBox1 = new System.Windows.Forms.ListBox();
-            fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -60,6 +60,38 @@
             panel3.Size = new System.Drawing.Size(847, 452);
             panel3.TabIndex = 1;
             // 
+            // fastColoredTextBox1
+            // 
+            fastColoredTextBox1.AutoCompleteBracketsList = new char[]
+    {
+    '(',
+    ')',
+    '{',
+    '}',
+    '[',
+    ']',
+    '"',
+    '"',
+    '\'',
+    '\''
+    };
+            fastColoredTextBox1.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
+            fastColoredTextBox1.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            fastColoredTextBox1.BackBrush = null;
+            fastColoredTextBox1.CharHeight = 14;
+            fastColoredTextBox1.CharWidth = 8;
+            fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
+            fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            fastColoredTextBox1.IsReplaceMode = false;
+            fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
+            fastColoredTextBox1.Name = "fastColoredTextBox1";
+            fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
+            fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255);
+            fastColoredTextBox1.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("fastColoredTextBox1.ServiceColors");
+            fastColoredTextBox1.Size = new System.Drawing.Size(847, 452);
+            fastColoredTextBox1.TabIndex = 0;
+            fastColoredTextBox1.Zoom = 100;
+            // 
             // panel2
             // 
             panel2.Controls.Add(listBox1);
@@ -79,40 +111,6 @@
             listBox1.Size = new System.Drawing.Size(147, 452);
             listBox1.TabIndex = 0;
             // 
-            // fastColoredTextBox1
-            // 
-            fastColoredTextBox1.AutoCompleteBracketsList = new char[]
-    {
-    '(',
-    ')',
-    '{',
-    '}',
-    '[',
-    ']',
-    '"',
-    '"',
-    '\'',
-    '\''
-    };
-            fastColoredTextBox1.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            fastColoredTextBox1.AutoScrollMinSize = new System.Drawing.Size(179, 14);
-            fastColoredTextBox1.BackBrush = null;
-            fastColoredTextBox1.CharHeight = 14;
-            fastColoredTextBox1.CharWidth = 8;
-            fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
-            fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
-            fastColoredTextBox1.IsReplaceMode = false;
-            fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
-            fastColoredTextBox1.Name = "fastColoredTextBox1";
-            fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
-            fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255);
-            fastColoredTextBox1.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("fastColoredTextBox1.ServiceColors");
-            fastColoredTextBox1.Size = new System.Drawing.Size(847, 452);
-            fastColoredTextBox1.TabIndex = 0;
-            fastColoredTextBox1.Text = "fastColoredTextBox1";
-            fastColoredTextBox1.Zoom = 100;
-            // 
             // ucEditor
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -122,8 +120,8 @@
             Size = new System.Drawing.Size(994, 452);
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 

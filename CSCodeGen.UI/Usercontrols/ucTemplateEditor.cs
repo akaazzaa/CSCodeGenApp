@@ -8,29 +8,34 @@ namespace CSCodeGen.UI.Usercontrols
     {
         public event Action<TabPage> OnClosingTap;
         public event Action OnSaveChanges;
-        private bool textChanged = false;
         private Template Template;
+        private string alterCode;
 
         public ucTemplateEditor(Template template)
         {
             InitializeComponent();
             Template = template;
             ucEditor2.Initialize(template);
-            ucEditor2.CodeChanged += UcEditor_CodeChanged;
-
+            ucEditor2.CodeChanged += UcEditor2_CodeChanged;
             löschenToolStripMenuItem.Click += (s, e) => CloseTab();
 
+
         }
-        private void UcEditor_CodeChanged(object sender, string newSource)
+
+        private void UcEditor2_CodeChanged(object sender, string newSource)
         {
+            alterCode = Template.Source;
+
             Template.Source = newSource;
-            textChanged = true;
+            
         }
 
         #region Methoden
         private void CloseTab()
         {
-            if (textChanged) // Falls Änderungen vorhanden sind
+            this.Validate();
+
+            if (Template.IsChanged) // Falls Änderungen vorhanden sind
             {
                 DialogResult result = MessageBox.Show(
                     "Änderungen speichern?",
@@ -43,9 +48,14 @@ namespace CSCodeGen.UI.Usercontrols
                 {
                     SaveChanges();
                 }
+                else if (result == DialogResult.No)
+                {
+                    Template.Source = alterCode;
+                    SaveChanges();
+                }
                 else if (result == DialogResult.Cancel)
                 {
-                    return; // Abbrechen, Tab bleibt offen
+                    return;
                 }
             }
 
@@ -58,8 +68,6 @@ namespace CSCodeGen.UI.Usercontrols
         }
 
         #endregion
-
-
 
     }
 }

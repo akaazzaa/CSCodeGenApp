@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <IsChanged>true</IsChanged>
+  <IsChanged>false</IsChanged>
   <Name>Klassen Model</Name>
   <Description>Klassen Model </Description>
   <CreationDate>2025-02-12T09:34:55.4264145+01:00</CreationDate>
-  <Source>
-
-
-
-</Source>
+  <Source />
   <Keywords>
     <Keyword>
       <Name>Property</Name>

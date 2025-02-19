@@ -31,12 +31,12 @@
             components = new System.ComponentModel.Container();
             panel1 = new System.Windows.Forms.Panel();
             panel3 = new System.Windows.Forms.Panel();
+            ucEditor2 = new ucEditor();
             panel4 = new System.Windows.Forms.Panel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             löschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             templateBindingSource = new System.Windows.Forms.BindingSource(components);
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
-            ucEditor2 = new ucEditor();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
@@ -66,6 +66,14 @@
             panel3.Name = "panel3";
             panel3.Size = new System.Drawing.Size(1277, 628);
             panel3.TabIndex = 1;
+            // 
+            // ucEditor2
+            // 
+            ucEditor2.Dock = System.Windows.Forms.DockStyle.Fill;
+            ucEditor2.Location = new System.Drawing.Point(0, 29);
+            ucEditor2.Name = "ucEditor2";
+            ucEditor2.Size = new System.Drawing.Size(1275, 597);
+            ucEditor2.TabIndex = 2;
             // 
             // panel4
             // 
@@ -102,14 +110,6 @@
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // ucEditor2
-            // 
-            ucEditor2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucEditor2.Location = new System.Drawing.Point(0, 29);
-            ucEditor2.Name = "ucEditor2";
-            ucEditor2.Size = new System.Drawing.Size(1275, 597);
-            ucEditor2.TabIndex = 2;
             // 
             // ucTemplateEditor
             // 

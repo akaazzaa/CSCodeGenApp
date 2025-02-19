@@ -61,6 +61,7 @@ namespace CSCodeGen.DataAccess.Model
 
             foreach (Template template in templates)
             {
+                template.IsChanged = false;
                 try
                 {
                     // Verwende den Template-Namen als Dateinamen und hänge .xml an
@@ -75,11 +76,12 @@ namespace CSCodeGen.DataAccess.Model
                         serializer.Serialize(writer, template);
                     }
 
-                    Console.WriteLine($"Template '{template.Name}' erfolgreich gespeichert.");
+                    
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Fehler beim Speichern der Datei '{template.Name}': {ex.Message}");
+                    template.IsChanged = true;
                 }
             }
         }

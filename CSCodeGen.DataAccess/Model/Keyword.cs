@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.DataAccess.Model.Config;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -7,14 +8,12 @@ namespace CSCodeGen.DataAccess.Model
 {
     public class Keyword : INotifyPropertyChanged
     {
-        private static int _nextID = 1;
-
+        
+        
         private string _code;
         private string _dataType;
         private string _name;
         private bool _prefixWithComment;
-
-        public int ID { get; }
 
 
         public string Name
@@ -76,7 +75,6 @@ namespace CSCodeGen.DataAccess.Model
 
         public Keyword()
         {
-            ID = _nextID++;
             _code = string.Empty;
             _dataType = string.Empty;
             _name = string.Empty;
@@ -86,7 +84,7 @@ namespace CSCodeGen.DataAccess.Model
         // Optional: ein Konstruktor, der z.B. initial den Namen setzt.
         public Keyword(string key)
         {
-            ID = _nextID++;
+           
             Name = key;
 
         }

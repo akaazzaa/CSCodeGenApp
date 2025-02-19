@@ -34,6 +34,10 @@
             tcMain = new System.Windows.Forms.TabControl();
             pnlSidebarRight = new System.Windows.Forms.Panel();
             gvKeywords = new System.Windows.Forms.DataGridView();
+            btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
+            gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            gvcbDataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
             bsKeywords = new System.Windows.Forms.BindingSource(components);
             pnlKeywordMenu = new System.Windows.Forms.Panel();
             keywordmenu = new System.Windows.Forms.MenuStrip();
@@ -48,13 +52,7 @@
             pnlbar = new System.Windows.Forms.Panel();
             mainMenu = new System.Windows.Forms.MenuStrip();
             btnNeuesTemplate = new System.Windows.Forms.ToolStripMenuItem();
-            btnÖfnnen = new System.Windows.Forms.ToolStripMenuItem();
             btnSave = new System.Windows.Forms.ToolStripMenuItem();
-            allesSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
-            gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            gvcbDataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
             panelMain.SuspendLayout();
             panelContent.SuspendLayout();
             pnlSidebarRight.SuspendLayout();
@@ -79,7 +77,7 @@
             panelMain.Location = new System.Drawing.Point(0, 0);
             panelMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panelMain.Name = "panelMain";
-            panelMain.Size = new System.Drawing.Size(1884, 612);
+            panelMain.Size = new System.Drawing.Size(1240, 554);
             panelMain.TabIndex = 0;
             // 
             // panelContent
@@ -91,7 +89,7 @@
             panelContent.Location = new System.Drawing.Point(198, 30);
             panelContent.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panelContent.Name = "panelContent";
-            panelContent.Size = new System.Drawing.Size(1686, 582);
+            panelContent.Size = new System.Drawing.Size(1042, 524);
             panelContent.TabIndex = 2;
             // 
             // tcMain
@@ -101,7 +99,7 @@
             tcMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new System.Drawing.Size(1353, 580);
+            tcMain.Size = new System.Drawing.Size(709, 522);
             tcMain.TabIndex = 1;
             // 
             // pnlSidebarRight
@@ -111,10 +109,10 @@
             pnlSidebarRight.Controls.Add(pnlKeywordMenu);
             pnlSidebarRight.Controls.Add(pnalPropertys);
             pnlSidebarRight.Dock = System.Windows.Forms.DockStyle.Right;
-            pnlSidebarRight.Location = new System.Drawing.Point(1353, 0);
+            pnlSidebarRight.Location = new System.Drawing.Point(709, 0);
             pnlSidebarRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlSidebarRight.Name = "pnlSidebarRight";
-            pnlSidebarRight.Size = new System.Drawing.Size(331, 580);
+            pnlSidebarRight.Size = new System.Drawing.Size(331, 522);
             pnlSidebarRight.TabIndex = 0;
             // 
             // gvKeywords
@@ -130,8 +128,40 @@
             gvKeywords.Location = new System.Drawing.Point(0, 318);
             gvKeywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gvKeywords.Name = "gvKeywords";
-            gvKeywords.Size = new System.Drawing.Size(329, 260);
+            gvKeywords.Size = new System.Drawing.Size(329, 202);
             gvKeywords.TabIndex = 1;
+            // 
+            // btnCode
+            // 
+            btnCode.DataPropertyName = "Code";
+            btnCode.HeaderText = "Code";
+            btnCode.Name = "btnCode";
+            btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            btnCode.Text = "Code anschauen";
+            btnCode.UseColumnTextForButtonValue = true;
+            // 
+            // gvtxtName
+            // 
+            gvtxtName.DataPropertyName = "Name";
+            gvtxtName.HeaderText = "Name";
+            gvtxtName.Name = "gvtxtName";
+            // 
+            // gvcbDataType
+            // 
+            gvcbDataType.DataPropertyName = "DataType";
+            gvcbDataType.HeaderText = "DataType";
+            gvcbDataType.Items.AddRange(new object[] { "int ", "bool ", "string", "Date", "char" });
+            gvcbDataType.Name = "gvcbDataType";
+            gvcbDataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            gvcbDataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // gvtxtDisplaytext
+            // 
+            gvtxtDisplaytext.DataPropertyName = "DisplayText";
+            gvtxtDisplaytext.HeaderText = "DisplayText";
+            gvtxtDisplaytext.Name = "gvtxtDisplaytext";
+            gvtxtDisplaytext.ReadOnly = true;
             // 
             // bsKeywords
             // 
@@ -199,7 +229,7 @@
             pnlSidebar.Location = new System.Drawing.Point(0, 30);
             pnlSidebar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.Size = new System.Drawing.Size(198, 582);
+            pnlSidebar.Size = new System.Drawing.Size(198, 524);
             pnlSidebar.TabIndex = 1;
             // 
             // pnlList
@@ -210,7 +240,7 @@
             pnlList.Location = new System.Drawing.Point(0, 0);
             pnlList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlList.Name = "pnlList";
-            pnlList.Size = new System.Drawing.Size(197, 580);
+            pnlList.Size = new System.Drawing.Size(197, 522);
             pnlList.TabIndex = 0;
             // 
             // listTemplate
@@ -223,7 +253,7 @@
             listTemplate.Location = new System.Drawing.Point(0, 0);
             listTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listTemplate.Name = "listTemplate";
-            listTemplate.Size = new System.Drawing.Size(195, 578);
+            listTemplate.Size = new System.Drawing.Size(195, 520);
             listTemplate.TabIndex = 0;
             listTemplate.DoubleClick += listBox1_DoubleClick;
             // 
@@ -239,31 +269,25 @@
             pnlbar.Location = new System.Drawing.Point(0, 0);
             pnlbar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlbar.Name = "pnlbar";
-            pnlbar.Size = new System.Drawing.Size(1884, 30);
+            pnlbar.Size = new System.Drawing.Size(1240, 30);
             pnlbar.TabIndex = 0;
             // 
             // mainMenu
             // 
-            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnÖfnnen, btnSave, allesSpeichernToolStripMenuItem });
+            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave });
             mainMenu.Location = new System.Drawing.Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            mainMenu.Size = new System.Drawing.Size(1882, 24);
+            mainMenu.Size = new System.Drawing.Size(1238, 24);
             mainMenu.TabIndex = 0;
             mainMenu.Text = "menuStrip1";
             // 
             // btnNeuesTemplate
             // 
             btnNeuesTemplate.Name = "btnNeuesTemplate";
-            btnNeuesTemplate.Size = new System.Drawing.Size(103, 20);
+            btnNeuesTemplate.Size = new System.Drawing.Size(104, 20);
             btnNeuesTemplate.Text = "Neues Template";
             btnNeuesTemplate.Click += neuesTemplateToolStripMenuItem_Click;
-            // 
-            // btnÖfnnen
-            // 
-            btnÖfnnen.Name = "btnÖfnnen";
-            btnÖfnnen.Size = new System.Drawing.Size(56, 20);
-            btnÖfnnen.Text = "Öffnen";
             // 
             // btnSave
             // 
@@ -272,50 +296,11 @@
             btnSave.Text = "Speichern";
             btnSave.Click += speichernToolStripMenuItem_Click;
             // 
-            // allesSpeichernToolStripMenuItem
-            // 
-            allesSpeichernToolStripMenuItem.Name = "allesSpeichernToolStripMenuItem";
-            allesSpeichernToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            allesSpeichernToolStripMenuItem.Text = "Alles Speichern";
-            allesSpeichernToolStripMenuItem.Click += allesSpeichernToolStripMenuItem_Click;
-            // 
-            // btnCode
-            // 
-            btnCode.DataPropertyName = "Code";
-            btnCode.HeaderText = "Code";
-            btnCode.Name = "btnCode";
-            btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            btnCode.Text = "Code anschauen";
-            btnCode.UseColumnTextForButtonValue = true;
-            // 
-            // gvtxtName
-            // 
-            gvtxtName.DataPropertyName = "Name";
-            gvtxtName.HeaderText = "Name";
-            gvtxtName.Name = "gvtxtName";
-            // 
-            // gvcbDataType
-            // 
-            gvcbDataType.DataPropertyName = "DataType";
-            gvcbDataType.HeaderText = "DataType";
-            gvcbDataType.Items.AddRange(new object[] { "int ", "bool ", "string", "Date", "char" });
-            gvcbDataType.Name = "gvcbDataType";
-            gvcbDataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            gvcbDataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // gvtxtDisplaytext
-            // 
-            gvtxtDisplaytext.DataPropertyName = "DisplayText";
-            gvtxtDisplaytext.HeaderText = "DisplayText";
-            gvtxtDisplaytext.Name = "gvtxtDisplaytext";
-            gvtxtDisplaytext.ReadOnly = true;
-            // 
             // TemplateDesignerForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1884, 612);
+            ClientSize = new System.Drawing.Size(1240, 554);
             Controls.Add(panelMain);
             MainMenuStrip = mainMenu;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -364,9 +349,7 @@
         private System.Windows.Forms.TabControl tcMain;
         private System.Windows.Forms.ToolStripMenuItem btnNeuesTemplate;
         private System.Windows.Forms.BindingSource bsTemplates;
-        private System.Windows.Forms.ToolStripMenuItem btnÖfnnen;
         private System.Windows.Forms.ToolStripMenuItem btnSave;
-        private System.Windows.Forms.ToolStripMenuItem allesSpeichernToolStripMenuItem;
         private System.Windows.Forms.DataGridViewButtonColumn btnCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtName;
         private System.Windows.Forms.DataGridViewComboBoxColumn gvcbDataType;

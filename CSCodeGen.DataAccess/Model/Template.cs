@@ -1,17 +1,39 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO.Enumeration;
 using System.Runtime.CompilerServices;
 
 namespace CSCodeGen.DataAccess.Model
 {
     public class Template : Observable, INotifyPropertyChanged
     {
-
+        private static int nextid = 1;
+        
         private string _Name;
         private string _Source;
         private string _Description;
+        private string _Filename;
+        private string oldFilename;
 
         // Properties
+
+        public string FileName
+        {
+            get
+            {
+
+            }
+
+            set
+            {
+
+            }
+        }
+
+        [Category("Template")]
+        [Description("ID")]
+        public int ID { get; }
+
         [Category("Template")]
         [Description("Name des Templates")]
         public string Name
@@ -86,6 +108,7 @@ namespace CSCodeGen.DataAccess.Model
 
         public Template()
         {
+            ID = nextid++;
             CreationDate = DateTime.Now;
             Keywords = new BindingList<Keyword>();
             IsChanged = false;
@@ -97,5 +120,11 @@ namespace CSCodeGen.DataAccess.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void ChangeFileName()
+        {
+
+        }
+
     }
 }

@@ -15,6 +15,7 @@ namespace CSCodeGen.UI
         private BindingList<Template> templates;
         private Dictionary<TabPage, Template> tabs = new Dictionary<TabPage, Template>();
         private Template currentTemplate;
+        ucTemplateEditor ucTemplateEditor;
 
         #endregion
         public TemplateDesignerForm()
@@ -34,32 +35,36 @@ namespace CSCodeGen.UI
             //Events
             tcMain.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             gvKeywords.CellClick += gvKeywords_CellClick;
+            gvKeywords.MouseWheel += GvKeywords_MouseWheel;
 
         }
 
-
-
         private void Save()
         {
-            if (currentTemplate == null) return;
+            this.Validate();
 
-
-            if (currentTemplate.IsChanged)
+            CoreGlobals.Instance.templateController.SaveAllTemplates();
+        }
+        private void Add()
+        {
+            if (currentTemplate == null || templates.Contains(currentTemplate))
             {
-                CoreGlobals.Instance.templateController.SaveTemplate(currentTemplate);
-                currentTemplate = null;
+                return;
             }
+
+            templates.Add(currentTemplate);
         }
         private void AddNewTap()
         {
             TabPage tabPage = new TabPage(currentTemplate.Name);
-            ucTemplateEditor ucEditor = new ucTemplateEditor(currentTemplate);
-            ucEditor.OnClosingTap += UcEditor_OnClosingTap;
-            ucEditor.OnSaveChanges += () => Save();
+            ucTemplateEditor = new ucTemplateEditor(currentTemplate);
+            ucTemplateEditor.Dock = DockStyle.Fill;
+            ucTemplateEditor.OnClosingTap += UcEditor_OnClosingTap;
+            ucTemplateEditor.OnSaveChanges += Add;
 
             tabs[tabPage] = currentTemplate;
 
-            tabPage.Controls.Add(ucEditor);
+            tabPage.Controls.Add(ucTemplateEditor);
             tcMain.TabPages.Add(tabPage);
 
             tcMain.SelectedTab = tabPage;
@@ -72,10 +77,31 @@ namespace CSCodeGen.UI
         #endregion
 
         #region Events
+        private void GvKeywords_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Shift))
+            {
+                if (gvKeywords.HorizontalScrollingOffset > 0 || e.Delta < 0) 
+                {
+                    int newIndex = Math.Max(0, gvKeywords.HorizontalScrollingOffset - (e.Delta / 2));
+                    gvKeywords.HorizontalScrollingOffset = Math.Max(0, newIndex);
+                }
+            }
+            else 
+            {
+                if (gvKeywords.RowCount > gvKeywords.DisplayedRowCount(false)) 
+                {
+                    int currentIndex = gvKeywords.FirstDisplayedScrollingRowIndex;
+                    int scrollLines = SystemInformation.MouseWheelScrollLines;
+                    int newIndex = Math.Max(0, currentIndex - (e.Delta / 120) * scrollLines);
 
+                    gvKeywords.FirstDisplayedScrollingRowIndex = newIndex;
+                }
+            }
+        }
         private void gvKeywords_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 && e.ColumnIndex < 0)
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
                 return;
             }
@@ -125,13 +151,18 @@ namespace CSCodeGen.UI
         }
         private void UcEditor_OnClosingTap(TabPage tabPage)
         {
+
+            
             if (tabPage == null)
             {
                 return;
             }
 
+            ucTemplateEditor.OnClosingTap += UcEditor_OnClosingTap;
+            ucTemplateEditor.OnSaveChanges += Add;
             // Jetzt die TabPage entfernen
             tcMain.TabPages.Remove(tabPage);
+            tabs.Remove(tabPage);
 
             if (tcMain.TabPages.Count > 0)
             {
@@ -159,6 +190,9 @@ namespace CSCodeGen.UI
         {
             Save();
         }
+
+       
+
         private void TemplateDesignerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (templates == null) return;
@@ -189,11 +223,11 @@ namespace CSCodeGen.UI
             }
 
         }
-        private void allesSpeichernToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CoreGlobals.Instance.templateController.SaveAllTemplates();
-        }
+        
         #endregion
+
+
+
     }
 
 }
