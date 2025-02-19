@@ -4,8 +4,7 @@
   <Name>Klassen Model</Name>
   <Description>Klassen Model </Description>
   <CreationDate>2025-02-12T09:34:55.4264145+01:00</CreationDate>
-  <Source>affafijiajad
-
+  <Source>
 
 
 
@@ -33,6 +32,12 @@
       <Name>Property</Name>
       <Code />
       <DataType>Date</DataType>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+    <Keyword>
+      <Name>Hallo</Name>
+      <Code />
+      <DataType />
       <PrefixWithComment>true</PrefixWithComment>
     </Keyword>
   </Keywords>

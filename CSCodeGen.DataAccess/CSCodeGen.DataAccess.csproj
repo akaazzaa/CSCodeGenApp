@@ -8,7 +8,7 @@
     <Copyright>Copyright ©  2025</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <BaseOutputPath>Build\</BaseOutputPath>
+    <BaseOutputPath>..Build</BaseOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\Build\</OutputPath>

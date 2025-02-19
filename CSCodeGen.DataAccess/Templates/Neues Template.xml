@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <IsChanged>false</IsChanged>
+  <IsChanged>true</IsChanged>
   <Name>Neues Template</Name>
-  <Description />
-  <CreationDate>2025-02-12T11:35:16.5283085+01:00</CreationDate>
-  <Source>124352556</Source>
-  <Keywords />
+  <CreationDate>2025-02-19T18:47:07.613246+01:00</CreationDate>
+  <Source />
+  <Keywords>
+    <Keyword>
+      <Code />
+      <DataType>string</DataType>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+    <Keyword>
+      <Code />
+      <DataType />
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+    <Keyword>
+      <Name />
+      <Code />
+      <DataType />
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+    <Keyword>
+      <Name />
+      <Code />
+      <DataType />
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+    <Keyword>
+      <Name />
+      <Code />
+      <DataType />
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+    <Keyword>
+      <Name />
+      <Code />
+      <DataType />
+      <PrefixWithComment>true</PrefixWithComment>
+    </Keyword>
+  </Keywords>
 </Template>

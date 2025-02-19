@@ -102,7 +102,6 @@
             fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
             fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
-            fastColoredTextBox1.Hotkeys = resources.GetString("fastColoredTextBox1.Hotkeys");
             fastColoredTextBox1.IsReplaceMode = false;
             fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
             fastColoredTextBox1.Name = "fastColoredTextBox1";
