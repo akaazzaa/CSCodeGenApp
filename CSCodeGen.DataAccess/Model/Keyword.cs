@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace CSCodeGen.DataAccess.Model
@@ -15,7 +16,6 @@ namespace CSCodeGen.DataAccess.Model
         private string _name;
         private bool _prefixWithComment;
 
-
         public string Name
         {
             get => _name;
@@ -25,7 +25,6 @@ namespace CSCodeGen.DataAccess.Model
                 OnPropertyChanged();
             }
         }
-
         public string Code
         {
             get => _code;
@@ -35,7 +34,6 @@ namespace CSCodeGen.DataAccess.Model
                 OnPropertyChanged();
             }
         }
-
         public string DataType
         {
             get => _dataType;
@@ -45,7 +43,6 @@ namespace CSCodeGen.DataAccess.Model
                 OnPropertyChanged();
             }
         }
-
         public bool PrefixWithComment
         {
             get => _prefixWithComment;
@@ -55,7 +52,6 @@ namespace CSCodeGen.DataAccess.Model
                 OnPropertyChanged();
             }
         }
-
         public string DisplayText
         {
             get
@@ -81,7 +77,7 @@ namespace CSCodeGen.DataAccess.Model
             _prefixWithComment = true;
         }
 
-        // Optional: ein Konstruktor, der z.B. initial den Namen setzt.
+       
         public Keyword(string key)
         {
            

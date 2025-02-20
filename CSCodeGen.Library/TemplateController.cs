@@ -7,34 +7,28 @@ namespace CSCodeGen.Library
     {
         public BindingList<Template> Templates { get; private set; } = new BindingList<Template>();
 
-        private XmlStorage _XmlStorage;
+        private XmlStorage _xmlStorage;
 
         public TemplateController(XmlStorage storage)
         {
-            _XmlStorage = storage;
-            LoadAllTemplates(); // Beim Erstellen des Controllers direkt die Templates laden
-
+            _xmlStorage = storage;
+            LoadAllTemplates(); // Direkt beim Erstellen Templates laden
         }
 
         #region Laden und Speichern 
-        public void SaveTemplate(Template template)
+        public void SaveAllTemplates()
         {
-            if (template != null && !Templates.Contains(template))
-            {
-                Templates.Add(template);  // Falls nicht vorhanden, hinzufügen
-            }
-            _XmlStorage.SaveAllTemplates(Templates);
-            template.IsChanged = false;
+            _xmlStorage.SaveAllTemplates(Templates);
         }
         public void LoadAllTemplates()
         {
-            Templates = _XmlStorage.LoadAllTemplates();
+            Templates.Clear();
+            foreach (var template in _xmlStorage.LoadAllTemplates())
+            {
+                Templates.Add(template);
+            }
         }
-        public void SaveAllTemplates()
-        {
-            _XmlStorage.SaveAllTemplates(Templates);
-        }
-       
+
         #endregion
     }
 }

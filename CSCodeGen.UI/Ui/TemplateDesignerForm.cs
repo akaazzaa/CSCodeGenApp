@@ -5,6 +5,7 @@ using CSCodeGen.UI.Usercontrols;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CSCodeGen.UI
@@ -18,14 +19,8 @@ namespace CSCodeGen.UI
         ucTemplateEditor ucTemplateEditor;
 
         #endregion
-        public TemplateDesignerForm()
-        {
-            InitializeComponent();
-            Init();
-        }
-
+    
         #region Methoden
-
         private void Init()
         {
             // Datasource binding
@@ -38,11 +33,10 @@ namespace CSCodeGen.UI
             gvKeywords.MouseWheel += GvKeywords_MouseWheel;
 
         }
-
         private void Save()
         {
+            if (!templates.Any(t => t.IsChanged)) return; // Nur speichern, wenn nötig
             this.Validate();
-
             CoreGlobals.Instance.templateController.SaveAllTemplates();
         }
         private void Add()
@@ -54,25 +48,47 @@ namespace CSCodeGen.UI
 
             templates.Add(currentTemplate);
         }
+        private void CloseTab(TabPage tabPage)
+        {
+            if (tabPage == null) return;
+
+            tcMain.TabPages.Remove(tabPage);
+            tabs.Remove(tabPage);
+
+            if (tcMain.TabPages.Count > 0)
+            {
+                tcMain.SelectedTab = tcMain.TabPages[tcMain.TabPages.Count - 1];
+            }
+        }
         private void AddNewTap()
         {
-            TabPage tabPage = new TabPage(currentTemplate.Name);
-            ucTemplateEditor = new ucTemplateEditor(currentTemplate);
-            ucTemplateEditor.Dock = DockStyle.Fill;
-            ucTemplateEditor.OnClosingTap += UcEditor_OnClosingTap;
-            ucTemplateEditor.OnSaveChanges += Add;
+            if (currentTemplate == null) return;
+
+            Add();
+
+            var tabPage = new TabPage(currentTemplate.Name);
+            var editor = new ucTemplateEditor(currentTemplate);
+            editor.Dock = DockStyle.Fill;
+            editor.OnClosingTap += CloseTab;
+            editor.OnSaveChanges += Save;
+            editor.OnResetChanges += ResetTextChanges;
+
 
             tabs[tabPage] = currentTemplate;
-
-            tabPage.Controls.Add(ucTemplateEditor);
+            tabPage.Controls.Add(editor);
             tcMain.TabPages.Add(tabPage);
-
             tcMain.SelectedTab = tabPage;
 
         }
-
-
-
+        private void ResetTextChanges(Template oldTemplate)
+        {
+            if (currentTemplate == null)
+            {
+                return;
+            }
+            currentTemplate = oldTemplate; 
+            currentTemplate.IsChanged = false;
+        }
 
         #endregion
 
@@ -143,36 +159,13 @@ namespace CSCodeGen.UI
         }
         private void neuesTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            currentTemplate = new Template { Name = "Neues Template" };
+            currentTemplate = new Template("Neues Template");
 
             AddNewTap();
             SetPropertyGrid(currentTemplate);
 
         }
-        private void UcEditor_OnClosingTap(TabPage tabPage)
-        {
-
-            
-            if (tabPage == null)
-            {
-                return;
-            }
-
-            ucTemplateEditor.OnClosingTap += UcEditor_OnClosingTap;
-            ucTemplateEditor.OnSaveChanges += Add;
-            // Jetzt die TabPage entfernen
-            tcMain.TabPages.Remove(tabPage);
-            tabs.Remove(tabPage);
-
-            if (tcMain.TabPages.Count > 0)
-            {
-                tcMain.SelectedTab = tcMain.TabPages[tcMain.TabPages.Count - 1];  // Setze den ersten Tab als aktiv
-            }
-
-            pgTemplate.SelectedObject = null;
-            gvKeywords.DataSource = null;
-
-        }
+     
         private void SetPropertyGrid(Template template)
         {
             pgTemplate.SelectedObject = template;
@@ -191,43 +184,33 @@ namespace CSCodeGen.UI
             Save();
         }
 
-       
-
         private void TemplateDesignerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (templates == null) return;
-
-            int nichtgespeichert = 0;
-            foreach (Template template in templates)
-            {
-                if (template.IsChanged)
-                {
-                    nichtgespeichert++;
-                }
-            }
-
-            if (nichtgespeichert > 0)
+            if (templates.Any(t => t.IsChanged))
             {
                 DialogResult result = MessageBox.Show(
-               "Änderungen speichern?",
-               "Speichern",
-               MessageBoxButtons.YesNoCancel,
-               MessageBoxIcon.Question
-           );
+                    "Änderungen speichern?",
+                    "Speichern",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question
+                );
 
                 if (result == DialogResult.Yes)
                 {
                     Save();
                 }
-
             }
 
         }
-        
+
         #endregion
 
 
-
+        public TemplateDesignerForm()
+        {
+            InitializeComponent();
+            Init();
+        }
     }
 
 }

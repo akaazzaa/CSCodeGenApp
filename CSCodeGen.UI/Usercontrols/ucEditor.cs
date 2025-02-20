@@ -26,6 +26,7 @@ namespace CSCodeGen.UI
 
         public void Initialize<T>(T obj)
         {
+            if (obj == null) return;
             _currentObject = obj;
 
             if (obj is Template template)
@@ -41,7 +42,7 @@ namespace CSCodeGen.UI
                 listBox1.DisplayMember = "Name";
             }
 
-            // Falls dein Objekt eine `Name`-Eigenschaft hat
+            
 
         }
         private void ListBox1_DoubleClick(object sender, EventArgs e)
@@ -54,7 +55,6 @@ namespace CSCodeGen.UI
                 fastColoredTextBox1.Text = fastColoredTextBox1.Text.Insert(insertPosition, fullKeyword);
             }
         }
-
         private BindingList<Keyword> LoadKeywords(Template template = null)
         {
             // Hole die String-Werte aus KeywordConfiguration
@@ -66,10 +66,8 @@ namespace CSCodeGen.UI
                 .ToList();
 
             defaultKeywords = new BindingList<Keyword>(
-              (reflectedKeywords ?? Enumerable.Empty<string>())
-                  .Select(text => new Keyword(text))
-                      .ToList()
-                      );
+             reflectedKeywords.Select(text => new Keyword(text)).ToList()
+             );
 
             if (template == null) { return defaultKeywords; }
 
@@ -82,7 +80,6 @@ namespace CSCodeGen.UI
 
             return defaultKeywords;
         }
-
         private void Keywords_AddingNew(object sender, AddingNewEventArgs e)
         {
             e.NewObject = new Keyword();
@@ -90,7 +87,6 @@ namespace CSCodeGen.UI
 
             defaultKeywords.Add(tmp);
         }
-
         private void FastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
             CodeChanged?.Invoke(this, fastColoredTextBox1.Text);
