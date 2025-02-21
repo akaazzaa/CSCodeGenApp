@@ -19,7 +19,7 @@ namespace CSCodeGen.UI
         ucTemplateEditor ucTemplateEditor;
 
         #endregion
-    
+
         #region Methoden
         private void Init()
         {
@@ -59,6 +59,12 @@ namespace CSCodeGen.UI
             {
                 tcMain.SelectedTab = tcMain.TabPages[tcMain.TabPages.Count - 1];
             }
+
+            pgTemplate.SelectedObject = null;
+            gvKeywords.DataSource = null;
+            currentTemplate = null;
+
+
         }
         private void AddNewTap()
         {
@@ -80,14 +86,20 @@ namespace CSCodeGen.UI
             tcMain.SelectedTab = tabPage;
 
         }
-        private void ResetTextChanges(Template oldTemplate)
+        private void ResetTextChanges()
         {
             if (currentTemplate == null)
             {
                 return;
             }
-            currentTemplate = oldTemplate; 
+            currentTemplate.Name = currentTemplate.OldName;
+            currentTemplate.Keywords.Clear();
             currentTemplate.IsChanged = false;
+        }
+        private void SetPropertyGrid(Template template)
+        {
+            pgTemplate.SelectedObject = template;
+            gvKeywords.DataSource = template.Keywords;
         }
 
         #endregion
@@ -97,15 +109,15 @@ namespace CSCodeGen.UI
         {
             if (ModifierKeys.HasFlag(Keys.Shift))
             {
-                if (gvKeywords.HorizontalScrollingOffset > 0 || e.Delta < 0) 
+                if (gvKeywords.HorizontalScrollingOffset > 0 || e.Delta < 0)
                 {
                     int newIndex = Math.Max(0, gvKeywords.HorizontalScrollingOffset - (e.Delta / 2));
                     gvKeywords.HorizontalScrollingOffset = Math.Max(0, newIndex);
                 }
             }
-            else 
+            else
             {
-                if (gvKeywords.RowCount > gvKeywords.DisplayedRowCount(false)) 
+                if (gvKeywords.RowCount > gvKeywords.DisplayedRowCount(false))
                 {
                     int currentIndex = gvKeywords.FirstDisplayedScrollingRowIndex;
                     int scrollLines = SystemInformation.MouseWheelScrollLines;
@@ -165,12 +177,8 @@ namespace CSCodeGen.UI
             SetPropertyGrid(currentTemplate);
 
         }
-     
-        private void SetPropertyGrid(Template template)
-        {
-            pgTemplate.SelectedObject = template;
-            gvKeywords.DataSource = template.Keywords;
-        }
+
+       
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             if (listTemplate.SelectedItem == null) return;
@@ -183,7 +191,6 @@ namespace CSCodeGen.UI
         {
             Save();
         }
-
         private void TemplateDesignerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (templates.Any(t => t.IsChanged))
@@ -202,6 +209,15 @@ namespace CSCodeGen.UI
             }
 
         }
+        private void btnRemovekeyword_Click(object sender, EventArgs e)
+        {
+
+            var selectedKeyword = (Keyword)gvKeywords.CurrentRow.DataBoundItem;
+
+            if (selectedKeyword == null) { return; }
+
+            currentTemplate.Keywords.Remove(selectedKeyword);
+        }
 
         #endregion
 
@@ -211,6 +227,8 @@ namespace CSCodeGen.UI
             InitializeComponent();
             Init();
         }
+
+        
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace CSCodeGen.DataAccess.Model
 {
@@ -6,6 +7,7 @@ namespace CSCodeGen.DataAccess.Model
     {
         private bool _isChanged = false;
 
+        [Browsable(false)]
         public bool IsChanged
         {
             get { return _isChanged; }

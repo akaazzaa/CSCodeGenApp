@@ -8,17 +8,15 @@ namespace CSCodeGen.UI.Usercontrols
     {
         public event Action<TabPage> OnClosingTap;
         public event Action OnSaveChanges;
-        public event Action<Template> OnResetChanges;
-        private Template oldTemplate;
-        private Template Template;
+        public event Action OnResetChanges;
+        private Template currentTemplate;
         private string alterCode;
 
         public ucTemplateEditor(Template template)
         {
             InitializeComponent();
             // Todo: Copy vom Template.Proprertys  machen und in der Resetchange mitgeben. 
-            oldTemplate = template;
-            Template = template;
+            currentTemplate = template;
             ucEditor2.Initialize(template);
             ucEditor2.CodeChanged += UcEditor2_CodeChanged;
             löschenToolStripMenuItem.Click += (s, e) => CloseTab();
@@ -28,9 +26,9 @@ namespace CSCodeGen.UI.Usercontrols
 
         private void UcEditor2_CodeChanged(object sender, string newSource)
         {
-            alterCode = Template.Source;
+            alterCode = currentTemplate.Source;
 
-            Template.Source = newSource;
+            currentTemplate.Source = newSource;
 
         }
 
@@ -39,12 +37,12 @@ namespace CSCodeGen.UI.Usercontrols
         {
             this.Validate(); // Sicherstellen, dass alle Eingaben verarbeitet wurden
 
-            if (Template.IsChanged) // Falls Änderungen vorhanden sind
+            if (currentTemplate.IsChanged) // Falls Änderungen vorhanden sind
             {
                 DialogResult result = MessageBox.Show(
                     "Änderungen speichern?",
                     "Speichern",
-                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 );
 
@@ -54,25 +52,17 @@ namespace CSCodeGen.UI.Usercontrols
                 }
                 else if (result == DialogResult.No)
                 {
-                    if (oldTemplate == null)
-                    {
-                        return;
-                    }
-
-                    OnResetChanges(oldTemplate);
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    return; // Abbruch, Tab bleibt offen
+                    ResetChanges();
                 }
             }
 
             OnClosingTap?.Invoke(this.Parent as TabPage);
         }
 
-        private void ResetChanges(Template oldTemplate)
+        private void ResetChanges()
         {
-            OnResetChanges?.Invoke(oldTemplate);
+            
+            OnResetChanges?.Invoke();
         }
         private void SaveChanges()
         {

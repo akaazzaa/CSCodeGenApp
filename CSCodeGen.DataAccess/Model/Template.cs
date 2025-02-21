@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace CSCodeGen.DataAccess.Model
 {
-    [DataContract]
+ 
     public class Template : Observable, INotifyPropertyChanged
     {
         private static int nextid = 1;
@@ -19,7 +19,8 @@ namespace CSCodeGen.DataAccess.Model
 
         #region Properties
         // Readonly 
-        [DataMember]
+        [Category("Information")]
+        [Description("Dateiname des Templates")]
         public string FileName
         {
             get
@@ -28,15 +29,15 @@ namespace CSCodeGen.DataAccess.Model
             }
         }
         // Properties
-        [DataMember] public string OldFileName { get; set; }
+        [Browsable(false)]
+        public string OldName { get; set; }
        
         [Category("Template")]
-        [Description("ID")]
-        [DataMember] public int ID { get; }
+        [Description("ID des Templates")]
+         public int ID { get; }
 
         [Category("Template")]
         [Description("Name des Templates")]
-        [DataMember]
         public string Name
         {
             get { return _Name; }
@@ -49,7 +50,7 @@ namespace CSCodeGen.DataAccess.Model
                         MarkAsChanged();
                     }
 
-                    OldFileName = _Name;
+                    OldName = _Name;
                     _Name = value;
                     NotifyPropertyChanged();
 
@@ -59,7 +60,6 @@ namespace CSCodeGen.DataAccess.Model
 
         [Category("Template")]
         [Description("Beschreibung des Templates")]
-        [DataMember]
         public string Description
         {
             get { return _Description; }
@@ -82,11 +82,10 @@ namespace CSCodeGen.DataAccess.Model
         [ReadOnly(true)]
         [Category("Information")]
         [Description("Anlagedatum des Templates")]
-        [DataMember] public DateTime CreationDate { get; set; }
-
+         public DateTime CreationDate { get; set; }
+        [ReadOnly(true)]
         [Category("Information")]
         [Description("Quellcode des Templates")]
-        [DataMember]
         public string Source
         {
             get { return _Source; }
@@ -108,7 +107,7 @@ namespace CSCodeGen.DataAccess.Model
 
         [Category("Template")]
         [Description("Liste der Keywords")]
-        [DataMember] public BindingList<Keyword> Keywords { get; set; }
+        public BindingList<Keyword> Keywords { get; set; }
         #endregion
         public Template()
         {

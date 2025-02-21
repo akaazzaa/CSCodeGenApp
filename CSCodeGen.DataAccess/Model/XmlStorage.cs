@@ -29,9 +29,9 @@ namespace CSCodeGen.DataAccess.Model
             try
             {
                 // Falls sich der Name geändert hat, alte Datei löschen
-                if (!string.IsNullOrEmpty(template.OldFileName) && template.OldFileName != template.FileName)
+                if (!string.IsNullOrEmpty(template.OldName) && template.OldName != template.FileName)
                 {
-                    string oldFilePath = Path.Combine(_FolderPath, template.OldFileName + ".xml");
+                    string oldFilePath = Path.Combine(_FolderPath, template.OldName + ".xml");
                     if (File.Exists(oldFilePath))
                     {
                         File.Delete(oldFilePath);
@@ -43,7 +43,7 @@ namespace CSCodeGen.DataAccess.Model
                 SerializeToXml(template, newFilePath);
 
                 // Erfolgreich gespeichert → Status zurücksetzen
-                template.OldFileName = template.FileName;
+                template.OldName = template.FileName;
                 template.IsChanged = false;
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace CSCodeGen.DataAccess.Model
                     Template template = DeserializeFromXml<Template>(file);
                     if (template != null)
                     {
-                        template.OldFileName = template.FileName; // Speichert den alten Namen
+                        template.OldName = template.FileName; // Speichert den alten Namen
                         template.IsChanged = false; // Direkt nach dem Laden als unverändert setzen
                         templates.Add(template);
                     }

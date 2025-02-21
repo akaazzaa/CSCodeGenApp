@@ -200,6 +200,7 @@
             btnRemovekeyword.Name = "btnRemovekeyword";
             btnRemovekeyword.Size = new System.Drawing.Size(62, 20);
             btnRemovekeyword.Text = "Remove";
+            btnRemovekeyword.Click += btnRemovekeyword_Click;
             // 
             // pnalPropertys
             // 
