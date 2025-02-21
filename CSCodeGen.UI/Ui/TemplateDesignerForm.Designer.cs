@@ -53,6 +53,7 @@
             mainMenu = new System.Windows.Forms.MenuStrip();
             btnNeuesTemplate = new System.Windows.Forms.ToolStripMenuItem();
             btnSave = new System.Windows.Forms.ToolStripMenuItem();
+            settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panelMain.SuspendLayout();
             panelContent.SuspendLayout();
             pnlSidebarRight.SuspendLayout();
@@ -275,7 +276,7 @@
             // 
             // mainMenu
             // 
-            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave });
+            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave, settingsToolStripMenuItem });
             mainMenu.Location = new System.Drawing.Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -296,6 +297,13 @@
             btnSave.Size = new System.Drawing.Size(71, 20);
             btnSave.Text = "Speichern";
             btnSave.Click += speichernToolStripMenuItem_Click;
+            // 
+            // settingsToolStripMenuItem
+            // 
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            settingsToolStripMenuItem.Text = "Settings";
+            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
             // 
             // TemplateDesignerForm
             // 
@@ -355,5 +363,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtName;
         private System.Windows.Forms.DataGridViewComboBoxColumn gvcbDataType;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtDisplaytext;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }

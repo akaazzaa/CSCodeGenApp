@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.DataAccess.Model;
+using CSCodeGen.DataAccess.Model.Config;
 using System;
 using System.IO;
 
@@ -13,6 +14,7 @@ namespace CSCodeGen.Library
 
         public TemplateController templateController;
         public XmlStorage storage;
+        public Settings settings;
 
         public string MainDirectoryPath
         {
@@ -55,6 +57,7 @@ namespace CSCodeGen.Library
 
             storage = new XmlStorage(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "CSCodeGen.DataAccess", "Templates"));
             templateController = new TemplateController(storage);
+            settings = new Settings();
 
         }
 

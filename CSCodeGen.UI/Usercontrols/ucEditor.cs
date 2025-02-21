@@ -1,5 +1,6 @@
 ﻿using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Model.Config;
+using CSCodeGen.Library;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,17 +58,15 @@ namespace CSCodeGen.UI
         }
         private BindingList<Keyword> LoadKeywords(Template template = null)
         {
-            // Hole die String-Werte aus KeywordConfiguration
-            List<string> reflectedKeywords = typeof(KeywordConfiguration)
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(prop => prop.PropertyType == typeof(string))
-                .Select(prop => prop.GetValue(Configuration.Keywords)?.ToString())
-                .Where(value => !string.IsNullOrEmpty(value)) // Filtert null und leere Werte
-                .ToList();
-
-            defaultKeywords = new BindingList<Keyword>(
-             reflectedKeywords.Select(text => new Keyword(text)).ToList()
-             );
+            if (CoreGlobals.Instance.settings.isTest)
+            {
+               defaultKeywords =  CoreGlobals.Instance.storage.TestAllKeywords();
+            }
+            else
+            {
+               defaultKeywords =  CoreGlobals.Instance.storage.LoadAllKeywords();
+            }
+           
 
             if (template == null) { return defaultKeywords; }
 

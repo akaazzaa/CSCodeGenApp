@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BaseOutputPath>././Build</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="fastcoloredtextbox.net5" Version="2.16.26" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
+    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Logik.csproj" />
+  </ItemGroup>
+
+</Project>

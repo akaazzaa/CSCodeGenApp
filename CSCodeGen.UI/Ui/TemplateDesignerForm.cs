@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.DataAccess.Model;
+using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
 using CSCodeGen.UI.Ui;
 using CSCodeGen.UI.Usercontrols;
@@ -178,7 +179,7 @@ namespace CSCodeGen.UI
 
         }
 
-       
+
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             if (listTemplate.SelectedItem == null) return;
@@ -228,7 +229,14 @@ namespace CSCodeGen.UI
             Init();
         }
 
-        
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            
+
+            frmSettings frmSettings = new frmSettings();
+            frmSettings.ShowDialog();
+        }
     }
 
 }
