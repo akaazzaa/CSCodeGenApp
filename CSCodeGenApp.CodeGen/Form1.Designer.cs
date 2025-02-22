@@ -33,8 +33,10 @@
             pnlMain = new Panel();
             spMain = new SplitContainer();
             pnlAuswahl = new Panel();
+            panel1 = new Panel();
             pnlMenu = new Panel();
             cbTemplate = new ComboBox();
+            bsDaten = new BindingSource(components);
             txtName = new TextBox();
             label2 = new Label();
             label1 = new Label();
@@ -44,7 +46,6 @@
             menu = new MenuStrip();
             saveToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
-            bsDaten = new BindingSource(components);
             pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spMain).BeginInit();
             spMain.Panel1.SuspendLayout();
@@ -52,11 +53,11 @@
             spMain.SuspendLayout();
             pnlAuswahl.SuspendLayout();
             pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
             pnlEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).BeginInit();
             pnlTop.SuspendLayout();
             menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
             SuspendLayout();
             // 
             // pnlMain
@@ -87,6 +88,8 @@
             // 
             // pnlAuswahl
             // 
+            pnlAuswahl.BorderStyle = BorderStyle.FixedSingle;
+            pnlAuswahl.Controls.Add(panel1);
             pnlAuswahl.Controls.Add(pnlMenu);
             pnlAuswahl.Dock = DockStyle.Fill;
             pnlAuswahl.Location = new Point(0, 0);
@@ -94,8 +97,18 @@
             pnlAuswahl.Size = new Size(463, 450);
             pnlAuswahl.TabIndex = 0;
             // 
+            // panel1
+            // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 130);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(461, 318);
+            panel1.TabIndex = 1;
+            // 
             // pnlMenu
             // 
+            pnlMenu.BorderStyle = BorderStyle.FixedSingle;
             pnlMenu.Controls.Add(cbTemplate);
             pnlMenu.Controls.Add(txtName);
             pnlMenu.Controls.Add(label2);
@@ -103,7 +116,7 @@
             pnlMenu.Dock = DockStyle.Top;
             pnlMenu.Location = new Point(0, 0);
             pnlMenu.Name = "pnlMenu";
-            pnlMenu.Size = new Size(463, 130);
+            pnlMenu.Size = new Size(461, 130);
             pnlMenu.TabIndex = 0;
             // 
             // cbTemplate
@@ -115,6 +128,11 @@
             cbTemplate.Name = "cbTemplate";
             cbTemplate.Size = new Size(229, 23);
             cbTemplate.TabIndex = 3;
+            cbTemplate.SelectedIndexChanged += cbTemplate_SelectedIndexChanged;
+            // 
+            // bsDaten
+            // 
+            bsDaten.DataSource = typeof(CSCodeGen.DataAccess.Model.Template);
             // 
             // txtName
             // 
@@ -213,10 +231,6 @@
             removeToolStripMenuItem.Size = new Size(62, 20);
             removeToolStripMenuItem.Text = "Remove";
             // 
-            // bsDaten
-            // 
-            bsDaten.DataSource = typeof(CSCodeGen.DataAccess.Model.Template);
-            // 
             // frmCodeGen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -234,13 +248,13 @@
             pnlAuswahl.ResumeLayout(false);
             pnlMenu.ResumeLayout(false);
             pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bsDaten).EndInit();
             pnlEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).EndInit();
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
             menu.ResumeLayout(false);
             menu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)bsDaten).EndInit();
             ResumeLayout(false);
         }
 
@@ -261,5 +275,6 @@
         private ComboBox cbTemplate;
         private TextBox txtName;
         private BindingSource bsDaten;
+        private Panel panel1;
     }
 }

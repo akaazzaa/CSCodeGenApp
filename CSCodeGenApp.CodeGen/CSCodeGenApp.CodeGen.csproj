@@ -6,8 +6,16 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>././Build</BaseOutputPath>
+    <BaseOutputPath>..\Build\</BaseOutputPath>
   </PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<OutputPath>..\Build\</OutputPath>
+		<NoWarn>1701;1702;CA1416</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>..\Build\</OutputPath>
+		<NoWarn>1701;1702;CA1416</NoWarn>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="fastcoloredtextbox.net5" Version="2.16.26" />

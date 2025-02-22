@@ -20,7 +20,7 @@ namespace CSCodeGen.Library
         {
             get
             {
-                return Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+                return Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).FullName;
             }
 
         }
@@ -30,7 +30,7 @@ namespace CSCodeGen.Library
             //
             //MainDirectoryPath + "/Templates/Template.json"
             //MainDirectoryPath + "/Templates/Textbaustein.json "C:\\Users\\dgami\\source\\repos\\akaazzaa\\CSCodeGenApp\\CSCodeGen.DataAccess\\Templates\\Textbaustein.xml"
-            //
+            //Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName
 
         }
 
@@ -55,7 +55,7 @@ namespace CSCodeGen.Library
         public void Init()
         {
 
-            storage = new XmlStorage(Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, "CSCodeGen.DataAccess", "Templates"));
+            storage = new XmlStorage(Path.Combine(MainDirectoryPath,"Templates"));
             templateController = new TemplateController(storage);
             settings = new Settings();
 
