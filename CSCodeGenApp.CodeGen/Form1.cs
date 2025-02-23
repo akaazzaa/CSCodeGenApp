@@ -9,6 +9,7 @@ namespace CSCodeGenApp.CodeGen
     public partial class frmCodeGen : Form
     {
         private BindingList<Template> templates;
+        private BindingList<Propertie> properties = new BindingList<Propertie>();
         private Template currentTemplate;
         private string lastInput = "";
         public frmCodeGen()
@@ -23,6 +24,7 @@ namespace CSCodeGenApp.CodeGen
             bsDaten.DataSource = templates;
             txtName.Validated += NameEingabe;
 
+            bsProperties.DataSource = properties;
 
             ChangeCurrentObjekt();
             

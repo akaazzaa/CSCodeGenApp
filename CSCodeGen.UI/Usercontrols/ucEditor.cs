@@ -16,6 +16,7 @@ namespace CSCodeGen.UI
         private object _currentObject;
         public event EventHandler<string> CodeChanged;
         private BindingList<Keyword> defaultKeywords;
+        
 
         public ucEditor()
         {
@@ -35,6 +36,8 @@ namespace CSCodeGen.UI
                 fastColoredTextBox1.Text = template.Source;
                 listBox1.DataSource = LoadKeywords(template);
                 listBox1.DisplayMember = "Name";
+                PublicEvents.KeywordDeleted += KeywordDeleted;
+               
             }
             else if (obj is Keyword keyword)
             {
@@ -42,10 +45,13 @@ namespace CSCodeGen.UI
                 listBox1.DataSource = LoadKeywords();
                 listBox1.DisplayMember = "Name";
             }
-
-            
-
         }
+
+        private void KeywordDeleted(Keyword deletedKeyword)
+        {
+            defaultKeywords.Remove(deletedKeyword);
+        }
+
         private void ListBox1_DoubleClick(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
@@ -58,15 +64,7 @@ namespace CSCodeGen.UI
         }
         private BindingList<Keyword> LoadKeywords(Template template = null)
         {
-            if (CoreGlobals.Instance.settings.isTest)
-            {
-               defaultKeywords =  CoreGlobals.Instance.storage.TestAllKeywords();
-            }
-            else
-            {
-               defaultKeywords =  CoreGlobals.Instance.storage.LoadAllKeywords();
-            }
-           
+            defaultKeywords = CoreGlobals.Instance.storage.LoadAllKeywords();
 
             if (template == null) { return defaultKeywords; }
 
@@ -74,9 +72,11 @@ namespace CSCodeGen.UI
 
             foreach (Keyword keyword in template.Keywords)
             {
-                defaultKeywords.Add(keyword);
+                if (!defaultKeywords.Any(k => k.Id == keyword.Id)) // Hier sicherstellen, dass kein doppeltes Keyword hinzugefügt wird
+                {
+                    defaultKeywords.Add(keyword);
+                }
             }
-
             return defaultKeywords;
         }
         private void Keywords_AddingNew(object sender, AddingNewEventArgs e)
@@ -84,7 +84,7 @@ namespace CSCodeGen.UI
             e.NewObject = new Keyword();
             Keyword tmp = (Keyword)e.NewObject;
 
-            defaultKeywords.Add(tmp);
+             defaultKeywords.Add(tmp);
         }
         private void FastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {

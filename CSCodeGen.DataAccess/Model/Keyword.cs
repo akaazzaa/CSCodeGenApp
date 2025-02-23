@@ -9,13 +9,14 @@ namespace CSCodeGen.DataAccess.Model
 {
     public class Keyword : INotifyPropertyChanged
     {
-        
-        
+
+        private static int _nextId = 1;
         private string _code;
         private string _dataType;
         private string _name;
         private bool _prefixWithComment;
 
+        public int Id { get; private set; }
         public string Name
         {
             get => _name;
@@ -71,6 +72,7 @@ namespace CSCodeGen.DataAccess.Model
 
         public Keyword()
         {
+            Id = _nextId++;
             _code = string.Empty;
             _dataType = string.Empty;
             _name = string.Empty;
@@ -80,7 +82,7 @@ namespace CSCodeGen.DataAccess.Model
        
         public Keyword(string key)
         {
-           
+            Id = _nextId++;
             Name = key;
 
         }
@@ -90,6 +92,19 @@ namespace CSCodeGen.DataAccess.Model
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is Keyword other)
+            {
+                return this.Id == other.Id; // Alternativ: this.Name.Equals(other.Name, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode(); // Alternativ: return Name?.GetHashCode() ?? 0;
         }
     }
 }

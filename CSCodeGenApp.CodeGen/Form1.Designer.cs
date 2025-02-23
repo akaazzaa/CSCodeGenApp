@@ -34,6 +34,15 @@
             spMain = new SplitContainer();
             pnlAuswahl = new Panel();
             panel1 = new Panel();
+            pnlProperties = new Panel();
+            dataGridView1 = new DataGridView();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bsProperties = new BindingSource(components);
+            pnlPropetiesBar = new Panel();
+            btnPropertiesDelete = new Button();
+            btnPropertiesAdd = new Button();
             pnlMenu = new Panel();
             cbTemplate = new ComboBox();
             bsDaten = new BindingSource(components);
@@ -52,6 +61,11 @@
             spMain.Panel2.SuspendLayout();
             spMain.SuspendLayout();
             pnlAuswahl.SuspendLayout();
+            panel1.SuspendLayout();
+            pnlProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsProperties).BeginInit();
+            pnlPropetiesBar.SuspendLayout();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
             pnlEditor.SuspendLayout();
@@ -100,15 +114,92 @@
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(pnlProperties);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 130);
+            panel1.Location = new Point(0, 108);
             panel1.Name = "panel1";
-            panel1.Size = new Size(461, 318);
+            panel1.Size = new Size(461, 340);
             panel1.TabIndex = 1;
+            // 
+            // pnlProperties
+            // 
+            pnlProperties.BorderStyle = BorderStyle.Fixed3D;
+            pnlProperties.Controls.Add(dataGridView1);
+            pnlProperties.Controls.Add(pnlPropetiesBar);
+            pnlProperties.Dock = DockStyle.Fill;
+            pnlProperties.Location = new Point(0, 0);
+            pnlProperties.Name = "pnlProperties";
+            pnlProperties.Size = new Size(459, 338);
+            pnlProperties.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn });
+            dataGridView1.DataSource = bsProperties;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(29, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(426, 334);
+            dataGridView1.TabIndex = 1;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            // 
+            // codeDataGridViewTextBoxColumn
+            // 
+            codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
+            codeDataGridViewTextBoxColumn.HeaderText = "Code";
+            codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            // 
+            // bsProperties
+            // 
+            bsProperties.DataSource = typeof(CSCodeGen.DataAccess.Model.Propertie);
+            // 
+            // pnlPropetiesBar
+            // 
+            pnlPropetiesBar.Controls.Add(btnPropertiesDelete);
+            pnlPropetiesBar.Controls.Add(btnPropertiesAdd);
+            pnlPropetiesBar.Dock = DockStyle.Left;
+            pnlPropetiesBar.Location = new Point(0, 0);
+            pnlPropetiesBar.Name = "pnlPropetiesBar";
+            pnlPropetiesBar.Size = new Size(29, 334);
+            pnlPropetiesBar.TabIndex = 0;
+            // 
+            // btnPropertiesDelete
+            // 
+            btnPropertiesDelete.Dock = DockStyle.Top;
+            btnPropertiesDelete.Location = new Point(0, 23);
+            btnPropertiesDelete.Name = "btnPropertiesDelete";
+            btnPropertiesDelete.Size = new Size(29, 23);
+            btnPropertiesDelete.TabIndex = 1;
+            btnPropertiesDelete.Text = "-";
+            btnPropertiesDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnPropertiesAdd
+            // 
+            btnPropertiesAdd.Dock = DockStyle.Top;
+            btnPropertiesAdd.Location = new Point(0, 0);
+            btnPropertiesAdd.Name = "btnPropertiesAdd";
+            btnPropertiesAdd.Size = new Size(29, 23);
+            btnPropertiesAdd.TabIndex = 0;
+            btnPropertiesAdd.Text = "+";
+            btnPropertiesAdd.UseVisualStyleBackColor = true;
             // 
             // pnlMenu
             // 
-            pnlMenu.BorderStyle = BorderStyle.FixedSingle;
+            pnlMenu.BorderStyle = BorderStyle.Fixed3D;
             pnlMenu.Controls.Add(cbTemplate);
             pnlMenu.Controls.Add(txtName);
             pnlMenu.Controls.Add(label2);
@@ -116,7 +207,7 @@
             pnlMenu.Dock = DockStyle.Top;
             pnlMenu.Location = new Point(0, 0);
             pnlMenu.Name = "pnlMenu";
-            pnlMenu.Size = new Size(461, 130);
+            pnlMenu.Size = new Size(461, 108);
             pnlMenu.TabIndex = 0;
             // 
             // cbTemplate
@@ -136,7 +227,7 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(117, 83);
+            txtName.Location = new Point(117, 55);
             txtName.Name = "txtName";
             txtName.Size = new Size(229, 23);
             txtName.TabIndex = 2;
@@ -153,7 +244,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(27, 86);
+            label1.Location = new Point(27, 63);
             label1.Name = "label1";
             label1.Size = new Size(84, 15);
             label1.TabIndex = 0;
@@ -185,7 +276,7 @@
     '\''
     };
             fastColoredTextBox1.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            fastColoredTextBox1.AutoScrollMinSize = new Size(27, 14);
+            fastColoredTextBox1.AutoScrollMinSize = new Size(67, 14);
             fastColoredTextBox1.BackBrush = null;
             fastColoredTextBox1.CharHeight = 14;
             fastColoredTextBox1.CharWidth = 8;
@@ -196,9 +287,10 @@
             fastColoredTextBox1.Name = "fastColoredTextBox1";
             fastColoredTextBox1.Paddings = new Padding(0);
             fastColoredTextBox1.SelectionColor = Color.FromArgb(60, 0, 0, 255);
-            fastColoredTextBox1.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("fastColoredTextBox1.ServiceColors");
+            fastColoredTextBox1.ServiceColors = null;
             fastColoredTextBox1.Size = new Size(523, 421);
             fastColoredTextBox1.TabIndex = 1;
+            fastColoredTextBox1.Text = "     ";
             fastColoredTextBox1.Zoom = 100;
             // 
             // pnlTop
@@ -246,6 +338,11 @@
             ((System.ComponentModel.ISupportInitialize)spMain).EndInit();
             spMain.ResumeLayout(false);
             pnlAuswahl.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            pnlProperties.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsProperties).EndInit();
+            pnlPropetiesBar.ResumeLayout(false);
             pnlMenu.ResumeLayout(false);
             pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).EndInit();
@@ -276,5 +373,14 @@
         private TextBox txtName;
         private BindingSource bsDaten;
         private Panel panel1;
+        private Panel pnlProperties;
+        private Panel pnlPropetiesBar;
+        private Button btnPropertiesDelete;
+        private Button btnPropertiesAdd;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
+        private BindingSource bsProperties;
     }
 }

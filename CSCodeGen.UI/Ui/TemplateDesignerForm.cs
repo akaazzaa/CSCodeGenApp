@@ -18,6 +18,7 @@ namespace CSCodeGen.UI
         private Dictionary<TabPage, Template> tabs = new Dictionary<TabPage, Template>();
         private Template currentTemplate;
         ucTemplateEditor ucTemplateEditor;
+        
 
         #endregion
 
@@ -64,7 +65,6 @@ namespace CSCodeGen.UI
             pgTemplate.SelectedObject = null;
             gvKeywords.DataSource = null;
             currentTemplate = null;
-
 
         }
         private void AddNewTap()
@@ -212,12 +212,12 @@ namespace CSCodeGen.UI
         }
         private void btnRemovekeyword_Click(object sender, EventArgs e)
         {
-
             var selectedKeyword = (Keyword)gvKeywords.CurrentRow.DataBoundItem;
 
             if (selectedKeyword == null) { return; }
 
             currentTemplate.Keywords.Remove(selectedKeyword);
+            PublicEvents.OnKeywordDeleted(selectedKeyword);
         }
 
         #endregion
