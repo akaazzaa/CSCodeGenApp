@@ -22,13 +22,41 @@ namespace CSCodeGenApp.CodeGen
             templates = CoreGlobals.Instance.templateController.Templates;
             bsDaten.DataSource = templates;
             txtName.Validated += NameEingabe;
-          
+
 
             ChangeCurrentObjekt();
+            
+        }
+        private string ReplaceKeywords(string source)
+        {
+            if (currentTemplate == null) return source;
 
+            // User-Keywords ersetzen
+            foreach (Keyword key in currentTemplate.Keywords)
+            {
+                source = source.Replace(key.DisplayText, key.Code + "\r   " + key.DisplayText);
+            }
+
+            // Standard-Keywords aus der Config ersetzen
+            return ReplaceStandardKeywords(source);
         }
 
-      
+        private string ReplaceStandardKeywords(string source)
+        {
+            var standardKeywords = new Dictionary<string, string>
+            {
+                
+                     
+            };
+
+            foreach (var kvp in standardKeywords)
+            {
+                source = source.Replace(kvp.Key, kvp.Value);
+            }
+
+            return source;
+        }
+        
 
         private void NameEingabe(object? sender, EventArgs e)
         {
@@ -62,15 +90,9 @@ namespace CSCodeGenApp.CodeGen
             if (cbTemplate.SelectedItem == null) { return; }
 
             currentTemplate = (Template)cbTemplate.SelectedItem;
-            string replacedText = string.Empty;
 
-            foreach (Keyword key in currentTemplate.Keywords)
-            {
-                replacedText = currentTemplate.Source.Replace(key.DisplayText,key.Code);
-            }
+            fastColoredTextBox1.Text =  ReplaceKeywords(currentTemplate.Source);
 
-
-            fastColoredTextBox1.Text = replacedText;
         }
 
         private void cbTemplate_SelectedIndexChanged(object sender, EventArgs e)
