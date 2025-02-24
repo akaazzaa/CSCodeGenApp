@@ -1,8 +1,6 @@
 ﻿using CSCodeGen.DataAccess.Model.Config;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace CSCodeGen.DataAccess.Model
@@ -16,13 +14,13 @@ namespace CSCodeGen.DataAccess.Model
         private string _name;
         private bool _prefixWithComment;
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
         public string Name
         {
             get => _name;
             set
             {
-                _name = value;
+                _name = value.Trim();
                 OnPropertyChanged();
             }
         }
@@ -37,10 +35,10 @@ namespace CSCodeGen.DataAccess.Model
         }
         public string DataType
         {
-            get => _dataType;
+            get => _dataType.Trim();
             set
             {
-                _dataType = value;
+                _dataType = value.Trim();
                 OnPropertyChanged();
             }
         }
@@ -79,7 +77,7 @@ namespace CSCodeGen.DataAccess.Model
             _prefixWithComment = true;
         }
 
-       
+
         public Keyword(string key)
         {
             Id = _nextId++;

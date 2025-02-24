@@ -30,6 +30,7 @@ namespace CSCodeGen.UI.Usercontrols
 
             currentTemplate.Source = newSource;
 
+
         }
 
         #region Methoden
@@ -61,7 +62,7 @@ namespace CSCodeGen.UI.Usercontrols
 
         private void ResetChanges()
         {
-            
+
             OnResetChanges?.Invoke();
         }
         private void SaveChanges()

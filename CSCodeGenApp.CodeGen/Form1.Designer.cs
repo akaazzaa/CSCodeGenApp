@@ -36,9 +36,6 @@
             panel1 = new Panel();
             pnlProperties = new Panel();
             dataGridView1 = new DataGridView();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            codeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bsProperties = new BindingSource(components);
             pnlPropetiesBar = new Panel();
             btnPropertiesDelete = new Button();
@@ -55,6 +52,8 @@
             menu = new MenuStrip();
             saveToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Datentyp = new DataGridViewComboBoxColumn();
             pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spMain).BeginInit();
             spMain.Panel1.SuspendLayout();
@@ -134,34 +133,21 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, Datentyp });
             dataGridView1.DataSource = bsProperties;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(29, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(426, 334);
             dataGridView1.TabIndex = 1;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            // 
-            // codeDataGridViewTextBoxColumn
-            // 
-            codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
-            codeDataGridViewTextBoxColumn.HeaderText = "Code";
-            codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            dataGridView1.CellValidated += dataGridView1_CellValidated;
             // 
             // bsProperties
             // 
@@ -186,6 +172,7 @@
             btnPropertiesDelete.TabIndex = 1;
             btnPropertiesDelete.Text = "-";
             btnPropertiesDelete.UseVisualStyleBackColor = true;
+            btnPropertiesDelete.Click += btnPropertiesDelete_Click;
             // 
             // btnPropertiesAdd
             // 
@@ -196,6 +183,7 @@
             btnPropertiesAdd.TabIndex = 0;
             btnPropertiesAdd.Text = "+";
             btnPropertiesAdd.UseVisualStyleBackColor = true;
+            btnPropertiesAdd.Click += btnPropertiesAdd_Click;
             // 
             // pnlMenu
             // 
@@ -237,7 +225,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(27, 29);
             label2.Name = "label2";
-            label2.Size = new Size(56, 15);
+            label2.Size = new Size(55, 15);
             label2.TabIndex = 1;
             label2.Text = "Template";
             // 
@@ -282,6 +270,8 @@
             fastColoredTextBox1.CharWidth = 8;
             fastColoredTextBox1.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             fastColoredTextBox1.Dock = DockStyle.Fill;
+            fastColoredTextBox1.Font = new Font("Courier New", 9.75F);
+            fastColoredTextBox1.Hotkeys = resources.GetString("fastColoredTextBox1.Hotkeys");
             fastColoredTextBox1.IsReplaceMode = false;
             fastColoredTextBox1.Location = new Point(0, 29);
             fastColoredTextBox1.Name = "fastColoredTextBox1";
@@ -322,6 +312,19 @@
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             removeToolStripMenuItem.Size = new Size(62, 20);
             removeToolStripMenuItem.Text = "Remove";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // Datentyp
+            // 
+            Datentyp.DataPropertyName = "DataType";
+            Datentyp.HeaderText = "Datentyp";
+            Datentyp.Items.AddRange(new object[] { "int", "bool", "string", "float", "Date" });
+            Datentyp.Name = "Datentyp";
             // 
             // frmCodeGen
             // 
@@ -378,9 +381,10 @@
         private Button btnPropertiesDelete;
         private Button btnPropertiesAdd;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private BindingSource bsProperties;
+        private DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewComboBoxColumn Datentyp;
     }
 }

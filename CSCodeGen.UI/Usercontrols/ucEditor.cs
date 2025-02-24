@@ -1,11 +1,8 @@
 ﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 
 
@@ -16,7 +13,7 @@ namespace CSCodeGen.UI
         private object _currentObject;
         public event EventHandler<string> CodeChanged;
         private BindingList<Keyword> defaultKeywords;
-        
+
 
         public ucEditor()
         {
@@ -37,7 +34,7 @@ namespace CSCodeGen.UI
                 listBox1.DataSource = LoadKeywords(template);
                 listBox1.DisplayMember = "Name";
                 PublicEvents.KeywordDeleted += KeywordDeleted;
-               
+
             }
             else if (obj is Keyword keyword)
             {
@@ -72,19 +69,26 @@ namespace CSCodeGen.UI
 
             foreach (Keyword keyword in template.Keywords)
             {
-                if (!defaultKeywords.Any(k => k.Id == keyword.Id)) // Hier sicherstellen, dass kein doppeltes Keyword hinzugefügt wird
+                if (!defaultKeywords.Any(k => k.Name == keyword.Name)) // Prüft, ob Name bereits existiert
                 {
                     defaultKeywords.Add(keyword);
                 }
             }
+
             return defaultKeywords;
+
         }
         private void Keywords_AddingNew(object sender, AddingNewEventArgs e)
         {
-            e.NewObject = new Keyword();
+            e.NewObject = new Keyword { Name = "Neues Keyword" }; // Neues Keyword mit Default-Name
+
             Keyword tmp = (Keyword)e.NewObject;
 
-             defaultKeywords.Add(tmp);
+            // Falls ein Keyword mit demselben Namen existiert, wird es NICHT hinzugefügt
+            if (!defaultKeywords.Any(k => k.Name == tmp.Name))
+            {
+                defaultKeywords.Add(tmp);
+            }
         }
         private void FastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {

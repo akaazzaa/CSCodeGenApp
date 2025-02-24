@@ -2,7 +2,6 @@ using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
 using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -27,17 +26,30 @@ namespace CSCodeGenApp.CodeGen
             bsProperties.DataSource = properties;
 
             ChangeCurrentObjekt();
-            
+
         }
+
+
         private string ReplaceKeywords(string source)
         {
             if (currentTemplate == null) return source;
-
-            // User-Keywords ersetzen
-            foreach (Keyword key in currentTemplate.Keywords)
+            List<Keyword> tmplist = new List<Keyword>();
+            foreach (Propertie prop in properties)
             {
-                source = source.Replace(key.DisplayText, key.Code + "\r   " + key.DisplayText);
+                if (string.IsNullOrEmpty(prop.Name) || string.IsNullOrEmpty(prop.DataType))
+                {
+                    continue;
+                }
+
+                tmplist = currentTemplate.Keywords.Where(k => k.DataType == prop.DataType).ToList();
+                foreach (Keyword key in tmplist)
+                {
+                    key.Code = key.Code.Replace(key.DisplayText, prop.Name);
+                    source = source.Replace(key.DisplayText, key.Code + "\r   " + key.DisplayText);
+                }
             }
+            // User-Keywords ersetzen
+
 
             // Standard-Keywords aus der Config ersetzen
             return ReplaceStandardKeywords(source);
@@ -47,8 +59,8 @@ namespace CSCodeGenApp.CodeGen
         {
             var standardKeywords = new Dictionary<string, string>
             {
-                
-                     
+
+
             };
 
             foreach (var kvp in standardKeywords)
@@ -58,7 +70,7 @@ namespace CSCodeGenApp.CodeGen
 
             return source;
         }
-        
+
 
         private void NameEingabe(object? sender, EventArgs e)
         {
@@ -66,7 +78,7 @@ namespace CSCodeGenApp.CodeGen
 
             if (!string.IsNullOrEmpty(txtName.Text))
             {
-                
+
                 string prefabName = $"{Configuration.Prefix}{Configuration.Keywords.PrefabClassname}{Configuration.Postfix}";
                 if (currentTemplate.Source.Contains(prefabName))
                 {
@@ -80,7 +92,7 @@ namespace CSCodeGenApp.CodeGen
                 lastInput = txtName.Text;
             }
 
-          
+
 
         }
         private void CheckCurrentTemplate()
@@ -93,7 +105,7 @@ namespace CSCodeGenApp.CodeGen
 
             currentTemplate = (Template)cbTemplate.SelectedItem;
 
-            fastColoredTextBox1.Text =  ReplaceKeywords(currentTemplate.Source);
+
 
         }
 
@@ -102,6 +114,22 @@ namespace CSCodeGenApp.CodeGen
             ChangeCurrentObjekt();
         }
 
-       
+        private void btnPropertiesAdd_Click(object sender, EventArgs e)
+        {
+            properties.Add(new Propertie());
+        }
+
+        private void btnPropertiesDelete_Click(object sender, EventArgs e)
+        {
+            var selectedPropertie = (Propertie)dataGridView1.CurrentRow.DataBoundItem;
+
+            if (selectedPropertie == null) { return; }
+            properties.Remove(selectedPropertie);
+        }
+
+        private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            fastColoredTextBox1.Text = ReplaceKeywords(currentTemplate.Source);
+        }
     }
 }
