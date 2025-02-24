@@ -16,6 +16,11 @@
 		<OutputPath>..\Build\</OutputPath>
 		<NoWarn>1701;1702;CA1416</NoWarn>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Build\**" />
+	  <EmbeddedResource Remove="Build\**" />
+	  <None Remove="Build\**" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="fastcoloredtextbox.net5" Version="2.16.26" />

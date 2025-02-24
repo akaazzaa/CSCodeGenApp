@@ -133,11 +133,5 @@ namespace CSCodeGen.DataAccess.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private void ChangeFileName()
-        {
-
-        }
-
     }
 }

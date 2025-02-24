@@ -166,7 +166,7 @@ namespace CSCodeGen.UI
 
 
             Keyword newkeyword = currentTemplate.Keywords.AddNew();
-
+            currentTemplate.IsChanged = true;
             gvKeywords.Refresh(); // Grid aktualisieren
 
         }
@@ -217,6 +217,7 @@ namespace CSCodeGen.UI
             if (selectedKeyword == null) { return; }
 
             currentTemplate.Keywords.Remove(selectedKeyword);
+            currentTemplate.IsChanged = true;
             PublicEvents.OnKeywordDeleted(selectedKeyword);
         }
 

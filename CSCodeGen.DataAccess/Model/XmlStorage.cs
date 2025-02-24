@@ -61,18 +61,19 @@ namespace CSCodeGen.DataAccess.Model
             }
         }
 
-
-        public BindingList<Keyword> LoadAllKeywords()
+        public List<string> GetDefaultKeywords()
         {
-            List<string> reflectedKeywords = typeof(DefaultKeyword)
+          return typeof(DefaultKeyword)
                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                .Where(prop => prop.PropertyType == typeof(string))
                .Select(prop => prop.GetValue(Configuration.Keywords)?.ToString())
                .Where(value => !string.IsNullOrEmpty(value))
                .ToList();
-
+        }
+        public BindingList<Keyword> LoadAllKeywords()
+        {
             return new BindingList<Keyword>(
-             reflectedKeywords.Select(text => new Keyword(text)).ToList()
+             GetDefaultKeywords().Select(text => new Keyword(text)).ToList()
              );
         }
         // Load

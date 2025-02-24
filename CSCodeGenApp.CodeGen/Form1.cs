@@ -1,14 +1,15 @@
 using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
+using FastColoredTextBoxNS;
 using System.ComponentModel;
 
 namespace CSCodeGenApp.CodeGen
 {
     public partial class frmCodeGen : Form
     {
-        private BindingList<Template> templates;
         private BindingList<Propertie> properties = new BindingList<Propertie>();
+         
         private Template currentTemplate;
         private string lastInput = "";
         public frmCodeGen()
@@ -19,8 +20,10 @@ namespace CSCodeGenApp.CodeGen
 
         private void Init()
         {
-            templates = CoreGlobals.Instance.templateController.Templates;
-            bsDaten.DataSource = templates;
+
+
+
+            bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
             txtName.Validated += NameEingabe;
 
             bsProperties.DataSource = properties;
@@ -33,7 +36,8 @@ namespace CSCodeGenApp.CodeGen
         private string ReplaceKeywords(string source)
         {
             if (currentTemplate == null) return source;
-            List<Keyword> tmplist = new List<Keyword>();
+            
+
             foreach (Propertie prop in properties)
             {
                 if (string.IsNullOrEmpty(prop.Name) || string.IsNullOrEmpty(prop.DataType))
@@ -41,34 +45,27 @@ namespace CSCodeGenApp.CodeGen
                     continue;
                 }
 
-                tmplist = currentTemplate.Keywords.Where(k => k.DataType == prop.DataType).ToList();
-                foreach (Keyword key in tmplist)
+                var matchingKeywords = currentTemplate.Keywords.Where(k => k.DataType == prop.DataType).ToList();
+
+                foreach (Keyword key in matchingKeywords)
                 {
-                    key.Code = key.Code.Replace(key.DisplayText, prop.Name);
+                    key.Code = ReplaceDefaultKeys(key.Code);
                     source = source.Replace(key.DisplayText, key.Code + "\r   " + key.DisplayText);
                 }
             }
-            // User-Keywords ersetzen
-
-
-            // Standard-Keywords aus der Config ersetzen
-            return ReplaceStandardKeywords(source);
+            
+            return source;
         }
 
-        private string ReplaceStandardKeywords(string source)
+        private string ReplaceDefaultKeys(string text)
         {
-            var standardKeywords = new Dictionary<string, string>
+            foreach (Keyword key in CoreGlobals.Instance.storage.LoadAllKeywords())
             {
 
-
-            };
-
-            foreach (var kvp in standardKeywords)
-            {
-                source = source.Replace(kvp.Key, kvp.Value);
+                
             }
 
-            return source;
+            return text;
         }
 
 
@@ -105,20 +102,17 @@ namespace CSCodeGenApp.CodeGen
 
             currentTemplate = (Template)cbTemplate.SelectedItem;
 
-
+            fastColoredTextBox1.Text = currentTemplate.Source;
 
         }
-
         private void cbTemplate_SelectedIndexChanged(object sender, EventArgs e)
         {
             ChangeCurrentObjekt();
         }
-
         private void btnPropertiesAdd_Click(object sender, EventArgs e)
         {
             properties.Add(new Propertie());
         }
-
         private void btnPropertiesDelete_Click(object sender, EventArgs e)
         {
             var selectedPropertie = (Propertie)dataGridView1.CurrentRow.DataBoundItem;
