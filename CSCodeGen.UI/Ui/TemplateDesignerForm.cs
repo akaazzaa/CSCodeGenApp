@@ -1,5 +1,4 @@
 ﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
 using CSCodeGen.UI.Ui;
 using CSCodeGen.UI.Usercontrols;
@@ -18,7 +17,7 @@ namespace CSCodeGen.UI
         private Dictionary<TabPage, Template> tabs = new Dictionary<TabPage, Template>();
         private Template currentTemplate;
         ucTemplateEditor ucTemplateEditor;
-        
+
 
         #endregion
 
@@ -143,11 +142,19 @@ namespace CSCodeGen.UI
             if (gvKeywords.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
             {
                 KeywordCodeForm keywordCodeForm = new KeywordCodeForm(selectedKeyword);
+                keywordCodeForm.KeywordChanged += KeywordChanged;
                 keywordCodeForm.ShowDialog();
-
             }
+        }
+
+        private void KeywordChanged()
+        {
+            if (currentTemplate == null) { return; }
+
+            currentTemplate.IsChanged = true;
 
         }
+
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
@@ -212,9 +219,11 @@ namespace CSCodeGen.UI
         }
         private void btnRemovekeyword_Click(object sender, EventArgs e)
         {
+            if (gvKeywords.CurrentRow == null) return;
+
             var selectedKeyword = (Keyword)gvKeywords.CurrentRow.DataBoundItem;
 
-            if (selectedKeyword == null) { return; }
+
 
             currentTemplate.Keywords.Remove(selectedKeyword);
             currentTemplate.IsChanged = true;
@@ -233,7 +242,7 @@ namespace CSCodeGen.UI
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            
+
 
             frmSettings frmSettings = new frmSettings();
             frmSettings.ShowDialog();

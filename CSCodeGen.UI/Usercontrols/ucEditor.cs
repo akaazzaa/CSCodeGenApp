@@ -46,6 +46,7 @@ namespace CSCodeGen.UI
 
         private void KeywordDeleted(Keyword deletedKeyword)
         {
+
             defaultKeywords.Remove(deletedKeyword);
         }
 
@@ -61,30 +62,41 @@ namespace CSCodeGen.UI
         }
         private BindingList<Keyword> LoadKeywords(Template template = null)
         {
-            defaultKeywords = CoreGlobals.Instance.storage.LoadAllKeywords();
 
-            if (template == null) { return defaultKeywords; }
 
+            // Hole die Standard-Keywords
+            defaultKeywords = CoreGlobals.Instance.storage.GetDefaultKeywords();
+
+            if (template == null)
+            {
+                // Ohne Template einfach zurückgeben
+                return defaultKeywords;
+            }
+
+            // Eventhandler registrieren
             template.Keywords.AddingNew += Keywords_AddingNew;
+
 
             foreach (Keyword keyword in template.Keywords)
             {
-                if (!defaultKeywords.Any(k => k.Name == keyword.Name)) // Prüft, ob Name bereits existiert
+                if (!defaultKeywords.Any(k => k.Name == keyword.Name))
                 {
                     defaultKeywords.Add(keyword);
                 }
             }
 
+
             return defaultKeywords;
+
 
         }
         private void Keywords_AddingNew(object sender, AddingNewEventArgs e)
         {
-            e.NewObject = new Keyword { Name = "Neues Keyword" }; // Neues Keyword mit Default-Name
+            e.NewObject = new Keyword(); // Neues Keyword mit Default-Name
 
             Keyword tmp = (Keyword)e.NewObject;
 
-            // Falls ein Keyword mit demselben Namen existiert, wird es NICHT hinzugefügt
+            // Falls ein Keyword mit demselben Namen bereits existiert, wird es nicht hinzugefügt
             if (!defaultKeywords.Any(k => k.Name == tmp.Name))
             {
                 defaultKeywords.Add(tmp);

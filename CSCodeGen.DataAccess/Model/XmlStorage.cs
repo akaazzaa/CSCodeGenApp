@@ -1,10 +1,8 @@
 ﻿using CSCodeGen.DataAccess.Model.Config;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Serialization;
 
 namespace CSCodeGen.DataAccess.Model
@@ -61,21 +59,37 @@ namespace CSCodeGen.DataAccess.Model
             }
         }
 
-        public List<string> GetDefaultKeywords()
+        public BindingList<Keyword> GetDefaultKeywords()
         {
-          return typeof(DefaultKeyword)
-               .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-               .Where(prop => prop.PropertyType == typeof(string))
-               .Select(prop => prop.GetValue(Configuration.Keywords)?.ToString())
-               .Where(value => !string.IsNullOrEmpty(value))
-               .ToList();
+            return new BindingList<Keyword>
+          {
+                new Keyword
+                {
+                    Id = 100,
+                    Name = Configuration.Keywords.Classname,
+                    PrefixWithComment = false,
+                },
+                new Keyword
+                {
+                    Id = 200,
+                    Name = Configuration.Keywords.Propertie,
+                    PrefixWithComment = false,
+                },
+                new Keyword
+                {
+                    Id = 300,
+                    Name = Configuration.Keywords.Namespace,
+                    PrefixWithComment = false,
+                },
+                new Keyword
+                {
+                    Id = 400,
+                    Name = Configuration.Keywords.Variable,
+                    PrefixWithComment = false,
+                },
+          };
         }
-        public BindingList<Keyword> LoadAllKeywords()
-        {
-            return new BindingList<Keyword>(
-             GetDefaultKeywords().Select(text => new Keyword(text)).ToList()
-             );
-        }
+
         // Load
         public BindingList<Template> LoadAllTemplates()
         {

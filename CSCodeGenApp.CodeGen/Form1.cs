@@ -1,15 +1,13 @@
 using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
-using FastColoredTextBoxNS;
-using System.ComponentModel;
 
 namespace CSCodeGenApp.CodeGen
 {
     public partial class frmCodeGen : Form
     {
-        private BindingList<Propertie> properties = new BindingList<Propertie>();
-         
+
+        private Klasse klasse = new Klasse();
         private Template currentTemplate;
         private string lastInput = "";
         public frmCodeGen()
@@ -21,12 +19,9 @@ namespace CSCodeGenApp.CodeGen
         private void Init()
         {
 
-
-
             bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
-            txtName.Validated += NameEingabe;
-
-            bsProperties.DataSource = properties;
+            klasseBindingSource.DataSource = klasse;
+            bsProperties.DataSource = klasse.Properties;
 
             ChangeCurrentObjekt();
 
@@ -36,9 +31,9 @@ namespace CSCodeGenApp.CodeGen
         private string ReplaceKeywords(string source)
         {
             if (currentTemplate == null) return source;
-            
 
-            foreach (Propertie prop in properties)
+
+            foreach (Propertie prop in klasse.Properties)
             {
                 if (string.IsNullOrEmpty(prop.Name) || string.IsNullOrEmpty(prop.DataType))
                 {
@@ -49,53 +44,57 @@ namespace CSCodeGenApp.CodeGen
 
                 foreach (Keyword key in matchingKeywords)
                 {
-                    key.Code = ReplaceDefaultKeys(key.Code);
-                    source = source.Replace(key.DisplayText, key.Code + "\r   " + key.DisplayText);
+
+                    string code = ReplaceDefaultKeys(key.Code, prop);
+
+                    source = source.Replace(key.DisplayText, code + "\r\r" + "            " + key.DisplayText);
                 }
             }
-            
-            return source;
+
+            return ReplaceDefaultKeys(source);
         }
 
-        private string ReplaceDefaultKeys(string text)
+        private string ReplaceDefaultKeys(string text, Propertie prop = null)
         {
-            foreach (Keyword key in CoreGlobals.Instance.storage.LoadAllKeywords())
+            foreach (Keyword key in CoreGlobals.Instance.storage.GetDefaultKeywords())
             {
-
-                
+                if (key.Name == Configuration.Keywords.Classname)
+                {
+                    text = text.Replace(key.DisplayText, klasse.Name);
+                }
+                else if (key.Name == Configuration.Keywords.Namespace)
+                {
+                    text = text.Replace(key.DisplayText, klasse.Namespace);
+                }
+                else if (key.Name == Configuration.Keywords.Variable)
+                {
+                    if (prop != null && !string.IsNullOrEmpty(prop.Name))
+                    {
+                        text = text.Replace(key.DisplayText, PropertyNameToVariable(prop.Name));
+                    }
+                }
+                else if (key.Name == Configuration.Keywords.Propertie)
+                {
+                    if (prop != null && !string.IsNullOrEmpty(prop.Name))
+                    {
+                        text = text.Replace(key.DisplayText, prop.Name);
+                    }
+                }
             }
 
             return text;
         }
 
-
-        private void NameEingabe(object? sender, EventArgs e)
+        private string PropertyNameToVariable(string name)
         {
-            CheckCurrentTemplate();
-
-            if (!string.IsNullOrEmpty(txtName.Text))
+            if (string.IsNullOrEmpty(name))
             {
-
-                string prefabName = $"{Configuration.Prefix}{Configuration.Keywords.PrefabClassname}{Configuration.Postfix}";
-                if (currentTemplate.Source.Contains(prefabName))
-                {
-                    currentTemplate.Source = currentTemplate.Source.Replace(prefabName, txtName.Text);
-                }
-                else if (!string.IsNullOrEmpty(lastInput))
-                {
-                    currentTemplate.Source = currentTemplate.Source.Replace(lastInput, txtName.Text);
-                }
-
-                lastInput = txtName.Text;
+                return string.Empty;
             }
 
-
-
+            return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
         }
-        private void CheckCurrentTemplate()
-        {
-            if (currentTemplate == null) { return; }
-        }
+
         private void ChangeCurrentObjekt()
         {
             if (cbTemplate.SelectedItem == null) { return; }
@@ -111,19 +110,21 @@ namespace CSCodeGenApp.CodeGen
         }
         private void btnPropertiesAdd_Click(object sender, EventArgs e)
         {
-            properties.Add(new Propertie());
+            klasse.Properties.Add(new Propertie());
         }
         private void btnPropertiesDelete_Click(object sender, EventArgs e)
         {
             var selectedPropertie = (Propertie)dataGridView1.CurrentRow.DataBoundItem;
 
             if (selectedPropertie == null) { return; }
-            properties.Remove(selectedPropertie);
+            klasse.Properties.Remove(selectedPropertie);
         }
 
         private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             fastColoredTextBox1.Text = ReplaceKeywords(currentTemplate.Source);
         }
+
+
     }
 }

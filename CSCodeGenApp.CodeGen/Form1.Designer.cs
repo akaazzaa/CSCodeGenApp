@@ -36,6 +36,8 @@
             panel1 = new Panel();
             pnlProperties = new Panel();
             dataGridView1 = new DataGridView();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Datentyp = new DataGridViewComboBoxColumn();
             bsProperties = new BindingSource(components);
             pnlPropetiesBar = new Panel();
             btnPropertiesDelete = new Button();
@@ -52,8 +54,7 @@
             menu = new MenuStrip();
             saveToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Datentyp = new DataGridViewComboBoxColumn();
+            klasseBindingSource = new BindingSource(components);
             pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spMain).BeginInit();
             spMain.Panel1.SuspendLayout();
@@ -71,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).BeginInit();
             pnlTop.SuspendLayout();
             menu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).BeginInit();
             SuspendLayout();
             // 
             // pnlMain
@@ -149,6 +151,19 @@
             dataGridView1.TabIndex = 1;
             dataGridView1.CellValidated += dataGridView1_CellValidated;
             // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // Datentyp
+            // 
+            Datentyp.DataPropertyName = "DataType";
+            Datentyp.HeaderText = "Datentyp";
+            Datentyp.Items.AddRange(new object[] { "int", "bool", "string", "float", "Date" });
+            Datentyp.Name = "Datentyp";
+            // 
             // bsProperties
             // 
             bsProperties.DataSource = typeof(CSCodeGen.DataAccess.Model.Propertie);
@@ -215,6 +230,7 @@
             // 
             // txtName
             // 
+            txtName.DataBindings.Add(new Binding("Text", klasseBindingSource, "Name", true, DataSourceUpdateMode.OnPropertyChanged));
             txtName.Location = new Point(117, 55);
             txtName.Name = "txtName";
             txtName.Size = new Size(229, 23);
@@ -270,7 +286,7 @@
             fastColoredTextBox1.CharWidth = 8;
             fastColoredTextBox1.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             fastColoredTextBox1.Dock = DockStyle.Fill;
-            fastColoredTextBox1.Font = new Font("Courier New", 9.75F);
+            fastColoredTextBox1.Hotkeys = resources.GetString("fastColoredTextBox1.Hotkeys");
             fastColoredTextBox1.IsReplaceMode = false;
             fastColoredTextBox1.Location = new Point(0, 29);
             fastColoredTextBox1.Name = "fastColoredTextBox1";
@@ -312,18 +328,9 @@
             removeToolStripMenuItem.Size = new Size(62, 20);
             removeToolStripMenuItem.Text = "Remove";
             // 
-            // nameDataGridViewTextBoxColumn
+            // klasseBindingSource
             // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // Datentyp
-            // 
-            Datentyp.DataPropertyName = "DataType";
-            Datentyp.HeaderText = "Datentyp";
-            Datentyp.Items.AddRange(new object[] { "int", "bool", "string", "float", "Date" });
-            Datentyp.Name = "Datentyp";
+            klasseBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Klasse);
             // 
             // frmCodeGen
             // 
@@ -354,6 +361,7 @@
             pnlTop.PerformLayout();
             menu.ResumeLayout(false);
             menu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -385,5 +393,6 @@
         private DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewComboBoxColumn Datentyp;
+        private BindingSource klasseBindingSource;
     }
 }

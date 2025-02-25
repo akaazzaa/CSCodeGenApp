@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{0879BB69-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.TemplateDesinger", "CSCodeGen.UI\CSCodeGen.TemplateDesinger.csproj", "{6756E006-1B12-4749-BDF1-2C496A13843E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGenApp.CodeGen", "CSCodeGenApp.CodeGen\CSCodeGenApp.CodeGen.csproj", "{6332C4F5-E217-408C-AD5C-AAFF1B7F254C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGenApp.CodeGen", "CSCodeGenApp.CodeGen\CSCodeGenApp.CodeGen.csproj", "{6332C4F5-E217-408C-AD5C-AAFF1B7F254C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

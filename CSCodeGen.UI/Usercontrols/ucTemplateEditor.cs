@@ -28,6 +28,7 @@ namespace CSCodeGen.UI.Usercontrols
         {
             alterCode = currentTemplate.Source;
 
+
             currentTemplate.Source = newSource;
 
 
