@@ -11,7 +11,6 @@ namespace CSCodeGen.DataAccess.Model
     {
         private readonly string _FolderPath;
 
-
         public XmlStorage(string FolderPath)
         {
             _FolderPath = FolderPath;

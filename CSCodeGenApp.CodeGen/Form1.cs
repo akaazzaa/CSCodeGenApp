@@ -29,7 +29,8 @@ namespace CSCodeGenApp.CodeGen
 
 
         private string ReplaceKeywords(string source)
-        {
+        
+             {
             if (currentTemplate == null) return source;
 
 

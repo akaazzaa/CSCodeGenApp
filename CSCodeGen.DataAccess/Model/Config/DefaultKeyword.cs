@@ -7,6 +7,7 @@
         public const string PREFABVARNAME = "VariabelnName";
         public const string PREFABPROPERTIENAME = "PropertyName";
 
+        #region Properties
         public string Classname
         {
             get
@@ -35,5 +36,6 @@
                 return PREFABPROPERTIENAME;
             }
         }
+        #endregion
     }
 }

@@ -7,13 +7,15 @@ namespace CSCodeGen.DataAccess.Model
 {
     public class Keyword : INotifyPropertyChanged
     {
-
+        #region Variabeln
         private static int _nextId = 1;
         private string _code;
         private string _dataType;
         private string _name;
         private bool _prefixWithComment;
+        #endregion
 
+        #region Properties
         public int Id { get; set; }
         public string Name
         {
@@ -66,8 +68,9 @@ namespace CSCodeGen.DataAccess.Model
                 return stringBuilder.ToString();
             }
         }
+        #endregion
 
-
+        #region Konstruktoren
         public Keyword()
         {
             Id = _nextId++;
@@ -75,34 +78,21 @@ namespace CSCodeGen.DataAccess.Model
             _dataType = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
-        }
-
-
+        } 
         public Keyword(string key)
         {
             Id = _nextId++;
             Name = key;
 
         }
+        #endregion
 
+        #region Events
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public override bool Equals(object obj)
-        {
-            if (obj is Keyword other)
-            {
-                return this.Id == other.Id; // Alternativ: this.Name.Equals(other.Name, StringComparison.OrdinalIgnoreCase);
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode(); // Alternativ: return Name?.GetHashCode() ?? 0;
-        }
+        #endregion
     }
 }

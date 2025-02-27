@@ -9,8 +9,9 @@ namespace CSCodeGen.DataAccess.Model
  
     public class Template : Observable, INotifyPropertyChanged
     {
-        private static int nextid = 1;
+
         #region Variabeln
+        private static int nextid = 1;
         private string _Name;
         private string _Source;
         private string _Description;
@@ -109,6 +110,8 @@ namespace CSCodeGen.DataAccess.Model
         [Description("Liste der Keywords")]
         public BindingList<Keyword> Keywords { get; set; }
         #endregion
+
+        #region Konstruktoren
         public Template()
         {
             ID = nextid++;
@@ -125,13 +128,15 @@ namespace CSCodeGen.DataAccess.Model
             Keywords = new BindingList<Keyword>();
             IsChanged = true;
         }
+        #endregion
 
-
+        #region Events
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
+
 }
