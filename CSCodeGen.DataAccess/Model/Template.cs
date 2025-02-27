@@ -117,7 +117,7 @@ namespace CSCodeGen.DataAccess.Model
             IsChanged = true;
         }
 
-        public Template(string name )
+        public Template(string name)
         {
             Name = name;
             ID = nextid++;
