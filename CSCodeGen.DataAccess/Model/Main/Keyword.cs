@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace CSCodeGen.DataAccess.Model
+namespace CSCodeGen.DataAccess.Model.Main
 {
     public class Keyword : INotifyPropertyChanged
     {

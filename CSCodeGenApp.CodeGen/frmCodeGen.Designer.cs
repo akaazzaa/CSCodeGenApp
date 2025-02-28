@@ -1,4 +1,7 @@
-﻿namespace CSCodeGenApp.CodeGen
+﻿using CSCodeGen.DataAccess.Model.Klasse;
+using CSCodeGen.DataAccess.Model.Main;
+
+namespace CSCodeGenApp.CodeGen
 {
     partial class frmCodeGen
     {
@@ -164,7 +167,7 @@
             // 
             // bsProperties
             // 
-            bsProperties.DataSource = typeof(CSCodeGen.DataAccess.Model.Propertie);
+            bsProperties.DataSource = typeof(Propertie);
             // 
             // pnlPropetiesBar
             // 
@@ -224,7 +227,7 @@
             // 
             // bsDaten
             // 
-            bsDaten.DataSource = typeof(CSCodeGen.DataAccess.Model.Template);
+            bsDaten.DataSource = typeof(Template);
             // 
             // txtName
             // 
@@ -236,7 +239,7 @@
             // 
             // klasseBindingSource
             // 
-            klasseBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Klasse);
+            klasseBindingSource.DataSource = typeof(Klasse);
             // 
             // label2
             // 

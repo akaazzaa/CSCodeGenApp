@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace CSCodeGen.DataAccess.Model
+namespace CSCodeGen.DataAccess.Model.Main
 {
     public class Observable
     {
@@ -21,21 +21,16 @@ namespace CSCodeGen.DataAccess.Model
             }
         }
 
-        // Ereignis, das ausgelöst wird, wenn sich etwas geändert hat
         public event Action Changed;
 
-        // Methode, die eine Änderung anzeigt (kann für beliebige Eigenschaften verwendet werden)
         protected void MarkAsChanged()
         {
             IsChanged = true;
         }
 
-        // Wird aufgerufen, wenn sich etwas ändert
         protected virtual void OnChanged()
         {
             Changed?.Invoke();
         }
-
-
     }
 }

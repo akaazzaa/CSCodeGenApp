@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CSCodeGen.DataAccess.Model
+namespace CSCodeGen.DataAccess.Model.Main
 {
 
     public class Template : Observable, INotifyPropertyChanged

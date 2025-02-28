@@ -1,4 +1,4 @@
-﻿using CSCodeGen.Library;
+﻿using CSCodeGen.Library.GlobalEvents;
 using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Ui

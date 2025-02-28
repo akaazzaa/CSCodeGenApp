@@ -1,11 +1,11 @@
-﻿using CSCodeGen.DataAccess.Model.Config;
+﻿using CSCodeGen.DataAccess.Model.Main;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace CSCodeGen.DataAccess.Model
+namespace CSCodeGen.DataAccess.Model.Config
 {
     public class XmlStorage
     {

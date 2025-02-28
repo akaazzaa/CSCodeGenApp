@@ -19,9 +19,6 @@
     <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Controller\Constants.cs" />
-    <Compile Remove="Controller\TextbausteinController.cs" />
+    <Folder Include="Interface\" />
   </ItemGroup>
 </Project>

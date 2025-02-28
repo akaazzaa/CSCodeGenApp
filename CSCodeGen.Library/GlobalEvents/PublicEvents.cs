@@ -1,7 +1,7 @@
-﻿using CSCodeGen.DataAccess.Model;
+﻿using CSCodeGen.DataAccess.Model.Main;
 using System;
 
-namespace CSCodeGen.Library
+namespace CSCodeGen.Library.GlobalEvents
 {
     public static class PublicEvents
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace CSCodeGen.DataAccess.Model
+namespace CSCodeGen.DataAccess.Model.Klasse
 {
     public class Klasse
     {
@@ -21,20 +21,6 @@ namespace CSCodeGen.DataAccess.Model
         }
 
         private string code;
-        public string Code
-        {
-            get
-            {
-                return code;
-            }
-            set
-            {
-                if (value != code)
-                {
-                    code = value;
-                }
-            }
-        }
 
         public string Namespace { get; set; }
         public BindingList<Propertie> Properties { get; set; } = new BindingList<Propertie>();

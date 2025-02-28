@@ -1,5 +1,6 @@
-﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.Library;
+﻿using CSCodeGen.DataAccess.Model.Main;
+using CSCodeGen.Library.GlobalEvents;
+using FastColoredTextBoxNS;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -13,11 +14,16 @@ namespace CSCodeGen.UI
         private object _currentObject;
         public event EventHandler<string> CodeChanged;
         private BindingList<Keyword> defaultKeywords;
-
+        private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
 
         public ucEditor()
         {
             InitializeComponent();
+            pnlEditor.Controls.Add(fastColoredTextBox1);
+            fastColoredTextBox1.Dock = DockStyle.Fill;
+            fastColoredTextBox1.Language = Language.CSharp;
+            fastColoredTextBox1.AutoIndentChars = true;
+            fastColoredTextBox1.AutoIndent = true;
             fastColoredTextBox1.TextChanged += FastColoredTextBox1_TextChanged;
             listBox1.DoubleClick += ListBox1_DoubleClick;
 

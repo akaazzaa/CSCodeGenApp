@@ -1,4 +1,6 @@
-﻿namespace CSCodeGen.UI
+﻿using CSCodeGen.DataAccess.Model.Main;
+
+namespace CSCodeGen.UI
 {
     partial class TemplateDesignerForm
     {
@@ -34,6 +36,10 @@
             tcMain = new System.Windows.Forms.TabControl();
             pnlSidebarRight = new System.Windows.Forms.Panel();
             gvKeywords = new System.Windows.Forms.DataGridView();
+            btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
+            gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            gvcbDataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
             bsKeywords = new System.Windows.Forms.BindingSource(components);
             pnlKeywordMenu = new System.Windows.Forms.Panel();
             keywordmenu = new System.Windows.Forms.MenuStrip();
@@ -50,10 +56,6 @@
             btnNeuesTemplate = new System.Windows.Forms.ToolStripMenuItem();
             btnSave = new System.Windows.Forms.ToolStripMenuItem();
             settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
-            gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            gvcbDataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
             panelMain.SuspendLayout();
             panelContent.SuspendLayout();
             pnlSidebarRight.SuspendLayout();
@@ -132,9 +134,41 @@
             gvKeywords.Size = new System.Drawing.Size(329, 202);
             gvKeywords.TabIndex = 1;
             // 
+            // btnCode
+            // 
+            btnCode.DataPropertyName = "Code";
+            btnCode.HeaderText = "Code";
+            btnCode.Name = "btnCode";
+            btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            btnCode.Text = "Code anschauen";
+            btnCode.UseColumnTextForButtonValue = true;
+            // 
+            // gvtxtName
+            // 
+            gvtxtName.DataPropertyName = "Name";
+            gvtxtName.HeaderText = "Name";
+            gvtxtName.Name = "gvtxtName";
+            // 
+            // gvcbDataType
+            // 
+            gvcbDataType.DataPropertyName = "DataType";
+            gvcbDataType.HeaderText = "DataType";
+            gvcbDataType.Items.AddRange(new object[] { "int", "bool", "string", "Date", "char" });
+            gvcbDataType.Name = "gvcbDataType";
+            gvcbDataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            gvcbDataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // gvtxtDisplaytext
+            // 
+            gvtxtDisplaytext.DataPropertyName = "DisplayText";
+            gvtxtDisplaytext.HeaderText = "DisplayText";
+            gvtxtDisplaytext.Name = "gvtxtDisplaytext";
+            gvtxtDisplaytext.ReadOnly = true;
+            // 
             // bsKeywords
             // 
-            bsKeywords.DataSource = typeof(DataAccess.Model.Keyword);
+            bsKeywords.DataSource = typeof(Keyword);
             // 
             // pnlKeywordMenu
             // 
@@ -229,7 +263,7 @@
             // 
             // bsTemplates
             // 
-            bsTemplates.DataSource = typeof(DataAccess.Model.Template);
+            bsTemplates.DataSource = typeof(Template);
             // 
             // pnlbar
             // 
@@ -255,7 +289,7 @@
             // btnNeuesTemplate
             // 
             btnNeuesTemplate.Name = "btnNeuesTemplate";
-            btnNeuesTemplate.Size = new System.Drawing.Size(103, 20);
+            btnNeuesTemplate.Size = new System.Drawing.Size(104, 20);
             btnNeuesTemplate.Text = "Neues Template";
             btnNeuesTemplate.Click += neuesTemplateToolStripMenuItem_Click;
             // 
@@ -272,38 +306,6 @@
             settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             settingsToolStripMenuItem.Text = "Settings";
             settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
-            // 
-            // btnCode
-            // 
-            btnCode.DataPropertyName = "Code";
-            btnCode.HeaderText = "Code";
-            btnCode.Name = "btnCode";
-            btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            btnCode.Text = "Code anschauen";
-            btnCode.UseColumnTextForButtonValue = true;
-            // 
-            // gvtxtName
-            // 
-            gvtxtName.DataPropertyName = "Name";
-            gvtxtName.HeaderText = "Name";
-            gvtxtName.Name = "gvtxtName";
-            // 
-            // gvcbDataType
-            // 
-            gvcbDataType.DataPropertyName = "DataType";
-            gvcbDataType.HeaderText = "DataType";
-            gvcbDataType.Items.AddRange(new object[] { "int", "bool", "string", "Date", "char" });
-            gvcbDataType.Name = "gvcbDataType";
-            gvcbDataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            gvcbDataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // gvtxtDisplaytext
-            // 
-            gvtxtDisplaytext.DataPropertyName = "DisplayText";
-            gvtxtDisplaytext.HeaderText = "DisplayText";
-            gvtxtDisplaytext.Name = "gvtxtDisplaytext";
-            gvtxtDisplaytext.ReadOnly = true;
             // 
             // TemplateDesignerForm
             // 

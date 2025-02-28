@@ -1,4 +1,4 @@
-﻿namespace CSCodeGen.DataAccess.Model
+﻿namespace CSCodeGen.DataAccess.Model.Klasse
 {
     public class Propertie
     {

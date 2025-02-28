@@ -1,4 +1,6 @@
-﻿namespace CSCodeGen.UI.Usercontrols
+﻿using CSCodeGen.DataAccess.Model.Main;
+
+namespace CSCodeGen.UI.Usercontrols
 {
     partial class ucTemplateEditor
     {
@@ -104,7 +106,7 @@
             // 
             // templateBindingSource
             // 
-            templateBindingSource.DataSource = typeof(DataAccess.Model.Template);
+            templateBindingSource.DataSource = typeof(Template);
             // 
             // contextMenuStrip1
             // 

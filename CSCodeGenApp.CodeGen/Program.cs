@@ -1,4 +1,4 @@
-using CSCodeGen.Library;
+using CSCodeGen.Library.GlobalEvents;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -13,7 +13,11 @@ namespace CSCodeGenApp.CodeGen
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
 
+            
             CoreGlobals.Instance.Init();
+
+
+
             ApplicationConfiguration.Initialize();
             Application.Run(new frmCodeGen());
         }

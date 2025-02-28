@@ -28,22 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucEditor));
             panel1 = new System.Windows.Forms.Panel();
-            panel3 = new System.Windows.Forms.Panel();
-            fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
+            pnlEditor = new System.Windows.Forms.Panel();
             panel2 = new System.Windows.Forms.Panel();
             listBox1 = new System.Windows.Forms.ListBox();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(pnlEditor);
             panel1.Controls.Add(panel2);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
@@ -51,48 +46,13 @@
             panel1.Size = new System.Drawing.Size(994, 452);
             panel1.TabIndex = 0;
             // 
-            // panel3
+            // pnlEditor
             // 
-            panel3.Controls.Add(fastColoredTextBox1);
-            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(147, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(847, 452);
-            panel3.TabIndex = 1;
-            // 
-            // fastColoredTextBox1
-            // 
-            fastColoredTextBox1.AutoCompleteBracketsList = new char[]
-    {
-    '(',
-    ')',
-    '{',
-    '}',
-    '[',
-    ']',
-    '"',
-    '"',
-    '\'',
-    '\''
-    };
-            fastColoredTextBox1.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            fastColoredTextBox1.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-            fastColoredTextBox1.BackBrush = null;
-            fastColoredTextBox1.CharHeight = 14;
-            fastColoredTextBox1.CharWidth = 8;
-            fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
-            fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
-            fastColoredTextBox1.IsReplaceMode = false;
-            fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.CSharp;
-            fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
-            fastColoredTextBox1.Name = "fastColoredTextBox1";
-            fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);
-            fastColoredTextBox1.SelectionColor = System.Drawing.Color.FromArgb(60, 0, 0, 255);
-            fastColoredTextBox1.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("fastColoredTextBox1.ServiceColors");
-            fastColoredTextBox1.Size = new System.Drawing.Size(847, 452);
-            fastColoredTextBox1.TabIndex = 0;
-            fastColoredTextBox1.Zoom = 100;
+            pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlEditor.Location = new System.Drawing.Point(147, 0);
+            pnlEditor.Name = "pnlEditor";
+            pnlEditor.Size = new System.Drawing.Size(847, 452);
+            pnlEditor.TabIndex = 1;
             // 
             // panel2
             // 
@@ -121,8 +81,6 @@
             Name = "ucEditor";
             Size = new System.Drawing.Size(994, 452);
             panel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).EndInit();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -130,9 +88,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlEditor;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox listBox1;
-        private FastColoredTextBoxNS.FastColoredTextBox fastColoredTextBox1;
     }
 }

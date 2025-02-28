@@ -1,11 +1,11 @@
-﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.DataAccess.Model.Config;
+﻿using CSCodeGen.DataAccess.Model.Config;
+using CSCodeGen.Library.Controller;
 using System;
 using System.IO;
 
 
 
-namespace CSCodeGen.Library
+namespace CSCodeGen.Library.GlobalEvents
 {
     public class CoreGlobals
     {

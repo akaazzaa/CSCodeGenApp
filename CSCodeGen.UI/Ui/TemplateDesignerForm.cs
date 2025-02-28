@@ -1,5 +1,5 @@
-﻿using CSCodeGen.DataAccess.Model;
-using CSCodeGen.Library;
+﻿using CSCodeGen.DataAccess.Model.Main;
+using CSCodeGen.Library.GlobalEvents;
 using CSCodeGen.UI.Ui;
 using CSCodeGen.UI.Usercontrols;
 using System;
@@ -241,12 +241,11 @@ namespace CSCodeGen.UI
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
-
             frmSettings frmSettings = new frmSettings();
             frmSettings.ShowDialog();
         }
+
+    
     }
 
 }

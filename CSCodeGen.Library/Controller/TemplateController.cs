@@ -1,7 +1,8 @@
-﻿using CSCodeGen.DataAccess.Model;
+﻿using CSCodeGen.DataAccess.Model.Config;
+using CSCodeGen.DataAccess.Model.Main;
 using System.ComponentModel;
 
-namespace CSCodeGen.Library
+namespace CSCodeGen.Library.Controller
 {
     public class TemplateController
     {
