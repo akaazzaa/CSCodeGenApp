@@ -12,9 +12,12 @@ namespace CSCodeGen.Library
         private static CoreGlobals _instance;
         private static readonly object _lock = new object();
 
+
+
         public TemplateController templateController;
         public XmlStorage storage;
         public Settings settings;
+
 
         public string MainDirectoryPath
         {
@@ -24,6 +27,16 @@ namespace CSCodeGen.Library
             }
 
         }
+
+        public string SaveCSPath
+        {
+            get
+            {
+                 return Path.Combine(MainDirectoryPath, "Daten");
+
+            }
+        }
+
         // Private Konstruktor
         private CoreGlobals()
         {
@@ -39,7 +52,7 @@ namespace CSCodeGen.Library
         {
             get
             {
-                // Thread-sicherstellen Instanz erstellen
+                
                 lock (_lock)
                 {
                     if (_instance == null)
@@ -55,7 +68,7 @@ namespace CSCodeGen.Library
         public void Init()
         {
 
-            storage = new XmlStorage(Path.Combine(MainDirectoryPath,"Templates"));
+            storage = new XmlStorage(Path.Combine(MainDirectoryPath, "Templates"));
             templateController = new TemplateController(storage);
             settings = new Settings();
 

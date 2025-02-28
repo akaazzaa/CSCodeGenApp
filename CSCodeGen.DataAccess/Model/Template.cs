@@ -1,12 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO.Enumeration;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 
 namespace CSCodeGen.DataAccess.Model
 {
- 
+
     public class Template : Observable, INotifyPropertyChanged
     {
 
@@ -32,10 +30,10 @@ namespace CSCodeGen.DataAccess.Model
         // Properties
         [Browsable(false)]
         public string OldName { get; set; }
-       
+
         [Category("Template")]
         [Description("ID des Templates")]
-         public int ID { get; }
+        public int ID { get; }
 
         [Category("Template")]
         [Description("Name des Templates")]
@@ -83,7 +81,7 @@ namespace CSCodeGen.DataAccess.Model
         [ReadOnly(true)]
         [Category("Information")]
         [Description("Anlagedatum des Templates")]
-         public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
         [ReadOnly(true)]
         [Category("Information")]
         [Description("Quellcode des Templates")]

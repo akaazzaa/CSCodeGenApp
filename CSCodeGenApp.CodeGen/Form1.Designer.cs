@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
-        {
+         {
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCodeGen));
             pnlMain = new Panel();
             spMain = new SplitContainer();
             pnlAuswahl = new Panel();
@@ -46,15 +45,15 @@
             cbTemplate = new ComboBox();
             bsDaten = new BindingSource(components);
             txtName = new TextBox();
+            klasseBindingSource = new BindingSource(components);
             label2 = new Label();
             label1 = new Label();
             pnlEditor = new Panel();
-            fastColoredTextBox1 = new FastColoredTextBoxNS.FastColoredTextBox();
             pnlTop = new Panel();
             menu = new MenuStrip();
             saveToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
-            klasseBindingSource = new BindingSource(components);
+            pnlEditorMain = new Panel();
             pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spMain).BeginInit();
             spMain.Panel1.SuspendLayout();
@@ -68,11 +67,10 @@
             pnlPropetiesBar.SuspendLayout();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).BeginInit();
             pnlEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).BeginInit();
             pnlTop.SuspendLayout();
             menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).BeginInit();
             SuspendLayout();
             // 
             // pnlMain
@@ -236,12 +234,16 @@
             txtName.Size = new Size(229, 23);
             txtName.TabIndex = 2;
             // 
+            // klasseBindingSource
+            // 
+            klasseBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Klasse);
+            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(27, 29);
             label2.Name = "label2";
-            label2.Size = new Size(55, 15);
+            label2.Size = new Size(56, 15);
             label2.TabIndex = 1;
             label2.Text = "Template";
             // 
@@ -256,46 +258,13 @@
             // 
             // pnlEditor
             // 
-            pnlEditor.Controls.Add(fastColoredTextBox1);
+            pnlEditor.Controls.Add(pnlEditorMain);
             pnlEditor.Controls.Add(pnlTop);
             pnlEditor.Dock = DockStyle.Fill;
             pnlEditor.Location = new Point(0, 0);
             pnlEditor.Name = "pnlEditor";
             pnlEditor.Size = new Size(523, 450);
             pnlEditor.TabIndex = 0;
-            // 
-            // fastColoredTextBox1
-            // 
-            fastColoredTextBox1.AutoCompleteBracketsList = new char[]
-    {
-    '(',
-    ')',
-    '{',
-    '}',
-    '[',
-    ']',
-    '"',
-    '"',
-    '\'',
-    '\''
-    };
-            fastColoredTextBox1.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
-            fastColoredTextBox1.AutoScrollMinSize = new Size(67, 14);
-            fastColoredTextBox1.BackBrush = null;
-            fastColoredTextBox1.CharHeight = 14;
-            fastColoredTextBox1.CharWidth = 8;
-            fastColoredTextBox1.DisabledColor = Color.FromArgb(100, 180, 180, 180);
-            fastColoredTextBox1.Dock = DockStyle.Fill;
-            fastColoredTextBox1.IsReplaceMode = false;
-            fastColoredTextBox1.Location = new Point(0, 29);
-            fastColoredTextBox1.Name = "fastColoredTextBox1";
-            fastColoredTextBox1.Paddings = new Padding(0);
-            fastColoredTextBox1.SelectionColor = Color.FromArgb(60, 0, 0, 255);
-            fastColoredTextBox1.ServiceColors = null;
-            fastColoredTextBox1.Size = new Size(523, 421);
-            fastColoredTextBox1.TabIndex = 1;
-            fastColoredTextBox1.Text = "     ";
-            fastColoredTextBox1.Zoom = 100;
             // 
             // pnlTop
             // 
@@ -320,6 +289,7 @@
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(43, 20);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // removeToolStripMenuItem
             // 
@@ -327,9 +297,13 @@
             removeToolStripMenuItem.Size = new Size(62, 20);
             removeToolStripMenuItem.Text = "Remove";
             // 
-            // klasseBindingSource
+            // pnlEditorMain
             // 
-            klasseBindingSource.DataSource = typeof(CSCodeGen.DataAccess.Model.Klasse);
+            pnlEditorMain.Dock = DockStyle.Fill;
+            pnlEditorMain.Location = new Point(0, 29);
+            pnlEditorMain.Name = "pnlEditorMain";
+            pnlEditorMain.Size = new Size(523, 421);
+            pnlEditorMain.TabIndex = 1;
             // 
             // frmCodeGen
             // 
@@ -354,13 +328,12 @@
             pnlMenu.ResumeLayout(false);
             pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).EndInit();
+            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).EndInit();
             pnlEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)fastColoredTextBox1).EndInit();
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
             menu.ResumeLayout(false);
             menu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -374,7 +347,6 @@
         private MenuStrip menu;
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem removeToolStripMenuItem;
-        private FastColoredTextBoxNS.FastColoredTextBox fastColoredTextBox1;
         private Panel pnlMenu;
         private Label label2;
         private Label label1;
@@ -393,5 +365,6 @@
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewComboBoxColumn Datentyp;
         private BindingSource klasseBindingSource;
+        private Panel pnlEditorMain;
     }
 }

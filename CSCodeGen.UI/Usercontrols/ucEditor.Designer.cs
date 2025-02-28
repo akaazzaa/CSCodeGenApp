@@ -82,7 +82,9 @@
             fastColoredTextBox1.CharWidth = 8;
             fastColoredTextBox1.DisabledColor = System.Drawing.Color.FromArgb(100, 180, 180, 180);
             fastColoredTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            fastColoredTextBox1.Font = new System.Drawing.Font("Courier New", 9.75F);
             fastColoredTextBox1.IsReplaceMode = false;
+            fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.CSharp;
             fastColoredTextBox1.Location = new System.Drawing.Point(0, 0);
             fastColoredTextBox1.Name = "fastColoredTextBox1";
             fastColoredTextBox1.Paddings = new System.Windows.Forms.Padding(0);

@@ -6,7 +6,7 @@ namespace CSCodeGen.Library
     public class TemplateController
     {
         public BindingList<Template> Templates { get; private set; } = new BindingList<Template>();
-        
+
         private XmlStorage _xmlStorage;
 
         public TemplateController(XmlStorage storage)

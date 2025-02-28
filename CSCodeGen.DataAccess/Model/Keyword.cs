@@ -78,7 +78,7 @@ namespace CSCodeGen.DataAccess.Model
             _dataType = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
-        } 
+        }
         public Keyword(string key)
         {
             Id = _nextId++;

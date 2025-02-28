@@ -1,12 +1,13 @@
 using CSCodeGen.DataAccess.Model;
 using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.Library;
+using FastColoredTextBoxNS;
 
 namespace CSCodeGenApp.CodeGen
 {
     public partial class frmCodeGen : Form
     {
-
+        private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
         private Klasse klasse = new Klasse();
         private Template currentTemplate;
         private string lastInput = "";
@@ -19,6 +20,14 @@ namespace CSCodeGenApp.CodeGen
         private void Init()
         {
 
+            pnlEditorMain.Controls.Add(fastColoredTextBox1);
+            fastColoredTextBox1.Dock = DockStyle.Fill;
+
+            fastColoredTextBox1.Language = Language.CSharp;
+            fastColoredTextBox1.AutoIndent = true;
+            fastColoredTextBox1.AutoIndentChars = true;
+
+
             bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
             klasseBindingSource.DataSource = klasse;
             bsProperties.DataSource = klasse.Properties;
@@ -29,8 +38,8 @@ namespace CSCodeGenApp.CodeGen
 
 
         private string ReplaceKeywords(string source)
-        
-             {
+
+        {
             if (currentTemplate == null) return source;
 
 
@@ -126,6 +135,19 @@ namespace CSCodeGenApp.CodeGen
             fastColoredTextBox1.Text = ReplaceKeywords(currentTemplate.Source);
         }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = CoreGlobals.Instance.SaveCSPath;
+            string fileName = "NewCSDatei.cs";
+            string fullPath = Path.Combine(path, fileName);
 
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            File.WriteAllText(fullPath, fastColoredTextBox1.Text);
+
+        }
     }
 }

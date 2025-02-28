@@ -3,7 +3,7 @@
     public class Configuration
     {
         private static DefaultKeyword keywords = null;
-        public  static string CommentPrefix => "//";
+        public static string CommentPrefix => "//";
         public static string Prefix => "<#";
         public static string Postfix => "#>";
         public static DefaultKeyword Keywords
@@ -15,11 +15,11 @@
                     keywords = new DefaultKeyword();
                 }
 
-                return keywords; 
+                return keywords;
             }
         }
 
-       
+
 
     }
 }
