@@ -1,4 +1,3 @@
-using CSCodeGen.DataAccess.Model.Config;
 using CSCodeGen.DataAccess.Model.Klasse;
 using CSCodeGen.DataAccess.Model.Main;
 using CSCodeGen.Library.GlobalEvents;
@@ -9,16 +8,10 @@ namespace CSCodeGenApp.CodeGen
     public partial class frmCodeGen : Form
     {
         private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
-        private Klasse klasse = new Klasse();
-        private Template currentTemplate;
-        private string lastInput = "";
+
         public frmCodeGen()
         {
             InitializeComponent();
-            Init();
-        }
-        private void Init()
-        {
             pnlEditorMain.Controls.Add(fastColoredTextBox1);
             fastColoredTextBox1.Dock = DockStyle.Fill;
 
@@ -28,7 +21,7 @@ namespace CSCodeGenApp.CodeGen
 
 
             bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
-            klasseBindingSource.DataSource = klasse;
+            klasseBindingSource.DataSource =
             bsProperties.DataSource = klasse.Properties;
 
             ChangeCurrentObjekt();
@@ -67,6 +60,15 @@ namespace CSCodeGenApp.CodeGen
             }
 
             File.WriteAllText(fullPath, fastColoredTextBox1.Text);
+
+        }
+        private void ChangeCurrentObjekt()
+        {
+            if (cbTemplate.SelectedItem == null) { return; }
+
+            currentTemplate = (Template)cbTemplate.SelectedItem;
+
+            fastColoredTextBox1.Text = currentTemplate.Source;
 
         }
     }

@@ -2,16 +2,15 @@
 using CSCodeGen.DataAccess.Model.Klasse;
 using CSCodeGen.DataAccess.Model.Main;
 using CSCodeGen.Library.GlobalEvents;
+using System.Linq;
 
 namespace CSCodeGen.Library.Controller
 {
-
     class ClassController
     {
-
-        
-
-
+        private Klasse klasse = new Klasse();
+        private Template currentTemplate;
+        private string lastInput = "";
         private string ReplaceKeywords(string source)
 
         {
@@ -80,15 +79,7 @@ namespace CSCodeGen.Library.Controller
             return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
         }
 
-        private void ChangeCurrentObjekt()
-        {
-            if (cbTemplate.SelectedItem == null) { return; }
 
-            currentTemplate = (Template)cbTemplate.SelectedItem;
-
-            fastColoredTextBox1.Text = currentTemplate.Source;
-
-        }
 
 
 
