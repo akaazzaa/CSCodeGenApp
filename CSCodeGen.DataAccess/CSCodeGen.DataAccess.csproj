@@ -16,8 +16,11 @@
     </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Interfaces\**" />
     <Compile Remove="Templates\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
     <EmbeddedResource Remove="Templates\**" />
+    <None Remove="Interfaces\**" />
     <None Remove="Templates\**" />
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +29,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
 </Project>
