@@ -28,46 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new System.Windows.Forms.Panel();
-            ucEditor1 = new ucEditor();
-            panel1.SuspendLayout();
+            pnlMain = new System.Windows.Forms.Panel();
             SuspendLayout();
             // 
-            // panel1
+            // pnlMain
             // 
-            panel1.Controls.Add(ucEditor1);
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 0);
-            panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(1150, 505);
-            panel1.TabIndex = 0;
-            // 
-            // ucEditor1
-            // 
-            ucEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucEditor1.Location = new System.Drawing.Point(0, 0);
-            ucEditor1.Name = "ucEditor1";
-            ucEditor1.Size = new System.Drawing.Size(1150, 505);
-            ucEditor1.TabIndex = 0;
+            pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlMain.Location = new System.Drawing.Point(0, 0);
+            pnlMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new System.Drawing.Size(1150, 505);
+            pnlMain.TabIndex = 0;
             // 
             // KeywordCodeForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1150, 505);
-            Controls.Add(panel1);
+            Controls.Add(pnlMain);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "KeywordCodeForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "KeywordCodeForm";
-            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private ucEditor ucEditor1;
+        private System.Windows.Forms.Panel pnlMain;
     }
 }

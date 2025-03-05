@@ -196,14 +196,12 @@ namespace CSCodeGen.UI
             btnAddKeyword.Name = "btnAddKeyword";
             btnAddKeyword.Size = new System.Drawing.Size(41, 20);
             btnAddKeyword.Text = "Add";
-            btnAddKeyword.Click += toolStripMenuItem1_Click;
             // 
             // btnRemovekeyword
             // 
             btnRemovekeyword.Name = "btnRemovekeyword";
             btnRemovekeyword.Size = new System.Drawing.Size(62, 20);
             btnRemovekeyword.Text = "Remove";
-            btnRemovekeyword.Click += btnRemovekeyword_Click;
             // 
             // pnalPropertys
             // 
@@ -259,11 +257,11 @@ namespace CSCodeGen.UI
             listTemplate.Name = "listTemplate";
             listTemplate.Size = new System.Drawing.Size(195, 520);
             listTemplate.TabIndex = 0;
-            listTemplate.DoubleClick += listBox1_DoubleClick;
+            
             // 
             // bsTemplates
             // 
-            bsTemplates.DataSource = typeof(Template);
+            bsTemplates.DataSource = typeof(CodeTemplate);
             // 
             // pnlbar
             // 
@@ -291,14 +289,12 @@ namespace CSCodeGen.UI
             btnNeuesTemplate.Name = "btnNeuesTemplate";
             btnNeuesTemplate.Size = new System.Drawing.Size(104, 20);
             btnNeuesTemplate.Text = "Neues Template";
-            btnNeuesTemplate.Click += neuesTemplateToolStripMenuItem_Click;
             // 
             // btnSave
             // 
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(71, 20);
             btnSave.Text = "Speichern";
-            btnSave.Click += speichernToolStripMenuItem_Click;
             // 
             // settingsToolStripMenuItem
             // 
@@ -318,7 +314,6 @@ namespace CSCodeGen.UI
             Name = "TemplateDesignerForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "TemplateDesigner";
-            FormClosing += TemplateDesignerForm_FormClosing;
             panelMain.ResumeLayout(false);
             panelContent.ResumeLayout(false);
             pnlSidebarRight.ResumeLayout(false);

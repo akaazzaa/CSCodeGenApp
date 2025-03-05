@@ -1,12 +1,11 @@
 ﻿namespace CSCodeGen.DataAccess.Model.Klasse
 {
-    public class Propertie
+    public class PropertyDefinition
     {
         public string Name { get; set; }
         public string DataType { get; set; }
-        public bool isUsed { get; set; }
 
-        public Propertie()
+        public PropertyDefinition()
         {
             Name = string.Empty;
             DataType = string.Empty;

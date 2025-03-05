@@ -4,7 +4,6 @@ using CSCodeGen.UI.Ui;
 using CSCodeGen.UI.Usercontrols;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,32 +12,61 @@ namespace CSCodeGen.UI
     public partial class TemplateDesignerForm : Form
     {
         #region Variabeln
-        private BindingList<Template> templates;
-        private Dictionary<TabPage, Template> tabs = new Dictionary<TabPage, Template>();
-        private Template currentTemplate;
-        ucTemplateEditor ucTemplateEditor;
+        private Dictionary<TabPage, CodeTemplate> tabs = new Dictionary<TabPage, CodeTemplate>();
 
 
         #endregion
 
+        public TemplateDesignerForm()
+        {
+            InitializeComponent();
+            // Datasource binding
+            Init();
+
+        }
+
         #region Methoden
+
         private void Init()
         {
-            // Datasource binding
             templates = CoreGlobals.Instance.templateController.Templates;
             bsTemplates.DataSource = templates;
-
-            //Events
-            tcMain.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
-            gvKeywords.CellClick += gvKeywords_CellClick;
-            gvKeywords.MouseWheel += GvKeywords_MouseWheel;
-
+            //Events abonnieren
+            tcMain.SelectedIndexChanged += SelectedTabChanged;
+            gvKeywords.CellClick += OpenKeywordCode;
+            gvKeywords.MouseWheel += Keyword_MouseWheelMove;
+            btnAddKeyword.Click += AddKeyword;
+            btnNeuesTemplate.Click += AddTemplate;
+            listTemplate.DoubleClick += ChangeSelectedTemplate;
+            btnSave.Click += (s, e) => Save();
+            FormClosing += OnFormClosing;
+            btnRemovekeyword.Click += RemoveKeyword;
         }
         private void Save()
         {
-            if (!templates.Any(t => t.IsChanged)) return; // Nur speichern, wenn nötig
-            this.Validate();
-            CoreGlobals.Instance.templateController.SaveAllTemplates();
+
+            try
+            {
+                if (!templates.Any(t => t.IsChanged)) return;
+
+                this.Validate();
+                CoreGlobals.Instance.templateController.SaveAllTemplates();
+
+                // Optional: Erfolgsbenachrichtigung
+                MessageBox.Show("Alle Templates erfolgreich gespeichert.",
+                                "Speichern",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fehler beim Speichern: {ex.Message}",
+                                "Fehler",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                // Optional: Logging
+                // Logger.LogError(ex);
+            }
         }
         private void Add()
         {
@@ -70,15 +98,28 @@ namespace CSCodeGen.UI
         {
             if (currentTemplate == null) return;
 
-            Add();
+            // Prüfe, ob Template bereits geöffnet
+            var existingTab = tabs.FirstOrDefault(x => x.Value == currentTemplate).Key;
+            if (existingTab != null)
+            {
+                tcMain.SelectedTab = existingTab;
+                return;
+            }
 
-            var tabPage = new TabPage(currentTemplate.Name);
-            var editor = new ucTemplateEditor(currentTemplate);
-            editor.Dock = DockStyle.Fill;
+            Add();
+            var tabPage = new TabPage(currentTemplate.Name)
+            {
+                ToolTipText = currentTemplate.Name
+            };
+
+            var editor = new ucTemplateEditor(currentTemplate)
+            {
+                Dock = DockStyle.Fill
+            };
+
             editor.OnClosingTap += CloseTab;
             editor.OnSaveChanges += Save;
             editor.OnResetChanges += ResetTextChanges;
-
 
             tabs[tabPage] = currentTemplate;
             tabPage.Controls.Add(editor);
@@ -96,7 +137,7 @@ namespace CSCodeGen.UI
             currentTemplate.Keywords.Clear();
             currentTemplate.IsChanged = false;
         }
-        private void SetPropertyGrid(Template template)
+        private void SetPropertyGrid(CodeTemplate template)
         {
             pgTemplate.SelectedObject = template;
             gvKeywords.DataSource = template.Keywords;
@@ -105,7 +146,7 @@ namespace CSCodeGen.UI
         #endregion
 
         #region Events
-        private void GvKeywords_MouseWheel(object sender, MouseEventArgs e)
+        private void Keyword_MouseWheelMove(object sender, MouseEventArgs e)
         {
             if (ModifierKeys.HasFlag(Keys.Shift))
             {
@@ -127,7 +168,7 @@ namespace CSCodeGen.UI
                 }
             }
         }
-        private void gvKeywords_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void OpenKeywordCode(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
@@ -146,7 +187,6 @@ namespace CSCodeGen.UI
                 keywordCodeForm.ShowDialog();
             }
         }
-
         private void KeywordChanged()
         {
             if (currentTemplate == null) { return; }
@@ -154,16 +194,15 @@ namespace CSCodeGen.UI
             currentTemplate.IsChanged = true;
 
         }
-
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void SelectedTabChanged(object sender, EventArgs e)
         {
             if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
             {
-                Template currentTemplate = tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
+                CodeTemplate currentTemplate = tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
                 SetPropertyGrid(currentTemplate);  // Übergib das Template an die Methode
             }
         }
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void AddKeyword(object sender, EventArgs e)
         {
             if (currentTemplate == null)
             {
@@ -177,47 +216,49 @@ namespace CSCodeGen.UI
             gvKeywords.Refresh(); // Grid aktualisieren
 
         }
-        private void neuesTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddTemplate(object sender, EventArgs e)
         {
-            currentTemplate = new Template("Neues Template");
+            currentTemplate = new CodeTemplate("Neues Template");
 
             AddNewTap();
             SetPropertyGrid(currentTemplate);
 
         }
-
-
-        private void listBox1_DoubleClick(object sender, EventArgs e)
+        private void ChangeSelectedTemplate(object sender, EventArgs e)
         {
             if (listTemplate.SelectedItem == null) return;
 
-            currentTemplate = (Template)listTemplate.SelectedItem;
+            currentTemplate = (CodeTemplate)listTemplate.SelectedItem;
             AddNewTap();
             SetPropertyGrid(currentTemplate);
         }
-        private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
-            Save();
-        }
-        private void TemplateDesignerForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (templates.Any(t => t.IsChanged))
+            var changedTemplates = templates.Where(t => t.IsChanged).ToList();
+
+            if (changedTemplates.Any())
             {
-                DialogResult result = MessageBox.Show(
-                    "Änderungen speichern?",
-                    "Speichern",
+                var result = MessageBox.Show(
+                    $"Es gibt {changedTemplates.Count} ungespeicherte Templates.\n" +
+                    "Möchten Sie alle speichern?",
+                    "Ungespeicherte Änderungen",
                     MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question
+                    MessageBoxIcon.Warning
                 );
 
-                if (result == DialogResult.Yes)
+                switch (result)
                 {
-                    Save();
+                    case DialogResult.Yes:
+                        Save();
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
                 }
             }
 
         }
-        private void btnRemovekeyword_Click(object sender, EventArgs e)
+        private void RemoveKeyword(object sender, EventArgs e)
         {
             if (gvKeywords.CurrentRow == null) return;
 
@@ -233,11 +274,7 @@ namespace CSCodeGen.UI
         #endregion
 
 
-        public TemplateDesignerForm()
-        {
-            InitializeComponent();
-            Init();
-        }
+
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -245,7 +282,7 @@ namespace CSCodeGen.UI
             frmSettings.ShowDialog();
         }
 
-    
+
     }
 
 }

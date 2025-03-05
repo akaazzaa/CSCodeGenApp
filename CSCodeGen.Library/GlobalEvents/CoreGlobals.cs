@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.DataAccess.Model.Config;
+using CSCodeGen.DataAccess.Model.Storage;
 using CSCodeGen.Library.Controller;
 using System;
 using System.IO;
@@ -12,10 +13,9 @@ namespace CSCodeGen.Library.GlobalEvents
         private static CoreGlobals _instance;
         private static readonly object _lock = new object();
 
-
-
         public TemplateController templateController;
-        public XmlStorage storage;
+        public ClassController classController;
+        public XmlTemplateStorage templateStroage;
         public Settings settings;
 
 
@@ -32,7 +32,7 @@ namespace CSCodeGen.Library.GlobalEvents
         {
             get
             {
-                 return Path.Combine(MainDirectoryPath, "Daten");
+                return Path.Combine(MainDirectoryPath, "Daten");
 
             }
         }
@@ -52,7 +52,7 @@ namespace CSCodeGen.Library.GlobalEvents
         {
             get
             {
-                
+
                 lock (_lock)
                 {
                     if (_instance == null)
@@ -68,16 +68,10 @@ namespace CSCodeGen.Library.GlobalEvents
         public void Init()
         {
 
-            storage = new XmlStorage(Path.Combine(MainDirectoryPath, "Templates"));
-            templateController = new TemplateController(storage);
+            templateStroage = new XmlTemplateStorage(Path.Combine(MainDirectoryPath, "Templates"));
+            templateController = new TemplateController(templateStroage);
+            classController = new ClassController();
             settings = new Settings();
-
-        }
-
-        public static void LogMessage(string message)
-        {
-
-            Console.WriteLine($"{message}");
         }
 
     }

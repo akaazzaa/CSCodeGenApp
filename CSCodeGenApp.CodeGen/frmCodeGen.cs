@@ -1,5 +1,6 @@
 using CSCodeGen.DataAccess.Model.Klasse;
 using CSCodeGen.DataAccess.Model.Main;
+using CSCodeGen.Library.Controller;
 using CSCodeGen.Library.GlobalEvents;
 using FastColoredTextBoxNS;
 
@@ -8,10 +9,16 @@ namespace CSCodeGenApp.CodeGen
     public partial class frmCodeGen : Form
     {
         private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
+        private ClassController classController;
+        private CodeTemplate currentTemplate;
 
-        public frmCodeGen()
+        public frmCodeGen(ClassController classController)
         {
             InitializeComponent();
+
+            // Controller für die Logik
+            this.classController = classController;
+
             pnlEditorMain.Controls.Add(fastColoredTextBox1);
             fastColoredTextBox1.Dock = DockStyle.Fill;
 
@@ -21,8 +28,8 @@ namespace CSCodeGenApp.CodeGen
 
 
             bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
-            klasseBindingSource.DataSource =
-            bsProperties.DataSource = klasse.Properties;
+            klasseBindingSource.DataSource = classController.Klasse;
+            bsProperties.DataSource = classController.Klasse.Properties;
 
             ChangeCurrentObjekt();
         }
@@ -33,40 +40,31 @@ namespace CSCodeGenApp.CodeGen
         }
         private void btnPropertiesAdd_Click(object sender, EventArgs e)
         {
-            klasse.Properties.Add(new Propertie());
+            classController.AddProperty(new PropertyDefinition());
         }
         private void btnPropertiesDelete_Click(object sender, EventArgs e)
         {
-            var selectedPropertie = (Propertie)dataGridView1.CurrentRow.DataBoundItem;
+            var selectedPropertie = (PropertyDefinition)dataGridView1.CurrentRow.DataBoundItem;
 
             if (selectedPropertie == null) { return; }
-            klasse.Properties.Remove(selectedPropertie);
+            classController.RemoveProperty(selectedPropertie);
         }
 
         private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            fastColoredTextBox1.Text = ReplaceKeywords(currentTemplate.Source);
+            fastColoredTextBox1.Text = classController.ReplaceKeywords(currentTemplate);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = CoreGlobals.Instance.SaveCSPath;
-            string fileName = "NewCSDatei.cs";
-            string fullPath = Path.Combine(path, fileName);
 
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            File.WriteAllText(fullPath, fastColoredTextBox1.Text);
 
         }
         private void ChangeCurrentObjekt()
         {
             if (cbTemplate.SelectedItem == null) { return; }
 
-            currentTemplate = (Template)cbTemplate.SelectedItem;
+            currentTemplate = (CodeTemplate)cbTemplate.SelectedItem;
 
             fastColoredTextBox1.Text = currentTemplate.Source;
 

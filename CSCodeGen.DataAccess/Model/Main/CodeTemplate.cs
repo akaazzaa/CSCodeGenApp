@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace CSCodeGen.DataAccess.Model.Main
 {
 
-    public class Template : Observable, INotifyPropertyChanged
+    public class CodeTemplate : Observable, INotifyPropertyChanged
     {
 
         #region Variabeln
@@ -110,7 +110,7 @@ namespace CSCodeGen.DataAccess.Model.Main
         #endregion
 
         #region Konstruktoren
-        public Template()
+        public CodeTemplate()
         {
             ID = nextid++;
             CreationDate = DateTime.Now;
@@ -118,7 +118,7 @@ namespace CSCodeGen.DataAccess.Model.Main
             IsChanged = true;
         }
 
-        public Template(string name)
+        public CodeTemplate(string name)
         {
             Name = name;
             ID = nextid++;

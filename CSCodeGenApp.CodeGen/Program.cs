@@ -10,16 +10,9 @@ namespace CSCodeGenApp.CodeGen
         [STAThread]
         static void Main()
         {
-
-
-
             CoreGlobals.Instance.Init();
-
-
-
-
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmCodeGen());
+            Application.Run(new frmCodeGen(CoreGlobals.Instance.classController));
         }
     }
 }

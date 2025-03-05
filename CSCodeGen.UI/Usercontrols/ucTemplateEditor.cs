@@ -6,25 +6,29 @@ namespace CSCodeGen.UI.Usercontrols
 {
     public partial class ucTemplateEditor : UserControl
     {
+        private ucEditor ucEditor;
         public event Action<TabPage> OnClosingTap;
         public event Action OnSaveChanges;
         public event Action OnResetChanges;
-        private Template currentTemplate;
+        private CodeTemplate currentTemplate;
         private string alterCode;
 
-        public ucTemplateEditor(Template template)
+        public ucTemplateEditor(CodeTemplate template)
         {
             InitializeComponent();
-            // Todo: Copy vom Template.Proprertys  machen und in der Resetchange mitgeben. 
+
+
             currentTemplate = template;
-            ucEditor2.Initialize(template);
-            ucEditor2.CodeChanged += UcEditor2_CodeChanged;
-            löschenToolStripMenuItem.Click += (s, e) => CloseTab();
+            ucEditor = new ucEditor(template);
+            ucEditor.CodeChanged += CodeChanged;
+            ucEditor.Dock = DockStyle.Fill;
+            pnlEditor.Controls.Add(ucEditor);
+            btnRemove.Click += (s, e) => CloseTab();
 
 
         }
 
-        private void UcEditor2_CodeChanged(object sender, string newSource)
+        private void CodeChanged(object sender, string newSource)
         {
             alterCode = currentTemplate.Source;
 

@@ -1,4 +1,4 @@
-﻿using CSCodeGen.DataAccess.Model.Config;
+﻿using CSCodeGen.DataAccess.Interface;
 using CSCodeGen.DataAccess.Model.Main;
 using System.ComponentModel;
 
@@ -6,25 +6,28 @@ namespace CSCodeGen.Library.Controller
 {
     public class TemplateController
     {
-        public BindingList<Template> Templates { get; private set; } = new BindingList<Template>();
+        private BindingList<CodeTemplate> templates;
+        private CodeTemplate currentTemplate;
+        public BindingList<CodeTemplate> Templates { get; private set; } = new BindingList<CodeTemplate>();
 
-        private XmlStorage _xmlStorage;
+        private readonly ITemplateStorage _templateStorage;
 
-        public TemplateController(XmlStorage storage)
+        public TemplateController(ITemplateStorage templateStorage)
         {
-            _xmlStorage = storage;
-            LoadAllTemplates(); // Direkt beim Erstellen Templates laden
+            _templateStorage = templateStorage;
+            // Direkt beim Erstellen Templates laden
+            LoadAllTemplates();
         }
 
         #region Laden und Speichern 
         public void SaveAllTemplates()
         {
-            _xmlStorage.SaveAllTemplates(Templates);
+            _templateStorage.SaveAll(Templates);
         }
         public void LoadAllTemplates()
         {
             Templates.Clear();
-            foreach (var template in _xmlStorage.LoadAllTemplates())
+            foreach (var template in _templateStorage.LoadAll())
             {
                 Templates.Add(template);
             }

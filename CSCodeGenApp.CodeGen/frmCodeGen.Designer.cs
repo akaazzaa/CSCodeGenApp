@@ -167,7 +167,7 @@ namespace CSCodeGenApp.CodeGen
             // 
             // bsProperties
             // 
-            bsProperties.DataSource = typeof(Propertie);
+            bsProperties.DataSource = typeof(PropertyDefinition);
             // 
             // pnlPropetiesBar
             // 
@@ -227,7 +227,7 @@ namespace CSCodeGenApp.CodeGen
             // 
             // bsDaten
             // 
-            bsDaten.DataSource = typeof(Template);
+            bsDaten.DataSource = typeof(CodeTemplate);
             // 
             // txtName
             // 
@@ -239,7 +239,7 @@ namespace CSCodeGenApp.CodeGen
             // 
             // klasseBindingSource
             // 
-            klasseBindingSource.DataSource = typeof(Klasse);
+            klasseBindingSource.DataSource = typeof(GenerationContext);
             // 
             // label2
             // 

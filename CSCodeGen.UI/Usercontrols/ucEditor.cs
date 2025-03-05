@@ -11,30 +11,35 @@ namespace CSCodeGen.UI
 {
     public partial class ucEditor : UserControl
     {
-        private object _currentObject;
-        public event EventHandler<string> CodeChanged;
-        private BindingList<Keyword> defaultKeywords;
         private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
+        public event EventHandler<string> CodeChanged;
 
-        public ucEditor()
+        private BindingList<Keyword> defaultKeywords;
+
+
+
+        public ucEditor(object obj)
         {
             InitializeComponent();
+            Initialize(obj);
+
+
             pnlEditor.Controls.Add(fastColoredTextBox1);
             fastColoredTextBox1.Dock = DockStyle.Fill;
             fastColoredTextBox1.Language = Language.CSharp;
             fastColoredTextBox1.AutoIndentChars = true;
             fastColoredTextBox1.AutoIndent = true;
-            fastColoredTextBox1.TextChanged += FastColoredTextBox1_TextChanged;
-            listBox1.DoubleClick += ListBox1_DoubleClick;
+            fastColoredTextBox1.TextChanged += OnTextChanged;
+            listBox1.DoubleClick += InsertKeyword;
 
         }
 
-        public void Initialize<T>(T obj)
+        private void Initialize<T>(T obj)
         {
             if (obj == null) return;
-            _currentObject = obj;
 
-            if (obj is Template template)
+
+            if (obj is CodeTemplate template)
             {
                 fastColoredTextBox1.Text = template.Source;
                 listBox1.DataSource = LoadKeywords(template);
@@ -49,14 +54,15 @@ namespace CSCodeGen.UI
                 listBox1.DisplayMember = "Name";
             }
         }
-
         private void KeywordDeleted(Keyword deletedKeyword)
         {
 
             defaultKeywords.Remove(deletedKeyword);
         }
 
-        private void ListBox1_DoubleClick(object sender, EventArgs e)
+
+
+        private void InsertKeyword(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
             {
@@ -66,12 +72,12 @@ namespace CSCodeGen.UI
                 fastColoredTextBox1.Text = fastColoredTextBox1.Text.Insert(insertPosition, fullKeyword);
             }
         }
-        private BindingList<Keyword> LoadKeywords(Template template = null)
+        private BindingList<Keyword> LoadKeywords(CodeTemplate template = null)
         {
 
 
             // Hole die Standard-Keywords
-            defaultKeywords = CoreGlobals.Instance.storage.GetDefaultKeywords();
+            defaultKeywords = (BindingList<Keyword>)CoreGlobals.Instance.templateStroage.GetDefaultKeywords();
 
             if (template == null)
             {
@@ -108,7 +114,7 @@ namespace CSCodeGen.UI
                 defaultKeywords.Add(tmp);
             }
         }
-        private void FastColoredTextBox1_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        private void OnTextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
             CodeChanged?.Invoke(this, fastColoredTextBox1.Text);
         }

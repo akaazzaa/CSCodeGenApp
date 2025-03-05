@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.TemplateDesinger"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGenApp.CodeGen", "CSCodeGenApp.CodeGen\CSCodeGenApp.CodeGen.csproj", "{6332C4F5-E217-408C-AD5C-AAFF1B7F254C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneratorTester", "CodeGeneratorTester\CodeGeneratorTester.csproj", "{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{6332C4F5-E217-408C-AD5C-AAFF1B7F254C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6332C4F5-E217-408C-AD5C-AAFF1B7F254C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6332C4F5-E217-408C-AD5C-AAFF1B7F254C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

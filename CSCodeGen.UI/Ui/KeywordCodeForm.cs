@@ -6,20 +6,22 @@ namespace CSCodeGen.UI.Ui
 {
     public partial class KeywordCodeForm : Form
     {
+        private ucEditor ucEditor;
         Keyword Keyword;
         public event Action KeywordChanged;
-        public KeywordCodeForm(Keyword current)
+        public KeywordCodeForm(Keyword keyword)
         {
             InitializeComponent();
 
-            Keyword = current;
-
-            ucEditor1.Initialize(current);
-            ucEditor1.CodeChanged += UcEditor1_CodeChanged;
+            Keyword = keyword;
+            ucEditor = new ucEditor(keyword);
+            ucEditor.CodeChanged += CodeChanged;
+            ucEditor.Dock = DockStyle.Fill;
+            pnlMain.Controls.Add(ucEditor);
 
         }
 
-        private void UcEditor1_CodeChanged(object sender, string newCode)
+        private void CodeChanged(object sender, string newCode)
         {
             Keyword.Code = newCode;
             KeywordChanged?.Invoke();

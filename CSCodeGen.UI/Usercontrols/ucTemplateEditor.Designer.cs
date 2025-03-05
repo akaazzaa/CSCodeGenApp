@@ -32,15 +32,15 @@ namespace CSCodeGen.UI.Usercontrols
         {
             components = new System.ComponentModel.Container();
             panel1 = new System.Windows.Forms.Panel();
-            panel3 = new System.Windows.Forms.Panel();
-            ucEditor2 = new ucEditor();
+            pnlMain = new System.Windows.Forms.Panel();
             panel4 = new System.Windows.Forms.Panel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
-            löschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            btnRemove = new System.Windows.Forms.ToolStripMenuItem();
             templateBindingSource = new System.Windows.Forms.BindingSource(components);
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            pnlEditor = new System.Windows.Forms.Panel();
             panel1.SuspendLayout();
-            panel3.SuspendLayout();
+            pnlMain.SuspendLayout();
             panel4.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)templateBindingSource).BeginInit();
@@ -49,7 +49,7 @@ namespace CSCodeGen.UI.Usercontrols
             // panel1
             // 
             panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(pnlMain);
             panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             panel1.Location = new System.Drawing.Point(0, 0);
             panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -57,25 +57,17 @@ namespace CSCodeGen.UI.Usercontrols
             panel1.Size = new System.Drawing.Size(1279, 630);
             panel1.TabIndex = 0;
             // 
-            // panel3
+            // pnlMain
             // 
-            panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            panel3.Controls.Add(ucEditor2);
-            panel3.Controls.Add(panel4);
-            panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel3.Location = new System.Drawing.Point(0, 0);
-            panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(1277, 628);
-            panel3.TabIndex = 1;
-            // 
-            // ucEditor2
-            // 
-            ucEditor2.Dock = System.Windows.Forms.DockStyle.Fill;
-            ucEditor2.Location = new System.Drawing.Point(0, 29);
-            ucEditor2.Name = "ucEditor2";
-            ucEditor2.Size = new System.Drawing.Size(1275, 597);
-            ucEditor2.TabIndex = 2;
+            pnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            pnlMain.Controls.Add(pnlEditor);
+            pnlMain.Controls.Add(panel4);
+            pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlMain.Location = new System.Drawing.Point(0, 0);
+            pnlMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new System.Drawing.Size(1277, 628);
+            pnlMain.TabIndex = 1;
             // 
             // panel4
             // 
@@ -90,7 +82,7 @@ namespace CSCodeGen.UI.Usercontrols
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { löschenToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnRemove });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -98,20 +90,28 @@ namespace CSCodeGen.UI.Usercontrols
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // löschenToolStripMenuItem
+            // btnRemove
             // 
-            löschenToolStripMenuItem.Name = "löschenToolStripMenuItem";
-            löschenToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            löschenToolStripMenuItem.Text = "Schließen";
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new System.Drawing.Size(70, 20);
+            btnRemove.Text = "Schließen";
             // 
             // templateBindingSource
             // 
-            templateBindingSource.DataSource = typeof(Template);
+            templateBindingSource.DataSource = typeof(CodeTemplate);
             // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // pnlEditor
+            // 
+            pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlEditor.Location = new System.Drawing.Point(0, 29);
+            pnlEditor.Name = "pnlEditor";
+            pnlEditor.Size = new System.Drawing.Size(1275, 597);
+            pnlEditor.TabIndex = 2;
             // 
             // ucTemplateEditor
             // 
@@ -122,7 +122,7 @@ namespace CSCodeGen.UI.Usercontrols
             Name = "ucTemplateEditor";
             Size = new System.Drawing.Size(1279, 630);
             panel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
+            pnlMain.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             menuStrip1.ResumeLayout(false);
@@ -136,10 +136,10 @@ namespace CSCodeGen.UI.Usercontrols
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.BindingSource templateBindingSource;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem löschenToolStripMenuItem;
-        private ucEditor ucEditor2;
+        private System.Windows.Forms.ToolStripMenuItem btnRemove;
+        private System.Windows.Forms.Panel pnlEditor;
     }
 }

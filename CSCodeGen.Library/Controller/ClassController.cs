@@ -2,29 +2,33 @@
 using CSCodeGen.DataAccess.Model.Klasse;
 using CSCodeGen.DataAccess.Model.Main;
 using CSCodeGen.Library.GlobalEvents;
+using System.IO;
 using System.Linq;
 
 namespace CSCodeGen.Library.Controller
 {
-    class ClassController
+    public class ClassController
     {
-        private Klasse klasse = new Klasse();
-        private Template currentTemplate;
-        private string lastInput = "";
-        private string ReplaceKeywords(string source)
+        private GenerationContext _context = new GenerationContext();
 
+        public GenerationContext Klasse { get { return _context; } }
+
+        public string ReplaceKeywords(CodeTemplate template)
         {
-            if (currentTemplate == null) return source;
+            string source = string.Empty;
 
+            if (template == null) return source;
 
-            foreach (Propertie prop in klasse.Properties)
+            source = template.Source;
+
+            foreach (PropertyDefinition prop in _context.Properties)
             {
                 if (string.IsNullOrEmpty(prop.Name) || string.IsNullOrEmpty(prop.DataType))
                 {
                     continue;
                 }
 
-                var matchingKeywords = currentTemplate.Keywords.Where(k => k.DataType == prop.DataType).ToList();
+                var matchingKeywords = template.Keywords.Where(k => k.DataType == prop.DataType).ToList();
 
                 foreach (Keyword key in matchingKeywords)
                 {
@@ -38,17 +42,17 @@ namespace CSCodeGen.Library.Controller
             return ReplaceDefaultKeys(source);
         }
 
-        private string ReplaceDefaultKeys(string text, Propertie prop = null)
+        private string ReplaceDefaultKeys(string text, PropertyDefinition prop = null)
         {
-            foreach (Keyword key in CoreGlobals.Instance.storage.GetDefaultKeywords())
+            foreach (Keyword key in CoreGlobals.Instance.templateStroage.GetDefaultKeywords())
             {
                 if (key.Name == Configuration.Keywords.Classname)
                 {
-                    text = text.Replace(key.DisplayText, klasse.Name);
+                    text = text.Replace(key.DisplayText, _context.ClassName);
                 }
                 else if (key.Name == Configuration.Keywords.Namespace)
                 {
-                    text = text.Replace(key.DisplayText, klasse.Namespace);
+                    text = text.Replace(key.DisplayText, _context.NameSpace);
                 }
                 else if (key.Name == Configuration.Keywords.Variable)
                 {
@@ -79,7 +83,28 @@ namespace CSCodeGen.Library.Controller
             return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
         }
 
+        public void AddProperty(PropertyDefinition prop)
+        {
+            _context.Properties.Add(prop);
+        }
+        public void RemoveProperty(PropertyDefinition prop)
+        {
+            _context.Properties.Remove(prop);
+        }
 
+        public void Save(string source)
+        {
+            string path = CoreGlobals.Instance.SaveCSPath;
+            string fileName = "NewCSDatei.cs";
+            string fullPath = Path.Combine(path, fileName);
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            File.WriteAllText(fullPath, source);
+        }
 
 
 

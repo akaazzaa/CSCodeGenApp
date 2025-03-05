@@ -1,25 +1,29 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
+﻿using CSCodeGen.DataAccess.Interface;
+using CSCodeGen.DataAccess.Model.Config;
+using CSCodeGen.DataAccess.Model.Main;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace CSCodeGen.DataAccess.Model.Config
+namespace CSCodeGen.DataAccess.Model.Storage
 {
-    public class XmlStorage
+    public class XmlTemplateStorage : ITemplateStorage
     {
-        private readonly string _FolderPath;
+        private readonly string _folderPath;
 
-        public XmlStorage(string FolderPath)
+        public XmlTemplateStorage(string folderPath)
         {
-            _FolderPath = FolderPath;
-            Directory.CreateDirectory(_FolderPath);
+            _folderPath = folderPath;
+            // Stelle sicher, dass der Ordner existiert
+            Directory.CreateDirectory(folderPath);
         }
 
         #region Save & Load
-        // Save
-        public void SaveTemplate(Template template)
+        //// Save
+        public void Save(CodeTemplate template)
         {
             if (!template.IsChanged) return;
 
@@ -28,7 +32,7 @@ namespace CSCodeGen.DataAccess.Model.Config
                 // Falls sich der Name geändert hat, alte Datei löschen
                 if (!string.IsNullOrEmpty(template.OldName) && template.OldName != template.FileName)
                 {
-                    string oldFilePath = Path.Combine(_FolderPath, template.OldName + ".xml");
+                    string oldFilePath = Path.Combine(_folderPath, template.OldName + ".xml");
                     if (File.Exists(oldFilePath))
                     {
                         File.Delete(oldFilePath);
@@ -36,7 +40,7 @@ namespace CSCodeGen.DataAccess.Model.Config
                 }
 
                 // Neues XML speichern
-                string newFilePath = Path.Combine(_FolderPath, template.FileName + ".xml");
+                string newFilePath = Path.Combine(_folderPath, template.FileName + ".xml");
                 SerializeToXml(template, newFilePath);
 
                 // Erfolgreich gespeichert → Status zurücksetzen
@@ -49,57 +53,24 @@ namespace CSCodeGen.DataAccess.Model.Config
                 template.IsChanged = true; // Falls Fehler auftritt, bleibt es "geändert"
             }
         }
-
-        public void SaveAllTemplates(BindingList<Template> templates)
+        public void SaveAll(IEnumerable<CodeTemplate> templates)
         {
             foreach (var template in templates.Where(t => t.IsChanged))
             {
-                SaveTemplate(template);
+                Save(template);
             }
         }
-
-        public BindingList<Keyword> GetDefaultKeywords()
+        //// Load
+        public IEnumerable<CodeTemplate> LoadAll()
         {
-            return new BindingList<Keyword>
-          {
-                new Keyword
-                {
-                    Id = 100,
-                    Name = Configuration.Keywords.Classname,
-                    PrefixWithComment = false,
-                },
-                new Keyword
-                {
-                    Id = 200,
-                    Name = Configuration.Keywords.Propertie,
-                    PrefixWithComment = false,
-                },
-                new Keyword
-                {
-                    Id = 300,
-                    Name = Configuration.Keywords.Namespace,
-                    PrefixWithComment = false,
-                },
-                new Keyword
-                {
-                    Id = 400,
-                    Name = Configuration.Keywords.Variable,
-                    PrefixWithComment = false,
-                },
-          };
-        }
-
-        // Load
-        public BindingList<Template> LoadAllTemplates()
-        {
-            BindingList<Template> templates = new BindingList<Template>();
-            string[] files = Directory.GetFiles(_FolderPath, "*.xml");
+            BindingList<CodeTemplate> templates = new BindingList<CodeTemplate>();
+            string[] files = Directory.GetFiles(_folderPath, "*.xml");
 
             foreach (string file in files)
             {
                 try
                 {
-                    Template template = DeserializeFromXml<Template>(file);
+                    CodeTemplate template = DeserializeFromXml<CodeTemplate>(file);
                     if (template != null)
                     {
                         template.OldName = template.FileName; // Speichert den alten Namen
@@ -151,5 +122,36 @@ namespace CSCodeGen.DataAccess.Model.Config
             }
         }
         #endregion
+        public IEnumerable<Keyword> GetDefaultKeywords()
+        {
+            return new BindingList<Keyword>
+          {
+                new Keyword
+                {
+                    Id = 100,
+                    Name = Configuration.Keywords.Classname,
+                    PrefixWithComment = false,
+                },
+                new Keyword
+                {
+                    Id = 200,
+                    Name = Configuration.Keywords.Propertie,
+                    PrefixWithComment = false,
+                },
+                new Keyword
+                {
+                    Id = 300,
+                    Name = Configuration.Keywords.Namespace,
+                    PrefixWithComment = false,
+                },
+                new Keyword
+                {
+                    Id = 400,
+                    Name = Configuration.Keywords.Variable,
+                    PrefixWithComment = false,
+                },
+          };
+        }
+
     }
 }
