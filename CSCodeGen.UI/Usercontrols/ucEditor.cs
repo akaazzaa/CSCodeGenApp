@@ -77,7 +77,7 @@ namespace CSCodeGen.UI
 
 
             // Hole die Standard-Keywords
-            defaultKeywords = (BindingList<Keyword>)CoreGlobals.Instance.templateStroage.GetDefaultKeywords();
+            defaultKeywords =    
 
             if (template == null)
             {

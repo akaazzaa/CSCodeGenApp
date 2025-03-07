@@ -1,9 +1,11 @@
 ﻿using CSCodeGen.DataAccess.Model.Main;
+using CSCodeGen.Library.Controller;
 using CSCodeGen.Library.GlobalEvents;
 using CSCodeGen.UI.Ui;
 using CSCodeGen.UI.Usercontrols;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,14 +15,21 @@ namespace CSCodeGen.UI
     {
         #region Variabeln
         private Dictionary<TabPage, CodeTemplate> tabs = new Dictionary<TabPage, CodeTemplate>();
-
-
+        TemplateController _templateController;
+        CodeTemplate currentTemplate;
+        BindingList<CodeTemplate> _templates;
         #endregion
 
-        public TemplateDesignerForm()
+        public TemplateDesignerForm(TemplateController templateController)
         {
             InitializeComponent();
+
+            _templateController = templateController;
+
+            _templates = _templateController.GetList();
             // Datasource binding
+            bsTemplates.DataSource = _templateController.GetList();
+
             Init();
 
         }
@@ -29,8 +38,6 @@ namespace CSCodeGen.UI
 
         private void Init()
         {
-            templates = CoreGlobals.Instance.templateController.Templates;
-            bsTemplates.DataSource = templates;
             //Events abonnieren
             tcMain.SelectedIndexChanged += SelectedTabChanged;
             gvKeywords.CellClick += OpenKeywordCode;
@@ -44,38 +51,17 @@ namespace CSCodeGen.UI
         }
         private void Save()
         {
-
-            try
-            {
-                if (!templates.Any(t => t.IsChanged)) return;
-
-                this.Validate();
-                CoreGlobals.Instance.templateController.SaveAllTemplates();
-
-                // Optional: Erfolgsbenachrichtigung
-                MessageBox.Show("Alle Templates erfolgreich gespeichert.",
-                                "Speichern",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Fehler beim Speichern: {ex.Message}",
-                                "Fehler",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-                // Optional: Logging
-                // Logger.LogError(ex);
-            }
+            this.Validate();
+            _templateController.Save();
         }
         private void Add()
         {
-            if (currentTemplate == null || templates.Contains(currentTemplate))
+            if (currentTemplate == null || _templates.Contains(currentTemplate))
             {
                 return;
             }
 
-            templates.Add(currentTemplate);
+            _templates.Add(currentTemplate);
         }
         private void CloseTab(TabPage tabPage)
         {
@@ -234,7 +220,7 @@ namespace CSCodeGen.UI
         }
         private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
-            var changedTemplates = templates.Where(t => t.IsChanged).ToList();
+            var changedTemplates = _templates.Where(t => t.IsChanged).ToList();
 
             if (changedTemplates.Any())
             {

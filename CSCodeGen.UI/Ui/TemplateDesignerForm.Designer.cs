@@ -257,11 +257,6 @@ namespace CSCodeGen.UI
             listTemplate.Name = "listTemplate";
             listTemplate.Size = new System.Drawing.Size(195, 520);
             listTemplate.TabIndex = 0;
-            
-            // 
-            // bsTemplates
-            // 
-            bsTemplates.DataSource = typeof(CodeTemplate);
             // 
             // pnlbar
             // 

@@ -13,9 +13,9 @@ namespace CSCodeGen.Library.GlobalEvents
         private static CoreGlobals _instance;
         private static readonly object _lock = new object();
 
-        public TemplateController templateController;
-        public ClassController classController;
-        public XmlTemplateStorage templateStroage;
+        
+        
+       
         public Settings settings;
 
 
@@ -62,16 +62,6 @@ namespace CSCodeGen.Library.GlobalEvents
                     return _instance;
                 }
             }
-        }
-
-        // Hilfsmethode
-        public void Init()
-        {
-
-            templateStroage = new XmlTemplateStorage(Path.Combine(MainDirectoryPath, "Templates"));
-            templateController = new TemplateController(templateStroage);
-            classController = new ClassController();
-            settings = new Settings();
         }
 
     }

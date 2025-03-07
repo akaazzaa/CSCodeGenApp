@@ -6,32 +6,25 @@ namespace CSCodeGen.Library.Controller
 {
     public class TemplateController
     {
-        private BindingList<CodeTemplate> templates;
-        private CodeTemplate currentTemplate;
-        public BindingList<CodeTemplate> Templates { get; private set; } = new BindingList<CodeTemplate>();
-
+        
         private readonly ITemplateStorage _templateStorage;
 
         public TemplateController(ITemplateStorage templateStorage)
         {
             _templateStorage = templateStorage;
-            // Direkt beim Erstellen Templates laden
-            LoadAllTemplates();
+        }
+
+        public BindingList<CodeTemplate> GetList()
+        {
+            return _templateStorage.GetTemplates();
         }
 
         #region Laden und Speichern 
-        public void SaveAllTemplates()
+        public void Save()
         {
-            _templateStorage.SaveAll(Templates);
+            _templateStorage.SaveAll();
         }
-        public void LoadAllTemplates()
-        {
-            Templates.Clear();
-            foreach (var template in _templateStorage.LoadAll())
-            {
-                Templates.Add(template);
-            }
-        }
+       
 
         #endregion
     }

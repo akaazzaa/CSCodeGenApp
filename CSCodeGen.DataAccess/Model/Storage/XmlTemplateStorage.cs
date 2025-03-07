@@ -13,12 +13,22 @@ namespace CSCodeGen.DataAccess.Model.Storage
     public class XmlTemplateStorage : ITemplateStorage
     {
         private readonly string _folderPath;
+        private BindingList<CodeTemplate> _templates;
 
-        public XmlTemplateStorage(string folderPath)
+        public XmlTemplateStorage(string folderPath, BindingList<CodeTemplate> templates)
         {
             _folderPath = folderPath;
+            _templates = templates;
             // Stelle sicher, dass der Ordner existiert
             Directory.CreateDirectory(folderPath);
+        }
+
+        public BindingList<CodeTemplate> GetTemplates()
+        {
+            LoadAll();
+
+
+            return _templates;
         }
 
         #region Save & Load
@@ -53,17 +63,17 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 template.IsChanged = true; // Falls Fehler auftritt, bleibt es "geändert"
             }
         }
-        public void SaveAll(IEnumerable<CodeTemplate> templates)
+        public void SaveAll()
         {
-            foreach (var template in templates.Where(t => t.IsChanged))
+            foreach (var template in _templates.Where(t => t.IsChanged))
             {
                 Save(template);
             }
         }
         //// Load
-        public IEnumerable<CodeTemplate> LoadAll()
+        public void LoadAll()
         {
-            BindingList<CodeTemplate> templates = new BindingList<CodeTemplate>();
+           
             string[] files = Directory.GetFiles(_folderPath, "*.xml");
 
             foreach (string file in files)
@@ -75,7 +85,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
                     {
                         template.OldName = template.FileName; // Speichert den alten Namen
                         template.IsChanged = false; // Direkt nach dem Laden als unverändert setzen
-                        templates.Add(template);
+                        _templates.Add(template);
                     }
                 }
                 catch (Exception ex)
@@ -84,7 +94,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 }
             }
 
-            return templates;
+           
         }
         #endregion
 
