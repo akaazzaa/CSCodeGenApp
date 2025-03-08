@@ -4,7 +4,15 @@ VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCodeGen.TemplateDesinger", "CSCodeGen.UI\CSCodeGen.TemplateDesinger.csproj", "{6756E006-1B12-4749-BDF1-2C496A13843E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneratorTester", "CodeGeneratorTester\CodeGeneratorTester.csproj", "{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.DataAccess", "CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj", "{FBA7A346-8394-C0E4-79DA-F916822FC4A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Logik", "CSCodeGen.Library\CSCodeGen.Logik.csproj", "{1FDAF445-1E19-DAA3-38FB-26CA66CC2687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGenApp.CodeGen", "CSCodeGenApp.CodeGen\CSCodeGenApp.CodeGen.csproj", "{84928BCE-985A-EAB4-73D1-E18CE4AC5368}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Contracts", "CSCodeGen.Contracts\CSCodeGen.Contracts.csproj", "{D45D0747-3ACA-4A30-8CE9-F50132DC795B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Model", "CSCodeGen.Model\CSCodeGen.Model.csproj", "{2B6E39C7-DC0A-498C-A577-5920F2EF2526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,16 +24,29 @@ Global
 		{6756E006-1B12-4749-BDF1-2C496A13843E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6756E006-1B12-4749-BDF1-2C496A13843E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6756E006-1B12-4749-BDF1-2C496A13843E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0E9FAC9-6C9D-4CED-8A7F-B1ABCAE82C8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA7A346-8394-C0E4-79DA-F916822FC4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA7A346-8394-C0E4-79DA-F916822FC4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA7A346-8394-C0E4-79DA-F916822FC4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA7A346-8394-C0E4-79DA-F916822FC4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FDAF445-1E19-DAA3-38FB-26CA66CC2687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDAF445-1E19-DAA3-38FB-26CA66CC2687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDAF445-1E19-DAA3-38FB-26CA66CC2687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDAF445-1E19-DAA3-38FB-26CA66CC2687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{6756E006-1B12-4749-BDF1-2C496A13843E} = {00000000-0000-0000-0000-000000000000}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7525046-7361-4FAF-BA44-4FE68B859721}

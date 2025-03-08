@@ -16,9 +16,11 @@
     <OutputPath>..\Build\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
+    <Compile Remove="Interface\**" />
+    <EmbeddedResource Remove="Interface\**" />
+    <None Remove="Interface\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interface\" />
+    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
   </ItemGroup>
 </Project>

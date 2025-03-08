@@ -90,7 +90,6 @@
             // 
             // bsDaten
             // 
-            bsDaten.DataSource = typeof(DataAccess.Model.Config.Settings);
             // 
             // frmSettings
             // 

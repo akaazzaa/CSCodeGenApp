@@ -1,4 +1,5 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
+﻿
+using CSCodeGen.Model.Main;
 using System;
 using System.Windows.Forms;
 

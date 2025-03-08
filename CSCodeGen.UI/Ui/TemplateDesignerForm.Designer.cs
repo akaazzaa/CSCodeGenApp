@@ -1,4 +1,4 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
+﻿using CSCodeGen.Model.Main;
 
 namespace CSCodeGen.UI
 {
@@ -257,6 +257,7 @@ namespace CSCodeGen.UI
             listTemplate.Name = "listTemplate";
             listTemplate.Size = new System.Drawing.Size(195, 520);
             listTemplate.TabIndex = 0;
+            listTemplate.DoubleClick += listTemplate_DoubleClick;
             // 
             // pnlbar
             // 
@@ -284,19 +285,20 @@ namespace CSCodeGen.UI
             btnNeuesTemplate.Name = "btnNeuesTemplate";
             btnNeuesTemplate.Size = new System.Drawing.Size(104, 20);
             btnNeuesTemplate.Text = "Neues Template";
+            btnNeuesTemplate.Click += btnNeuesTemplate_Click;
             // 
             // btnSave
             // 
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(71, 20);
             btnSave.Text = "Speichern";
+            btnSave.Click += btnSave_Click;
             // 
             // settingsToolStripMenuItem
             // 
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             settingsToolStripMenuItem.Text = "Settings";
-            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
             // 
             // TemplateDesignerForm
             // 

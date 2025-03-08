@@ -1,4 +1,4 @@
-﻿using CSCodeGen.Library.GlobalEvents;
+﻿
 using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Ui
@@ -10,7 +10,7 @@ namespace CSCodeGen.UI.Ui
         {
             InitializeComponent();
 
-            bsDaten.DataSource = CoreGlobals.Instance.settings;
+            //bsDaten.DataSource = CoreGlobals.Instance.settings;
             this.FormClosing += Close;
 
         }

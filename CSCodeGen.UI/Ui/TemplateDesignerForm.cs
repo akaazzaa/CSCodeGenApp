@@ -1,86 +1,63 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
-using CSCodeGen.Library.Controller;
-using CSCodeGen.Library.GlobalEvents;
-using CSCodeGen.UI.Ui;
-using CSCodeGen.UI.Usercontrols;
+﻿
+using CSCodeGen.Model.Main;
+using CSCodeGen.Contracts.Interfaces;
 using System;
-using System.Collections.Generic;
+
 using System.ComponentModel;
-using System.Linq;
+
 using System.Windows.Forms;
+using CSCodeGen.UI.Usercontrols;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSCodeGen.UI
 {
-    public partial class TemplateDesignerForm : Form
+    public partial class TemplateDesignerForm : Form, ICodeTemplateView<CodeTemplate>
     {
-        #region Variabeln
+        public event EventHandler LoadTemplates;
+        public event EventHandler<CodeTemplate> SaveTemplate;
+        public event EventHandler<CodeTemplate> NewTemplate;
         private Dictionary<TabPage, CodeTemplate> tabs = new Dictionary<TabPage, CodeTemplate>();
-        TemplateController _templateController;
-        CodeTemplate currentTemplate;
-        BindingList<CodeTemplate> _templates;
-        #endregion
 
-        public TemplateDesignerForm(TemplateController templateController)
+        public TemplateDesignerForm()
         {
             InitializeComponent();
-
-            _templateController = templateController;
-
-            _templates = _templateController.GetList();
-            // Datasource binding
-            bsTemplates.DataSource = _templateController.GetList();
-
-            Init();
-
+            this.Load += OnLoad;
         }
 
-        #region Methoden
-
-        private void Init()
+        private void OnLoad(object sender, EventArgs e)
         {
-            //Events abonnieren
-            tcMain.SelectedIndexChanged += SelectedTabChanged;
-            gvKeywords.CellClick += OpenKeywordCode;
-            gvKeywords.MouseWheel += Keyword_MouseWheelMove;
-            btnAddKeyword.Click += AddKeyword;
-            btnNeuesTemplate.Click += AddTemplate;
-            listTemplate.DoubleClick += ChangeSelectedTemplate;
-            btnSave.Click += (s, e) => Save();
-            FormClosing += OnFormClosing;
-            btnRemovekeyword.Click += RemoveKeyword;
+            LoadTemplates?.Invoke(this, EventArgs.Empty);
         }
-        private void Save()
+
+        public void ShowMessage(string message)
         {
-            this.Validate();
-            _templateController.Save();
+            MessageBox.Show(message);
         }
-        private void Add()
+
+        public void ShowTemplates(BindingList<CodeTemplate> templates)
         {
-            if (currentTemplate == null || _templates.Contains(currentTemplate))
-            {
-                return;
-            }
-
-            _templates.Add(currentTemplate);
+            bsTemplates.DataSource = templates;
         }
-        private void CloseTab(TabPage tabPage)
+
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            if (tabPage == null) return;
-
-            tcMain.TabPages.Remove(tabPage);
-            tabs.Remove(tabPage);
-
-            if (tcMain.TabPages.Count > 0)
-            {
-                tcMain.SelectedTab = tcMain.TabPages[tcMain.TabPages.Count - 1];
-            }
-
-            pgTemplate.SelectedObject = null;
-            gvKeywords.DataSource = null;
-            currentTemplate = null;
-
+            Save(this,GetSelectedTemplate());
         }
-        private void AddNewTap()
+
+        private void btnNeuesTemplate_Click(object sender, EventArgs e)
+        {
+            NewTemplate?.Invoke(this, new CodeTemplate("Neues Template"));
+        }
+
+        private void listTemplate_DoubleClick(object sender, EventArgs e)
+        {
+            bsKeywords.DataSource = GetSelectedTemplate().Keywords;
+            pgTemplate.SelectedObject = listTemplate.SelectedItem;
+            AddNewTap(GetSelectedTemplate());
+        }
+        private void AddNewTap(CodeTemplate currentTemplate)
         {
             if (currentTemplate == null) return;
 
@@ -92,7 +69,7 @@ namespace CSCodeGen.UI
                 return;
             }
 
-            Add();
+           
             var tabPage = new TabPage(currentTemplate.Name)
             {
                 ToolTipText = currentTemplate.Name
@@ -113,162 +90,25 @@ namespace CSCodeGen.UI
             tcMain.SelectedTab = tabPage;
 
         }
+
+        private void Save(object sender, CodeTemplate template)
+        {
+            SaveTemplate?.Invoke(this, template);
+        }
+
         private void ResetTextChanges()
         {
-            if (currentTemplate == null)
-            {
-                return;
-            }
-            currentTemplate.Name = currentTemplate.OldName;
-            currentTemplate.Keywords.Clear();
-            currentTemplate.IsChanged = false;
+            throw new NotImplementedException();
         }
-        private void SetPropertyGrid(CodeTemplate template)
+
+        private void CloseTab(TabPage page)
         {
-            pgTemplate.SelectedObject = template;
-            gvKeywords.DataSource = template.Keywords;
+            throw new NotImplementedException();
         }
-
-        #endregion
-
-        #region Events
-        private void Keyword_MouseWheelMove(object sender, MouseEventArgs e)
+        private CodeTemplate GetSelectedTemplate()
         {
-            if (ModifierKeys.HasFlag(Keys.Shift))
-            {
-                if (gvKeywords.HorizontalScrollingOffset > 0 || e.Delta < 0)
-                {
-                    int newIndex = Math.Max(0, gvKeywords.HorizontalScrollingOffset - (e.Delta / 2));
-                    gvKeywords.HorizontalScrollingOffset = Math.Max(0, newIndex);
-                }
-            }
-            else
-            {
-                if (gvKeywords.RowCount > gvKeywords.DisplayedRowCount(false))
-                {
-                    int currentIndex = gvKeywords.FirstDisplayedScrollingRowIndex;
-                    int scrollLines = SystemInformation.MouseWheelScrollLines;
-                    int newIndex = Math.Max(0, currentIndex - (e.Delta / 120) * scrollLines);
-
-                    gvKeywords.FirstDisplayedScrollingRowIndex = newIndex;
-                }
-            }
+            return listTemplate.SelectedItem as CodeTemplate;
         }
-        private void OpenKeywordCode(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-            {
-                return;
-            }
-
-            var selectedKeyword = (Keyword)gvKeywords.Rows[e.RowIndex].DataBoundItem;
-
-            if (selectedKeyword == null) { return; }
-
-            // Überprüfe, ob die geklickte Zelle zur Button-Spalte gehört
-            if (gvKeywords.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
-            {
-                KeywordCodeForm keywordCodeForm = new KeywordCodeForm(selectedKeyword);
-                keywordCodeForm.KeywordChanged += KeywordChanged;
-                keywordCodeForm.ShowDialog();
-            }
-        }
-        private void KeywordChanged()
-        {
-            if (currentTemplate == null) { return; }
-
-            currentTemplate.IsChanged = true;
-
-        }
-        private void SelectedTabChanged(object sender, EventArgs e)
-        {
-            if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
-            {
-                CodeTemplate currentTemplate = tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
-                SetPropertyGrid(currentTemplate);  // Übergib das Template an die Methode
-            }
-        }
-        private void AddKeyword(object sender, EventArgs e)
-        {
-            if (currentTemplate == null)
-            {
-                MessageBox.Show("Bitte zuerst ein Template erstellen oder auswählen.");
-                return;
-            }
-
-
-            Keyword newkeyword = currentTemplate.Keywords.AddNew();
-            currentTemplate.IsChanged = true;
-            gvKeywords.Refresh(); // Grid aktualisieren
-
-        }
-        private void AddTemplate(object sender, EventArgs e)
-        {
-            currentTemplate = new CodeTemplate("Neues Template");
-
-            AddNewTap();
-            SetPropertyGrid(currentTemplate);
-
-        }
-        private void ChangeSelectedTemplate(object sender, EventArgs e)
-        {
-            if (listTemplate.SelectedItem == null) return;
-
-            currentTemplate = (CodeTemplate)listTemplate.SelectedItem;
-            AddNewTap();
-            SetPropertyGrid(currentTemplate);
-        }
-        private void OnFormClosing(object sender, FormClosingEventArgs e)
-        {
-            var changedTemplates = _templates.Where(t => t.IsChanged).ToList();
-
-            if (changedTemplates.Any())
-            {
-                var result = MessageBox.Show(
-                    $"Es gibt {changedTemplates.Count} ungespeicherte Templates.\n" +
-                    "Möchten Sie alle speichern?",
-                    "Ungespeicherte Änderungen",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Warning
-                );
-
-                switch (result)
-                {
-                    case DialogResult.Yes:
-                        Save();
-                        break;
-                    case DialogResult.Cancel:
-                        e.Cancel = true;
-                        break;
-                }
-            }
-
-        }
-        private void RemoveKeyword(object sender, EventArgs e)
-        {
-            if (gvKeywords.CurrentRow == null) return;
-
-            var selectedKeyword = (Keyword)gvKeywords.CurrentRow.DataBoundItem;
-
-
-
-            currentTemplate.Keywords.Remove(selectedKeyword);
-            currentTemplate.IsChanged = true;
-            PublicEvents.OnKeywordDeleted(selectedKeyword);
-        }
-
-        #endregion
-
-
-
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmSettings frmSettings = new frmSettings();
-            frmSettings.ShowDialog();
-        }
-
-
     }
 
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace CSCodeGen.DataAccess.Model.Main
+namespace CSCodeGen.Model.Main
 {
     public class Observable
     {

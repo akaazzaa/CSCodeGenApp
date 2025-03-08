@@ -1,7 +1,7 @@
-﻿using CSCodeGen.DataAccess.Model.Config;
-using CSCodeGen.DataAccess.Model.Klasse;
-using CSCodeGen.DataAccess.Model.Main;
-using CSCodeGen.Library.GlobalEvents;
+﻿
+
+using CSCodeGen.Model.Main;
+using CSCodeGen.Model.Model;
 using System.IO;
 using System.Linq;
 
@@ -13,65 +13,65 @@ namespace CSCodeGen.Library.Controller
 
         public GenerationContext Klasse { get { return _context; } }
 
-        public string ReplaceKeywords(CodeTemplate template)
-        {
-            string source = string.Empty;
+        //public string ReplaceKeywords(CodeTemplate template)
+        //{
+        //    string source = string.Empty;
 
-            if (template == null) return source;
+        //    if (template == null) return source;
 
-            source = template.Source;
+        //    source = template.Source;
 
-            foreach (PropertyDefinition prop in _context.Properties)
-            {
-                if (string.IsNullOrEmpty(prop.Name) || string.IsNullOrEmpty(prop.DataType))
-                {
-                    continue;
-                }
+        //    foreach (PropertyDefinition prop in _context.Properties)
+        //    {
+        //        if (string.IsNullOrEmpty(prop.Name) || string.IsNullOrEmpty(prop.DataType))
+        //        {
+        //            continue;
+        //        }
 
-                var matchingKeywords = template.Keywords.Where(k => k.DataType == prop.DataType).ToList();
+        //        var matchingKeywords = template.Keywords.Where(k => k.DataType == prop.DataType).ToList();
 
-                foreach (Keyword key in matchingKeywords)
-                {
+        //        foreach (Keyword key in matchingKeywords)
+        //        {
 
-                    string code = ReplaceDefaultKeys(key.Code, prop);
+        //            string code = ReplaceDefaultKeys(key.Code, prop);
 
-                    source = source.Replace(key.DisplayText, code + "\r\r" + "            " + key.DisplayText);
-                }
-            }
+        //            source = source.Replace(key.DisplayText, code + "\r\r" + "            " + key.DisplayText);
+        //        }
+        //    }
 
-            return ReplaceDefaultKeys(source);
-        }
+        //    return ReplaceDefaultKeys(source);
+        //}
 
-        private string ReplaceDefaultKeys(string text, PropertyDefinition prop = null)
-        {
-            foreach (Keyword key in CoreGlobals.Instance.templateStroage.GetDefaultKeywords())
-            {
-                if (key.Name == Configuration.Keywords.Classname)
-                {
-                    text = text.Replace(key.DisplayText, _context.ClassName);
-                }
-                else if (key.Name == Configuration.Keywords.Namespace)
-                {
-                    text = text.Replace(key.DisplayText, _context.NameSpace);
-                }
-                else if (key.Name == Configuration.Keywords.Variable)
-                {
-                    if (prop != null && !string.IsNullOrEmpty(prop.Name))
-                    {
-                        text = text.Replace(key.DisplayText, PropertyNameToVariable(prop.Name));
-                    }
-                }
-                else if (key.Name == Configuration.Keywords.Propertie)
-                {
-                    if (prop != null && !string.IsNullOrEmpty(prop.Name))
-                    {
-                        text = text.Replace(key.DisplayText, prop.Name);
-                    }
-                }
-            }
+        //private string ReplaceDefaultKeys(string text, PropertyDefinition prop = null)
+        //{
+        //    foreach (Keyword key in CoreGlobals.Instance.templateStroage.GetDefaultKeywords())
+        //    {
+        //        if (key.Name == Configuration.Keywords.Classname)
+        //        {
+        //            text = text.Replace(key.DisplayText, _context.ClassName);
+        //        }
+        //        else if (key.Name == Configuration.Keywords.Namespace)
+        //        {
+        //            text = text.Replace(key.DisplayText, _context.NameSpace);
+        //        }
+        //        else if (key.Name == Configuration.Keywords.Variable)
+        //        {
+        //            if (prop != null && !string.IsNullOrEmpty(prop.Name))
+        //            {
+        //                text = text.Replace(key.DisplayText, PropertyNameToVariable(prop.Name));
+        //            }
+        //        }
+        //        else if (key.Name == Configuration.Keywords.Propertie)
+        //        {
+        //            if (prop != null && !string.IsNullOrEmpty(prop.Name))
+        //            {
+        //                text = text.Replace(key.DisplayText, prop.Name);
+        //            }
+        //        }
+        //    }
 
-            return text;
-        }
+        //    return text;
+        //}
 
         private string PropertyNameToVariable(string name)
         {
@@ -94,16 +94,16 @@ namespace CSCodeGen.Library.Controller
 
         public void Save(string source)
         {
-            string path = CoreGlobals.Instance.SaveCSPath;
-            string fileName = "NewCSDatei.cs";
-            string fullPath = Path.Combine(path, fileName);
+            ////string path = CoreGlobals.Instance.SaveCSPath;
+            //string fileName = "NewCSDatei.cs";
+            //string fullPath = Path.Combine(path, fileName);
 
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            //if (!Directory.Exists(path))
+            //{
+            //    Directory.CreateDirectory(path);
+            //}
 
-            File.WriteAllText(fullPath, source);
+            //File.WriteAllText(fullPath, source);
         }
 
 

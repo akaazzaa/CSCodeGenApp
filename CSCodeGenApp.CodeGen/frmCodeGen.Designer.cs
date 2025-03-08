@@ -1,4 +1,4 @@
-﻿using CSCodeGen.DataAccess.Model.Klasse;
+﻿
 using CSCodeGen.DataAccess.Model.Main;
 
 namespace CSCodeGenApp.CodeGen
@@ -150,7 +150,6 @@ namespace CSCodeGenApp.CodeGen
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(426, 334);
             dataGridView1.TabIndex = 1;
-            dataGridView1.CellValidated += dataGridView1_CellValidated;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -166,8 +165,7 @@ namespace CSCodeGenApp.CodeGen
             Datentyp.Name = "Datentyp";
             // 
             // bsProperties
-            // 
-            bsProperties.DataSource = typeof(PropertyDefinition);
+
             // 
             // pnlPropetiesBar
             // 
@@ -188,7 +186,7 @@ namespace CSCodeGenApp.CodeGen
             btnPropertiesDelete.TabIndex = 1;
             btnPropertiesDelete.Text = "-";
             btnPropertiesDelete.UseVisualStyleBackColor = true;
-            btnPropertiesDelete.Click += btnPropertiesDelete_Click;
+
             // 
             // btnPropertiesAdd
             // 
@@ -199,7 +197,7 @@ namespace CSCodeGenApp.CodeGen
             btnPropertiesAdd.TabIndex = 0;
             btnPropertiesAdd.Text = "+";
             btnPropertiesAdd.UseVisualStyleBackColor = true;
-            btnPropertiesAdd.Click += btnPropertiesAdd_Click;
+
             // 
             // pnlMenu
             // 
@@ -223,7 +221,7 @@ namespace CSCodeGenApp.CodeGen
             cbTemplate.Name = "cbTemplate";
             cbTemplate.Size = new Size(229, 23);
             cbTemplate.TabIndex = 3;
-            cbTemplate.SelectedIndexChanged += cbTemplate_SelectedIndexChanged;
+
             // 
             // bsDaten
             // 
@@ -239,7 +237,6 @@ namespace CSCodeGenApp.CodeGen
             // 
             // klasseBindingSource
             // 
-            klasseBindingSource.DataSource = typeof(GenerationContext);
             // 
             // label2
             // 
@@ -292,7 +289,7 @@ namespace CSCodeGenApp.CodeGen
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(43, 20);
             saveToolStripMenuItem.Text = "Save";
-            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+
             // 
             // removeToolStripMenuItem
             // 

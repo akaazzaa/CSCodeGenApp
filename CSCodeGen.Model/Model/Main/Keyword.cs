@@ -1,9 +1,9 @@
-﻿using CSCodeGen.DataAccess.Model.Config;
+﻿using CSCodeGen.Model.Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace CSCodeGen.DataAccess.Model.Main
+namespace CSCodeGen.Model.Main
 {
     public class Keyword : INotifyPropertyChanged
     {

@@ -1,8 +1,9 @@
-using CSCodeGen.DataAccess.Model.Klasse;
-using CSCodeGen.DataAccess.Model.Main;
+
+using CSCodeGen.Model;
 using CSCodeGen.Library.Controller;
-using CSCodeGen.Library.GlobalEvents;
 using FastColoredTextBoxNS;
+using CSCodeGen.Model.Model;
+using CSCodeGen.Model.Main;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -12,12 +13,12 @@ namespace CSCodeGenApp.CodeGen
         private ClassController classController;
         private CodeTemplate currentTemplate;
 
-        public frmCodeGen(ClassController classController)
+        public frmCodeGen()
         {
             InitializeComponent();
 
             // Controller für die Logik
-            this.classController = classController;
+            ////this.classController = classController;
 
             pnlEditorMain.Controls.Add(fastColoredTextBox1);
             fastColoredTextBox1.Dock = DockStyle.Fill;
@@ -27,7 +28,7 @@ namespace CSCodeGenApp.CodeGen
             fastColoredTextBox1.AutoIndentChars = true;
 
 
-            bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
+            //bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
             klasseBindingSource.DataSource = classController.Klasse;
             bsProperties.DataSource = classController.Klasse.Properties;
 
@@ -52,7 +53,7 @@ namespace CSCodeGenApp.CodeGen
 
         private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            fastColoredTextBox1.Text = classController.ReplaceKeywords(currentTemplate);
+            //fastColoredTextBox1.Text = classController.ReplaceKeywords(currentTemplate);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

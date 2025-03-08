@@ -1,4 +1,4 @@
-﻿namespace CSCodeGen.DataAccess.Model.Config
+﻿namespace CSCodeGen.Model.Model
 {
     public class DefaultKeyword
     {

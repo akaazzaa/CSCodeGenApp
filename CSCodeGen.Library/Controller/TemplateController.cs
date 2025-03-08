@@ -1,31 +1,45 @@
-﻿using CSCodeGen.DataAccess.Interface;
-using CSCodeGen.DataAccess.Model.Main;
+﻿
+using CSCodeGen.Contracts.Interfaces;
+using CSCodeGen.Model.Main;
+using System;
 using System.ComponentModel;
 
 namespace CSCodeGen.Library.Controller
 {
     public class TemplateController
     {
-        
-        private readonly ITemplateStorage _templateStorage;
-
-        public TemplateController(ITemplateStorage templateStorage)
+        ITemplateStorage<CodeTemplate> _storage;
+        ICodeTemplateView<CodeTemplate> _view;
+        public TemplateController(ITemplateStorage<CodeTemplate> templateStorage, ICodeTemplateView<CodeTemplate> view)
         {
-            _templateStorage = templateStorage;
+            _storage = templateStorage;
+            _view = view;
+
+            _view.LoadTemplates += OnLoadTemplates;
+            _view.SaveTemplate += OnSaveTemplate;
+            _view.NewTemplate += OnNewTemplate;
+            
         }
 
-        public BindingList<CodeTemplate> GetList()
+        private void OnNewTemplate(object sender, CodeTemplate template)
         {
-            return _templateStorage.GetTemplates();
+            if (template == null) return;
+
+            _storage.Add(template);
+            _view.ShowMessage("Neues Template angelegt!");
+            
         }
 
-        #region Laden und Speichern 
-        public void Save()
+        private void OnSaveTemplate(object sender, CodeTemplate template)
         {
-            _templateStorage.SaveAll();
+            _storage.Save(template);
+            _view.ShowMessage("Template gespeichert!");
         }
-       
 
-        #endregion
+        private void OnLoadTemplates(object sender, EventArgs e)
+        {
+            _storage.LoadAll();
+            _view.ShowTemplates(_storage.GetTemplates());
+        }
     }
 }

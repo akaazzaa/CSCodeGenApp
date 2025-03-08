@@ -1,5 +1,4 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
-using CSCodeGen.Library.GlobalEvents;
+﻿using CSCodeGen.Model.Main;
 using FastColoredTextBoxNS;
 using System;
 using System.ComponentModel;
@@ -13,6 +12,7 @@ namespace CSCodeGen.UI
     {
         private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
         public event EventHandler<string> CodeChanged;
+        public event EventHandler GetDefaultKeys;
 
         private BindingList<Keyword> defaultKeywords;
 
@@ -44,7 +44,7 @@ namespace CSCodeGen.UI
                 fastColoredTextBox1.Text = template.Source;
                 listBox1.DataSource = LoadKeywords(template);
                 listBox1.DisplayMember = "Name";
-                PublicEvents.KeywordDeleted += KeywordDeleted;
+                //PublicEvents.KeywordDeleted += KeywordDeleted;
 
             }
             else if (obj is Keyword keyword)
@@ -77,7 +77,7 @@ namespace CSCodeGen.UI
 
 
             // Hole die Standard-Keywords
-            defaultKeywords =    
+            //defaultKeywords =    
 
             if (template == null)
             {

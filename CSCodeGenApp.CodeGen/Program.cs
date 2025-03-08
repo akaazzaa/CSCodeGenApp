@@ -1,4 +1,4 @@
-using CSCodeGen.Library.GlobalEvents;
+
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -10,9 +10,9 @@ namespace CSCodeGenApp.CodeGen
         [STAThread]
         static void Main()
         {
-            CoreGlobals.Instance.Init();
+           
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmCodeGen(CoreGlobals.Instance.classController));
+            Application.Run(new frmCodeGen());
         }
     }
 }

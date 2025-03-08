@@ -1,8 +1,10 @@
-﻿using CSCodeGen.DataAccess.Interface;
-using CSCodeGen.DataAccess.Model.Main;
+﻿
+
+
+using CSCodeGen.Contracts.Interfaces;
 using CSCodeGen.DataAccess.Model.Storage;
 using CSCodeGen.Library.Controller;
-using CSCodeGen.Library.GlobalEvents;
+using CSCodeGen.Model.Main;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -18,17 +20,23 @@ namespace CSCodeGen.UI
         [STAThread]
         static void Main()
         {
-            string folderPath = Path.Combine(CoreGlobals.Instance.MainDirectoryPath, "Templates");
-
-            BindingList<CodeTemplate> templates = new BindingList<CodeTemplate>();
-
-            ITemplateStorage templateStroage = new XmlTemplateStorage(folderPath, templates);
-
-            TemplateController templateController = new TemplateController(templateStroage);
+           
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TemplateDesignerForm(templateController));
+
+            if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Templates")))
+            {
+                Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Templates"));
+            }
+            string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates");
+
+            ITemplateStorage<CodeTemplate> storage = new XmlStorage(templatePath);
+            // Beispielhafte Implementierung
+            ICodeTemplateView<CodeTemplate> view = new TemplateDesignerForm();
+            TemplateController templateController = new TemplateController(storage,view);
+
+            Application.Run((Form)view);
         }
     }
 }

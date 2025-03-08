@@ -1,4 +1,4 @@
-﻿namespace CSCodeGen.DataAccess.Model.Klasse
+﻿namespace CSCodeGen.Model.Model
 {
     public class VariableDefinition
     {

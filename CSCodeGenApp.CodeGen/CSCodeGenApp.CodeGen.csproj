@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
     <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Logik.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,8 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
+﻿
+using CSCodeGen.Model.Main;
 using System.Collections.Generic;
 
-namespace CSCodeGen.DataAccess.Model.Klasse
+namespace CSCodeGen.Model.Model
 {
     public class GenerationContext
     {

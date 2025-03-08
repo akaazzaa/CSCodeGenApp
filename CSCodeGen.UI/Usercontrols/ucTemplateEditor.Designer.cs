@@ -1,4 +1,4 @@
-﻿using CSCodeGen.DataAccess.Model.Main;
+﻿using CSCodeGen.Model.Main;
 
 namespace CSCodeGen.UI.Usercontrols
 {
@@ -33,12 +33,12 @@ namespace CSCodeGen.UI.Usercontrols
             components = new System.ComponentModel.Container();
             panel1 = new System.Windows.Forms.Panel();
             pnlMain = new System.Windows.Forms.Panel();
+            pnlEditor = new System.Windows.Forms.Panel();
             panel4 = new System.Windows.Forms.Panel();
             menuStrip1 = new System.Windows.Forms.MenuStrip();
             btnRemove = new System.Windows.Forms.ToolStripMenuItem();
             templateBindingSource = new System.Windows.Forms.BindingSource(components);
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
-            pnlEditor = new System.Windows.Forms.Panel();
             panel1.SuspendLayout();
             pnlMain.SuspendLayout();
             panel4.SuspendLayout();
@@ -68,6 +68,14 @@ namespace CSCodeGen.UI.Usercontrols
             pnlMain.Name = "pnlMain";
             pnlMain.Size = new System.Drawing.Size(1277, 628);
             pnlMain.TabIndex = 1;
+            // 
+            // pnlEditor
+            // 
+            pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlEditor.Location = new System.Drawing.Point(0, 29);
+            pnlEditor.Name = "pnlEditor";
+            pnlEditor.Size = new System.Drawing.Size(1275, 597);
+            pnlEditor.TabIndex = 2;
             // 
             // panel4
             // 
@@ -104,14 +112,6 @@ namespace CSCodeGen.UI.Usercontrols
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // pnlEditor
-            // 
-            pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlEditor.Location = new System.Drawing.Point(0, 29);
-            pnlEditor.Name = "pnlEditor";
-            pnlEditor.Size = new System.Drawing.Size(1275, 597);
-            pnlEditor.TabIndex = 2;
             // 
             // ucTemplateEditor
             // 
