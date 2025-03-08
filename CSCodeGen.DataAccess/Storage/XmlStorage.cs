@@ -30,16 +30,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
         {
             _templates.Add(template);
         }
-        public IEnumerable<Keyword> GetDefaultKeywords()
-        {
-            return new List<Keyword>
-        {
-            new Keyword { Id = 100, Name = Configuration.Keywords.Classname, PrefixWithComment = false },
-            new Keyword { Id = 200, Name = Configuration.Keywords.Propertie, PrefixWithComment = false },
-            new Keyword { Id = 300, Name = Configuration.Keywords.Namespace, PrefixWithComment = false },
-            new Keyword { Id = 400, Name = Configuration.Keywords.Variable, PrefixWithComment = false }
-        };
-        }
+
         public BindingList<CodeTemplate> GetTemplates() => _templates;
 
         #region Save & Load

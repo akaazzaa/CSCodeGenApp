@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.Model.Main;
+using CSCodeGen.Model.Model;
 using FastColoredTextBoxNS;
 using System;
 using System.ComponentModel;
@@ -75,9 +76,8 @@ namespace CSCodeGen.UI
         private BindingList<Keyword> LoadKeywords(CodeTemplate template = null)
         {
 
-
             // Hole die Standard-Keywords
-            //defaultKeywords =    
+            defaultKeywords = (BindingList<Keyword>)Configuration.GetDefaultKeywords();  
 
             if (template == null)
             {
