@@ -1,7 +1,9 @@
 ﻿
 
+using CSCodeGen.DataAccess.Model.Storage;
+using CSCodeGen.Model;
+using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Main;
-using CSCodeGen.Model.Model;
 using System.IO;
 using System.Linq;
 
@@ -9,9 +11,18 @@ namespace CSCodeGen.Library.Controller
 {
     public class ClassController
     {
-        private GenerationContext _context = new GenerationContext();
+        
+        IClassRepository _classRepository;
+        ITemplateRepository _templateRepository;
+        IClassView _view;
 
-        public GenerationContext Klasse { get { return _context; } }
+
+        public ClassController(IClassRepository classRepository, ITemplateRepository templateRepository,IClassView classView)
+        {
+            _classRepository = classRepository;
+            _templateRepository = templateRepository;
+            _view = classView;
+        }
 
         //public string ReplaceKeywords(CodeTemplate template)
         //{
@@ -83,14 +94,7 @@ namespace CSCodeGen.Library.Controller
             return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
         }
 
-        public void AddProperty(PropertyDefinition prop)
-        {
-            _context.Properties.Add(prop);
-        }
-        public void RemoveProperty(PropertyDefinition prop)
-        {
-            _context.Properties.Remove(prop);
-        }
+        
 
         public void Save(string source)
         {

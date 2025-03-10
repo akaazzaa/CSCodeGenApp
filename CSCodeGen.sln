@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Logik", "CSCodeGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGenApp.CodeGen", "CSCodeGenApp.CodeGen\CSCodeGenApp.CodeGen.csproj", "{84928BCE-985A-EAB4-73D1-E18CE4AC5368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Contracts", "CSCodeGen.Contracts\CSCodeGen.Contracts.csproj", "{D45D0747-3ACA-4A30-8CE9-F50132DC795B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCodeGen.Model", "CSCodeGen.Model\CSCodeGen.Model.csproj", "{2B6E39C7-DC0A-498C-A577-5920F2EF2526}"
 EndProject
 Global
@@ -36,10 +34,6 @@ Global
 		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84928BCE-985A-EAB4-73D1-E18CE4AC5368}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D45D0747-3ACA-4A30-8CE9-F50132DC795B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B6E39C7-DC0A-498C-A577-5920F2EF2526}.Release|Any CPU.ActiveCfg = Release|Any CPU

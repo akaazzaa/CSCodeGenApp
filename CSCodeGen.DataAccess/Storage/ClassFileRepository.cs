@@ -2,11 +2,11 @@
 
 namespace CSCodeGen.DataAccess.Model.Storage
 {
-    public class ClassFileStorage
+    public class ClassFileRepository 
     {
         private readonly string _folderPath;
 
-        public ClassFileStorage(string folderPath)
+        public ClassFileRepository(string folderPath)
         {
             _folderPath = folderPath;
             // Stelle sicher, dass der Ordner existiert

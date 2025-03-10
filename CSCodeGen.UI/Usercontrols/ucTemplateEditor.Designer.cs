@@ -106,7 +106,7 @@ namespace CSCodeGen.UI.Usercontrols
             // 
             // templateBindingSource
             // 
-            templateBindingSource.DataSource = typeof(CodeTemplate);
+            templateBindingSource.DataSource = typeof(Template);
             // 
             // contextMenuStrip1
             // 

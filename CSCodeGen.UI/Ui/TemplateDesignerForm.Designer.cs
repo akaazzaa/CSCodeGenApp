@@ -38,7 +38,7 @@ namespace CSCodeGen.UI
             gvKeywords = new System.Windows.Forms.DataGridView();
             btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
             gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            gvcbDataType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
             bsKeywords = new System.Windows.Forms.BindingSource(components);
             pnlKeywordMenu = new System.Windows.Forms.Panel();
@@ -104,6 +104,7 @@ namespace CSCodeGen.UI
             tcMain.SelectedIndex = 0;
             tcMain.Size = new System.Drawing.Size(709, 522);
             tcMain.TabIndex = 1;
+            tcMain.SelectedIndexChanged += tcMain_SelectedIndexChanged;
             // 
             // pnlSidebarRight
             // 
@@ -125,7 +126,7 @@ namespace CSCodeGen.UI
             gvKeywords.AllowUserToResizeColumns = false;
             gvKeywords.AutoGenerateColumns = false;
             gvKeywords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { btnCode, gvtxtName, gvcbDataType, gvtxtDisplaytext });
+            gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { btnCode, gvtxtName, Type, gvtxtDisplaytext });
             gvKeywords.DataSource = bsKeywords;
             gvKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
             gvKeywords.Location = new System.Drawing.Point(0, 318);
@@ -133,6 +134,7 @@ namespace CSCodeGen.UI
             gvKeywords.Name = "gvKeywords";
             gvKeywords.Size = new System.Drawing.Size(329, 202);
             gvKeywords.TabIndex = 1;
+            gvKeywords.CellClick += gvKeywords_CellClick;
             // 
             // btnCode
             // 
@@ -150,14 +152,12 @@ namespace CSCodeGen.UI
             gvtxtName.HeaderText = "Name";
             gvtxtName.Name = "gvtxtName";
             // 
-            // gvcbDataType
+            // Type
             // 
-            gvcbDataType.DataPropertyName = "DataType";
-            gvcbDataType.HeaderText = "DataType";
-            gvcbDataType.Items.AddRange(new object[] { "int", "bool", "string", "Date", "char" });
-            gvcbDataType.Name = "gvcbDataType";
-            gvcbDataType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            gvcbDataType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            Type.DataPropertyName = "Type";
+            Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            Type.HeaderText = "Type";
+            Type.Name = "Type";
             // 
             // gvtxtDisplaytext
             // 
@@ -196,12 +196,14 @@ namespace CSCodeGen.UI
             btnAddKeyword.Name = "btnAddKeyword";
             btnAddKeyword.Size = new System.Drawing.Size(41, 20);
             btnAddKeyword.Text = "Add";
+            btnAddKeyword.Click += btnAddKeyword_Click;
             // 
             // btnRemovekeyword
             // 
             btnRemovekeyword.Name = "btnRemovekeyword";
             btnRemovekeyword.Size = new System.Drawing.Size(62, 20);
             btnRemovekeyword.Text = "Remove";
+            btnRemovekeyword.Click += btnRemovekeyword_Click;
             // 
             // pnalPropertys
             // 
@@ -354,9 +356,10 @@ namespace CSCodeGen.UI
         private System.Windows.Forms.BindingSource bsTemplates;
         private System.Windows.Forms.ToolStripMenuItem btnSave;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewComboBoxColumn gvcbDataType;
         private System.Windows.Forms.DataGridViewButtonColumn btnCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtName;
-        private System.Windows.Forms.DataGridViewComboBoxColumn gvcbDataType;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtDisplaytext;
     }
 }

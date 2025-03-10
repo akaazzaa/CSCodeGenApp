@@ -1,8 +1,7 @@
 ﻿
-
-using CSCodeGen.Contracts.Interfaces;
+using CSCodeGen.Model;
+using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Main;
-using CSCodeGen.Model.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,28 +13,37 @@ using System.Xml.Serialization;
 
 namespace CSCodeGen.DataAccess.Model.Storage
 {
-    public class XmlStorage : ITemplateStorage<CodeTemplate>
+    public class XmlRepository : ITemplateRepository
     {
         private readonly string _folderPath;
-        private BindingList<CodeTemplate> _templates;
+        private BindingList<Template> _templates;
 
-        public XmlStorage(string folderPath)
+        public XmlRepository(string folderPath)
         {
             _folderPath = folderPath;
-            _templates = new BindingList<CodeTemplate>();
+            _templates = new BindingList<Template>();
             // Stelle sicher, dass der Ordner existiert
            
         }
-        public void Add(CodeTemplate template)
+        public BindingList<Template> GetTemplates() => _templates;
+        public void Add(Template template)
         {
             _templates.Add(template);
         }
-
-        public BindingList<CodeTemplate> GetTemplates() => _templates;
+        public IEnumerable<Keyword> GetDefaultKeywords()
+        {
+            return new List<Keyword>
+        {
+            new Keyword { Id = 100, Name = Configuration.Keywords.Classname, PrefixWithComment = false },
+            new Keyword { Id = 200, Name = Configuration.Keywords.Propertie, PrefixWithComment = false },
+            new Keyword { Id = 300, Name = Configuration.Keywords.Namespace, PrefixWithComment = false },
+            new Keyword { Id = 400, Name = Configuration.Keywords.Variable, PrefixWithComment = false }
+        };
+        }    
 
         #region Save & Load
         //// Save
-        public void Save(CodeTemplate template)
+        public void Save(Template template)
         {
             if (!template.IsChanged) return;
 
@@ -79,10 +87,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
             {
                 try
                 {
-                    CodeTemplate template = DeserializeFromXml<CodeTemplate>(file);
+                    Template template = DeserializeFromXml<Template>(file);
                     if (template != null)
                     {
-                        template.OldName = template.FileName; // Speichert den alten Namen
+                        template.OldName = template.Name; // Speichert den alten Namen
                         template.IsChanged = false; // Direkt nach dem Laden als unverändert setzen
                         _templates.Add(template);
                     }
@@ -130,7 +138,8 @@ namespace CSCodeGen.DataAccess.Model.Storage
             }
         }
 
-       
+        
+
         #endregion
 
     }

@@ -1,5 +1,6 @@
 ﻿
-using CSCodeGen.DataAccess.Model.Main;
+using CSCodeGen.Model;
+using CSCodeGen.Model.Main;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -225,7 +226,7 @@ namespace CSCodeGenApp.CodeGen
             // 
             // bsDaten
             // 
-            bsDaten.DataSource = typeof(CodeTemplate);
+            bsDaten.DataSource = typeof(Template);
             // 
             // txtName
             // 

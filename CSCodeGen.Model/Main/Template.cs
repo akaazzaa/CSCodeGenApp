@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace CSCodeGen.Model.Main;
 
 
-public class CodeTemplate : Observable, INotifyPropertyChanged
+public class Template : Observable, INotifyPropertyChanged
 {
 
     #region Variabeln
@@ -13,7 +13,6 @@ public class CodeTemplate : Observable, INotifyPropertyChanged
     private string _Name;
     private string _Source;
     private string _Description;
-    private string _Filename;
     #endregion
 
     #region Properties
@@ -110,7 +109,7 @@ public class CodeTemplate : Observable, INotifyPropertyChanged
     #endregion
 
     #region Konstruktoren
-    public CodeTemplate()
+    public Template()
     {
         ID = nextid++;
         CreationDate = DateTime.Now;
@@ -118,7 +117,7 @@ public class CodeTemplate : Observable, INotifyPropertyChanged
         IsChanged = true;
     }
 
-    public CodeTemplate(string name)
+    public Template(string name)
     {
         Name = name;
         ID = nextid++;

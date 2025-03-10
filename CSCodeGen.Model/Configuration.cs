@@ -1,6 +1,6 @@
 ﻿using CSCodeGen.Model.Main;
 
-namespace CSCodeGen.Model.Model
+namespace CSCodeGen.Model
 {
     public static class Configuration
     {
@@ -25,10 +25,10 @@ namespace CSCodeGen.Model.Model
         {
             return new List<Keyword>
         {
-            new Keyword { Id = 100, Name = Configuration.Keywords.Classname, PrefixWithComment = false },
-            new Keyword { Id = 200, Name = Configuration.Keywords.Propertie, PrefixWithComment = false },
-            new Keyword { Id = 300, Name = Configuration.Keywords.Namespace, PrefixWithComment = false },
-            new Keyword { Id = 400, Name = Configuration.Keywords.Variable, PrefixWithComment = false }
+            new Keyword { Id = 100, Name = Keywords.Classname, PrefixWithComment = false },
+            new Keyword { Id = 200, Name = Keywords.Propertie, PrefixWithComment = false },
+            new Keyword { Id = 300, Name = Keywords.Namespace, PrefixWithComment = false },
+            new Keyword { Id = 400, Name = Keywords.Variable, PrefixWithComment = false }
         };
         }
 

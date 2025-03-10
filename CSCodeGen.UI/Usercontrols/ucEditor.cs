@@ -1,7 +1,8 @@
-﻿using CSCodeGen.Model.Main;
-using CSCodeGen.Model.Model;
+﻿using CSCodeGen.Model;
+using CSCodeGen.Model.Main;
 using FastColoredTextBoxNS;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,84 +12,108 @@ namespace CSCodeGen.UI
 {
     public partial class ucEditor : UserControl
     {
-        private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
+        private FastColoredTextBox fastColoredTextBox = new FastColoredTextBox();
         public event EventHandler<string> CodeChanged;
         public event EventHandler GetDefaultKeys;
-
-        private BindingList<Keyword> defaultKeywords;
-
-
+        private List<Keyword> defaultKeywords;
+        private Template currentTemplate;
 
         public ucEditor(object obj)
         {
             InitializeComponent();
             Initialize(obj);
 
+            pnlEditor.Controls.Add(fastColoredTextBox);
+            fastColoredTextBox.Dock = DockStyle.Fill;
+            fastColoredTextBox.Language = Language.CSharp;
+            fastColoredTextBox.AutoIndentChars = true;
+            fastColoredTextBox.AutoIndent = true;
 
-            pnlEditor.Controls.Add(fastColoredTextBox1);
-            fastColoredTextBox1.Dock = DockStyle.Fill;
-            fastColoredTextBox1.Language = Language.CSharp;
-            fastColoredTextBox1.AutoIndentChars = true;
-            fastColoredTextBox1.AutoIndent = true;
-            fastColoredTextBox1.TextChanged += OnTextChanged;
+
+            fastColoredTextBox.TextChanged += OnTextChanged;
+
             listBox1.DoubleClick += InsertKeyword;
-
         }
-
         private void Initialize<T>(T obj)
         {
             if (obj == null) return;
 
 
-            if (obj is CodeTemplate template)
+            if (obj is Template template)
             {
-                fastColoredTextBox1.Text = template.Source;
-                listBox1.DataSource = LoadKeywords(template);
-                listBox1.DisplayMember = "Name";
-                //PublicEvents.KeywordDeleted += KeywordDeleted;
+                fastColoredTextBox.Text = template.Source;
+                currentTemplate = template;
+                LoadKeywords();
+                RefreshKeywordsList();
+
 
             }
             else if (obj is Keyword keyword)
             {
-                fastColoredTextBox1.Text = keyword.Code;
-                listBox1.DataSource = LoadKeywords();
-                listBox1.DisplayMember = "Name";
+                fastColoredTextBox.Text = keyword.Code;
+                LoadKeywords();
+                RefreshKeywordsList();
+
             }
         }
-        private void KeywordDeleted(Keyword deletedKeyword)
-        {
-
-            defaultKeywords.Remove(deletedKeyword);
-        }
-
-
-
         private void InsertKeyword(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
             {
                 Keyword selectedKeyword = (Keyword)listBox1.SelectedItem;
                 string fullKeyword = $"{selectedKeyword.DisplayText}";
-                int insertPosition = fastColoredTextBox1.SelectionStart;
-                fastColoredTextBox1.Text = fastColoredTextBox1.Text.Insert(insertPosition, fullKeyword);
+
+                int insertPosition = fastColoredTextBox.SelectionStart;
+
+                fastColoredTextBox.Text = fastColoredTextBox.Text.Insert(insertPosition, fullKeyword);
+
+                fastColoredTextBox.SelectionStart = insertPosition + fullKeyword.Length;
+                fastColoredTextBox.Focus();
             }
         }
-        private BindingList<Keyword> LoadKeywords(CodeTemplate template = null)
+        private void LoadKeywords()
         {
 
             // Hole die Standard-Keywords
-            defaultKeywords = (BindingList<Keyword>)Configuration.GetDefaultKeywords();  
+            defaultKeywords = (List<Keyword>)Configuration.GetDefaultKeywords();  
 
-            if (template == null)
+            if (currentTemplate == null)
             {
                 // Ohne Template einfach zurückgeben
-                return defaultKeywords;
+                return;
             }
 
+            
+
             // Eventhandler registrieren
-            template.Keywords.AddingNew += Keywords_AddingNew;
+            currentTemplate.Keywords.ListChanged += Keywords_ListChanged;
 
+            UpdateKeywordsList(currentTemplate);
 
+        }
+        private void Keywords_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded ||
+                e.ListChangedType == ListChangedType.ItemDeleted || 
+                e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                RefreshKeywordsList();
+                UpdateKeywordsList(currentTemplate);
+            }
+        }
+        private void OnTextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+            CodeChanged?.Invoke(this, fastColoredTextBox.Text);
+        }
+        private void RefreshKeywordsList()
+        {
+            // Aktualisiere die ListBox mit den Keywords
+            listBox1.DataSource = null;
+            listBox1.DataSource = defaultKeywords;
+            listBox1.DisplayMember = "Name";
+        }
+        private void UpdateKeywordsList(Template template)
+        {
             foreach (Keyword keyword in template.Keywords)
             {
                 if (!defaultKeywords.Any(k => k.Name == keyword.Name))
@@ -96,32 +121,7 @@ namespace CSCodeGen.UI
                     defaultKeywords.Add(keyword);
                 }
             }
-
-
-            return defaultKeywords;
-
-
         }
-        private void Keywords_AddingNew(object sender, AddingNewEventArgs e)
-        {
-            e.NewObject = new Keyword(); // Neues Keyword mit Default-Name
-
-            Keyword tmp = (Keyword)e.NewObject;
-
-            // Falls ein Keyword mit demselben Namen bereits existiert, wird es nicht hinzugefügt
-            if (!defaultKeywords.Any(k => k.Name == tmp.Name))
-            {
-                defaultKeywords.Add(tmp);
-            }
-        }
-        private void OnTextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
-        {
-            CodeChanged?.Invoke(this, fastColoredTextBox1.Text);
-        }
-
-
-
-
 
     }
 }

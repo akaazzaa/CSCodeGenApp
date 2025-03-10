@@ -4,7 +4,7 @@ namespace CSCodeGen.Contracts.Interfaces
 {
     public interface  ITemplateStorage<T> where T : class
     {
-        BindingList<T> GetTemplates();
+        T GetTemplates();
         void Add(T obj);
         void Save(T obj);
         void SaveAll();

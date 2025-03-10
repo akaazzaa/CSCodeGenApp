@@ -1,5 +1,4 @@
-﻿using CSCodeGen.Model.Model;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -10,7 +9,7 @@ namespace CSCodeGen.Model.Main
         #region Variabeln
         private static int _nextId = 1;
         private string _code;
-        private string _dataType;
+        private KeywordType _type;
         private string _name;
         private bool _prefixWithComment;
         #endregion
@@ -35,12 +34,12 @@ namespace CSCodeGen.Model.Main
                 OnPropertyChanged();
             }
         }
-        public string DataType
+        public KeywordType Type
         {
-            get => _dataType.Trim();
+            get => _type;
             set
             {
-                _dataType = value.Trim();
+                _type = value;
                 OnPropertyChanged();
             }
         }
@@ -75,7 +74,6 @@ namespace CSCodeGen.Model.Main
         {
             Id = _nextId++;
             _code = string.Empty;
-            _dataType = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
         }

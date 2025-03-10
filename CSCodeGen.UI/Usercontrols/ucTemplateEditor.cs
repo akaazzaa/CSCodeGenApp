@@ -1,23 +1,26 @@
-﻿using CSCodeGen.Model.Main;
+﻿using CSCodeGen.Model.Args;
+using CSCodeGen.Model.Main;
 using System;
 using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Usercontrols
 {
-    public partial class ucTemplateEditor : UserControl
+    public partial class ucTemplateEditor : UserControl 
     {
         private ucEditor ucEditor;
-        public event Action<TabPage> OnClosingTap;
-        public event EventHandler<CodeTemplate> OnSaveChanges;
-        public event Action OnResetChanges;
+        public event EventHandler<TabPage> OnClosingTap;
+        public event EventHandler<Template> OnSaveChanges;
+        public event EventHandler<Template> OnResetChanges;
         public event EventHandler<string> OnCodeChanged;
+        public event EventHandler OnKeywordDeleted;
 
-        private CodeTemplate currentTemplate;
+        private Template currentTemplate;
 
-        public ucTemplateEditor(CodeTemplate template)
+        public ucTemplateEditor(Template template)
         {
             InitializeComponent();
             currentTemplate = template;
+
             ucEditor = new ucEditor(template);
 
             ucEditor.CodeChanged += (s, newCode) =>
@@ -45,22 +48,22 @@ namespace CSCodeGen.UI.Usercontrols
                 );
 
                 if (result == DialogResult.Yes)
-                    SaveChanges(currentTemplate);
+                    SaveChanges();
                 else if (result == DialogResult.No)
                     ResetChanges();
             }
 
-            OnClosingTap?.Invoke(this.Parent as TabPage);
+            OnClosingTap?.Invoke(this,this.Parent as TabPage);
         }
 
         private void ResetChanges()
         {
-            OnResetChanges?.Invoke();
+            OnResetChanges?.Invoke(this,currentTemplate);
         }
 
-        private void SaveChanges(CodeTemplate template)
+        private void SaveChanges()
         {
-            OnSaveChanges?.Invoke(this, template);
+            OnSaveChanges?.Invoke(this, currentTemplate);
         }
 
        

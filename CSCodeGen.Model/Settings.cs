@@ -1,4 +1,4 @@
-﻿namespace CSCodeGen.Model.Model
+﻿namespace CSCodeGen.Model
 {
     public class Settings
     {
