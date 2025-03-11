@@ -13,19 +13,19 @@ using System.Xml.Serialization;
 
 namespace CSCodeGen.DataAccess.Model.Storage
 {
-    public class XmlRepository : ITemplateRepository
+    public class TemplateRepository : IRepository<Template>
     {
         private readonly string _folderPath;
         private BindingList<Template> _templates;
 
-        public XmlRepository(string folderPath)
+        public TemplateRepository(string folderPath)
         {
             _folderPath = folderPath;
             _templates = new BindingList<Template>();
             // Stelle sicher, dass der Ordner existiert
            
         }
-        public BindingList<Template> GetTemplates() => _templates;
+        public BindingList<Template> GetData() => _templates;
         public void Add(Template template)
         {
             _templates.Add(template);
@@ -34,10 +34,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
         {
             return new List<Keyword>
         {
-            new Keyword { Id = 100, Name = Configuration.Keywords.Classname, PrefixWithComment = false },
-            new Keyword { Id = 200, Name = Configuration.Keywords.Propertie, PrefixWithComment = false },
-            new Keyword { Id = 300, Name = Configuration.Keywords.Namespace, PrefixWithComment = false },
-            new Keyword { Id = 400, Name = Configuration.Keywords.Variable, PrefixWithComment = false }
+            new Keyword { Id = 100, Name = ConfigData.Keywords.Classname, PrefixWithComment = false },
+            new Keyword { Id = 200, Name = ConfigData.Keywords.Propertie, PrefixWithComment = false },
+            new Keyword { Id = 300, Name = ConfigData.Keywords.Namespace, PrefixWithComment = false },
+            new Keyword { Id = 400, Name = ConfigData.Keywords.Variable, PrefixWithComment = false }
         };
         }    
 
@@ -138,7 +138,12 @@ namespace CSCodeGen.DataAccess.Model.Storage
             }
         }
 
-        
+        public Template Load(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         #endregion
 

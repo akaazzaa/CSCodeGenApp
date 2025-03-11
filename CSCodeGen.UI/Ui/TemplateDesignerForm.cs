@@ -10,8 +10,8 @@ using CSCodeGen.UI.Usercontrols;
 using System.Collections.Generic;
 using System.Linq;
 using CSCodeGen.Model.Args;
-using CSCodeGen.Model.Interfaces;
 using CSCodeGen.UI.Ui;
+using CSCodeGen.Model.Interfaces.View;
 
 namespace CSCodeGen.UI
 {

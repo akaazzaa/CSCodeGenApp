@@ -39,9 +39,7 @@ namespace CSCodeGenApp.CodeGen
             panel1 = new Panel();
             pnlProperties = new Panel();
             dataGridView1 = new DataGridView();
-            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             Datentyp = new DataGridViewComboBoxColumn();
-            bsProperties = new BindingSource(components);
             pnlPropetiesBar = new Panel();
             btnPropertiesDelete = new Button();
             btnPropertiesAdd = new Button();
@@ -49,15 +47,14 @@ namespace CSCodeGenApp.CodeGen
             cbTemplate = new ComboBox();
             bsDaten = new BindingSource(components);
             txtName = new TextBox();
-            klasseBindingSource = new BindingSource(components);
             label2 = new Label();
             label1 = new Label();
             pnlEditor = new Panel();
+            pnlEditorMain = new Panel();
             pnlTop = new Panel();
             menu = new MenuStrip();
             saveToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
-            pnlEditorMain = new Panel();
             pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spMain).BeginInit();
             spMain.Panel1.SuspendLayout();
@@ -67,11 +64,9 @@ namespace CSCodeGenApp.CodeGen
             panel1.SuspendLayout();
             pnlProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsProperties).BeginInit();
             pnlPropetiesBar.SuspendLayout();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).BeginInit();
             pnlEditor.SuspendLayout();
             pnlTop.SuspendLayout();
             menu.SuspendLayout();
@@ -141,22 +136,14 @@ namespace CSCodeGenApp.CodeGen
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, Datentyp });
-            dataGridView1.DataSource = bsProperties;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Datentyp });
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(29, 0);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(426, 334);
             dataGridView1.TabIndex = 1;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             // 
             // Datentyp
             // 
@@ -164,9 +151,6 @@ namespace CSCodeGenApp.CodeGen
             Datentyp.HeaderText = "Datentyp";
             Datentyp.Items.AddRange(new object[] { "int", "bool", "string", "float", "Date" });
             Datentyp.Name = "Datentyp";
-            // 
-            // bsProperties
-
             // 
             // pnlPropetiesBar
             // 
@@ -187,7 +171,6 @@ namespace CSCodeGenApp.CodeGen
             btnPropertiesDelete.TabIndex = 1;
             btnPropertiesDelete.Text = "-";
             btnPropertiesDelete.UseVisualStyleBackColor = true;
-
             // 
             // btnPropertiesAdd
             // 
@@ -198,7 +181,6 @@ namespace CSCodeGenApp.CodeGen
             btnPropertiesAdd.TabIndex = 0;
             btnPropertiesAdd.Text = "+";
             btnPropertiesAdd.UseVisualStyleBackColor = true;
-
             // 
             // pnlMenu
             // 
@@ -222,7 +204,6 @@ namespace CSCodeGenApp.CodeGen
             cbTemplate.Name = "cbTemplate";
             cbTemplate.Size = new Size(229, 23);
             cbTemplate.TabIndex = 3;
-
             // 
             // bsDaten
             // 
@@ -230,14 +211,10 @@ namespace CSCodeGenApp.CodeGen
             // 
             // txtName
             // 
-            txtName.DataBindings.Add(new Binding("Text", klasseBindingSource, "Name", true, DataSourceUpdateMode.OnPropertyChanged));
             txtName.Location = new Point(117, 55);
             txtName.Name = "txtName";
             txtName.Size = new Size(229, 23);
             txtName.TabIndex = 2;
-            // 
-            // klasseBindingSource
-            // 
             // 
             // label2
             // 
@@ -267,6 +244,14 @@ namespace CSCodeGenApp.CodeGen
             pnlEditor.Size = new Size(523, 450);
             pnlEditor.TabIndex = 0;
             // 
+            // pnlEditorMain
+            // 
+            pnlEditorMain.Dock = DockStyle.Fill;
+            pnlEditorMain.Location = new Point(0, 29);
+            pnlEditorMain.Name = "pnlEditorMain";
+            pnlEditorMain.Size = new Size(523, 421);
+            pnlEditorMain.TabIndex = 1;
+            // 
             // pnlTop
             // 
             pnlTop.Controls.Add(menu);
@@ -290,21 +275,12 @@ namespace CSCodeGenApp.CodeGen
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(43, 20);
             saveToolStripMenuItem.Text = "Save";
-
             // 
             // removeToolStripMenuItem
             // 
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             removeToolStripMenuItem.Size = new Size(62, 20);
             removeToolStripMenuItem.Text = "Remove";
-            // 
-            // pnlEditorMain
-            // 
-            pnlEditorMain.Dock = DockStyle.Fill;
-            pnlEditorMain.Location = new Point(0, 29);
-            pnlEditorMain.Name = "pnlEditorMain";
-            pnlEditorMain.Size = new Size(523, 421);
-            pnlEditorMain.TabIndex = 1;
             // 
             // frmCodeGen
             // 
@@ -324,12 +300,10 @@ namespace CSCodeGenApp.CodeGen
             panel1.ResumeLayout(false);
             pnlProperties.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsProperties).EndInit();
             pnlPropetiesBar.ResumeLayout(false);
             pnlMenu.ResumeLayout(false);
             pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).EndInit();
-            ((System.ComponentModel.ISupportInitialize)klasseBindingSource).EndInit();
             pnlEditor.ResumeLayout(false);
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
@@ -361,11 +335,9 @@ namespace CSCodeGenApp.CodeGen
         private Button btnPropertiesAdd;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
-        private BindingSource bsProperties;
         private DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewComboBoxColumn Datentyp;
-        private BindingSource klasseBindingSource;
         private Panel pnlEditorMain;
     }
 }

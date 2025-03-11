@@ -3,8 +3,8 @@ using CSCodeGen.Model;
 using CSCodeGen.Library.Controller;
 using FastColoredTextBoxNS;
 using CSCodeGen.Model.Main;
-using CSCodeGen.Model.Interfaces;
 using System.ComponentModel;
+using CSCodeGen.Model.Interfaces.View;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -76,12 +76,12 @@ namespace CSCodeGenApp.CodeGen
 
         public void ShowTemplates(BindingList<Template> templates)
         {
-            throw new NotImplementedException();
+           bsDaten.DataSource = templates;
         }
 
         public void ShowMessage(string message)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(message);
         }
     }
 }

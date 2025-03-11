@@ -6,16 +6,17 @@ using System.ComponentModel;
 using CSCodeGen.Model.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using CSCodeGen.Model.Interfaces.View;
 
 
 namespace CSCodeGen.Library.Controller
 {
     public class TemplateController
     {
-        ITemplateRepository _repository;
+        IRepository<Template> _repository;
         ICodeTemplateView _view;
 
-        public TemplateController(ITemplateRepository templateStorage, ICodeTemplateView view)
+        public TemplateController(IRepository<Template> templateStorage, ICodeTemplateView view)
         {
             _repository = templateStorage;
             _view = view;
@@ -71,7 +72,7 @@ namespace CSCodeGen.Library.Controller
 
             _repository.Add(args.Template);
             _view.ShowMessage($"Neues Template '{args.Template.Name}' wurde angelegt!");
-            _view.ShowTemplates(_repository.GetTemplates());
+            _view.ShowTemplates(_repository.GetData());
         }
         private void OnSaveTemplate(object sender, TemplateEventArgs args)
         {
@@ -81,7 +82,7 @@ namespace CSCodeGen.Library.Controller
                 return;
             }
 
-            if (!_repository.GetTemplates().Contains(args.Template))
+            if (!_repository.GetData().Contains(args.Template))
             {
                 _view.ShowMessage("Warnung: Template existiert nicht, es wird nun hinzugefügt.");
                 _repository.Add(args.Template);
@@ -96,7 +97,7 @@ namespace CSCodeGen.Library.Controller
         private void OnLoadTemplates(object sender, EventArgs e)
         {
             _repository.LoadAll();
-            var templates = _repository.GetTemplates();
+            var templates = _repository.GetData();
 
             if (templates == null || templates.Count == 0)
             {

@@ -6,9 +6,11 @@ using CSCodeGen.DataAccess.Model.Storage;
 using CSCodeGen.Library.Controller;
 using CSCodeGen.Model.Args;
 using CSCodeGen.Model.Interfaces;
+using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 
@@ -27,15 +29,19 @@ namespace CSCodeGen.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            string templateFolder = string.Empty;
 
-            string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates");
-
-            if (!Directory.Exists(templatePath))
+            if (ConfigurationManager.AppSettings["FolderName"] != null)
             {
-                Directory.CreateDirectory(templatePath);
+                templateFolder = ConfigurationManager.AppSettings["FolderName"];
             }
 
-            ITemplateRepository storage = new XmlRepository(templatePath);
+
+
+
+            string templatePath = Path.Combine(Directory.GetCurrentDirectory(), templateFolder);
+
+            IRepository<Template> storage = new TemplateRepository(templatePath);
             ICodeTemplateView view = new TemplateDesignerForm();
 
 

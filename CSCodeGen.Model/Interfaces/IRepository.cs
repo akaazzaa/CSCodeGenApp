@@ -3,12 +3,13 @@ using System.ComponentModel;
 
 namespace CSCodeGen.Model.Interfaces
 {
-    public interface  ITemplateRepository
+    public interface  IRepository<T>
     {
-        BindingList<Template> GetTemplates();
-        void Add(Template obj);
-        void Save(Template obj);
+        BindingList<T> GetData();
+        void Add(T obj);
+        void Save(T obj);
         void SaveAll();
         void LoadAll();
+        T Load(string path);
     }
 }

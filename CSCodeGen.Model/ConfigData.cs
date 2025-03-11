@@ -2,7 +2,7 @@
 
 namespace CSCodeGen.Model
 {
-    public static class Configuration
+    public static class ConfigData
     {
         private static DefaultKeyword keywords = null;
         public static string CommentPrefix => "//";

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CSCodeGen.Model.Interfaces
+namespace CSCodeGen.Model.Interfaces.View
 {
     public interface IClassView
     {

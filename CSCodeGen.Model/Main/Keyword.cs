@@ -62,7 +62,7 @@ namespace CSCodeGen.Model.Main
                     stringBuilder.Append("//");
                 }
 
-                stringBuilder.Append($"{Configuration.Prefix}{Name}{Configuration.Postfix}");
+                stringBuilder.Append($"{ConfigData.Prefix}{Name}{ConfigData.Postfix}");
 
                 return stringBuilder.ToString();
             }

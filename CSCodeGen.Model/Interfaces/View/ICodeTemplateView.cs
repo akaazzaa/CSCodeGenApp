@@ -2,7 +2,7 @@
 using CSCodeGen.Model.Main;
 using System.ComponentModel;
 
-namespace CSCodeGen.Model.Interfaces
+namespace CSCodeGen.Model.Interfaces.View
 {
      public interface ICodeTemplateView 
     {

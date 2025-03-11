@@ -75,7 +75,7 @@ namespace CSCodeGen.UI
         {
 
             // Hole die Standard-Keywords
-            defaultKeywords = (List<Keyword>)Configuration.GetDefaultKeywords();  
+            defaultKeywords = (List<Keyword>)ConfigData.GetDefaultKeywords();  
 
             if (currentTemplate == null)
             {

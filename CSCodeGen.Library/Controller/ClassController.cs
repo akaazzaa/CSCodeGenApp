@@ -3,7 +3,9 @@
 using CSCodeGen.DataAccess.Model.Storage;
 using CSCodeGen.Model;
 using CSCodeGen.Model.Interfaces;
+using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -12,16 +14,23 @@ namespace CSCodeGen.Library.Controller
     public class ClassController
     {
         
-        IClassRepository _classRepository;
-        ITemplateRepository _templateRepository;
+        IRepository<Result> _resultRepository;
+        IRepository<Template> _templateRepository;
         IClassView _view;
 
 
-        public ClassController(IClassRepository classRepository, ITemplateRepository templateRepository,IClassView classView)
+        public ClassController(IRepository<Result> resultRepo, IRepository<Template> templateRepo,IClassView classView)
         {
-            _classRepository = classRepository;
-            _templateRepository = templateRepository;
+            _templateRepository = templateRepo;
+
             _view = classView;
+            _view.LoadTemplates += OnLoadTemplates;
+            
+        }
+
+        private void OnLoadTemplates(object sender, EventArgs e)
+        {
+            _view.ShowTemplates(_templateRepository.GetData());
         }
 
         //public string ReplaceKeywords(CodeTemplate template)
