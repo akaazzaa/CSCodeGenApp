@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
 
 namespace CSCodeGen.Model.Main;
 
@@ -106,6 +108,7 @@ public class Template : Observable, INotifyPropertyChanged
     [Category("Template")]
     [Description("Liste der Keywords")]
     public BindingList<Keyword> Keywords { get; set; }
+    
     #endregion
 
     #region Konstruktoren
@@ -134,4 +137,17 @@ public class Template : Observable, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     #endregion
+
+    public string ErsetzeKeywords()
+    {
+        string result = string.Empty;
+
+        foreach (var keyword in Keywords)
+        {
+            string pattern = $"//<#{keyword.Name}#>";  // Erstelle das Regex-Muster für das Keyword
+            result = Regex.Replace(result, pattern, keyword.Code);
+        }
+
+        return result;
+    }
 }

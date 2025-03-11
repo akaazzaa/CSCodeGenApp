@@ -30,6 +30,7 @@ namespace CSCodeGen.Library.Controller
 
         private void OnLoadTemplates(object sender, EventArgs e)
         {
+            _templateRepository.LoadAll();
             _view.ShowTemplates(_templateRepository.GetData());
         }
 

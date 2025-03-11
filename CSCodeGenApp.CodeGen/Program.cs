@@ -17,6 +17,8 @@ namespace CSCodeGenApp.CodeGen
         [STAThread]
         static void Main()
         {
+            ApplicationConfiguration.Initialize();
+
             string templateFolder= string.Empty;
 
             if (ConfigurationManager.AppSettings["FolderName"] != null)
@@ -37,7 +39,7 @@ namespace CSCodeGenApp.CodeGen
 
             ClassController classController = new ClassController(resultRepo,templateRepo,view);
 
-            ApplicationConfiguration.Initialize();
+            
             Application.Run((frmCodeGen)view);
         }
     }

@@ -5,10 +5,11 @@ using FastColoredTextBoxNS;
 using CSCodeGen.Model.Main;
 using System.ComponentModel;
 using CSCodeGen.Model.Interfaces.View;
+using System.Drawing.Design;
 
 namespace CSCodeGenApp.CodeGen
 {
-    public partial class frmCodeGen : Form , IClassView
+    public partial class frmCodeGen : Form, IClassView
     {
         private FastColoredTextBox fastColoredTextBox1 = new FastColoredTextBox();
         private Template currentTemplate;
@@ -28,11 +29,11 @@ namespace CSCodeGenApp.CodeGen
             fastColoredTextBox1.AutoIndentChars = true;
 
 
-            //bsDaten.DataSource = CoreGlobals.Instance.templateController.Templates;
-            //klasseBindingSource.DataSource = classController.Klasse;
-            //bsProperties.DataSource = classController.Klasse.Properties;
+            //Type.DataSource = Enum.GetValues(typeof(KeywordType)); // Alle Enum-Werte
+            //Type.ValueType = typeof(KeywordType);
+            //Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            ChangeCurrentObjekt();
+
         }
 
         private void OnLoad(object? sender, EventArgs e)
@@ -40,30 +41,8 @@ namespace CSCodeGenApp.CodeGen
             LoadTemplates?.Invoke(this, EventArgs.Empty);
         }
 
-        private void cbTemplate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ChangeCurrentObjekt();
-        }
-        private void btnPropertiesAdd_Click(object sender, EventArgs e)
-        {
-            
-        }
-        private void btnPropertiesDelete_Click(object sender, EventArgs e)
-        {
-            //var selectedPropertie = (PropertyDefinition)dataGridView1.CurrentRow.DataBoundItem;
 
-            //if (selectedPropertie == null) { return; }
-            //classController.RemoveProperty(selectedPropertie);
-        }
-        private void dataGridView1_CellValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            //fastColoredTextBox1.Text = classController.ReplaceKeywords(currentTemplate);
-        }
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-
-        }
+      
         private void ChangeCurrentObjekt()
         {
             if (cbTemplate.SelectedItem == null) { return; }
@@ -72,16 +51,23 @@ namespace CSCodeGenApp.CodeGen
 
             fastColoredTextBox1.Text = currentTemplate.Source;
 
+            fastColoredTextBox1.Text = currentTemplate.ErsetzeKeywords();
+
         }
 
         public void ShowTemplates(BindingList<Template> templates)
         {
-           bsDaten.DataSource = templates;
+            bsDaten.DataSource = templates;
+            ChangeCurrentObjekt();
         }
 
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
         }
+
+      
+
+      
     }
 }

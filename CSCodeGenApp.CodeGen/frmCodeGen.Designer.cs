@@ -38,11 +38,13 @@ namespace CSCodeGenApp.CodeGen
             pnlAuswahl = new Panel();
             panel1 = new Panel();
             pnlProperties = new Panel();
-            dataGridView1 = new DataGridView();
+            gvKeyValues = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             Datentyp = new DataGridViewComboBoxColumn();
+            bsResult = new BindingSource(components);
             pnlPropetiesBar = new Panel();
-            btnPropertiesDelete = new Button();
-            btnPropertiesAdd = new Button();
+            btnDelete = new Button();
+            btnAdd = new Button();
             pnlMenu = new Panel();
             cbTemplate = new ComboBox();
             bsDaten = new BindingSource(components);
@@ -63,7 +65,8 @@ namespace CSCodeGenApp.CodeGen
             pnlAuswahl.SuspendLayout();
             panel1.SuspendLayout();
             pnlProperties.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvKeyValues).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsResult).BeginInit();
             pnlPropetiesBar.SuspendLayout();
             pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bsDaten).BeginInit();
@@ -122,7 +125,7 @@ namespace CSCodeGenApp.CodeGen
             // pnlProperties
             // 
             pnlProperties.BorderStyle = BorderStyle.Fixed3D;
-            pnlProperties.Controls.Add(dataGridView1);
+            pnlProperties.Controls.Add(gvKeyValues);
             pnlProperties.Controls.Add(pnlPropetiesBar);
             pnlProperties.Dock = DockStyle.Fill;
             pnlProperties.Location = new Point(0, 0);
@@ -130,20 +133,28 @@ namespace CSCodeGenApp.CodeGen
             pnlProperties.Size = new Size(459, 338);
             pnlProperties.TabIndex = 0;
             // 
-            // dataGridView1
+            // gvKeyValues
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToResizeColumns = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Datentyp });
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(29, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(426, 334);
-            dataGridView1.TabIndex = 1;
+            gvKeyValues.AllowUserToAddRows = false;
+            gvKeyValues.AllowUserToDeleteRows = false;
+            gvKeyValues.AllowUserToResizeColumns = false;
+            gvKeyValues.AllowUserToResizeRows = false;
+            gvKeyValues.AutoGenerateColumns = false;
+            gvKeyValues.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gvKeyValues.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvKeyValues.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, Datentyp });
+            gvKeyValues.DataSource = bsResult;
+            gvKeyValues.Dock = DockStyle.Fill;
+            gvKeyValues.Location = new Point(29, 0);
+            gvKeyValues.Name = "gvKeyValues";
+            gvKeyValues.Size = new Size(426, 334);
+            gvKeyValues.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // Datentyp
             // 
@@ -152,35 +163,40 @@ namespace CSCodeGenApp.CodeGen
             Datentyp.Items.AddRange(new object[] { "int", "bool", "string", "float", "Date" });
             Datentyp.Name = "Datentyp";
             // 
+            // bsResult
+            // 
+            bsResult.DataSource = typeof(Result);
+            // 
             // pnlPropetiesBar
             // 
-            pnlPropetiesBar.Controls.Add(btnPropertiesDelete);
-            pnlPropetiesBar.Controls.Add(btnPropertiesAdd);
+            pnlPropetiesBar.Controls.Add(btnDelete);
+            pnlPropetiesBar.Controls.Add(btnAdd);
             pnlPropetiesBar.Dock = DockStyle.Left;
             pnlPropetiesBar.Location = new Point(0, 0);
             pnlPropetiesBar.Name = "pnlPropetiesBar";
             pnlPropetiesBar.Size = new Size(29, 334);
             pnlPropetiesBar.TabIndex = 0;
             // 
-            // btnPropertiesDelete
+            // btnDelete
             // 
-            btnPropertiesDelete.Dock = DockStyle.Top;
-            btnPropertiesDelete.Location = new Point(0, 23);
-            btnPropertiesDelete.Name = "btnPropertiesDelete";
-            btnPropertiesDelete.Size = new Size(29, 23);
-            btnPropertiesDelete.TabIndex = 1;
-            btnPropertiesDelete.Text = "-";
-            btnPropertiesDelete.UseVisualStyleBackColor = true;
+            btnDelete.Dock = DockStyle.Top;
+            btnDelete.Location = new Point(0, 23);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(29, 23);
+            btnDelete.TabIndex = 1;
+            btnDelete.Text = "-";
+            btnDelete.UseVisualStyleBackColor = true;
             // 
-            // btnPropertiesAdd
+            // btnAdd
             // 
-            btnPropertiesAdd.Dock = DockStyle.Top;
-            btnPropertiesAdd.Location = new Point(0, 0);
-            btnPropertiesAdd.Name = "btnPropertiesAdd";
-            btnPropertiesAdd.Size = new Size(29, 23);
-            btnPropertiesAdd.TabIndex = 0;
-            btnPropertiesAdd.Text = "+";
-            btnPropertiesAdd.UseVisualStyleBackColor = true;
+            btnAdd.Dock = DockStyle.Top;
+            btnAdd.Location = new Point(0, 0);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(29, 23);
+            btnAdd.TabIndex = 0;
+            btnAdd.Text = "+";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // pnlMenu
             // 
@@ -204,6 +220,7 @@ namespace CSCodeGenApp.CodeGen
             cbTemplate.Name = "cbTemplate";
             cbTemplate.Size = new Size(229, 23);
             cbTemplate.TabIndex = 3;
+            cbTemplate.SelectedIndexChanged += cbTemplate_SelectedIndexChanged_1;
             // 
             // bsDaten
             // 
@@ -299,7 +316,8 @@ namespace CSCodeGenApp.CodeGen
             pnlAuswahl.ResumeLayout(false);
             panel1.ResumeLayout(false);
             pnlProperties.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvKeyValues).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsResult).EndInit();
             pnlPropetiesBar.ResumeLayout(false);
             pnlMenu.ResumeLayout(false);
             pnlMenu.PerformLayout();
@@ -331,13 +349,15 @@ namespace CSCodeGenApp.CodeGen
         private Panel panel1;
         private Panel pnlProperties;
         private Panel pnlPropetiesBar;
-        private Button btnPropertiesDelete;
-        private Button btnPropertiesAdd;
-        private DataGridView dataGridView1;
+        private Button btnDelete;
+        private Button btnAdd;
+        private DataGridView gvKeyValues;
         private DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private DataGridViewComboBoxColumn Datentyp;
         private Panel pnlEditorMain;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewComboBoxColumn Datentyp;
+        private BindingSource bsResult;
     }
 }

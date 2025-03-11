@@ -36,9 +36,6 @@ namespace CSCodeGen.UI
                 templateFolder = ConfigurationManager.AppSettings["FolderName"];
             }
 
-
-
-
             string templatePath = Path.Combine(Directory.GetCurrentDirectory(), templateFolder);
 
             IRepository<Template> storage = new TemplateRepository(templatePath);
