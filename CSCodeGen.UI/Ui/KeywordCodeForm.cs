@@ -8,9 +8,9 @@ namespace CSCodeGen.UI.Ui
     public partial class KeywordCodeForm : Form
     {
         private ucEditor ucEditor;
-        Keyword Keyword;
+        Textbaustein Keyword;
         public event Action KeywordChanged;
-        public KeywordCodeForm(Keyword keyword)
+        public KeywordCodeForm(Textbaustein keyword)
         {
             InitializeComponent();
 
@@ -24,7 +24,7 @@ namespace CSCodeGen.UI.Ui
 
         private void CodeChanged(object sender, string newCode)
         {
-            Keyword.Code = newCode;
+            Keyword.Text = newCode;
             KeywordChanged?.Invoke();
         }
     }

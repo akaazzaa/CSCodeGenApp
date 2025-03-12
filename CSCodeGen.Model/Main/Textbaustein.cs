@@ -1,15 +1,16 @@
-﻿using System.ComponentModel;
+﻿using CSCodeGen.Model.Settings;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace CSCodeGen.Model.Main
 {
-    public class Keyword : INotifyPropertyChanged
+    public class Textbaustein : INotifyPropertyChanged
     {
         #region Variabeln
         private static int _nextId = 1;
-        private string _code;
-        private KeywordType _type;
+        private string _text;
+        private DataType _type;
         private string _name;
         private bool _prefixWithComment;
         #endregion
@@ -25,16 +26,16 @@ namespace CSCodeGen.Model.Main
                 OnPropertyChanged();
             }
         }
-        public string Code
+        public string Text
         {
-            get => _code;
+            get => _text;
             set
             {
-                _code = value;
+                _text = value;
                 OnPropertyChanged();
             }
         }
-        public KeywordType Type
+        public DataType Type
         {
             get => _type;
             set
@@ -43,6 +44,7 @@ namespace CSCodeGen.Model.Main
                 OnPropertyChanged();
             }
         }
+      
         public bool PrefixWithComment
         {
             get => _prefixWithComment;
@@ -70,14 +72,14 @@ namespace CSCodeGen.Model.Main
         #endregion
 
         #region Konstruktoren
-        public Keyword()
+        public Textbaustein()
         {
             Id = _nextId++;
-            _code = string.Empty;
+            _text = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
         }
-        public Keyword(string key)
+        public Textbaustein(string key)
         {
             Id = _nextId++;
             Name = key;

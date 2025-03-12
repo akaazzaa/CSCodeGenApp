@@ -12,9 +12,13 @@ namespace CSCodeGen.Model.Main
 
         public string Content { get; set; }
 
+        public List<UserValue> userValues { get; set; }
+
         public Result()
         {
-            
+            Name = string.Empty;
+            Content = string.Empty;
+            userValues = new List<UserValue>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using CSCodeGen.Model;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Main;
+using CSCodeGen.Model.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,14 +31,14 @@ namespace CSCodeGen.DataAccess.Model.Storage
         {
             _templates.Add(template);
         }
-        public IEnumerable<Keyword> GetDefaultKeywords()
+        public IEnumerable<Textbaustein> GetDefaultKeywords()
         {
-            return new List<Keyword>
+            return new List<Textbaustein>
         {
-            new Keyword { Id = 100, Name = ConfigData.Keywords.Classname, PrefixWithComment = false },
-            new Keyword { Id = 200, Name = ConfigData.Keywords.Propertie, PrefixWithComment = false },
-            new Keyword { Id = 300, Name = ConfigData.Keywords.Namespace, PrefixWithComment = false },
-            new Keyword { Id = 400, Name = ConfigData.Keywords.Variable, PrefixWithComment = false }
+            new Textbaustein { Id = 100, Name = ConfigData.DefaultBaustein.Classname, PrefixWithComment = false },
+            new Textbaustein { Id = 200, Name = ConfigData.DefaultBaustein.Propertie, PrefixWithComment = false },
+            new Textbaustein { Id = 300, Name = ConfigData.DefaultBaustein.Namespace, PrefixWithComment = false },
+            new Textbaustein { Id = 400, Name = ConfigData.DefaultBaustein.Variable, PrefixWithComment = false }
         };
         }    
 

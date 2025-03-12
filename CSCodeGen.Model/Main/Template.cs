@@ -12,9 +12,9 @@ public class Template : Observable, INotifyPropertyChanged
 
     #region Variabeln
     private static int nextid = 1;
-    private string _Name;
-    private string _Source;
-    private string _Description;
+    private string _name;
+    private string _content;
+    private string _description;
     #endregion
 
     #region Properties
@@ -25,7 +25,7 @@ public class Template : Observable, INotifyPropertyChanged
     {
         get
         {
-            return _Name + ".xml";
+            return _name + ".xml";
         }
     }
     // Properties
@@ -40,18 +40,18 @@ public class Template : Observable, INotifyPropertyChanged
     [Description("Name des Templates")]
     public string Name
     {
-        get { return _Name; }
+        get { return _name; }
         set
         {
-            if (_Name != value)
+            if (_name != value)
             {
-                if (_Name != null)
+                if (_name != null)
                 {
                     MarkAsChanged();
                 }
 
-                OldName = _Name;
-                _Name = value;
+                OldName = _name;
+                _name = value;
                 NotifyPropertyChanged();
 
             }
@@ -62,17 +62,17 @@ public class Template : Observable, INotifyPropertyChanged
     [Description("Beschreibung des Templates")]
     public string Description
     {
-        get { return _Description; }
+        get { return _description; }
         set
         {
-            if (_Description != value)
+            if (_description != value)
             {
-                if (_Description != null)
+                if (_description != null)
                 {
                     MarkAsChanged();
                 }
 
-                _Description = value;
+                _description = value;
                 NotifyPropertyChanged();
 
             }
@@ -86,28 +86,25 @@ public class Template : Observable, INotifyPropertyChanged
     [ReadOnly(true)]
     [Category("Information")]
     [Description("Quellcode des Templates")]
-    public string Source
+    public string Content
     {
-        get { return _Source; }
+        get { return _content; }
         set
         {
-            if (_Source != value)
+            if (_content != value)
             {
-                if (_Source != null)
+                if (_content != null)
                 {
                     MarkAsChanged();
                 }
-
-                _Source = value;
+                _content = value;
                 NotifyPropertyChanged();
-
             }
         }
     }
-
     [Category("Template")]
     [Description("Liste der Keywords")]
-    public BindingList<Keyword> Keywords { get; set; }
+    public BindingList<Textbaustein> Textbausteine { get; set; }
     
     #endregion
 
@@ -116,7 +113,7 @@ public class Template : Observable, INotifyPropertyChanged
     {
         ID = nextid++;
         CreationDate = DateTime.Now;
-        Keywords = new BindingList<Keyword>();
+        Textbausteine = new BindingList<Textbaustein>();
         IsChanged = true;
     }
 
@@ -125,7 +122,7 @@ public class Template : Observable, INotifyPropertyChanged
         Name = name;
         ID = nextid++;
         CreationDate = DateTime.Now;
-        Keywords = new BindingList<Keyword>();
+        Textbausteine = new BindingList<Textbaustein>();
         IsChanged = true;
     }
     #endregion
@@ -138,16 +135,5 @@ public class Template : Observable, INotifyPropertyChanged
     }
     #endregion
 
-    public string ErsetzeKeywords()
-    {
-        string result = string.Empty;
-
-        foreach (var keyword in Keywords)
-        {
-            string pattern = $"//<#{keyword.Name}#>";  // Erstelle das Regex-Muster für das Keyword
-            result = Regex.Replace(result, pattern, keyword.Code);
-        }
-
-        return result;
-    }
+   
 }

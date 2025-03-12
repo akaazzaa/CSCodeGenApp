@@ -33,19 +33,24 @@ namespace CSCodeGenApp.CodeGen
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             pnlMain = new Panel();
             spMain = new SplitContainer();
             pnlAuswahl = new Panel();
             panel1 = new Panel();
             pnlProperties = new Panel();
-            gvKeyValues = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            Datentyp = new DataGridViewComboBoxColumn();
+            gvUserValues = new DataGridView();
+            gvtxtValue = new DataGridViewTextBoxColumn();
+            gvcbType = new DataGridViewComboBoxColumn();
+            bsUserValues = new BindingSource(components);
             bsResult = new BindingSource(components);
             pnlPropetiesBar = new Panel();
             btnDelete = new Button();
             btnAdd = new Button();
             pnlMenu = new Panel();
+            btnGenerate = new Button();
             cbTemplate = new ComboBox();
             bsDaten = new BindingSource(components);
             txtName = new TextBox();
@@ -65,7 +70,8 @@ namespace CSCodeGenApp.CodeGen
             pnlAuswahl.SuspendLayout();
             panel1.SuspendLayout();
             pnlProperties.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gvKeyValues).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gvUserValues).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsUserValues).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsResult).BeginInit();
             pnlPropetiesBar.SuspendLayout();
             pnlMenu.SuspendLayout();
@@ -117,51 +123,81 @@ namespace CSCodeGenApp.CodeGen
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(pnlProperties);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 108);
+            panel1.Location = new Point(0, 200);
             panel1.Name = "panel1";
-            panel1.Size = new Size(461, 340);
+            panel1.Size = new Size(461, 248);
             panel1.TabIndex = 1;
             // 
             // pnlProperties
             // 
             pnlProperties.BorderStyle = BorderStyle.Fixed3D;
-            pnlProperties.Controls.Add(gvKeyValues);
+            pnlProperties.Controls.Add(gvUserValues);
             pnlProperties.Controls.Add(pnlPropetiesBar);
             pnlProperties.Dock = DockStyle.Fill;
             pnlProperties.Location = new Point(0, 0);
             pnlProperties.Name = "pnlProperties";
-            pnlProperties.Size = new Size(459, 338);
+            pnlProperties.Size = new Size(459, 246);
             pnlProperties.TabIndex = 0;
             // 
-            // gvKeyValues
+            // gvUserValues
             // 
-            gvKeyValues.AllowUserToAddRows = false;
-            gvKeyValues.AllowUserToDeleteRows = false;
-            gvKeyValues.AllowUserToResizeColumns = false;
-            gvKeyValues.AllowUserToResizeRows = false;
-            gvKeyValues.AutoGenerateColumns = false;
-            gvKeyValues.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            gvKeyValues.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gvKeyValues.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, Datentyp });
-            gvKeyValues.DataSource = bsResult;
-            gvKeyValues.Dock = DockStyle.Fill;
-            gvKeyValues.Location = new Point(29, 0);
-            gvKeyValues.Name = "gvKeyValues";
-            gvKeyValues.Size = new Size(426, 334);
-            gvKeyValues.TabIndex = 1;
+            gvUserValues.AllowUserToAddRows = false;
+            gvUserValues.AllowUserToDeleteRows = false;
+            gvUserValues.AllowUserToResizeColumns = false;
+            gvUserValues.AllowUserToResizeRows = false;
+            gvUserValues.AutoGenerateColumns = false;
+            gvUserValues.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            gvUserValues.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            gvUserValues.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvUserValues.Columns.AddRange(new DataGridViewColumn[] { gvtxtValue, gvcbType });
+            gvUserValues.DataSource = bsUserValues;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            gvUserValues.DefaultCellStyle = dataGridViewCellStyle2;
+            gvUserValues.Dock = DockStyle.Fill;
+            gvUserValues.Location = new Point(29, 0);
+            gvUserValues.Name = "gvUserValues";
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            gvUserValues.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            gvUserValues.Size = new Size(426, 242);
+            gvUserValues.TabIndex = 1;
             // 
-            // dataGridViewTextBoxColumn1
+            // gvtxtValue
             // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            dataGridViewTextBoxColumn1.HeaderText = "Name";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            gvtxtValue.DataPropertyName = "Value";
+            gvtxtValue.HeaderText = "Value";
+            gvtxtValue.Name = "gvtxtValue";
             // 
-            // Datentyp
+            // gvcbType
             // 
-            Datentyp.DataPropertyName = "DataType";
-            Datentyp.HeaderText = "Datentyp";
-            Datentyp.Items.AddRange(new object[] { "int", "bool", "string", "float", "Date" });
-            Datentyp.Name = "Datentyp";
+            gvcbType.DataPropertyName = "Type";
+            gvcbType.HeaderText = "Type";
+            gvcbType.Name = "gvcbType";
+            gvcbType.Resizable = DataGridViewTriState.True;
+            gvcbType.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // bsUserValues
+            // 
+            bsUserValues.DataMember = "userValues";
+            bsUserValues.DataSource = bsResult;
             // 
             // bsResult
             // 
@@ -174,7 +210,7 @@ namespace CSCodeGenApp.CodeGen
             pnlPropetiesBar.Dock = DockStyle.Left;
             pnlPropetiesBar.Location = new Point(0, 0);
             pnlPropetiesBar.Name = "pnlPropetiesBar";
-            pnlPropetiesBar.Size = new Size(29, 334);
+            pnlPropetiesBar.Size = new Size(29, 242);
             pnlPropetiesBar.TabIndex = 0;
             // 
             // btnDelete
@@ -186,6 +222,7 @@ namespace CSCodeGenApp.CodeGen
             btnDelete.TabIndex = 1;
             btnDelete.Text = "-";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnAdd
             // 
@@ -201,6 +238,7 @@ namespace CSCodeGenApp.CodeGen
             // pnlMenu
             // 
             pnlMenu.BorderStyle = BorderStyle.Fixed3D;
+            pnlMenu.Controls.Add(btnGenerate);
             pnlMenu.Controls.Add(cbTemplate);
             pnlMenu.Controls.Add(txtName);
             pnlMenu.Controls.Add(label2);
@@ -208,8 +246,18 @@ namespace CSCodeGenApp.CodeGen
             pnlMenu.Dock = DockStyle.Top;
             pnlMenu.Location = new Point(0, 0);
             pnlMenu.Name = "pnlMenu";
-            pnlMenu.Size = new Size(461, 108);
+            pnlMenu.Size = new Size(461, 200);
             pnlMenu.TabIndex = 0;
+            // 
+            // btnGenerate
+            // 
+            btnGenerate.Location = new Point(347, 153);
+            btnGenerate.Name = "btnGenerate";
+            btnGenerate.Size = new Size(95, 23);
+            btnGenerate.TabIndex = 4;
+            btnGenerate.Text = "Generate";
+            btnGenerate.UseVisualStyleBackColor = true;
+            btnGenerate.Click += btnGenerate_Click;
             // 
             // cbTemplate
             // 
@@ -220,7 +268,6 @@ namespace CSCodeGenApp.CodeGen
             cbTemplate.Name = "cbTemplate";
             cbTemplate.Size = new Size(229, 23);
             cbTemplate.TabIndex = 3;
-            cbTemplate.SelectedIndexChanged += cbTemplate_SelectedIndexChanged_1;
             // 
             // bsDaten
             // 
@@ -228,6 +275,7 @@ namespace CSCodeGenApp.CodeGen
             // 
             // txtName
             // 
+            txtName.DataBindings.Add(new Binding("Text", bsResult, "Name", true));
             txtName.Location = new Point(117, 55);
             txtName.Name = "txtName";
             txtName.Size = new Size(229, 23);
@@ -316,7 +364,8 @@ namespace CSCodeGenApp.CodeGen
             pnlAuswahl.ResumeLayout(false);
             panel1.ResumeLayout(false);
             pnlProperties.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)gvKeyValues).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gvUserValues).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsUserValues).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsResult).EndInit();
             pnlPropetiesBar.ResumeLayout(false);
             pnlMenu.ResumeLayout(false);
@@ -351,13 +400,14 @@ namespace CSCodeGenApp.CodeGen
         private Panel pnlPropetiesBar;
         private Button btnDelete;
         private Button btnAdd;
-        private DataGridView gvKeyValues;
+        private DataGridView gvUserValues;
         private DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
-        private DataGridViewComboBoxColumn typeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private Panel pnlEditorMain;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewComboBoxColumn Datentyp;
+        private Button btnGenerate;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private BindingSource bsUserValues;
         private BindingSource bsResult;
+        private DataGridViewTextBoxColumn gvtxtValue;
+        private DataGridViewComboBoxColumn gvcbType;
     }
 }

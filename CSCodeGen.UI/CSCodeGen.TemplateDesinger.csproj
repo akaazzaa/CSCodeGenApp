@@ -38,7 +38,4 @@
     <Compile Remove="TemplateDesignerForm.Designer.cs" />
     <EmbeddedResource Remove="TemplateDesignerForm.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
 </Project>

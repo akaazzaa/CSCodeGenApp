@@ -1,5 +1,6 @@
 ﻿using CSCodeGen.Model;
 using CSCodeGen.Model.Main;
+using CSCodeGen.Model.Settings;
 using FastColoredTextBoxNS;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace CSCodeGen.UI
         private FastColoredTextBox fastColoredTextBox = new FastColoredTextBox();
         public event EventHandler<string> CodeChanged;
         public event EventHandler GetDefaultKeys;
-        private List<Keyword> defaultKeywords;
+        public event EventHandler UpdatePlatzhalter;
+        private List<Textbaustein> defaultKeywords = new List<Textbaustein>();
         private Template currentTemplate;
 
         public ucEditor(object obj)
@@ -33,6 +35,7 @@ namespace CSCodeGen.UI
             fastColoredTextBox.TextChanged += OnTextChanged;
 
             listBox1.DoubleClick += InsertKeyword;
+            
         }
         private void Initialize<T>(T obj)
         {
@@ -41,26 +44,23 @@ namespace CSCodeGen.UI
 
             if (obj is Template template)
             {
-                fastColoredTextBox.Text = template.Source;
+                fastColoredTextBox.Text = template.Content;
                 currentTemplate = template;
                 LoadKeywords();
                 RefreshKeywordsList();
-
-
             }
-            else if (obj is Keyword keyword)
+            else if (obj is Textbaustein keyword)
             {
-                fastColoredTextBox.Text = keyword.Code;
+                fastColoredTextBox.Text = keyword.Text;
                 LoadKeywords();
                 RefreshKeywordsList();
-
             }
         }
         private void InsertKeyword(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem != null)
             {
-                Keyword selectedKeyword = (Keyword)listBox1.SelectedItem;
+                Textbaustein selectedKeyword = (Textbaustein)listBox1.SelectedItem;
                 string fullKeyword = $"{selectedKeyword.DisplayText}";
 
                 int insertPosition = fastColoredTextBox.SelectionStart;
@@ -74,19 +74,15 @@ namespace CSCodeGen.UI
         private void LoadKeywords()
         {
 
-            // Hole die Standard-Keywords
-            defaultKeywords = (List<Keyword>)ConfigData.GetDefaultKeywords();  
+            //defaultKeywords = (List<Textbaustein>)ConfigData.GetDefaults();  
 
             if (currentTemplate == null)
             {
-                // Ohne Template einfach zurückgeben
+               
                 return;
             }
 
-            
-
-            // Eventhandler registrieren
-            currentTemplate.Keywords.ListChanged += Keywords_ListChanged;
+            currentTemplate.Textbausteine.ListChanged += Keywords_ListChanged;
 
             UpdateKeywordsList(currentTemplate);
 
@@ -97,8 +93,8 @@ namespace CSCodeGen.UI
                 e.ListChangedType == ListChangedType.ItemDeleted || 
                 e.ListChangedType == ListChangedType.ItemChanged)
             {
-                RefreshKeywordsList();
                 UpdateKeywordsList(currentTemplate);
+                RefreshKeywordsList(); 
             }
         }
         private void OnTextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -114,7 +110,8 @@ namespace CSCodeGen.UI
         }
         private void UpdateKeywordsList(Template template)
         {
-            foreach (Keyword keyword in template.Keywords)
+
+            foreach (Textbaustein keyword in template.Textbausteine)
             {
                 if (!defaultKeywords.Any(k => k.Name == keyword.Name))
                 {

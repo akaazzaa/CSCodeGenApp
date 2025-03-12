@@ -41,9 +41,9 @@ namespace CSCodeGen.Library.Controller
                 return; 
             }
 
-            if (args.Template.Keywords.Contains(args.Keyword))
+            if (args.Template.Textbausteine.Contains(args.Keyword))
             {
-                args.Template.Keywords.Remove(args.Keyword);
+                args.Template.Textbausteine.Remove(args.Keyword);
                 args.Template.IsChanged = true;
             }
         }
@@ -54,8 +54,8 @@ namespace CSCodeGen.Library.Controller
                 _view.ShowMessage("Fehler: Kein Template ausgewählt, um ein Keyword hinzuzufügen.");
                 return;
             }
-            var keyword = new Keyword();
-            args.Template.Keywords.Add(keyword);
+            var keyword = new Textbaustein();
+            args.Template.Textbausteine.Add(keyword);
             args.Template.IsChanged = true;
 
             _view.ShowMessage($"Keyword wurde zum Template '{args.Template.Name}' hinzugefügt!");

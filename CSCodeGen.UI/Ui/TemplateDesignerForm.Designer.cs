@@ -36,15 +36,10 @@ namespace CSCodeGen.UI
             tcMain = new System.Windows.Forms.TabControl();
             pnlSidebarRight = new System.Windows.Forms.Panel();
             gvKeywords = new System.Windows.Forms.DataGridView();
-            btnCode = new System.Windows.Forms.DataGridViewButtonColumn();
-            gvtxtName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            gvtxtDisplaytext = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            bsKeywords = new System.Windows.Forms.BindingSource(components);
-            pnlKeywordMenu = new System.Windows.Forms.Panel();
-            keywordmenu = new System.Windows.Forms.MenuStrip();
-            btnAddKeyword = new System.Windows.Forms.ToolStripMenuItem();
-            btnRemovekeyword = new System.Windows.Forms.ToolStripMenuItem();
+            dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            prefixWithCommentDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            bsPlatzhalter = new System.Windows.Forms.BindingSource(components);
             pnalPropertys = new System.Windows.Forms.Panel();
             pgTemplate = new System.Windows.Forms.PropertyGrid();
             pnlSidebar = new System.Windows.Forms.Panel();
@@ -55,14 +50,11 @@ namespace CSCodeGen.UI
             mainMenu = new System.Windows.Forms.MenuStrip();
             btnNeuesTemplate = new System.Windows.Forms.ToolStripMenuItem();
             btnSave = new System.Windows.Forms.ToolStripMenuItem();
-            settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             panelMain.SuspendLayout();
             panelContent.SuspendLayout();
             pnlSidebarRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gvKeywords).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsKeywords).BeginInit();
-            pnlKeywordMenu.SuspendLayout();
-            keywordmenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bsPlatzhalter).BeginInit();
             pnalPropertys.SuspendLayout();
             pnlSidebar.SuspendLayout();
             pnlList.SuspendLayout();
@@ -110,7 +102,6 @@ namespace CSCodeGen.UI
             // 
             pnlSidebarRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlSidebarRight.Controls.Add(gvKeywords);
-            pnlSidebarRight.Controls.Add(pnlKeywordMenu);
             pnlSidebarRight.Controls.Add(pnalPropertys);
             pnlSidebarRight.Dock = System.Windows.Forms.DockStyle.Right;
             pnlSidebarRight.Location = new System.Drawing.Point(709, 0);
@@ -126,84 +117,44 @@ namespace CSCodeGen.UI
             gvKeywords.AllowUserToResizeColumns = false;
             gvKeywords.AutoGenerateColumns = false;
             gvKeywords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { btnCode, gvtxtName, Type, gvtxtDisplaytext });
-            gvKeywords.DataSource = bsKeywords;
+            gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn1, prefixWithCommentDataGridViewCheckBoxColumn, Type });
+            gvKeywords.DataSource = bsPlatzhalter;
             gvKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
-            gvKeywords.Location = new System.Drawing.Point(0, 318);
+            gvKeywords.Enabled = false;
+            gvKeywords.Location = new System.Drawing.Point(0, 294);
             gvKeywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gvKeywords.MultiSelect = false;
             gvKeywords.Name = "gvKeywords";
-            gvKeywords.Size = new System.Drawing.Size(329, 202);
+            gvKeywords.ReadOnly = true;
+            gvKeywords.Size = new System.Drawing.Size(329, 226);
             gvKeywords.TabIndex = 1;
             gvKeywords.CellClick += gvKeywords_CellClick;
+            gvKeywords.DoubleClick += gvKeywords_DoubleClick;
             // 
-            // btnCode
+            // dataGridViewTextBoxColumn1
             // 
-            btnCode.DataPropertyName = "Code";
-            btnCode.HeaderText = "Code";
-            btnCode.Name = "btnCode";
-            btnCode.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            btnCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            btnCode.Text = "Code anschauen";
-            btnCode.UseColumnTextForButtonValue = true;
+            dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // gvtxtName
+            // prefixWithCommentDataGridViewCheckBoxColumn
             // 
-            gvtxtName.DataPropertyName = "Name";
-            gvtxtName.HeaderText = "Name";
-            gvtxtName.Name = "gvtxtName";
+            prefixWithCommentDataGridViewCheckBoxColumn.DataPropertyName = "PrefixWithComment";
+            prefixWithCommentDataGridViewCheckBoxColumn.HeaderText = "PrefixWithComment";
+            prefixWithCommentDataGridViewCheckBoxColumn.Name = "prefixWithCommentDataGridViewCheckBoxColumn";
+            prefixWithCommentDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // Type
             // 
             Type.DataPropertyName = "Type";
-            Type.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             Type.HeaderText = "Type";
             Type.Name = "Type";
+            Type.ReadOnly = true;
             // 
-            // gvtxtDisplaytext
+            // bsPlatzhalter
             // 
-            gvtxtDisplaytext.DataPropertyName = "DisplayText";
-            gvtxtDisplaytext.HeaderText = "DisplayText";
-            gvtxtDisplaytext.Name = "gvtxtDisplaytext";
-            gvtxtDisplaytext.ReadOnly = true;
-            // 
-            // bsKeywords
-            // 
-            bsKeywords.DataSource = typeof(Keyword);
-            // 
-            // pnlKeywordMenu
-            // 
-            pnlKeywordMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            pnlKeywordMenu.Controls.Add(keywordmenu);
-            pnlKeywordMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            pnlKeywordMenu.Location = new System.Drawing.Point(0, 294);
-            pnlKeywordMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            pnlKeywordMenu.Name = "pnlKeywordMenu";
-            pnlKeywordMenu.Size = new System.Drawing.Size(329, 24);
-            pnlKeywordMenu.TabIndex = 2;
-            // 
-            // keywordmenu
-            // 
-            keywordmenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnAddKeyword, btnRemovekeyword });
-            keywordmenu.Location = new System.Drawing.Point(0, 0);
-            keywordmenu.Name = "keywordmenu";
-            keywordmenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            keywordmenu.Size = new System.Drawing.Size(327, 24);
-            keywordmenu.TabIndex = 0;
-            keywordmenu.Text = "menuStrip2";
-            // 
-            // btnAddKeyword
-            // 
-            btnAddKeyword.Name = "btnAddKeyword";
-            btnAddKeyword.Size = new System.Drawing.Size(41, 20);
-            btnAddKeyword.Text = "Add";
-            btnAddKeyword.Click += btnAddKeyword_Click;
-            // 
-            // btnRemovekeyword
-            // 
-            btnRemovekeyword.Name = "btnRemovekeyword";
-            btnRemovekeyword.Size = new System.Drawing.Size(62, 20);
-            btnRemovekeyword.Text = "Remove";
-            btnRemovekeyword.Click += btnRemovekeyword_Click;
+            bsPlatzhalter.DataSource = typeof(Textbaustein);
             // 
             // pnalPropertys
             // 
@@ -261,6 +212,10 @@ namespace CSCodeGen.UI
             listTemplate.TabIndex = 0;
             listTemplate.DoubleClick += listTemplate_DoubleClick;
             // 
+            // bsTemplates
+            // 
+            bsTemplates.DataSource = typeof(Template);
+            // 
             // pnlbar
             // 
             pnlbar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -274,7 +229,7 @@ namespace CSCodeGen.UI
             // 
             // mainMenu
             // 
-            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave, settingsToolStripMenuItem });
+            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave });
             mainMenu.Location = new System.Drawing.Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -296,12 +251,6 @@ namespace CSCodeGen.UI
             btnSave.Text = "Speichern";
             btnSave.Click += btnSave_Click;
             // 
-            // settingsToolStripMenuItem
-            // 
-            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            settingsToolStripMenuItem.Text = "Settings";
-            // 
             // TemplateDesignerForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -312,16 +261,12 @@ namespace CSCodeGen.UI
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "TemplateDesignerForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "TemplateDesigner";
+            Text = "Designer";
             panelMain.ResumeLayout(false);
             panelContent.ResumeLayout(false);
             pnlSidebarRight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gvKeywords).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsKeywords).EndInit();
-            pnlKeywordMenu.ResumeLayout(false);
-            pnlKeywordMenu.PerformLayout();
-            keywordmenu.ResumeLayout(false);
-            keywordmenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bsPlatzhalter).EndInit();
             pnalPropertys.ResumeLayout(false);
             pnlSidebar.ResumeLayout(false);
             pnlList.ResumeLayout(false);
@@ -340,14 +285,9 @@ namespace CSCodeGen.UI
         private System.Windows.Forms.Panel pnlSidebar;
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.Panel pnlSidebarRight;
-        private System.Windows.Forms.DataGridView gvKeywords;
-        private System.Windows.Forms.Panel pnlKeywordMenu;
-        private System.Windows.Forms.MenuStrip keywordmenu;
-        private System.Windows.Forms.ToolStripMenuItem btnAddKeyword;
-        private System.Windows.Forms.ToolStripMenuItem btnRemovekeyword;
         private System.Windows.Forms.Panel pnalPropertys;
         private System.Windows.Forms.DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource bsKeywords;
+        private System.Windows.Forms.BindingSource bsPlatzhalter;
         private System.Windows.Forms.PropertyGrid pgTemplate;
         private System.Windows.Forms.Panel pnlList;
         private System.Windows.Forms.ListBox listTemplate;
@@ -355,11 +295,11 @@ namespace CSCodeGen.UI
         private System.Windows.Forms.ToolStripMenuItem btnNeuesTemplate;
         private System.Windows.Forms.BindingSource bsTemplates;
         private System.Windows.Forms.ToolStripMenuItem btnSave;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.DataGridViewComboBoxColumn gvcbDataType;
-        private System.Windows.Forms.DataGridViewButtonColumn btnCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtName;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gvtxtDisplaytext;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView gvKeywords;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn prefixWithCommentDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
     }
 }

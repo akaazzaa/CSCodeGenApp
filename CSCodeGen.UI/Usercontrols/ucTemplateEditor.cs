@@ -12,6 +12,7 @@ namespace CSCodeGen.UI.Usercontrols
         public event EventHandler<Template> OnSaveChanges;
         public event EventHandler<Template> OnResetChanges;
         public event EventHandler<string> OnCodeChanged;
+        public event EventHandler UpdatePlatzhalter;
         public event EventHandler OnKeywordDeleted;
 
         private Template currentTemplate;
@@ -23,9 +24,11 @@ namespace CSCodeGen.UI.Usercontrols
 
             ucEditor = new ucEditor(template);
 
+            
+
             ucEditor.CodeChanged += (s, newCode) =>
             {
-                currentTemplate.Source = newCode;
+                currentTemplate.Content = newCode;
                 OnCodeChanged?.Invoke(this, newCode); // Weiterleitung an die Form
             };
 
@@ -35,6 +38,7 @@ namespace CSCodeGen.UI.Usercontrols
             btnRemove.Click += (s, e) => CloseTab();
 
         }
+
 
         private void CloseTab()
         {

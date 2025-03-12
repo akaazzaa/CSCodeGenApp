@@ -13,6 +13,7 @@ using CSCodeGen.Model.Args;
 using CSCodeGen.UI.Ui;
 using CSCodeGen.Model.Interfaces.View;
 
+
 namespace CSCodeGen.UI
 {
     public partial class TemplateDesignerForm : Form, ICodeTemplateView
@@ -34,9 +35,11 @@ namespace CSCodeGen.UI
             this.Load += OnLoad;
             this.FormClosing += OnFormClosing;
 
-            Type.DataSource = Enum.GetValues(typeof(KeywordType)); // Alle Enum-Werte
-            Type.ValueType = typeof(KeywordType);
-            Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //Type.DataSource = Enum.GetValues(typeof(DataType)); // Alle Enum-Werte
+            //Type.ValueType = typeof(DataType);
+            //Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //gvKeywords.CellValueChanged += GvKeywords_CellChanged;
+
         }
 
         #region Form Events
@@ -52,15 +55,7 @@ namespace CSCodeGen.UI
         {
             SaveAll?.Invoke(this, EventArgs.Empty);
         }
-        private void btnAddKeyword_Click(object sender, EventArgs e)
-        {   
-            if (tcMain.SelectedTab == null) { return; }
-            TemplateEventArgs args = new TemplateEventArgs();
-            args.Template = tabs[tcMain.SelectedTab];
 
-            AddKeyword?.Invoke(this, args);
-            gvKeywords.Refresh();
-        }
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
@@ -75,12 +70,31 @@ namespace CSCodeGen.UI
 
             var args = new TemplateEventArgs();
 
-            args.Keyword = (Keyword)gvKeywords.CurrentRow.DataBoundItem;
+            args.Keyword = (Textbaustein)gvKeywords.CurrentRow.DataBoundItem;
 
             args.Template = GetSelectedTemplate();
 
             RemoveKeyword?.Invoke(this, args);
 
+        }
+        private void gvKeywords_DoubleClick(object sender, EventArgs e)
+        {
+            if (tcMain.SelectedTab == null) { return; }
+
+            var currentTemplate = tabs[tcMain.SelectedTab];
+
+            var args = new TemplateEventArgs();
+
+            args.Template = currentTemplate;
+
+            KeywordAdd keywordAdd = new KeywordAdd(args);
+
+            if (keywordAdd.ShowDialog() == DialogResult.OK)
+            {
+
+
+                AddKeyword?.Invoke(this, new TemplateEventArgs { Template = currentTemplate });
+            }
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
         {
@@ -108,7 +122,7 @@ namespace CSCodeGen.UI
                 return;
             }
 
-            var selectedKeyword = (Keyword)gvKeywords.Rows[e.RowIndex].DataBoundItem;
+            var selectedKeyword = (Textbaustein)gvKeywords.Rows[e.RowIndex].DataBoundItem;
 
             if (selectedKeyword == null) { return; }
 
@@ -123,7 +137,7 @@ namespace CSCodeGen.UI
         #endregion
 
         #region Methods
-       
+
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
@@ -134,7 +148,7 @@ namespace CSCodeGen.UI
         }
         private void SetKeyWordsBindings(Template currentTemplate)
         {
-            bsKeywords.DataSource = currentTemplate.Keywords;
+            bsPlatzhalter.DataSource = currentTemplate.Textbausteine;
             pgTemplate.SelectedObject = listTemplate.SelectedItem;
         }
         private void AddNewTab(Template currentTemplate)
@@ -179,7 +193,7 @@ namespace CSCodeGen.UI
                 return;
             }
             template.Name = template.OldName;
-            template.Keywords.Clear();
+            template.Textbausteine.Clear();
             template.IsChanged = false;
         }
         private void Save(object sender, Template template)
@@ -203,7 +217,7 @@ namespace CSCodeGen.UI
             }
 
             pgTemplate.SelectedObject = null;
-            bsKeywords.DataSource = null;
+            bsPlatzhalter.DataSource = null;
 
         }
         private Template GetSelectedTemplate()
@@ -211,6 +225,7 @@ namespace CSCodeGen.UI
             return listTemplate.SelectedItem as Template;
         }
         #endregion
+
 
         
     }

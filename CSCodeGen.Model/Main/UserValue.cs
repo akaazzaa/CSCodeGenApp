@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace CSCodeGen.Model.Main
 {
-    public enum KeywordType
+    public class UserValue
     {
-        Text,
-        String,
-        Integer,
-        Double,
-        Boolean,
-        DateTime,
-        List,
+        public string Value { get; set; }   
+        public DataType Type { get; set; }
+     
     }
 }

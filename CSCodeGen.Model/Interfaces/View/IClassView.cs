@@ -1,4 +1,5 @@
-﻿using CSCodeGen.Model.Main;
+﻿using CSCodeGen.Model.Args;
+using CSCodeGen.Model.Main;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +12,10 @@ namespace CSCodeGen.Model.Interfaces.View
     public interface IClassView
     {
         event EventHandler LoadTemplates;
+        event EventHandler<GeneratorEventArgs> GenerateCode;
 
-
-
-        void ShowTemplates(BindingList<Template> templates);
+        void ShowText(string text);
+        void Show(BindingList<Template> templates);
         void ShowMessage(string message);
     }
 }

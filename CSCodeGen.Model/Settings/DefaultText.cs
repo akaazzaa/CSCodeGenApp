@@ -1,6 +1,6 @@
-﻿namespace CSCodeGen.Model
+﻿namespace CSCodeGen.Model.Settings
 {
-    public class DefaultKeyword
+    public class DefaultText
     {
         public const string PREFABCLASSNAME = "Classname";
         public const string PREFABNAMESPACE = "Namespace";

@@ -14,19 +14,13 @@ namespace CSCodeGen.Model.Args
 
         public BindingList<Template> Templates { get; set; } = null;
 
-        public Keyword Keyword { get; set; } = null;
+        public Textbaustein Keyword { get; set; } = null;
 
-        public List<Keyword> Keywords { get; set; } = null;
+        public List<Textbaustein> Keywords { get; set; } = null;
 
         public object Undefined { get; set; } = null;
 
-        public TemplateEventArgs()
-        {
-            
-        }
-
-
-
+   
     }
 
 }
