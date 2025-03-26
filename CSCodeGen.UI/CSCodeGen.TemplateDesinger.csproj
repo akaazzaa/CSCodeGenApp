@@ -25,9 +25,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSCodeGen.Library\CSCodeGen.Logik.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="FastColoredTextBox.Net5" Version="2.16.26" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
@@ -37,5 +34,8 @@
     <Compile Remove="TemplateDesignerForm.cs" />
     <Compile Remove="TemplateDesignerForm.Designer.cs" />
     <EmbeddedResource Remove="TemplateDesignerForm.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSCodeGen.Logik\CSCodeGen.Logik.csproj" />
   </ItemGroup>
 </Project>

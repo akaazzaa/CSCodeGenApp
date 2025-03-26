@@ -120,7 +120,6 @@ namespace CSCodeGen.UI
             gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn1, prefixWithCommentDataGridViewCheckBoxColumn, Type });
             gvKeywords.DataSource = bsPlatzhalter;
             gvKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
-            gvKeywords.Enabled = false;
             gvKeywords.Location = new System.Drawing.Point(0, 294);
             gvKeywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gvKeywords.MultiSelect = false;
