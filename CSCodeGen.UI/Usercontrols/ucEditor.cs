@@ -51,7 +51,7 @@ namespace CSCodeGen.UI
             }
             else if (obj is Textbaustein keyword)
             {
-                fastColoredTextBox.Text = keyword.Text;
+                fastColoredTextBox.Text = keyword.Code;
                 LoadKeywords();
                 RefreshKeywordsList();
             }

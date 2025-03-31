@@ -8,15 +8,22 @@ namespace CSCodeGen.Model.Main
     public class Textbaustein : INotifyPropertyChanged
     {
         #region Variabeln
-        private static int _nextId = 1;
-        private string _text;
+        private Guid _guid;
+        private string _code;
         private DataType _type;
         private string _name;
         private bool _prefixWithComment;
         #endregion
 
         #region Properties
-        public int Id { get; set; }
+        public int Id 
+        {
+            get
+            {
+                return _guid.GetHashCode();
+            } 
+           
+        }
         public string Name
         {
             get => _name;
@@ -26,12 +33,12 @@ namespace CSCodeGen.Model.Main
                 OnPropertyChanged();
             }
         }
-        public string Text
+        public string Code
         {
-            get => _text;
+            get => _code;
             set
             {
-                _text = value;
+                _code = value;
                 OnPropertyChanged();
             }
         }
@@ -74,14 +81,14 @@ namespace CSCodeGen.Model.Main
         #region Konstruktoren
         public Textbaustein()
         {
-            Id = _nextId++;
-            _text = string.Empty;
+            _guid = Guid.NewGuid();
+            _code = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
         }
         public Textbaustein(string key)
         {
-            Id = _nextId++;
+            _guid = Guid.NewGuid();
             Name = key;
 
         }

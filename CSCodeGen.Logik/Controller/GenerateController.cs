@@ -20,6 +20,7 @@ namespace CSCodeGen.Library.Controller
         IRepository<Template> _templateRepository;
         IClassView _view;
 
+        
 
         public GenerateController(IRepository<Result> resultRepo, IRepository<Template> templateRepo,IClassView classView)
         {
@@ -62,7 +63,7 @@ namespace CSCodeGen.Library.Controller
                 foreach (Textbaustein platzhalter in matching)
                 {
 
-                    string code = ReplaceDefaultKeys(platzhalter.Text, uservalue);
+                    string code = ReplaceDefaultKeys(platzhalter.Code, uservalue);
 
                     source = source.Replace(platzhalter.DisplayText, code + "\r\r" + "            " + platzhalter.DisplayText);
                 }

@@ -35,10 +35,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
         {
             return new List<Textbaustein>
         {
-            new Textbaustein { Id = 100, Name = ConfigData.DefaultBaustein.Classname, PrefixWithComment = false },
-            new Textbaustein { Id = 200, Name = ConfigData.DefaultBaustein.Propertie, PrefixWithComment = false },
-            new Textbaustein { Id = 300, Name = ConfigData.DefaultBaustein.Namespace, PrefixWithComment = false },
-            new Textbaustein { Id = 400, Name = ConfigData.DefaultBaustein.Variable, PrefixWithComment = false }
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Classname, PrefixWithComment = false },
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Propertie, PrefixWithComment = false },
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Namespace, PrefixWithComment = false },
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Variable, PrefixWithComment = false }
         };
         }    
 

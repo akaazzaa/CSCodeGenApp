@@ -89,11 +89,9 @@ namespace CSCodeGen.UI
 
             KeywordAdd keywordAdd = new KeywordAdd(args);
 
-            if (keywordAdd.ShowDialog() == DialogResult.OK)
+            if (keywordAdd.ShowDialog() == DialogResult.Cancel)
             {
-
-
-                AddKeyword?.Invoke(this, new TemplateEventArgs { Template = currentTemplate });
+               currentTemplate.IsChanged = true;
             }
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
@@ -193,7 +191,11 @@ namespace CSCodeGen.UI
                 return;
             }
             template.Name = template.OldName;
-            template.Textbausteine.Clear();
+            if (template.Textbausteine.Count > 0)
+            {
+                template.Textbausteine.Clear();
+            }
+            
             template.IsChanged = false;
         }
         private void Save(object sender, Template template)
@@ -225,6 +227,7 @@ namespace CSCodeGen.UI
             return listTemplate.SelectedItem as Template;
         }
         #endregion
+
 
 
         

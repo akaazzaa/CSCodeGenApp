@@ -94,7 +94,7 @@ namespace CSCodeGen.UI
             tcMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new System.Drawing.Size(709, 522);
+            tcMain.Size = new System.Drawing.Size(696, 522);
             tcMain.TabIndex = 1;
             tcMain.SelectedIndexChanged += tcMain_SelectedIndexChanged;
             // 
@@ -104,10 +104,10 @@ namespace CSCodeGen.UI
             pnlSidebarRight.Controls.Add(gvKeywords);
             pnlSidebarRight.Controls.Add(pnalPropertys);
             pnlSidebarRight.Dock = System.Windows.Forms.DockStyle.Right;
-            pnlSidebarRight.Location = new System.Drawing.Point(709, 0);
+            pnlSidebarRight.Location = new System.Drawing.Point(696, 0);
             pnlSidebarRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlSidebarRight.Name = "pnlSidebarRight";
-            pnlSidebarRight.Size = new System.Drawing.Size(331, 522);
+            pnlSidebarRight.Size = new System.Drawing.Size(344, 522);
             pnlSidebarRight.TabIndex = 0;
             // 
             // gvKeywords
@@ -120,12 +120,12 @@ namespace CSCodeGen.UI
             gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn1, prefixWithCommentDataGridViewCheckBoxColumn, Type });
             gvKeywords.DataSource = bsPlatzhalter;
             gvKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
-            gvKeywords.Location = new System.Drawing.Point(0, 294);
+            gvKeywords.Location = new System.Drawing.Point(0, 251);
             gvKeywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gvKeywords.MultiSelect = false;
             gvKeywords.Name = "gvKeywords";
             gvKeywords.ReadOnly = true;
-            gvKeywords.Size = new System.Drawing.Size(329, 226);
+            gvKeywords.Size = new System.Drawing.Size(342, 269);
             gvKeywords.TabIndex = 1;
             gvKeywords.CellClick += gvKeywords_CellClick;
             gvKeywords.DoubleClick += gvKeywords_DoubleClick;
@@ -163,7 +163,7 @@ namespace CSCodeGen.UI
             pnalPropertys.Location = new System.Drawing.Point(0, 0);
             pnalPropertys.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnalPropertys.Name = "pnalPropertys";
-            pnalPropertys.Size = new System.Drawing.Size(329, 294);
+            pnalPropertys.Size = new System.Drawing.Size(342, 251);
             pnalPropertys.TabIndex = 0;
             // 
             // pgTemplate
@@ -172,7 +172,7 @@ namespace CSCodeGen.UI
             pgTemplate.Location = new System.Drawing.Point(0, 0);
             pgTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pgTemplate.Name = "pgTemplate";
-            pgTemplate.Size = new System.Drawing.Size(327, 292);
+            pgTemplate.Size = new System.Drawing.Size(340, 249);
             pgTemplate.TabIndex = 0;
             // 
             // pnlSidebar

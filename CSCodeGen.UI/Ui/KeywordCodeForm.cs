@@ -24,7 +24,7 @@ namespace CSCodeGen.UI.Ui
 
         private void CodeChanged(object sender, string newCode)
         {
-            Keyword.Text = newCode;
+            Keyword.Code = newCode;
             KeywordChanged?.Invoke();
         }
     }
