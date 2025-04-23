@@ -34,7 +34,7 @@ public class Template : Observable, INotifyPropertyChanged
 
     [Category("Template")]
     [Description("ID des Templates")]
-    public int ID { get; }
+    public int ID { get; set; }
 
     [Category("Template")]
     [Description("Name des Templates")]
@@ -105,7 +105,8 @@ public class Template : Observable, INotifyPropertyChanged
     [Category("Template")]
     [Description("Liste der Keywords")]
     public BindingList<Textbaustein> Textbausteine { get; set; }
-    
+    public override object _copy { get; set; }
+
     #endregion
 
     #region Konstruktoren
@@ -133,7 +134,49 @@ public class Template : Observable, INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    protected override void CreateCopy()
+    {
+        _copy = new Template()
+        {
+            ID = this.ID,
+            Name = this.Name, // Name hinzufügen
+            CreationDate = this.CreationDate,
+            Description = this.Description,
+            Content = this.Content,
+            Textbausteine = this.Textbausteine
+        };
+    }
+
+    protected override void RevertChanges()
+    {
+        if (_copy is Template originalTemplate)
+        {
+            this.ID = originalTemplate.ID;
+            this.Name = originalTemplate.Name;
+            this.Description = originalTemplate.Description;
+            this.Content = originalTemplate.Content;
+            this.CreationDate = originalTemplate.CreationDate;
+
+            foreach (var textbaustein in this.Textbausteine)
+            {
+                if (textbaustein.IsChanged)
+                {
+                    textbaustein.Revert();
+                }
+            }
+
+            // Benachrichtige über die Änderungen
+            NotifyPropertyChanged(nameof(Name));
+            NotifyPropertyChanged(nameof(Description));
+            NotifyPropertyChanged(nameof(Content));
+            NotifyPropertyChanged(nameof(Textbausteine));
+            NotifyPropertyChanged(nameof(FileName)); // Falls sich der Name geändert hat
+        }
+    }
+
+ 
     #endregion
 
-   
+
 }

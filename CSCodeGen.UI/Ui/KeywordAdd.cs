@@ -50,6 +50,9 @@ namespace CSCodeGen.UI.Ui
         public void ShowKeywords(IEnumerable<Textbaustein> keywords)
         {
             textbausteinBindingSource.DataSource = keywords;
+
+             Type.DataSource = Enum.GetValues(typeof(DataType));
+
         }
     }
 }

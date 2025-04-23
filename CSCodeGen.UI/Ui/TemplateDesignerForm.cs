@@ -45,7 +45,7 @@ namespace CSCodeGen.UI
         #region Form Events
         private void OnKeywordChanged()
         {
-            GetSelectedTemplate().IsChanged = true;
+            GetSelectedTemplate().MarkAsChanged();
         }
         private void OnLoad(object sender, EventArgs e)
         {
@@ -91,7 +91,7 @@ namespace CSCodeGen.UI
 
             if (keywordAdd.ShowDialog() == DialogResult.Cancel)
             {
-               currentTemplate.IsChanged = true;
+               currentTemplate.MarkAsChanged();
             }
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
@@ -190,13 +190,10 @@ namespace CSCodeGen.UI
             {
                 return;
             }
-            template.Name = template.OldName;
-            if (template.Textbausteine.Count > 0)
-            {
-                template.Textbausteine.Clear();
-            }
             
-            template.IsChanged = false;
+            template.Revert();
+            
+            template.AcceptChanges();
         }
         private void Save(object sender, Template template)
         {

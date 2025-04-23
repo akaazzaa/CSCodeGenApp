@@ -35,9 +35,9 @@
             textbausteinBindingSource = new System.Windows.Forms.BindingSource(components);
             idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             prefixWithCommentDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             displayTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             pnlMain.SuspendLayout();
             pnlRight.SuspendLayout();
@@ -68,7 +68,7 @@
             gvDaten.AutoGenerateColumns = false;
             gvDaten.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             gvDaten.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gvDaten.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, prefixWithCommentDataGridViewCheckBoxColumn, displayTextDataGridViewTextBoxColumn });
+            gvDaten.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn, prefixWithCommentDataGridViewCheckBoxColumn, Type, displayTextDataGridViewTextBoxColumn });
             gvDaten.DataSource = textbausteinBindingSource;
             gvDaten.Dock = System.Windows.Forms.DockStyle.Fill;
             gvDaten.Location = new System.Drawing.Point(0, 0);
@@ -85,6 +85,7 @@
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn.HeaderText = "Id";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -97,18 +98,21 @@
             codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
             codeDataGridViewTextBoxColumn.HeaderText = "Code";
             codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            codeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            codeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            codeDataGridViewTextBoxColumn.UseColumnTextForButtonValue = true;
             // 
             // prefixWithCommentDataGridViewCheckBoxColumn
             // 
             prefixWithCommentDataGridViewCheckBoxColumn.DataPropertyName = "PrefixWithComment";
             prefixWithCommentDataGridViewCheckBoxColumn.HeaderText = "PrefixWithComment";
             prefixWithCommentDataGridViewCheckBoxColumn.Name = "prefixWithCommentDataGridViewCheckBoxColumn";
+            // 
+            // Type
+            // 
+            Type.DataPropertyName = "Type";
+            Type.HeaderText = "Type";
+            Type.Name = "Type";
             // 
             // displayTextDataGridViewTextBoxColumn
             // 
@@ -138,12 +142,12 @@
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.DataGridView gvDaten;
         private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource textbausteinBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn prefixWithCommentDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn displayTextDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource textbausteinBindingSource;
     }
 }

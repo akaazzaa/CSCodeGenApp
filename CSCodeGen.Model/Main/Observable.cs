@@ -3,34 +3,38 @@ using System.ComponentModel;
 
 namespace CSCodeGen.Model.Main
 {
-    public class Observable
+    public abstract class Observable
     {
-        private bool _isChanged = false;
 
         [Browsable(false)]
-        public bool IsChanged
-        {
-            get { return _isChanged; }
-            set
+        public bool IsChanged { get;  set; }
+        public abstract object _copy { get; set; }
+
+        protected abstract void CreateCopy();
+        protected abstract void RevertChanges();
+
+            public void MarkAsChanged()
             {
-                if (_isChanged != value)
+                if (!IsChanged)
                 {
-                    _isChanged = value;
-                    OnChanged();
+                    IsChanged = true;
+                    // Erstelle eine Kopie des aktuellen Zustands
+                    CreateCopy();
                 }
             }
-        }
 
-        public event Action Changed;
+            public void AcceptChanges()
+            {
+                IsChanged = false;
+            }
 
-        protected void MarkAsChanged()
-        {
-            IsChanged = true;
-        }
-
-        protected virtual void OnChanged()
-        {
-            Changed?.Invoke();
-        }
+            // Diese Methode stellt den ursprünglichen Zustand wieder her
+            public void Revert()
+            {
+                RevertChanges();
+                IsChanged = false;
+            }
+        
     }
 }
+

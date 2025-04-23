@@ -47,7 +47,7 @@ namespace CSCodeGen.Library.Controller
             if (args.Template.Textbausteine.Contains(args.Keyword))
             {
                 args.Template.Textbausteine.Remove(args.Keyword);
-                args.Template.IsChanged = true;
+                args.Template.MarkAsChanged();
             }
         }
         private void OnAddKeyword(object sender, TemplateEventArgs args)
@@ -59,7 +59,7 @@ namespace CSCodeGen.Library.Controller
             }
             var keyword = new Textbaustein();
             args.Template.Textbausteine.Add(keyword);
-            args.Template.IsChanged = true;
+            args.Template.MarkAsChanged();
 
             _templateView.ShowMessage($"Keyword wurde zum Template '{args.Template.Name}' hinzugefügt!");
 

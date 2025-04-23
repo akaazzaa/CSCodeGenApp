@@ -1,11 +1,12 @@
-﻿using CSCodeGen.Model.Settings;
+﻿using CSCodeGen.Model.Interfaces;
+using CSCodeGen.Model.Settings;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace CSCodeGen.Model.Main
 {
-    public class Textbaustein : INotifyPropertyChanged
+    public class Textbaustein :  Observable, INotifyPropertyChanged 
     {
         #region Variabeln
         private Guid _guid;
@@ -16,12 +17,20 @@ namespace CSCodeGen.Model.Main
         #endregion
 
         #region Properties
-        public int Id 
+        public Guid ID 
         {
             get
             {
-                return _guid.GetHashCode();
+                return _guid;
             } 
+
+            set
+            {
+                if (_guid != value)
+                {
+                    _guid = value;
+                }
+            }
            
         }
         public string Name
@@ -29,8 +38,17 @@ namespace CSCodeGen.Model.Main
             get => _name;
             set
             {
-                _name = value.Trim();
-                OnPropertyChanged();
+                if (_name != value)
+                {
+                    if (_name != null)
+                    {
+                        MarkAsChanged();
+                    }
+
+                    
+                    _name = value.Trim();
+                    OnPropertyChanged();
+                }
             }
         }
         public string Code
@@ -38,8 +56,16 @@ namespace CSCodeGen.Model.Main
             get => _code;
             set
             {
-                _code = value;
-                OnPropertyChanged();
+                if(_code != value)
+                {
+                    if (_code != null)
+                    {
+                        MarkAsChanged();
+                    }
+                    _code = value;
+                    OnPropertyChanged();
+                }
+               
             }
         }
         public DataType Type
@@ -47,8 +73,15 @@ namespace CSCodeGen.Model.Main
             get => _type;
             set
             {
-                _type = value;
-                OnPropertyChanged();
+                if (_type != value)
+                {
+                    
+                    
+                    MarkAsChanged();
+                    _type = value;
+                    OnPropertyChanged();
+                }
+                 
             }
         }
       
@@ -56,9 +89,15 @@ namespace CSCodeGen.Model.Main
         {
             get => _prefixWithComment;
             set
-            {
-                _prefixWithComment = value;
-                OnPropertyChanged();
+            { 
+                if (_prefixWithComment != value)
+                {
+                    
+                    MarkAsChanged();
+                    _prefixWithComment = value;
+                    OnPropertyChanged();
+                }
+                
             }
         }
         public string DisplayText
@@ -76,6 +115,8 @@ namespace CSCodeGen.Model.Main
                 return stringBuilder.ToString();
             }
         }
+
+        public override object _copy { get; set; }
         #endregion
 
         #region Konstruktoren
@@ -85,12 +126,12 @@ namespace CSCodeGen.Model.Main
             _code = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
+            
         }
         public Textbaustein(string key)
         {
             _guid = Guid.NewGuid();
             Name = key;
-
         }
         #endregion
 
@@ -99,6 +140,31 @@ namespace CSCodeGen.Model.Main
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected override void CreateCopy()
+        {
+            _copy = new Textbaustein
+            {
+               _guid = this._guid,
+                _code = this._code,
+                _name = this._name,
+                _type = this._type,
+                _prefixWithComment = this._prefixWithComment
+            };
+
+        }
+
+        protected override void RevertChanges()
+        {
+            if ( _copy is Textbaustein originalTemplate)
+            {
+                this.ID = originalTemplate.ID;
+                this.Code = originalTemplate.Code;
+                this.Name = originalTemplate.Name;
+                this.Type = originalTemplate.Type;
+                this.PrefixWithComment = originalTemplate.PrefixWithComment;
+            }
         }
         #endregion
     }

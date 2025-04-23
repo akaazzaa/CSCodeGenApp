@@ -64,12 +64,12 @@ namespace CSCodeGen.DataAccess.Model.Storage
 
                 // Erfolgreich gespeichert → Status zurücksetzen
                 template.OldName = template.Name;
-                template.IsChanged = false;
+                template.AcceptChanges();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ERROR] Fehler beim Speichern: {ex.Message}");
-                template.IsChanged = true; // Falls Fehler auftritt, bleibt der Status auf "geändert"
+                template.MarkAsChanged(); // Falls Fehler auftritt, bleibt der Status auf "geändert"
             }
         }
         public void SaveAll()
@@ -92,7 +92,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
                     if (template != null)
                     {
                         template.OldName = template.Name; // Speichert den alten Namen
-                        template.IsChanged = false; // Direkt nach dem Laden als unverändert setzen
+                        template.AcceptChanges(); // Direkt nach dem Laden als unverändert setzen
                         _templates.Add(template);
                     }
 }
