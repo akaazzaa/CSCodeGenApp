@@ -116,7 +116,7 @@ namespace CSCodeGen.Model.Main
             }
         }
 
-        public override object _copy { get; set; }
+
         #endregion
 
         #region Konstruktoren
@@ -140,31 +140,6 @@ namespace CSCodeGen.Model.Main
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected override void CreateCopy()
-        {
-            _copy = new Textbaustein
-            {
-               _guid = this._guid,
-                _code = this._code,
-                _name = this._name,
-                _type = this._type,
-                _prefixWithComment = this._prefixWithComment
-            };
-
-        }
-
-        protected override void RevertChanges()
-        {
-            if ( _copy is Textbaustein originalTemplate)
-            {
-                this.ID = originalTemplate.ID;
-                this.Code = originalTemplate.Code;
-                this.Name = originalTemplate.Name;
-                this.Type = originalTemplate.Type;
-                this.PrefixWithComment = originalTemplate.PrefixWithComment;
-            }
         }
         #endregion
     }

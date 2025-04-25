@@ -127,7 +127,6 @@ namespace CSCodeGen.UI
             gvKeywords.ReadOnly = true;
             gvKeywords.Size = new System.Drawing.Size(342, 269);
             gvKeywords.TabIndex = 1;
-            gvKeywords.CellClick += gvKeywords_CellClick;
             gvKeywords.DoubleClick += gvKeywords_DoubleClick;
             // 
             // dataGridViewTextBoxColumn1

@@ -55,7 +55,6 @@ namespace CSCodeGen.UI
         {
             SaveAll?.Invoke(this, EventArgs.Empty);
         }
-
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
@@ -91,7 +90,7 @@ namespace CSCodeGen.UI
 
             if (keywordAdd.ShowDialog() == DialogResult.Cancel)
             {
-               currentTemplate.MarkAsChanged();
+               
             }
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
@@ -113,25 +112,7 @@ namespace CSCodeGen.UI
 
             NewTemplate?.Invoke(this, _args);
         }
-        private void gvKeywords_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
-            {
-                return;
-            }
 
-            var selectedKeyword = (Textbaustein)gvKeywords.Rows[e.RowIndex].DataBoundItem;
-
-            if (selectedKeyword == null) { return; }
-
-            // Überprüfe, ob die geklickte Zelle zur Button-Spalte gehört
-            if (gvKeywords.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
-            {
-                KeywordCodeForm keywordCodeForm = new KeywordCodeForm(selectedKeyword);
-                keywordCodeForm.KeywordChanged += OnKeywordChanged;
-                keywordCodeForm.ShowDialog();
-            }
-        }
         #endregion
 
         #region Methods
@@ -191,9 +172,6 @@ namespace CSCodeGen.UI
                 return;
             }
             
-            template.Revert();
-            
-            template.AcceptChanges();
         }
         private void Save(object sender, Template template)
         {
