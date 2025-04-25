@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace CSCodeGen.Model.Interfaces.View
 {
-     public interface ICodeTemplateView 
+     public interface ICodeTemplateView : IView
     {
         event EventHandler LoadTemplates;
         event EventHandler SaveAll;

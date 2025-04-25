@@ -25,23 +25,14 @@ namespace CSCodeGen.UI
         public event EventHandler<TemplateEventArgs> AddKeyword;
         public event EventHandler<TemplateEventArgs> RemoveKeyword;
 
-        private Dictionary<TabPage, Template> tabs = new Dictionary<TabPage, Template>();
-
+        private Dictionary<TabPage, Template> _tabs = new Dictionary<TabPage, Template>();
         private TemplateEventArgs _args;
 
         public TemplateDesignerForm()
         {
             InitializeComponent();
-            this.Load += OnLoad;
-            this.FormClosing += OnFormClosing;
-
-            //Type.DataSource = Enum.GetValues(typeof(DataType)); // Alle Enum-Werte
-            //Type.ValueType = typeof(DataType);
-            //Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //gvKeywords.CellValueChanged += GvKeywords_CellChanged;
-
+            Initialize();
         }
-
         #region Form Events
         private void OnKeywordChanged()
         {
@@ -55,12 +46,11 @@ namespace CSCodeGen.UI
         {
             SaveAll?.Invoke(this, EventArgs.Empty);
         }
-
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tcMain.SelectedTab != null && tabs.ContainsKey(tcMain.SelectedTab))
+            if (tcMain.SelectedTab != null && _tabs.ContainsKey(tcMain.SelectedTab))
             {
-                Template currentTemplate = tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
+                Template currentTemplate = _tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
                 SetKeyWordsBindings(currentTemplate);
             }
         }
@@ -81,7 +71,7 @@ namespace CSCodeGen.UI
         {
             if (tcMain.SelectedTab == null) { return; }
 
-            var currentTemplate = tabs[tcMain.SelectedTab];
+            var currentTemplate = _tabs[tcMain.SelectedTab];
 
             var args = new TemplateEventArgs();
 
@@ -137,7 +127,16 @@ namespace CSCodeGen.UI
         #endregion
 
         #region Methods
+        public void Initialize()
+        {
+            this.Load += OnLoad;
+            this.FormClosing += OnFormClosing;
 
+            //Type.DataSource = Enum.GetValues(typeof(DataType)); // Alle Enum-Werte
+            //Type.ValueType = typeof(DataType);
+            //Type.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //gvKeywords.CellValueChanged += GvKeywords_CellChanged;
+        }
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
@@ -156,7 +155,7 @@ namespace CSCodeGen.UI
             if (currentTemplate == null) return;
 
             // Prüfe, ob Template bereits geöffnet
-            var existingTab = tabs.FirstOrDefault(x => x.Value == currentTemplate);
+            var existingTab = _tabs.FirstOrDefault(x => x.Value == currentTemplate);
             if (existingTab.Key != null)
             {
                 tcMain.SelectedTab = existingTab.Key;
@@ -179,7 +178,7 @@ namespace CSCodeGen.UI
             editor.OnResetChanges += ResetTextChanges;
 
 
-            tabs[tabPage] = currentTemplate;
+            _tabs[tabPage] = currentTemplate;
             tabPage.Controls.Add(editor);
             tcMain.TabPages.Add(tabPage);
             tcMain.SelectedTab = tabPage;
@@ -209,7 +208,7 @@ namespace CSCodeGen.UI
             if (tabPage == null) return;
 
             tcMain.TabPages.Remove(tabPage);
-            tabs.Remove(tabPage);
+            _tabs.Remove(tabPage);
 
             if (tcMain.TabPages.Count > 0)
             {
@@ -227,7 +226,7 @@ namespace CSCodeGen.UI
         #endregion
 
 
-        
+
     }
 
 }

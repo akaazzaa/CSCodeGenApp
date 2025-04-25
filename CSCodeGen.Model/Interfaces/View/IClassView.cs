@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CSCodeGen.Model.Interfaces.View
 {
-    public interface IClassView
+    public interface IClassView : IView
     {
         event EventHandler LoadTemplates;
         event EventHandler<GeneratorEventArgs> GenerateCode;
