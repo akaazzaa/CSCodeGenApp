@@ -1,38 +1,71 @@
-﻿using CSCodeGen.Model.Settings;
+﻿using CSCodeGen.Model.Interfaces;
+using CSCodeGen.Model.Settings;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace CSCodeGen.Model.Main
 {
-    public class Textbaustein : INotifyPropertyChanged
+    public class Textbaustein :  Observable, INotifyPropertyChanged 
     {
         #region Variabeln
-        private static int _nextId = 1;
-        private string _text;
+        private Guid _guid;
+        private string _code;
         private DataType _type;
         private string _name;
         private bool _prefixWithComment;
         #endregion
 
         #region Properties
-        public int Id { get; set; }
+        public Guid ID 
+        {
+            get
+            {
+                return _guid;
+            } 
+
+            set
+            {
+                if (_guid != value)
+                {
+                    _guid = value;
+                }
+            }
+           
+        }
         public string Name
         {
             get => _name;
             set
             {
-                _name = value.Trim();
-                OnPropertyChanged();
+                if (_name != value)
+                {
+                    if (_name != null)
+                    {
+                        MarkAsChanged();
+                    }
+
+                    
+                    _name = value.Trim();
+                    OnPropertyChanged();
+                }
             }
         }
-        public string Text
+        public string Code
         {
-            get => _text;
+            get => _code;
             set
             {
-                _text = value;
-                OnPropertyChanged();
+                if(_code != value)
+                {
+                    if (_code != null)
+                    {
+                        MarkAsChanged();
+                    }
+                    _code = value;
+                    OnPropertyChanged();
+                }
+               
             }
         }
         public DataType Type
@@ -40,8 +73,15 @@ namespace CSCodeGen.Model.Main
             get => _type;
             set
             {
-                _type = value;
-                OnPropertyChanged();
+                if (_type != value)
+                {
+                    
+                    
+                    MarkAsChanged();
+                    _type = value;
+                    OnPropertyChanged();
+                }
+                 
             }
         }
       
@@ -49,9 +89,15 @@ namespace CSCodeGen.Model.Main
         {
             get => _prefixWithComment;
             set
-            {
-                _prefixWithComment = value;
-                OnPropertyChanged();
+            { 
+                if (_prefixWithComment != value)
+                {
+                    
+                    MarkAsChanged();
+                    _prefixWithComment = value;
+                    OnPropertyChanged();
+                }
+                
             }
         }
         public string DisplayText
@@ -69,21 +115,23 @@ namespace CSCodeGen.Model.Main
                 return stringBuilder.ToString();
             }
         }
+
+
         #endregion
 
         #region Konstruktoren
         public Textbaustein()
         {
-            Id = _nextId++;
-            _text = string.Empty;
+            _guid = Guid.NewGuid();
+            _code = string.Empty;
             _name = string.Empty;
             _prefixWithComment = true;
+            
         }
         public Textbaustein(string key)
         {
-            Id = _nextId++;
+            _guid = Guid.NewGuid();
             Name = key;
-
         }
         #endregion
 

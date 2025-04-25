@@ -34,7 +34,7 @@ public class Template : Observable, INotifyPropertyChanged
 
     [Category("Template")]
     [Description("ID des Templates")]
-    public int ID { get; }
+    public int ID { get; set; }
 
     [Category("Template")]
     [Description("Name des Templates")]
@@ -105,7 +105,7 @@ public class Template : Observable, INotifyPropertyChanged
     [Category("Template")]
     [Description("Liste der Keywords")]
     public BindingList<Textbaustein> Textbausteine { get; set; }
-    
+
     #endregion
 
     #region Konstruktoren
@@ -135,5 +135,5 @@ public class Template : Observable, INotifyPropertyChanged
     }
     #endregion
 
-   
+
 }

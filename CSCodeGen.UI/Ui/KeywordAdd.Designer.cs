@@ -28,30 +28,119 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new System.Windows.Forms.Panel();
+            components = new System.ComponentModel.Container();
+            pnlMain = new System.Windows.Forms.Panel();
+            pnlRight = new System.Windows.Forms.Panel();
+            gvDaten = new System.Windows.Forms.DataGridView();
+            nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            prefixWithCommentDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            displayTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            textbausteinBindingSource = new System.Windows.Forms.BindingSource(components);
+            pnlMain.SuspendLayout();
+            pnlRight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvDaten).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)textbausteinBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // panel1
+            // pnlMain
             // 
-            panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel1.Location = new System.Drawing.Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(656, 403);
-            panel1.TabIndex = 0;
+            pnlMain.Controls.Add(pnlRight);
+            pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlMain.Location = new System.Drawing.Point(0, 0);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new System.Drawing.Size(1113, 547);
+            pnlMain.TabIndex = 0;
+            // 
+            // pnlRight
+            // 
+            pnlRight.Controls.Add(gvDaten);
+            pnlRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlRight.Location = new System.Drawing.Point(0, 0);
+            pnlRight.Name = "pnlRight";
+            pnlRight.Size = new System.Drawing.Size(1113, 547);
+            pnlRight.TabIndex = 0;
+            // 
+            // gvDaten
+            // 
+            gvDaten.AutoGenerateColumns = false;
+            gvDaten.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            gvDaten.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvDaten.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { nameDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn, prefixWithCommentDataGridViewCheckBoxColumn, Type, displayTextDataGridViewTextBoxColumn });
+            gvDaten.DataSource = textbausteinBindingSource;
+            gvDaten.Dock = System.Windows.Forms.DockStyle.Fill;
+            gvDaten.Location = new System.Drawing.Point(0, 0);
+            gvDaten.Name = "gvDaten";
+            gvDaten.Size = new System.Drawing.Size(1113, 547);
+            gvDaten.TabIndex = 0;
+            gvDaten.CellClick += gvDaten_CellClick;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // codeDataGridViewTextBoxColumn
+            // 
+            codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
+            codeDataGridViewTextBoxColumn.HeaderText = "Code";
+            codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
+            codeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            codeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            codeDataGridViewTextBoxColumn.UseColumnTextForButtonValue = true;
+            // 
+            // prefixWithCommentDataGridViewCheckBoxColumn
+            // 
+            prefixWithCommentDataGridViewCheckBoxColumn.DataPropertyName = "PrefixWithComment";
+            prefixWithCommentDataGridViewCheckBoxColumn.HeaderText = "PrefixWithComment";
+            prefixWithCommentDataGridViewCheckBoxColumn.Name = "prefixWithCommentDataGridViewCheckBoxColumn";
+            // 
+            // Type
+            // 
+            Type.DataPropertyName = "Type";
+            Type.HeaderText = "Type";
+            Type.Name = "Type";
+            // 
+            // displayTextDataGridViewTextBoxColumn
+            // 
+            displayTextDataGridViewTextBoxColumn.DataPropertyName = "DisplayText";
+            displayTextDataGridViewTextBoxColumn.HeaderText = "DisplayText";
+            displayTextDataGridViewTextBoxColumn.Name = "displayTextDataGridViewTextBoxColumn";
+            displayTextDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // textbausteinBindingSource
+            // 
+            textbausteinBindingSource.DataSource = typeof(Model.Main.Textbaustein);
             // 
             // KeywordAdd
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(656, 403);
-            Controls.Add(panel1);
+            ClientSize = new System.Drawing.Size(1113, 547);
+            Controls.Add(pnlMain);
             Name = "KeywordAdd";
             Text = "KeywordAdd";
+            pnlMain.ResumeLayout(false);
+            pnlRight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gvDaten).EndInit();
+            ((System.ComponentModel.ISupportInitialize)textbausteinBindingSource).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.Panel pnlRight;
+        private System.Windows.Forms.DataGridView gvDaten;
+        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource textbausteinBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn codeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn prefixWithCommentDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn displayTextDataGridViewTextBoxColumn;
     }
 }

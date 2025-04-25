@@ -8,6 +8,7 @@ using CSCodeGen.Model.Args;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
+using CSCodeGen.UI.Ui;
 using System;
 using System.ComponentModel;
 using System.Configuration;
@@ -40,8 +41,7 @@ namespace CSCodeGen.UI
 
             IRepository<Template> storage = new TemplateRepository(templatePath);
             ICodeTemplateView view = new TemplateDesignerForm();
-
-
+            
             TemplateController templateController = new TemplateController(storage,view);
 
             Application.Run((Form)view);

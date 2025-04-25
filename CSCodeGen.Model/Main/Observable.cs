@@ -3,34 +3,27 @@ using System.ComponentModel;
 
 namespace CSCodeGen.Model.Main
 {
-    public class Observable
+    public abstract class Observable
     {
-        private bool _isChanged = false;
 
         [Browsable(false)]
-        public bool IsChanged
-        {
-            get { return _isChanged; }
-            set
+        public bool IsChanged { get;  set; }
+
+            public void MarkAsChanged()
             {
-                if (_isChanged != value)
+                if (!IsChanged)
                 {
-                    _isChanged = value;
-                    OnChanged();
+                    IsChanged = true;
                 }
             }
-        }
 
-        public event Action Changed;
+            public void AcceptChanges()
+            {
+                IsChanged = false;
+            }
 
-        protected void MarkAsChanged()
-        {
-            IsChanged = true;
-        }
-
-        protected virtual void OnChanged()
-        {
-            Changed?.Invoke();
-        }
+         
+        
     }
 }
+

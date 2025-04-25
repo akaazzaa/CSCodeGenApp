@@ -35,10 +35,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
         {
             return new List<Textbaustein>
         {
-            new Textbaustein { Id = 100, Name = ConfigData.DefaultBaustein.Classname, PrefixWithComment = false },
-            new Textbaustein { Id = 200, Name = ConfigData.DefaultBaustein.Propertie, PrefixWithComment = false },
-            new Textbaustein { Id = 300, Name = ConfigData.DefaultBaustein.Namespace, PrefixWithComment = false },
-            new Textbaustein { Id = 400, Name = ConfigData.DefaultBaustein.Variable, PrefixWithComment = false }
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Classname, PrefixWithComment = false },
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Propertie, PrefixWithComment = false },
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Namespace, PrefixWithComment = false },
+            new Textbaustein { Name = ConfigData.DefaultBaustein.Variable, PrefixWithComment = false }
         };
         }    
 
@@ -64,12 +64,12 @@ namespace CSCodeGen.DataAccess.Model.Storage
 
                 // Erfolgreich gespeichert → Status zurücksetzen
                 template.OldName = template.Name;
-                template.IsChanged = false;
+                template.AcceptChanges();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ERROR] Fehler beim Speichern: {ex.Message}");
-                template.IsChanged = true; // Falls Fehler auftritt, bleibt der Status auf "geändert"
+                template.MarkAsChanged(); // Falls Fehler auftritt, bleibt der Status auf "geändert"
             }
         }
         public void SaveAll()
@@ -92,7 +92,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
                     if (template != null)
                     {
                         template.OldName = template.Name; // Speichert den alten Namen
-                        template.IsChanged = false; // Direkt nach dem Laden als unverändert setzen
+                        template.AcceptChanges(); // Direkt nach dem Laden als unverändert setzen
                         _templates.Add(template);
                     }
 }
