@@ -1,4 +1,4 @@
-﻿namespace CSCodeGen.UI
+﻿namespace CSCodeGen.UC
 {
     partial class ucEditor
     {

@@ -1,6 +1,6 @@
 ﻿namespace CSCodeGen.UI.Ui
 {
-    partial class KeywordAdd
+    partial class frmTextBlockList
     {
         /// <summary>
         /// Required designer variable.

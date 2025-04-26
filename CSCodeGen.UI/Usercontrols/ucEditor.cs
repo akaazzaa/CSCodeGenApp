@@ -7,16 +7,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using CSCodeGen.Model.Interfaces.View;
 
 
-namespace CSCodeGen.UI
+namespace CSCodeGen.UC
 {
-    public partial class ucEditor : UserControl
+    public partial class ucEditor : UserControl , IEditorView
     {
-        private FastColoredTextBox fastColoredTextBox = new FastColoredTextBox();
         public event EventHandler<string> CodeChanged;
         public event EventHandler GetDefaultKeys;
         public event EventHandler UpdatePlatzhalter;
+
+        private FastColoredTextBox fastColoredTextBox = new FastColoredTextBox();
         private List<Textbaustein> defaultKeywords = new List<Textbaustein>();
         private Template currentTemplate;
 
@@ -25,34 +27,19 @@ namespace CSCodeGen.UI
             InitializeComponent();
             Initialize(obj);
 
-            pnlEditor.Controls.Add(fastColoredTextBox);
-            fastColoredTextBox.Dock = DockStyle.Fill;
-            fastColoredTextBox.Language = Language.CSharp;
-            fastColoredTextBox.AutoIndentChars = true;
-            fastColoredTextBox.AutoIndent = true;
-
-
-            fastColoredTextBox.TextChanged += OnTextChanged;
-
-            listBox1.DoubleClick += InsertKeyword;
-            
         }
-        private void Initialize<T>(T obj)
+        #region Events
+        private void OnTextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
-            if (obj == null) return;
-
-
-            if (obj is Template template)
+            CodeChanged?.Invoke(this, fastColoredTextBox.Text);
+        }
+        private void Keywords_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType == ListChangedType.ItemAdded ||
+                e.ListChangedType == ListChangedType.ItemDeleted ||
+                e.ListChangedType == ListChangedType.ItemChanged)
             {
-                fastColoredTextBox.Text = template.Content;
-                currentTemplate = template;
-                LoadKeywords();
-                RefreshKeywordsList();
-            }
-            else if (obj is Textbaustein keyword)
-            {
-                fastColoredTextBox.Text = keyword.Code;
-                LoadKeywords();
+                UpdateKeywordsList(currentTemplate);
                 RefreshKeywordsList();
             }
         }
@@ -71,9 +58,40 @@ namespace CSCodeGen.UI
                 fastColoredTextBox.Focus();
             }
         }
+        #endregion
+        public void Initialize<T>(T obj)
+        {
+            if (obj == null) return;
+
+
+            if (obj is Template template)
+            {
+                fastColoredTextBox.Text = template.Content;
+                currentTemplate = template;
+                LoadKeywords();
+                RefreshKeywordsList();
+            }
+            else if (obj is Textbaustein keyword)
+            {
+                fastColoredTextBox.Text = keyword.Code;
+                LoadKeywords();
+                RefreshKeywordsList();
+            }
+
+            pnlEditor.Controls.Add(fastColoredTextBox);
+            fastColoredTextBox.Dock = DockStyle.Fill;
+            fastColoredTextBox.Language = Language.CSharp;
+            fastColoredTextBox.AutoIndentChars = true;
+            fastColoredTextBox.AutoIndent = true;
+
+
+            fastColoredTextBox.TextChanged += OnTextChanged;
+
+            listBox1.DoubleClick += InsertKeyword;
+        }
+  
         private void LoadKeywords()
         {
-
             //defaultKeywords = (List<Textbaustein>)ConfigData.GetDefaults();  
 
             if (currentTemplate == null)
@@ -86,20 +104,6 @@ namespace CSCodeGen.UI
 
             UpdateKeywordsList(currentTemplate);
 
-        }
-        private void Keywords_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            if (e.ListChangedType == ListChangedType.ItemAdded ||
-                e.ListChangedType == ListChangedType.ItemDeleted || 
-                e.ListChangedType == ListChangedType.ItemChanged)
-            {
-                UpdateKeywordsList(currentTemplate);
-                RefreshKeywordsList(); 
-            }
-        }
-        private void OnTextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
-        {
-            CodeChanged?.Invoke(this, fastColoredTextBox.Text);
         }
         private void RefreshKeywordsList()
         {
@@ -120,5 +124,6 @@ namespace CSCodeGen.UI
             }
         }
 
+       
     }
 }

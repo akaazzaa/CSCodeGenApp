@@ -14,6 +14,5 @@ namespace CSCodeGen.Model.Main
         DateTime,
         Double,
         Float,
-        Text,
     }
 }
