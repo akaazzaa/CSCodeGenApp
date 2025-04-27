@@ -9,7 +9,9 @@ using CSCodeGen.Model.Args;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
+using CSCodeGen.Model.Settings;
 using CSCodeGen.UI.Ui;
+using NLog;
 using System;
 using System.ComponentModel;
 using System.Configuration;
@@ -30,6 +32,10 @@ namespace CSCodeGen.UI
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            ConfigData.SetupLogConfig();
+
+
 
             string templateFolder = string.Empty;
 

@@ -91,7 +91,7 @@ namespace CSCodeGen.UI
         {
             var args = new TemplateEventArgs();
 
-            args.Template = new Template("Neues Template");
+            args.Template = new Template();
 
             NewTemplate?.Invoke(this, args);
         }

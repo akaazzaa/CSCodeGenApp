@@ -35,17 +35,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
         {
             _templates.Add(template);
         }
-        public IEnumerable<Textbaustein> GetDefaultKeywords()
-        {
-            return new List<Textbaustein>
-        {
-            new Textbaustein { Name = ConfigData.DefaultBaustein.Classname, PrefixWithComment = false },
-            new Textbaustein { Name = ConfigData.DefaultBaustein.Propertie, PrefixWithComment = false },
-            new Textbaustein { Name = ConfigData.DefaultBaustein.Namespace, PrefixWithComment = false },
-            new Textbaustein { Name = ConfigData.DefaultBaustein.Variable, PrefixWithComment = false }
-        };
-        }    
-
+           
         #region Save & Load
         //// Save
         public void Save(Template template)

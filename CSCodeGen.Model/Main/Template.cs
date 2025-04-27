@@ -109,18 +109,11 @@ public class Template : Observable, INotifyPropertyChanged
     #endregion
 
     #region Konstruktoren
+  
     public Template()
     {
         ID = nextid++;
-        CreationDate = DateTime.Now;
-        Textbausteine = new BindingList<Textbaustein>();
-        IsChanged = true;
-    }
-
-    public Template(string name)
-    {
-        Name = name;
-        ID = nextid++;
+        Name = $"Neues Template{ID}";
         CreationDate = DateTime.Now;
         Textbausteine = new BindingList<Textbaustein>();
         IsChanged = true;

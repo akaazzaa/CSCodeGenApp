@@ -5,6 +5,7 @@ using CSCodeGen.Library.Controller;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
+using CSCodeGen.Model.Settings;
 using System.Configuration;
 
 namespace CSCodeGenApp.CodeGen
@@ -19,11 +20,13 @@ namespace CSCodeGenApp.CodeGen
         {
             ApplicationConfiguration.Initialize();
 
-            string templateFolder= string.Empty;
+            ConfigData.SetupLogConfig();
+
+            string? templateFolder = string.Empty;
 
             if (ConfigurationManager.AppSettings["FolderName"] != null)
             {
-                templateFolder = ConfigurationManager.AppSettings["FolderName"];
+               templateFolder = ConfigurationManager.AppSettings["FolderName"];
             }
 
             string templatePath = Path.Combine(Directory.GetCurrentDirectory(), templateFolder );

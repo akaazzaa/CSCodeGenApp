@@ -7,12 +7,15 @@ using CSCodeGen.Model.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using CSCodeGen.Model.Interfaces.View;
+using NLog;
 
 
 namespace CSCodeGen.Library.Controller
 {
     public class TemplateController
     {
+        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         IRepository<Template> _repository;
         ICodeTemplateView _templateView;
         
@@ -70,11 +73,13 @@ namespace CSCodeGen.Library.Controller
             if (args.Template == null)
             {
                 _templateView.ShowMessage("Fehler: Kein gültiges Template angegeben.");
+                _logger.Error("Template ist null");
                 return;
             }
 
             _repository.Add(args.Template);
             _templateView.ShowMessage($"Neues Template '{args.Template.Name}' wurde angelegt!");
+            _logger.Info($"{args.Template.Name}' wurde angelegt!");
             _templateView.ShowTemplates(_repository.GetData());
         }
         private void OnSaveTemplate(object sender, TemplateEventArgs args)
@@ -82,6 +87,7 @@ namespace CSCodeGen.Library.Controller
             if (args.Template == null)
             {
                 _templateView.ShowMessage("Fehler: Kein Template zum Speichern ausgewählt.");
+                _logger.Info($"Fehler: Kein Template zum Speichern ausgewählt. Template war Null");
                 return;
             }
 
@@ -89,6 +95,7 @@ namespace CSCodeGen.Library.Controller
             {
                 _templateView.ShowMessage("Warnung: Template existiert nicht, es wird nun hinzugefügt.");
                 _repository.Add(args.Template);
+                _logger.Info($"Warnung: Template existiert nicht, es wird nun hinzugefügt.{args.Template}");
             }
             else
             {
@@ -96,6 +103,7 @@ namespace CSCodeGen.Library.Controller
             }
 
             _templateView.ShowMessage($"Template '{args.Template.Name}' wurde gespeichert!");
+            _logger.Info($"Teplate {args.Template.ID} wurde gespeichert");
         }
         private void OnLoadTemplates(object sender, EventArgs e)
         {
@@ -105,6 +113,7 @@ namespace CSCodeGen.Library.Controller
             if (templates == null || templates.Count == 0)
             {
                 _templateView.ShowMessage("Es sind keine Templates vorhanden.");
+                _logger.Info("Keine Templates vorhanden");
             }
             _templateView.ShowTemplates(templates);
         }
