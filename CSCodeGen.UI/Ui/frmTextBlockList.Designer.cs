@@ -1,4 +1,8 @@
-﻿namespace CSCodeGen.UI.Ui
+﻿using CSCodeGen.Model.Main;
+using System;
+using System.Windows.Forms;
+
+namespace CSCodeGen.UI.Ui
 {
     partial class frmTextBlockList
     {
@@ -29,67 +33,63 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            pnlMain = new System.Windows.Forms.Panel();
-            pnlRight = new System.Windows.Forms.Panel();
-            gvDaten = new System.Windows.Forms.DataGridView();
-            nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            prefixWithCommentDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            Type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            displayTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            textbausteinBindingSource = new System.Windows.Forms.BindingSource(components);
+            pnlMain = new Panel();
+            gvDaten = new DataGridView();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            prefixWithCommentDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            Type = new DataGridViewComboBoxColumn();
+            displayTextDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            textbausteinBindingSource = new BindingSource(components);
+            panel1 = new Panel();
+            menuStrip1 = new MenuStrip();
+            btnAdd = new ToolStripMenuItem();
+            btnDelete = new ToolStripMenuItem();
+            btnSave = new ToolStripMenuItem();
+            pnlRight = new Panel();
             pnlMain.SuspendLayout();
-            pnlRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gvDaten).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textbausteinBindingSource).BeginInit();
+            panel1.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMain
             // 
+            pnlMain.Controls.Add(gvDaten);
+            pnlMain.Controls.Add(panel1);
             pnlMain.Controls.Add(pnlRight);
-            pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            pnlMain.Dock = DockStyle.Fill;
             pnlMain.Location = new System.Drawing.Point(0, 0);
             pnlMain.Name = "pnlMain";
-            pnlMain.Size = new System.Drawing.Size(1113, 547);
+            pnlMain.Size = new System.Drawing.Size(1530, 615);
             pnlMain.TabIndex = 0;
-            // 
-            // pnlRight
-            // 
-            pnlRight.Controls.Add(gvDaten);
-            pnlRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            pnlRight.Location = new System.Drawing.Point(0, 0);
-            pnlRight.Name = "pnlRight";
-            pnlRight.Size = new System.Drawing.Size(1113, 547);
-            pnlRight.TabIndex = 0;
             // 
             // gvDaten
             // 
+            gvDaten.AllowUserToAddRows = false;
+            gvDaten.AllowUserToDeleteRows = false;
+            gvDaten.AllowUserToResizeColumns = false;
+            gvDaten.AllowUserToResizeRows = false;
             gvDaten.AutoGenerateColumns = false;
-            gvDaten.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            gvDaten.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gvDaten.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { nameDataGridViewTextBoxColumn, codeDataGridViewTextBoxColumn, prefixWithCommentDataGridViewCheckBoxColumn, Type, displayTextDataGridViewTextBoxColumn });
+            gvDaten.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gvDaten.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvDaten.Columns.AddRange(new DataGridViewColumn[] { nameDataGridViewTextBoxColumn, prefixWithCommentDataGridViewCheckBoxColumn, Type, displayTextDataGridViewTextBoxColumn });
+            gvDaten.DataBindings.Add(new Binding("DataContext", textbausteinBindingSource, "Name", true, DataSourceUpdateMode.OnPropertyChanged));
             gvDaten.DataSource = textbausteinBindingSource;
-            gvDaten.Dock = System.Windows.Forms.DockStyle.Fill;
-            gvDaten.Location = new System.Drawing.Point(0, 0);
+            gvDaten.Dock = DockStyle.Fill;
+            gvDaten.Location = new System.Drawing.Point(645, 25);
+            gvDaten.MultiSelect = false;
             gvDaten.Name = "gvDaten";
-            gvDaten.Size = new System.Drawing.Size(1113, 547);
+            gvDaten.RowHeadersVisible = false;
+            gvDaten.Size = new System.Drawing.Size(885, 590);
             gvDaten.TabIndex = 0;
-            gvDaten.CellClick += gvDaten_CellClick;
+            gvDaten.CellDoubleClick += gvDaten_CellDoubleClick;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             nameDataGridViewTextBoxColumn.HeaderText = "Name";
             nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            // 
-            // codeDataGridViewTextBoxColumn
-            // 
-            codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
-            codeDataGridViewTextBoxColumn.HeaderText = "Code";
-            codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-            codeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            codeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            codeDataGridViewTextBoxColumn.UseColumnTextForButtonValue = true;
             // 
             // prefixWithCommentDataGridViewCheckBoxColumn
             // 
@@ -112,20 +112,72 @@
             // 
             // textbausteinBindingSource
             // 
-            textbausteinBindingSource.DataSource = typeof(Model.Main.Textbaustein);
+            textbausteinBindingSource.DataSource = typeof(Textbaustein);
             // 
-            // KeywordAdd
+            // panel1
+            // 
+            panel1.Controls.Add(menuStrip1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new System.Drawing.Point(645, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(885, 25);
+            panel1.TabIndex = 1;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Dock = DockStyle.Fill;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { btnAdd, btnDelete, btnSave });
+            menuStrip1.Location = new System.Drawing.Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new System.Drawing.Size(885, 25);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // btnAdd
+            // 
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new System.Drawing.Size(81, 21);
+            btnAdd.Text = "Hinzufügen";
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new System.Drawing.Size(63, 21);
+            btnDelete.Text = "Löschen";
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnSave
+            // 
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(71, 21);
+            btnSave.Text = "Speichern";
+            btnSave.Click += btnSave_Click;
+            // 
+            // pnlRight
+            // 
+            pnlRight.Dock = DockStyle.Left;
+            pnlRight.Location = new System.Drawing.Point(0, 0);
+            pnlRight.Name = "pnlRight";
+            pnlRight.Size = new System.Drawing.Size(645, 615);
+            pnlRight.TabIndex = 0;
+            // 
+            // frmTextBlockList
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1113, 547);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1530, 615);
             Controls.Add(pnlMain);
-            Name = "KeywordAdd";
+            MainMenuStrip = menuStrip1;
+            Name = "frmTextBlockList";
             Text = "KeywordAdd";
             pnlMain.ResumeLayout(false);
-            pnlRight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gvDaten).EndInit();
             ((System.ComponentModel.ISupportInitialize)textbausteinBindingSource).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -138,9 +190,13 @@
         private System.Windows.Forms.BindingSource textbausteinBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn prefixWithCommentDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn displayTextDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem btnAdd;
+        private System.Windows.Forms.ToolStripMenuItem btnDelete;
+        private System.Windows.Forms.ToolStripMenuItem btnSave;
     }
 }

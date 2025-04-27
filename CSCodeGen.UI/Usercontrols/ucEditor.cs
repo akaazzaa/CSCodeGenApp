@@ -22,10 +22,10 @@ namespace CSCodeGen.UC
         private List<Textbaustein> defaultKeywords = new List<Textbaustein>();
         private Template currentTemplate;
 
-        public ucEditor(object obj)
+        public ucEditor()
         {
             InitializeComponent();
-            Initialize(obj);
+            Initialize();
 
         }
         #region Events
@@ -61,11 +61,8 @@ namespace CSCodeGen.UC
         #endregion
 
         #region Methods
-        public void Initialize<T>(T obj)
+        public void ShowContent(object obj)
         {
-            if (obj == null) return;
-
-
             if (obj is Template template)
             {
                 fastColoredTextBox.Text = template.Content;
@@ -79,21 +76,20 @@ namespace CSCodeGen.UC
                 LoadKeywords();
                 RefreshKeywordsList();
             }
-
+        }
+        public void Initialize()
+        {    
             pnlEditor.Controls.Add(fastColoredTextBox);
             fastColoredTextBox.Dock = DockStyle.Fill;
             fastColoredTextBox.Language = Language.CSharp;
             fastColoredTextBox.AutoIndentChars = true;
             fastColoredTextBox.AutoIndent = true;
-
-
             fastColoredTextBox.TextChanged += OnTextChanged;
-
             listBox1.DoubleClick += InsertKeyword;
         }
         private void LoadKeywords()
         {
-            //defaultKeywords = (List<Textbaustein>)ConfigData.GetDefaults();  
+            defaultKeywords = (List<Textbaustein>)ConfigData.GetDefaults();  
 
             if (currentTemplate == null)
             {
@@ -115,7 +111,6 @@ namespace CSCodeGen.UC
         }
         private void UpdateKeywordsList(Template template)
         {
-
             foreach (Textbaustein keyword in template.Textbausteine)
             {
                 if (!defaultKeywords.Any(k => k.Name == keyword.Name))

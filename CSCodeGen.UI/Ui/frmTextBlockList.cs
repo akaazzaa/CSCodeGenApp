@@ -1,6 +1,7 @@
 ﻿using CSCodeGen.Model.Args;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
+using CSCodeGen.UC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,8 @@ namespace CSCodeGen.UI.Ui
     public partial class frmTextBlockList : Form, ITextBlockListView
     {
         private TemplateEventArgs _args;
-
+        private ucEditor ucEditor;
+        private Textbaustein _textbaustein;
         public frmTextBlockList(TemplateEventArgs args)
         {
             InitializeComponent();
@@ -27,8 +29,21 @@ namespace CSCodeGen.UI.Ui
         #region Mthods
         public void Initialize()
         {
+            ucEditor = new ucEditor();
+            ucEditor.Dock = DockStyle.Fill;
+            ucEditor.CodeChanged += CodeChanged;
+           
+            pnlRight.Controls.Add(ucEditor);
             ShowKeywords(_args.Template.Textbausteine);
         }
+
+        private void CodeChanged(object sender, string e)
+        {
+            if (_textbaustein == null) { return; }
+
+            _textbaustein.Code = e;
+        }
+
         public void ShowKeywords(IEnumerable<Textbaustein> keywords)
         {
             textbausteinBindingSource.DataSource = keywords;
@@ -38,25 +53,38 @@ namespace CSCodeGen.UI.Ui
         }
         #endregion
         #region Events
-        private void gvDaten_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void gvDaten_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            this.Validate();
+
+            if (e.RowIndex < 0) { return; }
+
+            _textbaustein = (Textbaustein)gvDaten.Rows[e.RowIndex].DataBoundItem;
+
+            if (String.IsNullOrEmpty(_textbaustein.Name))
             {
-                return;
+                MessageBox.Show("Bitte erst einen Namen vergeben");
             }
+            ucEditor.ShowContent(_textbaustein);
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            textbausteinBindingSource.Add(new Textbaustein());
+        }
 
-            var selectedKeyword = (Textbaustein)gvDaten.Rows[e.RowIndex].DataBoundItem;
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
 
-            if (selectedKeyword == null) { return; }
+        }
 
-            // Überprüfe, ob die geklickte Zelle zur Button-Spalte gehört
-            if (gvDaten.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
-            {
-                frmTextBlockEditor textBlockEditor = new frmTextBlockEditor(selectedKeyword);
-                textBlockEditor.ShowDialog();
-            }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
+
+
 
     }
 }

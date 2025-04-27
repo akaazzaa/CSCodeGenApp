@@ -26,9 +26,7 @@ namespace CSCodeGen.UI.Usercontrols
             InitializeComponent();
             currentTemplate = template;
 
-            ucEditor = new ucEditor(template);
-
-            
+            ucEditor = new ucEditor();
 
             ucEditor.CodeChanged += (s, newCode) =>
             {
@@ -41,6 +39,7 @@ namespace CSCodeGen.UI.Usercontrols
 
             btnRemove.Click += (s, e) => CloseTab();
 
+            ucEditor.ShowContent(template);
         }
 
 

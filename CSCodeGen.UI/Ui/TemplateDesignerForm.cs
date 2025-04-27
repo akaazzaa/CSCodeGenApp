@@ -72,12 +72,9 @@ namespace CSCodeGen.UI
 
             args.Template = currentTemplate;
 
-            frmTextBlockList keywordAdd = new frmTextBlockList(args);
-
-            if (keywordAdd.ShowDialog() == DialogResult.Cancel)
-            {
-               
-            }
+            frmTextBlockList textBlockList = new frmTextBlockList(args);
+            textBlockList.ShowDialog();
+           
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
         {
