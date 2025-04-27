@@ -8,8 +8,11 @@ using System.Xml.Serialization;
 
 namespace CSCodeGen.DataAccess.Helper
 {
-    public class XMLHelper
+    public static class XMLHelper
     {
+
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         #region Serialize & Deserialize
         public static T DeserializeFromXml<T>(string filePath)
         {
@@ -23,7 +26,7 @@ namespace CSCodeGen.DataAccess.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler beim Deserialisieren: {ex.Message}");
+                logger.Error($"Fehler beim Deserialisieren: {ex.Message}");
                 return default;
             }
         }
@@ -40,7 +43,7 @@ namespace CSCodeGen.DataAccess.Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Fehler beim Serialisieren: {ex.Message}");
+                logger.Error($"Fehler beim Serialisieren: {ex.Message}");
             }
         }
 

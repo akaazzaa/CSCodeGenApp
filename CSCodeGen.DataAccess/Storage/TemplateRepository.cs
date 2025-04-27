@@ -10,13 +10,17 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
+using NLog;
 
 
 namespace CSCodeGen.DataAccess.Model.Storage
 {
     public class TemplateRepository : IRepository<Template>
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         private readonly string _folderPath;
         private BindingList<Template> _templates;
         
@@ -68,8 +72,8 @@ namespace CSCodeGen.DataAccess.Model.Storage
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[ERROR] Fehler beim Speichern: {ex.Message}");
-                template.MarkAsChanged(); // Falls Fehler auftritt, bleibt der Status auf "geändert"
+                logger.Error($"[ERROR] Fehler beim Speichern: {ex.Message}");
+                template.MarkAsChanged();
             }
         }
         public void SaveAll()
@@ -82,25 +86,24 @@ namespace CSCodeGen.DataAccess.Model.Storage
         //// Load
         public void LoadAll()
         {
-            string[] files = Directory.GetFiles(_folderPath, "*.xml");
-
-            foreach (string file in files)
+            var files = Directory.GetFiles(_folderPath, "*.xml");
+            Parallel.ForEach(files, file =>
             {
                 try
                 {
-                    Template template = XMLHelper.DeserializeFromXml<Template>(file);
+                    var template = XMLHelper.DeserializeFromXml<Template>(file);
                     if (template != null)
                     {
-                        template.OldName = template.Name; // Speichert den alten Namen
-                        template.AcceptChanges(); // Direkt nach dem Laden als unverändert setzen
+                        template.OldName = template.Name;
+                        template.AcceptChanges();
                         _templates.Add(template);
                     }
-}
+                }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Fehler beim Laden der Datei '{file}': {ex.Message}");
+                    logger.Error(ex, $"Fehler beim Laden der Datei {file}");
                 }
-            }
+            });
         }
 
         #endregion
