@@ -30,7 +30,6 @@ namespace CSCodeGen.DataAccess.Model.Storage
         }
            
         #region Save & Load
-        //// Save
         public void Save(Template template)
         {
             if (template == null) return;
@@ -57,7 +56,6 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 template.MarkAsChanged();
             }
         }
-
         private string GenerateUniqueTemplateName(string baseName)
         {
             int counter = 1;
@@ -75,7 +73,6 @@ namespace CSCodeGen.DataAccess.Model.Storage
             return newName;
 
         } 
-
         public string GetTemplatePath(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
