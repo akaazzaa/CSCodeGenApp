@@ -2,6 +2,7 @@
 
 
 
+using CSCodeGen.DataAccess.Helper;
 using CSCodeGen.DataAccess.Model.Storage;
 using CSCodeGen.Library.Controller;
 using CSCodeGen.Model.Args;
@@ -38,7 +39,7 @@ namespace CSCodeGen.UI
             }
 
             string templatePath = Path.Combine(Directory.GetCurrentDirectory(), templateFolder);
-
+            
             IRepository<Template> storage = new TemplateRepository(templatePath);
             ICodeTemplateView view = new TemplateDesignerForm();
             

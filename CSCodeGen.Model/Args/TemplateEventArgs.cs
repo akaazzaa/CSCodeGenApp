@@ -10,15 +10,15 @@ namespace CSCodeGen.Model.Args
 {
     public class TemplateEventArgs : EventArgs
     {
-        public Template Template { get; set; } = null;
+        public Template? Template { get; set; } = null;
 
-        public BindingList<Template> Templates { get; set; } = null;
+        public BindingList<Template>? Templates { get; set; } = null;
 
-        public Textbaustein Keyword { get; set; } = null;
+        public Textbaustein? Keyword { get; set; } = null;
 
-        public List<Textbaustein> Keywords { get; set; } = null;
+        public List<Textbaustein>? Keywords { get; set; } = null;
 
-        public object Undefined { get; set; } = null;
+        public object? Undefined { get; set; } = null;
 
    
     }

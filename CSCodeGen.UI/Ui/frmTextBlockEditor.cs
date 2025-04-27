@@ -1,4 +1,5 @@
 ﻿
+using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using CSCodeGen.UC;
 using System;

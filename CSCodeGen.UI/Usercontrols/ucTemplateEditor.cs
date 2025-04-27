@@ -1,4 +1,5 @@
 ﻿using CSCodeGen.Model.Args;
+using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using CSCodeGen.UC;
 using System;
@@ -6,10 +7,12 @@ using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Usercontrols
 {
-    public partial class ucTemplateEditor : UserControl 
+    public partial class ucTemplateEditor : UserControl
     {
+
         private ucEditor ucEditor;
         public event EventHandler<TabPage> OnClosingTap;
+
         public event EventHandler<Template> OnSaveChanges;
         public event EventHandler<Template> OnResetChanges;
         public event EventHandler<string> OnCodeChanged;
@@ -72,5 +75,7 @@ namespace CSCodeGen.UI.Usercontrols
         }
 
        
+
+        
     }
 }

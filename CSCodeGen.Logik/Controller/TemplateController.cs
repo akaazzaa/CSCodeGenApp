@@ -16,21 +16,21 @@ namespace CSCodeGen.Library.Controller
         IRepository<Template> _repository;
         ICodeTemplateView _templateView;
         
+        
 
         public TemplateController(IRepository<Template> templateStorage, ICodeTemplateView templateView)
         {
             _repository = templateStorage;
             _templateView = templateView;
             
-
-            
-
             _templateView.LoadTemplates += OnLoadTemplates;
             _templateView.SaveTemplate += OnSaveTemplate;
             _templateView.NewTemplate += OnNewTemplate;
             _templateView.AddKeyword += OnAddKeyword;
             _templateView.RemoveKeyword += OnRemoveKeyword;
             _templateView.SaveAll += OnSaveAll;
+
+            
         }
         private void OnSaveAll(object sender, EventArgs e)
         {

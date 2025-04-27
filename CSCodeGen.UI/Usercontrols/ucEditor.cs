@@ -12,7 +12,7 @@ using CSCodeGen.Model.Interfaces.View;
 
 namespace CSCodeGen.UC
 {
-    public partial class ucEditor : UserControl , IEditorView
+    public partial class ucEditor : UserControl 
     {
         public event EventHandler<string> CodeChanged;
         public event EventHandler GetDefaultKeys;
@@ -59,6 +59,8 @@ namespace CSCodeGen.UC
             }
         }
         #endregion
+
+        #region Methods
         public void Initialize<T>(T obj)
         {
             if (obj == null) return;
@@ -89,7 +91,6 @@ namespace CSCodeGen.UC
 
             listBox1.DoubleClick += InsertKeyword;
         }
-  
         private void LoadKeywords()
         {
             //defaultKeywords = (List<Textbaustein>)ConfigData.GetDefaults();  
@@ -124,6 +125,6 @@ namespace CSCodeGen.UC
             }
         }
 
-       
+        #endregion
     }
 }

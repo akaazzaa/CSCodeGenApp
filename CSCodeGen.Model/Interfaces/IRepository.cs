@@ -10,6 +10,6 @@ namespace CSCodeGen.Model.Interfaces
         void Save(T obj);
         void SaveAll();
         void LoadAll();
-        T Load(string path);
+       
     }
 }

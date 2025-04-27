@@ -1,4 +1,5 @@
 ﻿
+using CSCodeGen.DataAccess.Helper;
 using CSCodeGen.Model;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Main;
@@ -18,13 +19,12 @@ namespace CSCodeGen.DataAccess.Model.Storage
     {
         private readonly string _folderPath;
         private BindingList<Template> _templates;
+        
 
         public TemplateRepository(string folderPath)
         {
             _folderPath = folderPath;
             _templates = new BindingList<Template>();
-            // Stelle sicher, dass der Ordner existiert
-           
         }
         public BindingList<Template> GetData() => _templates;
         public void Add(Template template)
@@ -60,7 +60,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 }
 
                 // Neues XML speichern
-                SerializeToXml(template, newFilePath);
+                XMLHelper.SerializeToXml(template, newFilePath);
 
                 // Erfolgreich gespeichert → Status zurücksetzen
                 template.OldName = template.Name;
@@ -88,7 +88,7 @@ namespace CSCodeGen.DataAccess.Model.Storage
             {
                 try
                 {
-                    Template template = DeserializeFromXml<Template>(file);
+                    Template template = XMLHelper.DeserializeFromXml<Template>(file);
                     if (template != null)
                     {
                         template.OldName = template.Name; // Speichert den alten Namen
@@ -104,50 +104,6 @@ namespace CSCodeGen.DataAccess.Model.Storage
         }
 
         #endregion
-
-        #region Serialize & Deserialize
-        private T DeserializeFromXml<T>(string  filePath)
-        {
-            try
-            {
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    return (T)serializer.Deserialize(reader);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Fehler beim Deserialisieren: {ex.Message}");
-                return default;
-            }
-        }
-
-        private void SerializeToXml<T>(T obj, string filePath)
-        {
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    serializer.Serialize(writer, obj);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Fehler beim Serialisieren: {ex.Message}");
-            }
-        }
-
-        public Template Load(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        #endregion
-
     }
 }
 
