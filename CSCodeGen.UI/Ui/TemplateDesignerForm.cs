@@ -43,9 +43,9 @@ namespace CSCodeGen.UI
         }
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tcMain.SelectedTab != null && TabPageHelper.GetTabs().ContainsKey(tcMain.SelectedTab))
+            if (tcMain.SelectedTab != null && TabPageHelper.Tabs.ContainsKey(tcMain.SelectedTab))
             {
-                Template currentTemplate = TabPageHelper.GetTabs()[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
+                Template currentTemplate = TabPageHelper.Tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
                 SetKeyWordsBindings(currentTemplate);
             }
         }
@@ -66,7 +66,7 @@ namespace CSCodeGen.UI
         {
             if (tcMain.SelectedTab == null) { return; }
 
-            var currentTemplate = TabPageHelper.GetTabs()[tcMain.SelectedTab];
+            var currentTemplate = TabPageHelper.Tabs[tcMain.SelectedTab];
 
             var args = new TemplateEventArgs();
 
@@ -123,12 +123,21 @@ namespace CSCodeGen.UI
         }
         private void AddNewTab(Template currentTemplate)
         {
-            if (currentTemplate == null || TabPageHelper.GetTabs().ContainsValue(currentTemplate))
+            if (currentTemplate == null || TabPageHelper.Tabs.ContainsValue(currentTemplate))
             {
                 return;
             }
-           
-            var tabPage = TabPageHelper.CreateTabPage(currentTemplate);   
+
+            var editor = new ucTemplateEditor(currentTemplate)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            editor.OnClosingTap += CloseTab;
+            editor.OnSaveChanges += Save;
+            editor.OnResetChanges += ResetTextChanges;
+
+            var tabPage = TabPageHelper.CreateTabPage(currentTemplate,editor);   
             tcMain.TabPages.Add(tabPage);
             tcMain.SelectedTab = tabPage;
 
@@ -155,7 +164,7 @@ namespace CSCodeGen.UI
             if (tabPage == null) return;
 
             tcMain.TabPages.Remove(tabPage);
-            TabPageHelper.GetTabs().Remove(tabPage);
+            TabPageHelper.Tabs.Remove(tabPage);
 
             if (tcMain.TabPages.Count > 0)
             {

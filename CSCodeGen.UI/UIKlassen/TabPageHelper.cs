@@ -13,15 +13,10 @@ namespace CSCodeGen.UI.UIKlassen
 {
     public class TabPageHelper
     {
-        private static Dictionary<TabPage, Template> _tabs = new Dictionary<TabPage, Template>();
-        private Template _template;
-        public static Dictionary<TabPage,Template> GetTabs()
+        public static Dictionary<TabPage, Template> Tabs = new Dictionary<TabPage, Template>();
+        public static TabPage CreateTabPage(Template template, ucTemplateEditor editor)
         {
-            return _tabs;
-        }
-        public static TabPage CreateTabPage(Template template, ICodeTemplateView templateView)
-        {
-            if (template == null || templateView == null)
+            if (template == null)
             {
                 throw new ArgumentNullException("Fehler! Tabpage konnte nicht erstellt werden!");
             }
@@ -31,18 +26,8 @@ namespace CSCodeGen.UI.UIKlassen
                 ToolTipText = template.Name
             };
 
-            var editor = new ucTemplateEditor(template)
-            {
-                Dock = DockStyle.Fill
-            };
-
-            editor.OnClosingTap += (sender, e) => CloseTab(tabPage, form);
-            editor.OnSaveChanges += templateView.
-            editor.OnResetChanges += (sender, e) => form.ResetTemplate?.Invoke(sender, new TemplateEventArgs { Template = template });
-
-
             tabPage.Controls.Add(editor);
-            _tabs[tabPage] = template;
+            Tabs[tabPage] = template;
 
             return tabPage;
         }
@@ -50,4 +35,3 @@ namespace CSCodeGen.UI.UIKlassen
        
     }
 }
-))
