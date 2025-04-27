@@ -12,9 +12,8 @@ namespace CSCodeGen.Model.Interfaces.View
         event EventHandler<TemplateEventArgs> NewTemplate;
         event EventHandler<TemplateEventArgs> AddKeyword;
         event EventHandler<TemplateEventArgs> RemoveKeyword;
-
-       
-
+        event EventHandler<TemplateEventArgs> DeleteKeyword;
+  
         void ShowTemplates(BindingList<Template> templates);
         void ShowMessage(string message);
     }

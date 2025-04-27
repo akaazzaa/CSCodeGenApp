@@ -3,29 +3,30 @@ using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using CSCodeGen.UC;
 using System;
+using System.ComponentModel.Design;
 using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Usercontrols
 {
     public partial class ucTemplateEditor : UserControl
     {
-
+        private Template currentTemplate;
         private ucEditor ucEditor;
-        public event EventHandler<TabPage> OnClosingTap;
 
+        public event EventHandler<TabPage> OnClosingTap;
         public event EventHandler<Template> OnSaveChanges;
         public event EventHandler<Template> OnResetChanges;
         public event EventHandler<string> OnCodeChanged;
-        public event EventHandler UpdatePlatzhalter;
-        public event EventHandler OnKeywordDeleted;
-
-        private Template currentTemplate;
-
+    
         public ucTemplateEditor(Template template)
         {
             InitializeComponent();
             currentTemplate = template;
+            Initialize();
+        }
 
+        private void Initialize()
+        {
             ucEditor = new ucEditor();
 
             ucEditor.CodeChanged += (s, newCode) =>
@@ -39,9 +40,10 @@ namespace CSCodeGen.UI.Usercontrols
 
             btnRemove.Click += (s, e) => CloseTab();
 
-            ucEditor.ShowContent(template);
+            ucEditor.ShowContent(currentTemplate);
         }
 
+        #region Events
 
         private void CloseTab()
         {
@@ -72,9 +74,9 @@ namespace CSCodeGen.UI.Usercontrols
         {
             OnSaveChanges?.Invoke(this, currentTemplate);
         }
+        #endregion
 
-       
 
-        
+
     }
 }

@@ -21,10 +21,7 @@ namespace CSCodeGen.UI
         public event EventHandler<TemplateEventArgs> NewTemplate;
         public event EventHandler<TemplateEventArgs> AddKeyword;
         public event EventHandler<TemplateEventArgs> RemoveKeyword;
-
-        
-        
-        
+        public event EventHandler<TemplateEventArgs> DeleteKeyword;
 
         public TemplateDesignerForm()
         {
@@ -32,7 +29,7 @@ namespace CSCodeGen.UI
             Initialize();
         }
         #region Form Events
-       
+
         private void OnLoad(object sender, EventArgs e)
         {
             LoadTemplates?.Invoke(this, EventArgs.Empty);
@@ -43,38 +40,18 @@ namespace CSCodeGen.UI
         }
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tcMain.SelectedTab != null && TabPageHelper.Tabs.ContainsKey(tcMain.SelectedTab))
-            {
-                Template currentTemplate = TabPageHelper.Tabs[tcMain.SelectedTab];  // Hole das Template der ausgewählten TabPage
-                SetKeyWordsBindings(currentTemplate);
-            }
-        }
-        private void btnRemovekeyword_Click(object sender, EventArgs e)
-        {
-            if (gvKeywords.CurrentRow == null) return;
-
-            var args = new TemplateEventArgs();
-
-            args.Keyword = (Textbaustein)gvKeywords.CurrentRow.DataBoundItem;
-
-            args.Template = GetSelectedTemplate();
-
-            RemoveKeyword?.Invoke(this, args);
-
+            if (IsSelectedTabPageNull() || TabPageHelper.DictonaryContaisTabPage(tcMain.SelectedTab)) { return; }
+            SetKeyWordsBindings(GetTemplateFromTap());
         }
         private void gvKeywords_DoubleClick(object sender, EventArgs e)
         {
-            if (tcMain.SelectedTab == null) { return; }
-
-            var currentTemplate = TabPageHelper.Tabs[tcMain.SelectedTab];
+            if (IsSelectedTabPageNull()) return;
 
             var args = new TemplateEventArgs();
 
-            args.Template = currentTemplate;
+            args.Template = GetTemplateFromTap();
 
-            frmTextBlockList textBlockList = new frmTextBlockList(args);
-            textBlockList.ShowDialog();
-           
+            OpenEditor(args);
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
         {
@@ -95,7 +72,14 @@ namespace CSCodeGen.UI
 
             NewTemplate?.Invoke(this, args);
         }
+        private void btnLöschen_Click(object sender, EventArgs e)
+        {
+            var args = new TemplateEventArgs();
 
+            args.Template = GetSelectedTemplate();
+
+            DeleteKeyword?.Invoke(sender, args);
+        }
         #endregion
 
         #region Methods
@@ -104,6 +88,19 @@ namespace CSCodeGen.UI
             this.Load += OnLoad;
             this.FormClosing += OnFormClosing;
 
+        }
+        private void OpenEditor(TemplateEventArgs args)
+        {
+            frmTextBlockList textBlockList = new frmTextBlockList(args);
+            textBlockList.ShowDialog();
+        }
+        private bool IsSelectedTabPageNull()
+        {
+            return tcMain.SelectedTab == null;
+        }
+        private Template GetTemplateFromTap()
+        {
+            return TabPageHelper.Tabs[tcMain.SelectedTab];
         }
         public void ShowMessage(string message)
         {
@@ -120,10 +117,7 @@ namespace CSCodeGen.UI
         }
         private void AddNewTab(Template currentTemplate)
         {
-            if (currentTemplate == null || TabPageHelper.Tabs.ContainsValue(currentTemplate))
-            {
-                return;
-            }
+            if (currentTemplate == null || TabPageHelper.DictonaryContainsTemplate(currentTemplate)) { return; }
 
             var editor = new ucTemplateEditor(currentTemplate)
             {
@@ -134,7 +128,7 @@ namespace CSCodeGen.UI
             editor.OnSaveChanges += Save;
             editor.OnResetChanges += ResetTextChanges;
 
-            var tabPage = TabPageHelper.CreateTabPage(currentTemplate,editor);   
+            var tabPage = TabPageHelper.CreateTabPage(currentTemplate, editor);
             tcMain.TabPages.Add(tabPage);
             tcMain.SelectedTab = tabPage;
 
@@ -146,7 +140,7 @@ namespace CSCodeGen.UI
             {
                 return;
             }
-            
+
         }
         private void Save(object sender, Template template)
         {
@@ -180,6 +174,7 @@ namespace CSCodeGen.UI
 
 
 
+        
     }
 
 }

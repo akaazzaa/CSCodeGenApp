@@ -50,5 +50,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
 
             return result;
         }
+
+        public void Delete(string filePath)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

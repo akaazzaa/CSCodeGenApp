@@ -113,7 +113,7 @@ public class Template : Observable, INotifyPropertyChanged
     public Template()
     {
         ID = nextid++;
-        Name = $"Neues Template{ID}";
+        Name = $"Neues Template";
         CreationDate = DateTime.Now;
         Textbausteine = new BindingList<Textbaustein>();
         IsChanged = true;

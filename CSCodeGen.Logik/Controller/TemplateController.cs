@@ -2,12 +2,8 @@
 using CSCodeGen.Model.Main;
 using CSCodeGen.Model.Args;
 using System;
-using System.ComponentModel;
 using CSCodeGen.Model.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 using CSCodeGen.Model.Interfaces.View;
-using NLog;
 
 
 namespace CSCodeGen.Library.Controller
@@ -19,8 +15,6 @@ namespace CSCodeGen.Library.Controller
         IRepository<Template> _repository;
         ICodeTemplateView _templateView;
         
-        
-
         public TemplateController(IRepository<Template> templateStorage, ICodeTemplateView templateView)
         {
             _repository = templateStorage;
@@ -32,8 +26,15 @@ namespace CSCodeGen.Library.Controller
             _templateView.AddKeyword += OnAddKeyword;
             _templateView.RemoveKeyword += OnRemoveKeyword;
             _templateView.SaveAll += OnSaveAll;
-
+            _templateView.DeleteKeyword += OnDeleteTemplate;
             
+            
+        }
+        private void OnDeleteTemplate(object sender, TemplateEventArgs args)
+        {
+            if (args.Template == null) {return; }
+            _repository.GetData().Remove(args.Template);
+            _repository.Delete(args.Template.Name);
         }
         private void OnSaveAll(object sender, EventArgs e)
         {

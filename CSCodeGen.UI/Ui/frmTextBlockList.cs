@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace CSCodeGen.UI.Ui
 {
-    public partial class frmTextBlockList : Form, ITextBlockListView
+    public partial class frmTextBlockList : Form 
     {
         private TemplateEventArgs _args;
         private ucEditor ucEditor;
@@ -37,13 +37,6 @@ namespace CSCodeGen.UI.Ui
             ShowKeywords(_args.Template.Textbausteine);
         }
 
-        private void CodeChanged(object sender, string e)
-        {
-            if (_textbaustein == null) { return; }
-
-            _textbaustein.Code = e;
-        }
-
         public void ShowKeywords(IEnumerable<Textbaustein> keywords)
         {
             textbausteinBindingSource.DataSource = keywords;
@@ -53,7 +46,12 @@ namespace CSCodeGen.UI.Ui
         }
         #endregion
         #region Events
+        private void CodeChanged(object sender, string e)
+        {
+            if (_textbaustein == null) { return; }
 
+            _textbaustein.Code = e;
+        }
         private void gvDaten_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             this.Validate();

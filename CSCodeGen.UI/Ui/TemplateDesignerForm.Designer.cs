@@ -50,6 +50,7 @@ namespace CSCodeGen.UI
             mainMenu = new System.Windows.Forms.MenuStrip();
             btnNeuesTemplate = new System.Windows.Forms.ToolStripMenuItem();
             btnSave = new System.Windows.Forms.ToolStripMenuItem();
+            btnLöschen = new System.Windows.Forms.ToolStripMenuItem();
             panelMain.SuspendLayout();
             panelContent.SuspendLayout();
             pnlSidebarRight.SuspendLayout();
@@ -227,7 +228,7 @@ namespace CSCodeGen.UI
             // 
             // mainMenu
             // 
-            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave });
+            mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { btnNeuesTemplate, btnSave, btnLöschen });
             mainMenu.Location = new System.Drawing.Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -248,6 +249,13 @@ namespace CSCodeGen.UI
             btnSave.Size = new System.Drawing.Size(71, 20);
             btnSave.Text = "Speichern";
             btnSave.Click += btnSave_Click;
+            // 
+            // btnLöschen
+            // 
+            btnLöschen.Name = "btnLöschen";
+            btnLöschen.Size = new System.Drawing.Size(63, 20);
+            btnLöschen.Text = "Löschen";
+            btnLöschen.Click += btnLöschen_Click;
             // 
             // TemplateDesignerForm
             // 
@@ -299,5 +307,6 @@ namespace CSCodeGen.UI
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn prefixWithCommentDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
+        private System.Windows.Forms.ToolStripMenuItem btnLöschen;
     }
 }

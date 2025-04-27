@@ -4,6 +4,7 @@ using CSCodeGen.Model.Main;
 using CSCodeGen.UI.Usercontrols;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,16 @@ namespace CSCodeGen.UI.UIKlassen
             return tabPage;
         }
 
-       
+        public static bool DictonaryContaisTabPage(TabPage tapPage)
+        {
+            return Tabs.ContainsKey(tapPage);
+        }
+
+        public static bool DictonaryContainsTemplate(Template template)
+        {
+            return Tabs.ContainsValue(template);
+        }
+
+
     }
 }
