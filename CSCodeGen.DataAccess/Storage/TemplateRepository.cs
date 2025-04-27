@@ -37,13 +37,18 @@ namespace CSCodeGen.DataAccess.Model.Storage
 
             try
             {
-                var newFilePath = GetTemplatePath(template.Name);
+                string filePath = GetTemplatePath(template.Name);
 
-                // Immer in die Datei unter aktuellem Namen speichern
-                XMLHelper.SerializeToXml(template, newFilePath);
+                // Wenn die Datei existiert, neuen Namen finden
+                if (File.Exists(filePath))
+                {
+                    template.Name = GenerateUniqueTemplateName(template.Name);
+                    filePath = GetTemplatePath(template.Name);
+                }
 
-                Delete(template.OldName);
-                // Template ist jetzt synchron mit der Datei
+                XMLHelper.SerializeToXml(template, filePath);
+
+                // Synchronisieren
                 template.AcceptChanges();
             }
             catch (Exception ex)
@@ -52,6 +57,25 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 template.MarkAsChanged();
             }
         }
+
+        private string GenerateUniqueTemplateName(string baseName)
+        {
+            int counter = 1;
+            string newName = baseName;
+            string newPath = GetTemplatePath(newName);
+
+            
+            while (File.Exists(newPath))
+            {
+                newName = $"{baseName}_{counter}";
+                newPath = GetTemplatePath(newName);
+                counter++;
+            }
+
+            return newName;
+
+        } 
+
         public string GetTemplatePath(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
