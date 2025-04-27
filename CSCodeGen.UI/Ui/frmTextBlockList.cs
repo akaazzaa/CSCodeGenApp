@@ -75,13 +75,11 @@ namespace CSCodeGen.UI.Ui
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if(textbausteinBindingSource.Current == null) { return; }
 
+            textbausteinBindingSource.RemoveCurrent();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-        }
         #endregion
 
 

@@ -44,7 +44,6 @@ namespace CSCodeGen.UI.Ui
             menuStrip1 = new MenuStrip();
             btnAdd = new ToolStripMenuItem();
             btnDelete = new ToolStripMenuItem();
-            btnSave = new ToolStripMenuItem();
             pnlRight = new Panel();
             pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gvDaten).BeginInit();
@@ -126,7 +125,7 @@ namespace CSCodeGen.UI.Ui
             // menuStrip1
             // 
             menuStrip1.Dock = DockStyle.Fill;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { btnAdd, btnDelete, btnSave });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { btnAdd, btnDelete });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new System.Drawing.Size(885, 25);
@@ -146,13 +145,6 @@ namespace CSCodeGen.UI.Ui
             btnDelete.Size = new System.Drawing.Size(63, 21);
             btnDelete.Text = "Löschen";
             btnDelete.Click += btnDelete_Click;
-            // 
-            // btnSave
-            // 
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(71, 21);
-            btnSave.Text = "Speichern";
-            btnSave.Click += btnSave_Click;
             // 
             // pnlRight
             // 
@@ -197,6 +189,5 @@ namespace CSCodeGen.UI.Ui
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btnAdd;
         private System.Windows.Forms.ToolStripMenuItem btnDelete;
-        private System.Windows.Forms.ToolStripMenuItem btnSave;
     }
 }
