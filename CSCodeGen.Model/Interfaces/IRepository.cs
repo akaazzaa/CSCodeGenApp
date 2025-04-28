@@ -7,7 +7,7 @@ namespace CSCodeGen.Model.Interfaces
     {
         BindingList<T> GetData();
         void Add(T obj);
-        void Save(T obj);
+        string Save(T obj);
         void SaveAll();
         void LoadAll();
         void Delete(string filePath);

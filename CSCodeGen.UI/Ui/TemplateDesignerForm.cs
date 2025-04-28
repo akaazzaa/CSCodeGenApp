@@ -15,6 +15,8 @@ namespace CSCodeGen.UI
 {
     public partial class TemplateDesignerForm : Form, ICodeTemplateView
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
         public event EventHandler LoadTemplates;
         public event EventHandler SaveAll;
         public event EventHandler<TemplateEventArgs> SaveTemplate;
@@ -55,8 +57,13 @@ namespace CSCodeGen.UI
         }
         private void listTemplate_DoubleClick(object sender, EventArgs e)
         {
+            logger.Debug("Button Klick");
+            logger.Debug($"{GetSelectedTemplate().IsChanged}");
+
             SetKeyWordsBindings(GetSelectedTemplate());
             AddNewTab(GetSelectedTemplate());
+
+            logger.Debug($"{GetSelectedTemplate().IsChanged}");
         }
         private void btnSave_Click(object sender, EventArgs e)
         {

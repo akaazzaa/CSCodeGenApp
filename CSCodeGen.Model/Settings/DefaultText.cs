@@ -4,7 +4,7 @@
     {
         public const string PREFABCLASSNAME = "Classname";
         public const string PREFABNAMESPACE = "Namespace";
-        public const string PREFABVARNAME = "VariabelnName";
+        public const string PREFABVARNAME = "VariablenName";
         public const string PREFABPROPERTIENAME = "PropertyName";
 
         #region Properties

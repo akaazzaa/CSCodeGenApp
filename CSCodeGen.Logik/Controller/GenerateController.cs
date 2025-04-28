@@ -72,17 +72,17 @@ namespace CSCodeGen.Library.Controller
             return ReplaceDefaultKeys(source);
         }
 
-        public static string ReplaceDefaultKeys(string text, UserValue userValue = null, Result result = null)
+        public static string ReplaceDefaultKeys(string text, UserValue userValue = null)
         {
             foreach (Textbaustein Textbaustein in ConfigData.GetDefaults())
             {
-                if (Textbaustein.Name == ConfigData.DefaultBaustein.Classname && result != null)
+                if (Textbaustein.Name == ConfigData.DefaultBaustein.Classname )
                 {
-                    //text = text.Replace(platzhalter.DisplayText, r.ClassName);
+                    //text = text.Replace(Textbaustein.DisplayText, );
                 }
-                else if (Textbaustein.Name == ConfigData.DefaultBaustein.Namespace && result != null)
+                else if (Textbaustein.Name == ConfigData.DefaultBaustein.Namespace)
                 {
-                    //text = text.Replace(platzhalter.DisplayText, _context.NameSpace);
+                    //text = text.Replace(Textbaustein.DisplayText, );
                 }
                 else if (Textbaustein.Name == ConfigData.DefaultBaustein.Variable)
                 {

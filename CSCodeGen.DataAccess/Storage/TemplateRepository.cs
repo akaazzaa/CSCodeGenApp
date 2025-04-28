@@ -30,39 +30,48 @@ namespace CSCodeGen.DataAccess.Model.Storage
         }
            
         #region Save & Load
-        public void Save(Template template)
+        public string Save(Template template)
         {
-            if (template == null) return;
+            if (template == null || !template.IsChanged) return $"Template wurde nicht gespeichert: Template: {template} und {template.IsChanged}";
+
+
+
+            if (IsObjectEmpty(template))
+            {
+                return "Das Objekt ist leer und wird nicht gespeichert.";
+            }
+
 
             try
             {
                 string filePath = GetTemplatePath(template.Name);
 
-                // Wenn die Datei existiert, neuen Namen finden
                 if (File.Exists(filePath))
                 {
                     template.Name = GenerateUniqueTemplateName(template.Name);
                     filePath = GetTemplatePath(template.Name);
+
                 }
 
-                XMLHelper.SerializeToXml(template, filePath);
-
-                // Synchronisieren
                 template.AcceptChanges();
+                XMLHelper.SerializeToXml(template, filePath); 
             }
             catch (Exception ex)
             {
-                logger.Error(ex, $"Fehler beim Speichern des Templates '{template?.Name}'");
                 template.MarkAsChanged();
+                return $"Fehler beim Speichern des Templates '{template?.Name}'";
             }
+
+            return $"Template '{template.Name}' wurde gespeichert!"; 
         }
+
         private string GenerateUniqueTemplateName(string baseName)
         {
             int counter = 1;
             string newName = baseName;
             string newPath = GetTemplatePath(newName);
 
-            
+
             while (File.Exists(newPath))
             {
                 newName = $"{baseName}_{counter}";
@@ -72,7 +81,27 @@ namespace CSCodeGen.DataAccess.Model.Storage
 
             return newName;
 
-        } 
+        }
+
+        private bool IsObjectEmpty(Template template)
+        {
+
+            var property = typeof(Template).GetProperty("Content");
+            
+                var value = property.GetValue(template);
+                if (value != null && !value.Equals(GetDefaultValue(property.PropertyType)))
+                {
+                    return false;
+                }
+            
+            return true;
+        }
+
+        private static object GetDefaultValue(Type type)
+        {
+            return type.IsValueType ? Activator.CreateInstance(type) : null;
+        }
+
         public string GetTemplatePath(string name)
         {
             if (string.IsNullOrWhiteSpace(name))

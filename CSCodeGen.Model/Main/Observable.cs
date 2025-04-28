@@ -1,12 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace CSCodeGen.Model.Main
 {
     public abstract class Observable
     {
 
-        [Browsable(false)]
+        //[Browsable(false)]
+        [XmlIgnore]
         public bool IsChanged { get;  set; }
 
             public void MarkAsChanged()

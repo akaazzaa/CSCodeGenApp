@@ -75,13 +75,10 @@ namespace CSCodeGen.Model.Main
             {
                 if (_type != value)
                 {
-                    
-                    
                     MarkAsChanged();
                     _type = value;
                     OnPropertyChanged();
-                }
-                 
+                }              
             }
         }
       
