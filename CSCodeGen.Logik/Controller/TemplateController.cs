@@ -100,11 +100,12 @@ namespace CSCodeGen.Library.Controller
             }
             else
             {
-                _repository.Save(args.Template);
+                var textResult = _repository.Save(args.Template);
+
+               _logger.Info(textResult);
+                _templateView.ShowMessage(textResult);
             }
 
-            _templateView.ShowMessage($"Template '{args.Template.Name}' wurde gespeichert!");
-            _logger.Info($"Teplate {args.Template.ID} wurde gespeichert");
         }
         private void OnLoadTemplates(object sender, EventArgs e)
         {

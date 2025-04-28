@@ -28,19 +28,18 @@ namespace CSCodeGen.UI.Usercontrols
         private void Initialize()
         {
             ucEditor = new ucEditor();
-
-            ucEditor.CodeChanged += (s, newCode) =>
-            {
-                currentTemplate.Content = newCode;
-                OnCodeChanged?.Invoke(this, newCode); // Weiterleitung an die Form
-            };
-
             ucEditor.Dock = DockStyle.Fill;
             pnlEditor.Controls.Add(ucEditor);
 
             btnRemove.Click += (s, e) => CloseTab();
 
             ucEditor.ShowContent(currentTemplate);
+
+            ucEditor.CodeChanged += (s, newCode) =>
+            {
+               currentTemplate.Content = newCode;
+               OnCodeChanged?.Invoke(this, newCode); // Weiterleitung an die Form
+            };
         }
 
         #region Events

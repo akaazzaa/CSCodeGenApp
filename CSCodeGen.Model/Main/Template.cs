@@ -9,6 +9,7 @@ namespace CSCodeGen.Model.Main;
 
 public class Template : Observable, INotifyPropertyChanged
 {
+    private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
     #region Variabeln
     private static int nextid = 1;
@@ -45,6 +46,7 @@ public class Template : Observable, INotifyPropertyChanged
         {
             if (_name != value)
             {
+                logger.Debug($"Name geändert von {_name} zu {value}");
                 if (_name != null)
                 {
                     MarkAsChanged();
@@ -67,6 +69,7 @@ public class Template : Observable, INotifyPropertyChanged
         {
             if (_description != value)
             {
+                logger.Debug($"Beschreibung geändert von {_description} zu {value}");
                 if (_description != null)
                 {
                     MarkAsChanged();
@@ -93,6 +96,7 @@ public class Template : Observable, INotifyPropertyChanged
         {
             if (_content != value)
             {
+                logger.Debug($"Content geändert von {_content} zu {value}");
                 if (_content != null)
                 {
                     MarkAsChanged();

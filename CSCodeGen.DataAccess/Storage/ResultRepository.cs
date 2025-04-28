@@ -22,9 +22,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
             throw new System.NotImplementedException();
         }
 
-        public void Save(Result result)
+        public string Save(Result result)
         {
             File.WriteAllText("filePath", result.Content);
+            return "";
         }
 
         public void SaveAll()
