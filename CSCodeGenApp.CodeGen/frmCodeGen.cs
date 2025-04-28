@@ -26,6 +26,7 @@ namespace CSCodeGenApp.CodeGen
         private void OnLoad(object? sender, EventArgs e)
         {
             LoadTemplates?.Invoke(this, EventArgs.Empty);
+            
         }
         private void btnGenerate_Click(object sender, EventArgs e)
         {
@@ -104,5 +105,10 @@ namespace CSCodeGenApp.CodeGen
             return (Result)bsResult.DataSource;
         }
         #endregion
+
+        private void cbTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeCurrentObjekt();
+        }
     }
 }

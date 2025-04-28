@@ -268,6 +268,7 @@ namespace CSCodeGenApp.CodeGen
             cbTemplate.Name = "cbTemplate";
             cbTemplate.Size = new Size(229, 23);
             cbTemplate.TabIndex = 3;
+            cbTemplate.SelectedIndexChanged += cbTemplate_SelectedIndexChanged;
             // 
             // bsDaten
             // 

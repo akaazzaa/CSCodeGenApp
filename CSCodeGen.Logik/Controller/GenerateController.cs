@@ -59,13 +59,13 @@ namespace CSCodeGen.Library.Controller
                 if (matchingTextbaustein != null)
                 {
                     // Ersetze den Code des Textbausteins im Template.Content
-                    updatedContent = updatedContent.Replace(matchingTextbaustein.Code, userValue.Value);
+                    updatedContent = updatedContent.Replace(matchingTextbaustein.DisplayText, matchingTextbaustein.Code);
                 }
             }
 
             return updatedContent;
         }
-    
+
 
     }
 
