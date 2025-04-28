@@ -8,6 +8,7 @@ using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using CSCodeGen.Model.Settings;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -33,7 +34,7 @@ namespace CSCodeGen.Library.Controller
 
         private void OnGenerateCode(object sender, GeneratorEventArgs args)
         {
-            string tmp =  Generate(args);
+            string tmp = ReplaceUserValuesInTemplate(args);
             _view.ShowText(tmp);
         }
 
@@ -43,93 +44,28 @@ namespace CSCodeGen.Library.Controller
             _view.Show(_templateRepository.GetData());
         }
 
-        public string Generate(GeneratorEventArgs args)
+        private string ReplaceUserValuesInTemplate(GeneratorEventArgs args)
         {
-            string source = string.Empty;
+            if (args.Template == null || args.Result.userValues == null || string.IsNullOrEmpty(args.Template.Content))
+                throw new ArgumentNullException("Template, UserValues oder Template.Content darf nicht null sein.");
 
-            if (args == null) return source;
+            string updatedContent = args.Template.Content;
 
-            source = args.Template.Content;
-
-            foreach (UserValue uservalue in args.Result.userValues)
+            foreach (var userValue in args.Result.userValues)
             {
-                if (string.IsNullOrEmpty(uservalue.Value))
+                // Suche nach einem passenden Textbaustein basierend auf dem Datentyp
+                var matchingTextbaustein = args.Template.Textbausteine.FirstOrDefault(tb => tb.Type == userValue.Type);
+
+                if (matchingTextbaustein != null)
                 {
-                    continue;
-                }
-
-                var matching = args.Template.Textbausteine.Where(k => k.Type == uservalue.Type).ToList();
-
-                foreach (Textbaustein platzhalter in matching)
-                {
-
-                    string code = ReplaceDefaultKeys(platzhalter.Code, uservalue);
-
-                    source = source.Replace(platzhalter.DisplayText, code + "\r\r" + "            " + platzhalter.DisplayText);
+                    // Ersetze den Code des Textbausteins im Template.Content
+                    updatedContent = updatedContent.Replace(matchingTextbaustein.Code, userValue.Value);
                 }
             }
 
-            return ReplaceDefaultKeys(source);
+            return updatedContent;
         }
-
-        public static string ReplaceDefaultKeys(string text, UserValue userValue = null, Result result = null)
-        {
-            foreach (Textbaustein Textbaustein in ConfigData.GetDefaults())
-            {
-                if (Textbaustein.Name == ConfigData.DefaultBaustein.Classname && result != null)
-                {
-                    //text = text.Replace(platzhalter.DisplayText, r.ClassName);
-                }
-                else if (Textbaustein.Name == ConfigData.DefaultBaustein.Namespace && result != null)
-                {
-                    //text = text.Replace(platzhalter.DisplayText, _context.NameSpace);
-                }
-                else if (Textbaustein.Name == ConfigData.DefaultBaustein.Variable)
-                {
-                    if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
-                    {
-                        text = text.Replace(Textbaustein.DisplayText, PropertyNameToVariable(userValue.Value));
-                    }
-                }
-                else if (Textbaustein.Name == ConfigData.DefaultBaustein.Propertie)
-                {
-                    if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
-                    {
-                        text = text.Replace(Textbaustein.DisplayText, userValue.Value);
-                    }
-                }
-            }
-
-            return text;
-        }
-
-        private static string PropertyNameToVariable(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                return string.Empty;
-            }
-
-            return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
-        }
-
-
-        public void Save(string source)
-        {
-            ////string path = CoreGlobals.Instance.SaveCSPath;
-            //string fileName = "NewCSDatei.cs";
-            //string fullPath = Path.Combine(path, fileName);
-
-            //if (!Directory.Exists(path))
-            //{
-            //    Directory.CreateDirectory(path);
-            //}
-
-            //File.WriteAllText(fullPath, source);
-        }
-
-
-
+    
 
     }
 
