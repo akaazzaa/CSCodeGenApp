@@ -17,6 +17,7 @@ namespace CSCodeGenApp.CodeGen
         public event EventHandler? LoadTemplates;
         public event EventHandler<GeneratorEventArgs>? GenerateCode;
 
+        private GeneratorUIData _UIData = new GeneratorUIData();
         public frmCodeGen()
         {
             InitializeComponent();
@@ -26,30 +27,31 @@ namespace CSCodeGenApp.CodeGen
         private void OnLoad(object? sender, EventArgs e)
         {
             LoadTemplates?.Invoke(this, EventArgs.Empty);
-            
+
         }
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            var uiData = GetUserData();
             var args = new GeneratorEventArgs();
-            var template = GetSelectedTemplate();
-            var result = GetResult();
-            if (template == null) { return; }
-
-
-            args.Template = template;
-            args.Result = result;
+            args.ClassName = uiData.ClassName;
+            args.Namespace = uiData.NameSpace;
+            args.UserValues = uiData.UserValues;
+            args.TemplateName = GetTemplateID();
 
             GenerateCode?.Invoke(this, args);
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var uv = new UserValue();
-
-            bsUserValues.Add(uv);
+            var userValue = new UserValue();
+            _UIData.UserValues.Add(userValue);
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
             gvUserValues.Rows.Remove(gvUserValues.CurrentRow);
+        }
+        private void cbTemplate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeCurrentObjekt();
         }
         #endregion
         #region Methods
@@ -63,10 +65,10 @@ namespace CSCodeGenApp.CodeGen
             fastColoredTextBox1.AutoIndent = true;
             fastColoredTextBox1.AutoIndentChars = true;
 
-
             gvcbType.DataSource = Enum.GetValues(typeof(DataType));
             gvcbType.ValueType = typeof(DataType);
             gvcbType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
         }
         public void ShowText(string text)
         {
@@ -74,8 +76,8 @@ namespace CSCodeGenApp.CodeGen
         }
         public void Show(BindingList<Template> templates)
         {
-            bsDaten.DataSource = templates;
-            bsResult.DataSource = new Result();
+            templateBindingSource.DataSource = templates;
+            bsDaten.DataSource = _UIData;
 
             ChangeCurrentObjekt();
         }
@@ -83,7 +85,7 @@ namespace CSCodeGenApp.CodeGen
         {
             MessageBox.Show(message);
         }
-        private Template GetSelectedTemplate()
+        private Template? GetSelectedTemplate()
         {
             if (cbTemplate.SelectedItem == null) { return null; }
 
@@ -91,6 +93,7 @@ namespace CSCodeGenApp.CodeGen
 
             return template;
         }
+
         private void ChangeCurrentObjekt()
         {
             var template = GetSelectedTemplate();
@@ -100,15 +103,28 @@ namespace CSCodeGenApp.CodeGen
             ShowText(template.Content);
 
         }
-        private Result GetResult()
+
+        private string GetTemplateID()
         {
-            return (Result)bsResult.DataSource;
+            var template = GetSelectedTemplate();
+            if (template == null)
+            {
+                return string.Empty;
+            }
+
+            return template.Name;
+
+        }
+
+        private GeneratorUIData GetUserData()
+        {
+            var result = (GeneratorUIData)bsDaten.DataSource;
+
+            return result;
         }
         #endregion
 
-        private void cbTemplate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ChangeCurrentObjekt();
-        }
+
+       
     }
 }

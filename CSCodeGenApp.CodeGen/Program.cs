@@ -37,10 +37,10 @@ namespace CSCodeGenApp.CodeGen
             }
 
             IRepository<Template> templateRepo = new TemplateRepository(templatePath);
-            IRepository<Result> resultRepo = new ResultRepository();
+      
             IClassView view = new frmCodeGen();
 
-            GenerateController classController = new GenerateController(resultRepo,templateRepo,view);
+            GenerateController classController = new GenerateController(templateRepo,view);
 
             
             Application.Run((frmCodeGen)view);

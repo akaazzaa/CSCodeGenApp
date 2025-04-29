@@ -11,6 +11,8 @@ namespace CSCodeGen.Model.Interfaces
         void SaveAll();
         void LoadAll();
         void Delete(string filePath);
-       
+        Template GetTemplateByName(string name);
+
+
     }
 }

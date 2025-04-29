@@ -146,7 +146,10 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 }
             }
         }
-
+        public Template GetTemplateByName(string name)
+        {
+            return _templates.FirstOrDefault(t => t.Name == name);
+        } 
         #endregion
     }
 }

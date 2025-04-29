@@ -5,7 +5,7 @@ namespace CSCodeGen.Model.Settings
 {
     public static class ConfigData
     {
-        private static DefaultText keywords = null;
+        private static DefaultText? keywords = null;
         public static string CommentPrefix => "//";
         public static string Prefix => "<#";
         public static string Postfix => "#>";

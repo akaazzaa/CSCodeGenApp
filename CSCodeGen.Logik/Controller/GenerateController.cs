@@ -7,23 +7,26 @@ using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using CSCodeGen.Model.Settings;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CSCodeGen.Library.Controller
 {
     public class GenerateController
     {
         
-        IRepository<Result> _resultRepository;
+        //IRepository<Result> _resultRepository;
         IRepository<Template> _templateRepository;
         IClassView _view;
 
-        
+        private string _ClassName;
+        private string _NameSpace;
 
-        public GenerateController(IRepository<Result> resultRepo, IRepository<Template> templateRepo,IClassView classView)
+        public GenerateController( IRepository<Template> templateRepo,IClassView classView)
         {
             _templateRepository = templateRepo;
 
@@ -34,8 +37,16 @@ namespace CSCodeGen.Library.Controller
 
         private void OnGenerateCode(object sender, GeneratorEventArgs args)
         {
-            string tmp = ReplaceUserValuesInTemplate(args);
-            _view.ShowText(tmp);
+            _ClassName = args.ClassName;
+            _NameSpace = args.Namespace;
+
+            string ret = ReplaceUserValuesInTemplate(args);
+
+            if ( ret == null )
+            {
+                return;
+            }
+            _view.ShowText(ret);
         }
 
         private void OnLoadTemplates(object sender, EventArgs e)
@@ -46,24 +57,72 @@ namespace CSCodeGen.Library.Controller
 
         private string ReplaceUserValuesInTemplate(GeneratorEventArgs args)
         {
-            if (args.Template == null || args.Result.userValues == null || string.IsNullOrEmpty(args.Template.Content))
-                throw new ArgumentNullException("Template, UserValues oder Template.Content darf nicht null sein.");
+            if (args.UserValues == null || string.IsNullOrEmpty(args.TemplateName)) 
+            { 
+                return null;  
+            }
+            
+            Template template = _templateRepository.GetTemplateByName(args.TemplateName);
 
-            string updatedContent = args.Template.Content;
+            args.ContentResult = template.Content;
 
-            foreach (var userValue in args.Result.userValues)
+            foreach (var userValue in args.UserValues)
             {
-                // Suche nach einem passenden Textbaustein basierend auf dem Datentyp
-                var matchingTextbaustein = args.Template.Textbausteine.FirstOrDefault(tb => tb.Type == userValue.Type);
+                if (!string.IsNullOrEmpty(userValue.Value)) { continue; }
+                
+                var matchingTextbaustein = template.Textbausteine.Where(tb => tb.Type == userValue.Type).ToList();
 
-                if (matchingTextbaustein != null)
+                foreach (var textbaustein in matchingTextbaustein)
                 {
-                    // Ersetze den Code des Textbausteins im Template.Content
-                    updatedContent = updatedContent.Replace(matchingTextbaustein.DisplayText, matchingTextbaustein.Code);
+                    string replacedCode = ReplaceDefaultString(textbaustein.Code, userValue);
+                    args.ContentResult = args.ContentResult.Replace(textbaustein.DisplayText, replacedCode + "\r\r" + "            " + textbaustein.DisplayText);
                 }
             }
 
-            return updatedContent;
+            return ReplaceDefaultString(args.ContentResult);
+        }
+
+        private string ReplaceDefaultString(string ret,UserValue userValue = null)
+        {
+            foreach (Textbaustein textbaustein in ConfigData.GetDefaults())
+            {
+                if (textbaustein.Name == ConfigData.DefaultBaustein.Classname)
+                {
+                    ret = ret.Replace(textbaustein.DisplayText, _ClassName);
+                }
+                else if (textbaustein.Name == ConfigData.DefaultBaustein.Namespace)
+                {
+                    ret = ret.Replace(textbaustein.DisplayText, _NameSpace);
+                }
+                else if (textbaustein.Name == ConfigData.DefaultBaustein.Variable)
+                {
+                    if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
+                    {
+                        ret = ret.Replace(textbaustein.DisplayText, PropertyNameToVariable(userValue.Value));
+                    }
+                }
+                else if (textbaustein.Name == ConfigData.DefaultBaustein.Propertie)
+                {
+                    if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
+                    {
+                        ret = ret.Replace(textbaustein.DisplayText, userValue.Value);
+                    }
+                }
+            }
+
+            return ret;
+        }
+
+               
+
+        private static string PropertyNameToVariable(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return string.Empty;
+            }
+
+            return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
         }
 
 
