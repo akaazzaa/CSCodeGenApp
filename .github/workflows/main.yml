@@ -21,7 +21,7 @@ jobs:
       run: dotnet restore CSCodeGen.sln
 
     - name: Build & publish WinForms project
-      run: dotnet publish CSCodeGen/CSCodeGen.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true
+      run: dotnet publish CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true
 
     - name: Upload .exe artifact
       uses: actions/upload-artifact@v4
