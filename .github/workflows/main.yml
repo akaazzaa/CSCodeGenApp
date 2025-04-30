@@ -1,35 +1,39 @@
-name: Build and Publish WinForms App
+name: Build and Upload CSCodeGenApp
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
 
-    - name: Publish Application
-      run: dotnet publish CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true
+      - name: Restore dependencies
+        run: dotnet restore CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj
 
-    - name: Suche nach .exe Dateien (PowerShell)
-      shell: pwsh
-      run: |
-        Get-ChildItem -Recurse -Path CSCodeGenApp -Filter *.exe | ForEach-Object { Write-Host $_.FullName }
+      - name: Build project
+        run: dotnet build CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj --configuration Release --no-restore
 
-    - name: Upload .exe artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: WinFormsApp
-        path: CSCodeGenApp/bin/Release/net8.0-windows/win-x64/publish/*.exe
-        if-no-files-found: warn
+      - name: Publish project
+        run: dotnet publish CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj --configuration Release --runtime win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true --output publish
+
+      - name: List output files
+        run: |
+          dir publish
+
+      - name: Upload .exe as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CSCodeGenApp
+          path: publish/*.exe
