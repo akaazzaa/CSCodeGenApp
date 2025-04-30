@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: WinFormsApp
-        path: CSCodeGen/Build/Release/net8.0/win-x64/publish/*.exe
+        path: CSCodeGenApp/Build/Release/net8.0-windows/*.exe
