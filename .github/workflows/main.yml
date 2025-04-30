@@ -20,7 +20,7 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Publish Application
-      run: dotnet publish CSCodeGenApp/CSCodeGenApp.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true
+      run: dotnet publish CSCodeGenApp/CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true
 
     - name: Zeige Verzeichnisstruktur
       run: dir /s /b CSCodeGenApp
