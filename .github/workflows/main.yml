@@ -22,9 +22,10 @@ jobs:
     - name: Publish Application
       run: dotnet publish CSCodeGenApp.CodeGen/CSCodeGenApp.CodeGen.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeAllContentForSelfExtract=true
 
-    - name: Zeige Verzeichnisstruktur (PowerShell)
+    - name: Suche nach .exe Dateien (PowerShell)
       shell: pwsh
-      run: Get-ChildItem -Recurse -Path CSCodeGenApp | Select-Object FullName
+      run: |
+        Get-ChildItem -Recurse -Path CSCodeGenApp -Filter *.exe | ForEach-Object { Write-Host $_.FullName }
 
     - name: Upload .exe artifact
       uses: actions/upload-artifact@v4
