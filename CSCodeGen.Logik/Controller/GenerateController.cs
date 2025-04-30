@@ -113,15 +113,15 @@ namespace CSCodeGen.Library.Controller
         }
 
 
-        public static string FormatCode(string code)
-        {
-            var workspace = new AdhocWorkspace();
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var root = syntaxTree.GetRoot();
+        //public static string FormatCode(string code)
+        //{
+        //    var workspace = new AdhocWorkspace();
+        //    var syntaxTree = CSharpSyntaxTree.ParseText(code);
+        //    var root = syntaxTree.GetRoot();
 
-            var formattedRoot = Formatter.Format(root, workspace);
-            return formattedRoot.ToFullString();
-        }
+        //    var formattedRoot = Formatter.Format(root, workspace);
+        //    return formattedRoot.ToFullString();
+        //}
 
         //var options = workspace.Options
         // .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, false)
