@@ -12,13 +12,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace CSCodeGen.Library.Controller
 {
     public class GenerateController
     {
-        
+
         //IRepository<Result> _resultRepository;
         IRepository<Template> _templateRepository;
         IClassView _view;
@@ -26,10 +28,9 @@ namespace CSCodeGen.Library.Controller
         private string _ClassName;
         private string _NameSpace;
 
-        public GenerateController( IRepository<Template> templateRepo,IClassView classView)
+        public GenerateController(IRepository<Template> templateRepo, IClassView classView)
         {
             _templateRepository = templateRepo;
-
             _view = classView;
             _view.LoadTemplates += OnLoadTemplates;
             _view.GenerateCode += OnGenerateCode;
@@ -42,7 +43,7 @@ namespace CSCodeGen.Library.Controller
 
             string ret = ReplaceUserValuesInTemplate(args);
 
-            if ( ret == null )
+            if (ret == null)
             {
                 return;
             }
@@ -57,19 +58,19 @@ namespace CSCodeGen.Library.Controller
 
         private string ReplaceUserValuesInTemplate(GeneratorEventArgs args)
         {
-            if (args.UserValues == null || string.IsNullOrEmpty(args.TemplateName)) 
-            { 
-                return null;  
+            if (args.UserValues == null || string.IsNullOrEmpty(args.TemplateName))
+            {
+                return null;
             }
-            
+
             Template template = _templateRepository.GetTemplateByName(args.TemplateName);
 
             args.ContentResult = template.Content;
 
             foreach (var userValue in args.UserValues)
             {
-                if (!string.IsNullOrEmpty(userValue.Value)) { continue; }
-                
+                if (string.IsNullOrEmpty(userValue.Value)) { continue; }
+
                 var matchingTextbaustein = template.Textbausteine.Where(tb => tb.Type == userValue.Type).ToList();
 
                 foreach (var textbaustein in matchingTextbaustein)
@@ -82,38 +83,53 @@ namespace CSCodeGen.Library.Controller
             return ReplaceDefaultString(args.ContentResult);
         }
 
-        private string ReplaceDefaultString(string ret,UserValue userValue = null)
+        private string ReplaceDefaultString(string ret, UserValue userValue = null)
         {
             foreach (Textbaustein textbaustein in ConfigData.GetDefaults())
             {
-                if (textbaustein.Name == ConfigData.DefaultBaustein.Classname)
+                switch (textbaustein.Name)
                 {
-                    ret = ret.Replace(textbaustein.DisplayText, _ClassName);
-                }
-                else if (textbaustein.Name == ConfigData.DefaultBaustein.Namespace)
-                {
-                    ret = ret.Replace(textbaustein.DisplayText, _NameSpace);
-                }
-                else if (textbaustein.Name == ConfigData.DefaultBaustein.Variable)
-                {
-                    if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
-                    {
-                        ret = ret.Replace(textbaustein.DisplayText, PropertyNameToVariable(userValue.Value));
-                    }
-                }
-                else if (textbaustein.Name == ConfigData.DefaultBaustein.Propertie)
-                {
-                    if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
-                    {
-                        ret = ret.Replace(textbaustein.DisplayText, userValue.Value);
-                    }
+                    case DefaultText.PREFABCLASSNAME:
+                        ret = ret.Replace(textbaustein.DisplayText, _ClassName);
+                        break;
+                    case DefaultText.PREFABNAMESPACE:
+                        ret = ret.Replace(textbaustein.DisplayText, _NameSpace);
+                        break;
+                    case DefaultText.PREFABVARNAME:
+                        if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
+                        {
+                            ret = ret.Replace(textbaustein.DisplayText, PropertyNameToVariable(userValue.Value));
+                        }
+                        break;
+                    default:
+                        if (userValue != null && !string.IsNullOrEmpty(userValue.Value))
+                        {
+                            ret = ret.Replace(textbaustein.DisplayText,userValue.Value);
+                        }
+                        break;
                 }
             }
-
             return ret;
         }
 
-               
+
+        public static string FormatCode(string code)
+        {
+            var workspace = new AdhocWorkspace();
+            var syntaxTree = CSharpSyntaxTree.ParseText(code);
+            var root = syntaxTree.GetRoot();
+
+            var formattedRoot = Formatter.Format(root, workspace);
+            return formattedRoot.ToFullString();
+        }
+
+        //var options = workspace.Options
+        // .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, false)
+        // .WithChangedOption(FormattingOptions.TabSize, LanguageNames.CSharp, 4);
+
+        //var formattedRoot = Formatter.Format(root, workspace, options);
+
+
 
         private static string PropertyNameToVariable(string name)
         {

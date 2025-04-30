@@ -1,5 +1,6 @@
 ﻿using CSCodeGen.Model.Main;
 using NLog;
+using System.Xml.Linq;
 
 namespace CSCodeGen.Model.Settings
 {
@@ -29,23 +30,28 @@ namespace CSCodeGen.Model.Settings
             new Textbaustein {  Name = DefaultBaustein.Classname, PrefixWithComment = false },
             new Textbaustein {  Name = DefaultBaustein.Propertie, PrefixWithComment = false },
             new Textbaustein {  Name = DefaultBaustein.Namespace, PrefixWithComment = false },
-            new Textbaustein {  Name = DefaultBaustein.Variable, PrefixWithComment = false }
+            new Textbaustein {  Name = DefaultBaustein.Variable, PrefixWithComment = false },
+            new Textbaustein {  Name = DefaultBaustein.Methode, PrefixWithComment = false },
+            new Textbaustein {  Name = DefaultBaustein.Function, PrefixWithComment = false },
         };
         }
+
+
+ 
 
         public static void SetupLogConfig()
         {
             var config = new NLog.Config.LoggingConfiguration();
 
-            
+
             var logfile = new NLog.Targets.FileTarget("logfile") { FileName = "file.txt" };
             var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
 
-                   
+
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logconsole);
             config.AddRule(LogLevel.Debug, LogLevel.Fatal, logfile);
 
-                    
+
             NLog.LogManager.Configuration = config;
         }
 

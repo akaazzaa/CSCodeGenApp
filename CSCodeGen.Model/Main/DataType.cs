@@ -14,5 +14,12 @@ namespace CSCodeGen.Model.Main
         DateTime,
         Double,
         Float,
+        Method,
+        Text,
+        FuncInt,
+        FuncString,
+        FuncBool,
+        FuncDouble,
+        FuncFloat,
     }
 }

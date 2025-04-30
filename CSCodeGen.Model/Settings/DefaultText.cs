@@ -6,7 +6,8 @@
         public const string PREFABNAMESPACE = "Namespace";
         public const string PREFABVARNAME = "VariablenName";
         public const string PREFABPROPERTIENAME = "PropertyName";
-
+        public const string PREFABMETHODENNAME = "MethodenName";
+        public const string PREFABFUNCTIONNAME = "FunctionName";
         #region Properties
         public string Classname
         {
@@ -36,6 +37,21 @@
                 return PREFABPROPERTIENAME;
             }
         }
+        public string Function
+        {
+            get
+            {
+                return PREFABFUNCTIONNAME;
+            }
+        }
+        public string Methode
+        {
+            get
+            {
+                return PREFABMETHODENNAME;
+            }
+        }
+
         #endregion
     }
 }
