@@ -91,31 +91,38 @@ namespace CSCodeGen.Library.Controller
                 _logger.Info($"Fehler: Kein Template zum Speichern ausgewählt. Template war Null");
                 return;
             }
+            if (!args.Template.IsChanged) { return; }
 
             if (_repository.FileExists(args.Template.Name) )
             {
                 if (_templateView.ShowMessagBox($"Template '{args.Template.Name}' existiert bereits. Möchten Sie es überschreiben?", "Template existiert bereits")) 
                 {
+                    //// ändern 
                     _repository.Save(args.Template);
+                }
+                else
+                {
+                    _templateView.UseFileDialog();
+                    _repository.LoadAll();
                 }
             }
 
 
 
 
-            if (!_repository.GetData().Contains(args.Template))
-            {
-                _templateView.ShowMessage(" Template existiert nicht, es wird nun hinzugefügt.");
-                _repository.Add(args.Template);
-                _logger.Info($"Warnung: Template existiert nicht, es wird nun hinzugefügt.{args.Template}");
-            }
-            else
-            {
-                var textResult = _repository.Save(args.Template);
+            //if (!_repository.GetData().Contains(args.Template))
+            //{
+            //    _templateView.ShowMessage(" Template existiert nicht, es wird nun hinzugefügt.");
+            //    _repository.Add(args.Template);
+            //    _logger.Info($"Warnung: Template existiert nicht, es wird nun hinzugefügt.{args.Template}");
+            //}
+            //else
+            //{
+            //    var textResult = _repository.Save(args.Template);
 
-               _logger.Info(textResult);
-                _templateView.ShowMessage(textResult);
-            }
+            //   _logger.Info(textResult);
+            //    _templateView.ShowMessage(textResult);
+            //}
 
         }
         private void OnLoadTemplates(object sender, EventArgs e)

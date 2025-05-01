@@ -10,6 +10,8 @@ using CSCodeGen.UI.Ui;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Library.Controller;
 using CSCodeGen.UI.UIKlassen;
+using System.Configuration;
+using System.IO;
 
 namespace CSCodeGen.UI
 {
@@ -95,6 +97,22 @@ namespace CSCodeGen.UI
         {
             this.Load += OnLoad;
             this.FormClosing += OnFormClosing;
+        }
+        public string UseFileDialog()
+        {
+             using(SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                var saveFolder = ConfigurationManager.AppSettings["FolderName"];
+                saveFileDialog.Filter = "Textdateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*";
+                saveFileDialog.Title = "Speichern unter";
+                saveFileDialog.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), saveFolder); ;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    return saveFileDialog.FileName;
+                }
+            }
+
+                return "";
         }
 
         public bool ShowMessagBox(string message, string caption)
