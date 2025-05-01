@@ -19,8 +19,7 @@ namespace CSCodeGen.Library.Controller
         public TemplateController(IRepository<Template> templateStorage, ICodeTemplateView templateView)
         {
             _repository = templateStorage;
-            _templateView = templateView;
-            
+            _templateView = templateView;      
             _templateView.LoadTemplates += OnLoadTemplates;
             _templateView.SaveTemplate += OnSaveTemplate;
             _templateView.NewTemplate += OnNewTemplate;
@@ -28,8 +27,6 @@ namespace CSCodeGen.Library.Controller
             _templateView.RemoveKeyword += OnRemoveKeyword;
             _templateView.SaveAll += OnSaveAll;
             _templateView.DeleteKeyword += OnDeleteTemplate;
-            
-            
         }
         private void OnDeleteTemplate(object sender, TemplateEventArgs args)
         {
@@ -128,6 +125,5 @@ namespace CSCodeGen.Library.Controller
             }
             _templateView.ShowTemplates(templates);
         }
-
     }
 }

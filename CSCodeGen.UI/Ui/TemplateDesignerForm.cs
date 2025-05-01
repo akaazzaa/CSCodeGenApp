@@ -26,14 +26,12 @@ namespace CSCodeGen.UI
         public event EventHandler<TemplateEventArgs> AddKeyword;
         public event EventHandler<TemplateEventArgs> RemoveKeyword;
         public event EventHandler<TemplateEventArgs> DeleteKeyword;
-
         public TemplateDesignerForm()
         {
             InitializeComponent();
             Initialize();
         }
         #region Form Events
-
         private void OnLoad(object sender, EventArgs e)
         {
             LoadTemplates?.Invoke(this, EventArgs.Empty);
@@ -61,7 +59,6 @@ namespace CSCodeGen.UI
 
             OpenEditor(args);
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.Validate();
@@ -84,7 +81,6 @@ namespace CSCodeGen.UI
 
             DeleteKeyword?.Invoke(sender, args);
         }
-
         private void listTemplate_Click(object sender, EventArgs e)
         {
             SetKeyWordsBindings(GetSelectedTemplate());
@@ -114,7 +110,6 @@ namespace CSCodeGen.UI
 
                 return "";
         }
-
         public bool ShowMessagBox(string message, string caption)
         {
            var result =  MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Information);

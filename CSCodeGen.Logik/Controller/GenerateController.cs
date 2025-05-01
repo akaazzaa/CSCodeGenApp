@@ -33,8 +33,6 @@ namespace CSCodeGen.Library.Controller
             _view.GenerateCode += OnGenerateCode;
             _view.Save += OnSave;
         }
-
-
         #region Events
         private void OnSave(object sender, GeneratorEventArgs args)
         {
