@@ -73,7 +73,7 @@ namespace CSCodeGen.UI
             panelMain.Location = new System.Drawing.Point(0, 0);
             panelMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panelMain.Name = "panelMain";
-            panelMain.Size = new System.Drawing.Size(1240, 554);
+            panelMain.Size = new System.Drawing.Size(1336, 663);
             panelMain.TabIndex = 0;
             // 
             // panelContent
@@ -82,10 +82,10 @@ namespace CSCodeGen.UI
             panelContent.Controls.Add(tcMain);
             panelContent.Controls.Add(pnlSidebarRight);
             panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            panelContent.Location = new System.Drawing.Point(198, 30);
+            panelContent.Location = new System.Drawing.Point(124, 30);
             panelContent.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             panelContent.Name = "panelContent";
-            panelContent.Size = new System.Drawing.Size(1042, 524);
+            panelContent.Size = new System.Drawing.Size(1212, 633);
             panelContent.TabIndex = 2;
             // 
             // tcMain
@@ -95,7 +95,7 @@ namespace CSCodeGen.UI
             tcMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tcMain.Name = "tcMain";
             tcMain.SelectedIndex = 0;
-            tcMain.Size = new System.Drawing.Size(696, 522);
+            tcMain.Size = new System.Drawing.Size(912, 631);
             tcMain.TabIndex = 1;
             tcMain.SelectedIndexChanged += tcMain_SelectedIndexChanged;
             // 
@@ -105,10 +105,10 @@ namespace CSCodeGen.UI
             pnlSidebarRight.Controls.Add(gvKeywords);
             pnlSidebarRight.Controls.Add(pnalPropertys);
             pnlSidebarRight.Dock = System.Windows.Forms.DockStyle.Right;
-            pnlSidebarRight.Location = new System.Drawing.Point(696, 0);
+            pnlSidebarRight.Location = new System.Drawing.Point(912, 0);
             pnlSidebarRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlSidebarRight.Name = "pnlSidebarRight";
-            pnlSidebarRight.Size = new System.Drawing.Size(344, 522);
+            pnlSidebarRight.Size = new System.Drawing.Size(298, 631);
             pnlSidebarRight.TabIndex = 0;
             // 
             // gvKeywords
@@ -121,12 +121,12 @@ namespace CSCodeGen.UI
             gvKeywords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn1, prefixWithCommentDataGridViewCheckBoxColumn, Type });
             gvKeywords.DataSource = bsPlatzhalter;
             gvKeywords.Dock = System.Windows.Forms.DockStyle.Fill;
-            gvKeywords.Location = new System.Drawing.Point(0, 251);
+            gvKeywords.Location = new System.Drawing.Point(0, 315);
             gvKeywords.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gvKeywords.MultiSelect = false;
             gvKeywords.Name = "gvKeywords";
             gvKeywords.ReadOnly = true;
-            gvKeywords.Size = new System.Drawing.Size(342, 269);
+            gvKeywords.Size = new System.Drawing.Size(296, 314);
             gvKeywords.TabIndex = 1;
             gvKeywords.DoubleClick += gvKeywords_DoubleClick;
             // 
@@ -163,7 +163,7 @@ namespace CSCodeGen.UI
             pnalPropertys.Location = new System.Drawing.Point(0, 0);
             pnalPropertys.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnalPropertys.Name = "pnalPropertys";
-            pnalPropertys.Size = new System.Drawing.Size(342, 251);
+            pnalPropertys.Size = new System.Drawing.Size(296, 315);
             pnalPropertys.TabIndex = 0;
             // 
             // pgTemplate
@@ -172,7 +172,7 @@ namespace CSCodeGen.UI
             pgTemplate.Location = new System.Drawing.Point(0, 0);
             pgTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pgTemplate.Name = "pgTemplate";
-            pgTemplate.Size = new System.Drawing.Size(340, 249);
+            pgTemplate.Size = new System.Drawing.Size(294, 313);
             pgTemplate.TabIndex = 0;
             // 
             // pnlSidebar
@@ -183,7 +183,7 @@ namespace CSCodeGen.UI
             pnlSidebar.Location = new System.Drawing.Point(0, 30);
             pnlSidebar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.Size = new System.Drawing.Size(198, 524);
+            pnlSidebar.Size = new System.Drawing.Size(124, 633);
             pnlSidebar.TabIndex = 1;
             // 
             // pnlList
@@ -194,7 +194,7 @@ namespace CSCodeGen.UI
             pnlList.Location = new System.Drawing.Point(0, 0);
             pnlList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlList.Name = "pnlList";
-            pnlList.Size = new System.Drawing.Size(197, 522);
+            pnlList.Size = new System.Drawing.Size(122, 631);
             pnlList.TabIndex = 0;
             // 
             // listTemplate
@@ -207,9 +207,9 @@ namespace CSCodeGen.UI
             listTemplate.Location = new System.Drawing.Point(0, 0);
             listTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listTemplate.Name = "listTemplate";
-            listTemplate.Size = new System.Drawing.Size(195, 520);
+            listTemplate.Size = new System.Drawing.Size(120, 629);
             listTemplate.TabIndex = 0;
-            listTemplate.DoubleClick += listTemplate_DoubleClick;
+            listTemplate.Click += listTemplate_Click;
             // 
             // bsTemplates
             // 
@@ -223,7 +223,7 @@ namespace CSCodeGen.UI
             pnlbar.Location = new System.Drawing.Point(0, 0);
             pnlbar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pnlbar.Name = "pnlbar";
-            pnlbar.Size = new System.Drawing.Size(1240, 30);
+            pnlbar.Size = new System.Drawing.Size(1336, 30);
             pnlbar.TabIndex = 0;
             // 
             // mainMenu
@@ -232,7 +232,7 @@ namespace CSCodeGen.UI
             mainMenu.Location = new System.Drawing.Point(0, 0);
             mainMenu.Name = "mainMenu";
             mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            mainMenu.Size = new System.Drawing.Size(1238, 24);
+            mainMenu.Size = new System.Drawing.Size(1334, 24);
             mainMenu.TabIndex = 0;
             mainMenu.Text = "menuStrip1";
             // 
@@ -261,7 +261,7 @@ namespace CSCodeGen.UI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1240, 554);
+            ClientSize = new System.Drawing.Size(1336, 663);
             Controls.Add(panelMain);
             MainMenuStrip = mainMenu;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

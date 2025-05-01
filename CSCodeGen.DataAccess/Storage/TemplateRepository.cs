@@ -65,6 +65,12 @@ namespace CSCodeGen.DataAccess.Model.Storage
             return $"Template '{template.Name}' wurde gespeichert!"; 
         }
 
+        public bool FileExists(string name)
+        {
+            string filePath = GetTemplatePath(name);
+            return File.Exists(filePath);
+        }
+
         private string GenerateUniqueTemplateName(string baseName)
         {
             int counter = 1;

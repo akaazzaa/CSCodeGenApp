@@ -35,6 +35,7 @@ namespace CSCodeGen.UI
         private void OnLoad(object sender, EventArgs e)
         {
             LoadTemplates?.Invoke(this, EventArgs.Empty);
+            listTemplate.SelectedIndex = -1;
         }
         private void OnFormClosing(object sender, FormClosingEventArgs e)
         {
@@ -42,8 +43,11 @@ namespace CSCodeGen.UI
         }
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (IsSelectedTabPageNull() || TabPageHelper.DictonaryContaisTabPage(tcMain.SelectedTab)) { return; }
-            SetKeyWordsBindings(GetTemplateFromTap());
+            if (IsSelectedTabPageNull() || !TabPageHelper.DictonaryContaisTabPage(tcMain.SelectedTab)) return;
+
+            var template = TabPageHelper.Tabs[tcMain.SelectedTab];
+            listTemplate.SelectedItem = template;
+            SetKeyWordsBindings(template);
         }
         private void gvKeywords_DoubleClick(object sender, EventArgs e)
         {
@@ -55,16 +59,7 @@ namespace CSCodeGen.UI
 
             OpenEditor(args);
         }
-        private void listTemplate_DoubleClick(object sender, EventArgs e)
-        {
-            logger.Debug("Button Klick");
-            logger.Debug($"{GetSelectedTemplate().IsChanged}");
 
-            SetKeyWordsBindings(GetSelectedTemplate());
-            AddNewTab(GetSelectedTemplate());
-
-            logger.Debug($"{GetSelectedTemplate().IsChanged}");
-        }
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.Validate();
@@ -87,6 +82,12 @@ namespace CSCodeGen.UI
 
             DeleteKeyword?.Invoke(sender, args);
         }
+
+        private void listTemplate_Click(object sender, EventArgs e)
+        {
+            SetKeyWordsBindings(GetSelectedTemplate());
+            AddNewTab(GetSelectedTemplate());
+        }
         #endregion
 
         #region Methods
@@ -94,6 +95,13 @@ namespace CSCodeGen.UI
         {
             this.Load += OnLoad;
             this.FormClosing += OnFormClosing;
+        }
+
+        public bool ShowMessagBox(string message, string caption)
+        {
+           var result =  MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            return result == DialogResult.Yes;
 
         }
         private void OpenEditor(TemplateEventArgs args)
@@ -120,25 +128,32 @@ namespace CSCodeGen.UI
         private void SetKeyWordsBindings(Template currentTemplate)
         {
             bsPlatzhalter.DataSource = currentTemplate.Textbausteine;
-            pgTemplate.SelectedObject = listTemplate.SelectedItem;
+            pgTemplate.SelectedObject = currentTemplate;
         }
         private void AddNewTab(Template currentTemplate)
         {
-            if (currentTemplate == null || TabPageHelper.DictonaryContainsTemplate(currentTemplate)) { return; }
+            if (currentTemplate == null ) { return; }
 
-            var editor = new ucTemplateEditor(currentTemplate)
+
+            if (TabPageHelper.DictonaryContainsTemplate(currentTemplate))
             {
-                Dock = DockStyle.Fill
-            };
+                tcMain.SelectedTab = TabPageHelper.Tabs.FirstOrDefault(x => x.Value == currentTemplate).Key;
 
-            editor.OnClosingTap += CloseTab;
-            editor.OnSaveChanges += Save;
-            editor.OnResetChanges += ResetTextChanges;
+            }else
+            {
+                var editor = new ucTemplateEditor(currentTemplate)
+                {
+                    Dock = DockStyle.Fill
+                };
 
-            var tabPage = TabPageHelper.CreateTabPage(currentTemplate, editor);
-            tcMain.TabPages.Add(tabPage);
-            tcMain.SelectedTab = tabPage;
+                editor.OnClosingTap += CloseTab;
+                editor.OnSaveChanges += Save;
+                editor.OnResetChanges += ResetTextChanges;
 
+                var tabPage = TabPageHelper.CreateTabPage(currentTemplate, editor);
+                tcMain.TabPages.Add(tabPage);
+                tcMain.SelectedTab = tabPage;
+            }
         }
         private void ResetTextChanges(object sender, Template template)
         {
@@ -177,11 +192,9 @@ namespace CSCodeGen.UI
         {
             return listTemplate.SelectedItem as Template;
         }
-        #endregion
-
-
 
         
+        #endregion
     }
 
 }

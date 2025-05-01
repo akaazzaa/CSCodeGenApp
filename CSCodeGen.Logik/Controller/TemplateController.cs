@@ -92,9 +92,20 @@ namespace CSCodeGen.Library.Controller
                 return;
             }
 
+            if (_repository.FileExists(args.Template.Name) )
+            {
+                if (_templateView.ShowMessagBox($"Template '{args.Template.Name}' existiert bereits. Möchten Sie es überschreiben?", "Template existiert bereits")) 
+                {
+                    _repository.Save(args.Template);
+                }
+            }
+
+
+
+
             if (!_repository.GetData().Contains(args.Template))
             {
-                _templateView.ShowMessage("Warnung: Template existiert nicht, es wird nun hinzugefügt.");
+                _templateView.ShowMessage(" Template existiert nicht, es wird nun hinzugefügt.");
                 _repository.Add(args.Template);
                 _logger.Info($"Warnung: Template existiert nicht, es wird nun hinzugefügt.{args.Template}");
             }

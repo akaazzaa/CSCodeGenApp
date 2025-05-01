@@ -8,6 +8,7 @@ namespace CSCodeGen.Model.Interfaces
         BindingList<T> GetData();
         void Add(T obj);
         string Save(T obj);
+        bool FileExists(string name);
         void SaveAll();
         void LoadAll();
         void Delete(string filePath);

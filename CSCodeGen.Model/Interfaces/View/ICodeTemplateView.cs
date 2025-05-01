@@ -16,5 +16,6 @@ namespace CSCodeGen.Model.Interfaces.View
   
         void ShowTemplates(BindingList<Template> templates);
         void ShowMessage(string message);
+        bool ShowMessagBox(string message, string caption);
     }
 }
