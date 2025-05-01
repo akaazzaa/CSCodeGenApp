@@ -29,6 +29,10 @@ namespace CSCodeGenApp.CodeGen
             LoadTemplates?.Invoke(this, EventArgs.Empty);
 
         }
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             var uiData = GetUserData();
@@ -60,11 +64,11 @@ namespace CSCodeGenApp.CodeGen
             using (var workspace = new AdhocWorkspace())
             {
                 // Einrückungseinstellungen
-               var workspaceOptions = workspace.Options
+                var workspaceOptions = workspace.Options
 
-                    .WithChangedOption(FormattingOptions.IndentationSize, LanguageNames.CSharp, 4)
-                    .WithChangedOption(FormattingOptions.TabSize, LanguageNames.CSharp, 4)
-                    .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, false);
+                     .WithChangedOption(FormattingOptions.IndentationSize, LanguageNames.CSharp, 4)
+                     .WithChangedOption(FormattingOptions.TabSize, LanguageNames.CSharp, 4)
+                     .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, false);
 
                 workspaceOptions = workspaceOptions
                     .WithChangedOption(CSharpFormattingOptions.IndentBlock, true)
@@ -76,13 +80,13 @@ namespace CSCodeGenApp.CodeGen
 
                 // Den Code formatieren
                 var formattedDocument = Formatter.Format(root, workspace, workspaceOptions);
-               
+
 
                 // Das Ergebnis ausgeben
                 string formattedCode = formattedDocument.ToString();
                 return formattedCode;
             }
-            
+
         }
 
         public void Initialize()
@@ -157,10 +161,11 @@ namespace CSCodeGenApp.CodeGen
             return result;
         }
         #endregion
-       
-       
-    
 
 
+
+
+
+        
     }
 }

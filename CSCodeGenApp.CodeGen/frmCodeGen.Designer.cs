@@ -357,6 +357,7 @@ namespace CSCodeGenApp.CodeGen
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(43, 20);
             saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
             // removeToolStripMenuItem
             // 
