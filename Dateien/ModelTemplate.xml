@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OldName>ModelTemplate</OldName>
+  <ID>1</ID>
+  <Name>ModelTemplate</Name>
+  <CreationDate>2025-04-27T23:04:49.8337234+02:00</CreationDate>
+  <Content>//&lt;#Text#&gt;
+
+namespace &lt;#Namespace#&gt;
+{
+    public class &lt;#Classname#&gt;
+    {
+        //&lt;#Variable#&gt;
+        //&lt;#Property#&gt;
+        public &lt;#Classname#&gt;()
+
+        {
+            
+
+        }
+        //&lt;#FuncInt#&gt;
+        //&lt;#FuncString#&gt;
+        //&lt;#FuncBool#&gt;
+        //&lt;#FuncDouble#&gt;
+        //&lt;#FuncFloat#&gt;
+        //&lt;#Method#&gt;
+    }
+}</Content>
+  <Textbausteine>
+    <Textbaustein>
+      <ID>e7c9228e-76e8-4501-8ba6-2263faf35287</ID>
+      <Name>Property</Name>
+      <Code>public string &lt;#PropertyName#&gt; {get; set;}</Code>
+      <Type>String</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>2d09dabd-30b1-4226-aa9e-2d3c8aebf6ca</ID>
+      <Name>Property</Name>
+      <Code>public int &lt;#PropertyName#&gt; {get; set;}</Code>
+      <Type>Integer</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>cadef061-e846-43ac-8777-7a2df2f9811e</ID>
+      <Name>Property</Name>
+      <Code>public bool &lt;#PropertyName#&gt; {get; set;}</Code>
+      <Type>Boolean</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>870549f9-6017-4805-8dcb-3557944a371b</ID>
+      <Name>Property</Name>
+      <Code>public DateTime &lt;#PropertyName#&gt; {get; set;}</Code>
+      <Type>DateTime</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>95bb3c94-8c16-4072-953e-207e8f07e0fc</ID>
+      <Name>Property</Name>
+      <Code>private double &lt;#VariablenName#&gt;;</Code>
+      <Type>Double</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>8de5eb65-d5a1-490d-8c4f-407e11abeb73</ID>
+      <Name>Property</Name>
+      <Code>public float &lt;#PropertyName#&gt; {get; set;}</Code>
+      <Type>Float</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>732c1f9c-3fa1-4b25-8ef4-da6ad528c79f</ID>
+      <Name>Method</Name>
+      <Code>public void &lt;#MethodenName#&gt;()
+{  
+}</Code>
+      <Type>Method</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>3e7d17d6-c878-4e62-8065-7b3b0fc7cb53</ID>
+      <Name>Text</Name>
+      <Code>// Die ist eine automatisch generiete Klasse; </Code>
+      <Type>Text</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>15af5739-8382-4504-814b-a37e69614ca5</ID>
+      <Name>FuncInt</Name>
+      <Code>public int &lt;#FunctionName#&gt;()
+{
+    return 0;
+}</Code>
+      <Type>FuncInt</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>d2c53c22-eb08-4709-baba-221dd76cf43d</ID>
+      <Name>FuncString</Name>
+      <Code>public string &lt;#FunctionName#&gt;()
+{
+    return string.Empty;
+}</Code>
+      <Type>FuncString</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>6380a391-d353-4145-b59c-a633bc54b104</ID>
+      <Name>FuncBool</Name>
+      <Code>public bool &lt;#FunctionName#&gt;()
+{
+    return false;
+}</Code>
+      <Type>FuncBool</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>9a10baac-16e4-4bd6-ae12-f9df90ca7cdb</ID>
+      <Name>FuncDouble</Name>
+      <Code>public double &lt;#FunctionName#&gt;()
+{
+    return 0,0;
+}</Code>
+      <Type>FuncDouble</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>bfa20ef6-558f-4c12-83fb-15e2fe59c981</ID>
+      <Name>FuncFloat</Name>
+      <Code>public float &lt;#FunctionName#&gt;()
+{
+    return 0,0;
+}</Code>
+      <Type>FuncFloat</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>2d0a0ff2-eda8-49da-a3b5-c166b9339be8</ID>
+      <Name>Variable</Name>
+      <Code>private int &lt;#VariablenName#&gt;;</Code>
+      <Type>Integer</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>52782a8c-825e-46e6-9ca5-db9920e65a7c</ID>
+      <Name>Variable</Name>
+      <Code>private string &lt;#VariablenName#&gt;;</Code>
+      <Type>String</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>b1dfa611-857b-42c9-8a46-af9a453a7938</ID>
+      <Name>Variable</Name>
+      <Code>private bool &lt;#VariablenName#&gt;;</Code>
+      <Type>Boolean</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>f7f06c74-0b01-406c-b841-09a636da455b</ID>
+      <Name>Variable</Name>
+      <Code>private DateTime &lt;#VariablenName#&gt;;</Code>
+      <Type>DateTime</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>8de547b6-dba5-4edd-9bcc-82a66b959af5</ID>
+      <Name>Variable</Name>
+      <Code>private double &lt;#VariablenName#&gt;;</Code>
+      <Type>Double</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+    <Textbaustein>
+      <ID>a6879dca-e273-45c7-952c-fd2a400c9110</ID>
+      <Name>Variable</Name>
+      <Code>private float &lt;#VariablenName#&gt;;</Code>
+      <Type>Float</Type>
+      <PrefixWithComment>true</PrefixWithComment>
+    </Textbaustein>
+  </Textbausteine>
+</Template>

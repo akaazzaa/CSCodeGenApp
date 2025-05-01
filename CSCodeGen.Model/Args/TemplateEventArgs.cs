@@ -18,7 +18,7 @@ namespace CSCodeGen.Model.Args
 
         public List<Textbaustein>? Keywords { get; set; } = null;
 
-        public object? Undefined { get; set; } = null;
+        public string fullPath { get; set; } = string.Empty;
 
    
     }

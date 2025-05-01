@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Text;
 using System;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
@@ -30,8 +31,15 @@ namespace CSCodeGen.Library.Controller
             _view = classView;
             _view.LoadTemplates += OnLoadTemplates;
             _view.GenerateCode += OnGenerateCode;
+            _view.Save += OnSave;
         }
+
+
         #region Events
+        private void OnSave(object sender, GeneratorEventArgs args)
+        {
+            File.WriteAllText(args.SavePath,args.ContentResult);
+        }
         private void OnGenerateCode(object sender, GeneratorEventArgs args)
         {
             _ClassName = args.ClassName;
@@ -54,6 +62,11 @@ namespace CSCodeGen.Library.Controller
         }
         #endregion
         #region Methods
+        /// <summary>
+        /// Baut den CSharpCode zusammen.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         private string ReplaceUserValuesInTemplate(GeneratorEventArgs args)
         {
             if (args.UserValues == null || string.IsNullOrEmpty(args.TemplateName))
@@ -80,8 +93,16 @@ namespace CSCodeGen.Library.Controller
 
             return ReplaceDefaultString(args.ContentResult);
         }
+        /// <summary>
+        ///  Ersetz die Standartwerte mit den User eingaben
+        /// </summary>
+        /// <param name="ret"></param>
+        /// <param name="userValue"></param>
+        /// <returns></returns>
         private string ReplaceDefaultString(string ret, UserValue userValue = null)
         {
+            if (ret == null) { return string.Empty; }
+
             foreach (Textbaustein textbaustein in ConfigData.GetDefaults())
             {
                 switch (textbaustein.Name)
@@ -108,6 +129,11 @@ namespace CSCodeGen.Library.Controller
             }
             return ret;
         }
+        /// <summary>
+        /// Macht einen Propertynamen zu einem Variablennamen.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private static string PropertyNameToVariable(string name)
         {
             if (string.IsNullOrEmpty(name))

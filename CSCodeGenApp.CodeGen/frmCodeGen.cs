@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Formatting;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -16,6 +17,7 @@ namespace CSCodeGenApp.CodeGen
 
         public event EventHandler? LoadTemplates;
         public event EventHandler<GeneratorEventArgs>? GenerateCode;
+        public event EventHandler<GeneratorEventArgs>? Save;
 
         private GeneratorUIData _UIData = new GeneratorUIData();
         public frmCodeGen()
@@ -31,6 +33,20 @@ namespace CSCodeGenApp.CodeGen
         }
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            using(SaveFileDialog svd = new SaveFileDialog())
+            {
+                svd.Filter = "CS (*.cs)|*.cs|Alle Dateien (*.*)|*.*";
+                svd.Title = "Speichern unter";
+                svd.InitialDirectory = Globals.FolderPath;
+                if (svd.ShowDialog() == DialogResult.OK)
+                {
+                    var args = new GeneratorEventArgs();
+                    args.ContentResult = fastColoredTextBox1.Text;
+                    args.SavePath = svd.FileName;
+                    Save?.Invoke(this, args);
+                }
+
+            }
 
         }
         private void btnGenerate_Click(object sender, EventArgs e)
@@ -40,7 +56,7 @@ namespace CSCodeGenApp.CodeGen
             args.ClassName = uiData.ClassName;
             args.Namespace = uiData.NameSpace;
             args.UserValues = uiData.UserValues;
-            args.TemplateName = GetTemplateID();
+            args.TemplateName = GetTemplateName();
 
             GenerateCode?.Invoke(this, args);
         }
@@ -59,6 +75,11 @@ namespace CSCodeGenApp.CodeGen
         }
         #endregion
         #region Methods
+        /// <summary>
+        /// Formatiert den Code richtig
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public string Format(string code)
         {
             using (var workspace = new AdhocWorkspace())
@@ -88,7 +109,9 @@ namespace CSCodeGenApp.CodeGen
             }
 
         }
-
+        /// <summary>
+        /// Initialisiert die Form und Events
+        /// </summary>
         public void Initialize()
         {
             this.Load += OnLoad;
@@ -104,10 +127,18 @@ namespace CSCodeGenApp.CodeGen
             gvcbType.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
         }
+        /// <summary>
+        /// Zeigt den Text in dem Editor an
+        /// </summary>
+        /// <param name="text"></param>
         public void ShowText(string text)
         {
             fastColoredTextBox1.Text = Format(text); ;
         }
+        /// <summary>
+        /// Datenbindung 
+        /// </summary>
+        /// <param name="templates"></param>
         public void Show(BindingList<Template> templates)
         {
             templateBindingSource.DataSource = templates;
@@ -115,10 +146,18 @@ namespace CSCodeGenApp.CodeGen
 
             ChangeCurrentObjekt();
         }
+        /// <summary>
+        /// Zeigt eine MessageBox an 
+        /// </summary>
+        /// <param name="message"></param>
         public void ShowMessage(string message)
         {
             MessageBox.Show(message);
         }
+        /// <summary>
+        /// Gibt das ausgewählte Template zurück
+        /// </summary>
+        /// <returns></returns>
         private Template? GetSelectedTemplate()
         {
             if (cbTemplate.SelectedItem == null) { return null; }
@@ -127,6 +166,9 @@ namespace CSCodeGenApp.CodeGen
 
             return template;
         }
+        /// <summary>
+        /// Wechselt das Objekt und die Daten die angezeigt werden
+        /// </summary>
         private void ChangeCurrentObjekt()
         {
             var template = GetSelectedTemplate();
@@ -138,12 +180,16 @@ namespace CSCodeGenApp.CodeGen
             args.ClassName = uiData.ClassName;
             args.Namespace = uiData.NameSpace;
             args.UserValues = uiData.UserValues;
-            args.TemplateName = GetTemplateID();
+            args.TemplateName = GetTemplateName();
 
             GenerateCode?.Invoke(this, args);
 
         }
-        private string GetTemplateID()
+        /// <summary>
+        /// Gibt den Templatenamen zurück
+        /// </summary>
+        /// <returns></returns>
+        private string GetTemplateName()
         {
             var template = GetSelectedTemplate();
             if (template == null)
@@ -154,6 +200,10 @@ namespace CSCodeGenApp.CodeGen
             return template.Name;
 
         }
+        /// <summary>
+        /// Gibt die User eingabe zurück 
+        /// </summary>
+        /// <returns></returns>
         private GeneratorUIData GetUserData()
         {
             var result = (GeneratorUIData)bsDaten.DataSource;

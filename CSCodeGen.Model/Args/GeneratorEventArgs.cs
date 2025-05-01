@@ -15,5 +15,6 @@ namespace CSCodeGen.Model.Args
         public string? ContentResult { get; set; } = null;
         public string TemplateName { get; set; } = string.Empty;
         public BindingList<UserValue>? UserValues { get; set; } = null;
+        public string SavePath { get; set; } = string.Empty ;
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using CSCodeGen.DataAccess.Helper;
+using CSCodeGen.Model.Args;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Main;
 using System;
@@ -27,31 +28,36 @@ namespace CSCodeGen.DataAccess.Model.Storage
         public void Add(Template template)
         {
             _templates.Add(template);
-        }
-           
+        }  
         #region Save & Load
-        public bool Save(Template template)
+        public void Save(TemplateEventArgs args)
         {
+            if (!_templates.Contains(args.Template))
+            {
+                _templates.Add(args.Template);
+            }
+
+            string savePath = string.Empty;
+            if (args.fullPath == string.Empty)
+            {
+                savePath = GetTemplatePath(args.Template.Name);
+            }
+            else
+            {
+                savePath = args.fullPath;
+            }
+                
             try
-            { 
-               var filePath = GetTemplatePath(template.Name);
-                template.AcceptChanges();
-                XMLHelper.SerializeToXml(template, filePath); 
+            {
+                args.Template.AcceptChanges();
+                XMLHelper.SerializeToXml(args.Template, savePath);
+                
             }
             catch (Exception ex)
             {
-                template.MarkAsChanged();
-                return false;
+                args.Template.MarkAsChanged();
             }
-
-            return true;
         }
-     
-
-   
-
-       
-
         public string GetTemplatePath(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -64,15 +70,17 @@ namespace CSCodeGen.DataAccess.Model.Storage
         }
         public void Delete(string name)
         {
-
             File.Delete(GetTemplatePath(name));
         }
         public void SaveAll()
         {
-            foreach (var template in _templates.Where(t => t.IsChanged))
-            {
-                Save(template);
-            }
+            var args = new TemplateEventArgs();
+
+           foreach (var template in _templates)
+           {
+                args.Template = template;
+                Save(args);
+           }
         }
         public void LoadAll()
         {
@@ -96,11 +104,14 @@ namespace CSCodeGen.DataAccess.Model.Storage
                 }
             }
         }
+        public Template GetTemplateByFileName(string filename)
+        {
+            return _templates.FirstOrDefault(t => t.FileName == filename);
+        }
         public Template GetTemplateByName(string name)
         {
             return _templates.FirstOrDefault(t => t.Name == name);
         }
-
         public bool FileExists(string name)
         {
           return File.Exists(GetTemplatePath(name));

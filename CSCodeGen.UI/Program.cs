@@ -45,6 +45,7 @@ namespace CSCodeGen.UI
             }
 
             string templatePath = Path.Combine(Directory.GetCurrentDirectory(), templateFolder);
+            Globals.FolderPath = templatePath;
             
             IRepository<Template> storage = new TemplateRepository(templatePath);
             ICodeTemplateView view = new TemplateDesignerForm();

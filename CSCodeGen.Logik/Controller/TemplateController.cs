@@ -4,6 +4,7 @@ using CSCodeGen.Model.Args;
 using System;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Interfaces.View;
+using System.IO;
 
 
 namespace CSCodeGen.Library.Controller
@@ -93,37 +94,27 @@ namespace CSCodeGen.Library.Controller
             }
             if (!args.Template.IsChanged) { return; }
 
+            
+
             if (_repository.FileExists(args.Template.Name) )
             {
                 if (_templateView.ShowMessagBox($"Template '{args.Template.Name}' existiert bereits. Möchten Sie es überschreiben?", "Template existiert bereits")) 
                 {
-                    //// ändern 
-                    _repository.Save(args.Template);
+                    _repository.Save(args);
                 }
                 else
                 {
-                    _templateView.UseFileDialog();
+                    var fullPath =_templateView.UseFileDialog();
+                    args.fullPath = fullPath;
+                    _repository.Save(args);
                     _repository.LoadAll();
                 }
             }
-
-
-
-
-            //if (!_repository.GetData().Contains(args.Template))
-            //{
-            //    _templateView.ShowMessage(" Template existiert nicht, es wird nun hinzugefügt.");
-            //    _repository.Add(args.Template);
-            //    _logger.Info($"Warnung: Template existiert nicht, es wird nun hinzugefügt.{args.Template}");
-            //}
-            //else
-            //{
-            //    var textResult = _repository.Save(args.Template);
-
-            //   _logger.Info(textResult);
-            //    _templateView.ShowMessage(textResult);
-            //}
-
+            else
+            {
+                _repository.Save(args);
+                _templateView.ShowMessage($"Template: {args.Template.Name} wurde gespeichert");
+            }
         }
         private void OnLoadTemplates(object sender, EventArgs e)
         {

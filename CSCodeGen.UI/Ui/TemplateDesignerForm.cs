@@ -102,10 +102,10 @@ namespace CSCodeGen.UI
         {
              using(SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                var saveFolder = ConfigurationManager.AppSettings["FolderName"];
+                
                 saveFileDialog.Filter = "Textdateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*";
                 saveFileDialog.Title = "Speichern unter";
-                saveFileDialog.InitialDirectory = Path.Combine(Directory.GetCurrentDirectory(), saveFolder); ;
+                saveFileDialog.InitialDirectory = Globals.FolderPath; 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     return saveFileDialog.FileName;
