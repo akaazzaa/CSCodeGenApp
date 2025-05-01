@@ -13,8 +13,7 @@ namespace CSCodeGen.Model.Interfaces.View
     {
         event EventHandler LoadTemplates;
         event EventHandler<GeneratorEventArgs> GenerateCode;
-
-        void ShowText(string text);
+        void  ShowText(string text);
         void Show(BindingList<Template> templates);
         void ShowMessage(string message);
     }

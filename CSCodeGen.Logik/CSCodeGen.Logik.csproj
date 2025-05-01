@@ -21,6 +21,10 @@
     <None Remove="Interface\**" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.13.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\CSCodeGen.DataAccess\CSCodeGen.DataAccess.csproj" />
   </ItemGroup>
 </Project>

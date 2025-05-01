@@ -24,6 +24,9 @@
 
   <ItemGroup>
     <PackageReference Include="fastcoloredtextbox.net5" Version="2.16.26" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.13.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.13.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,26 +1,22 @@
-﻿
-
-using CSCodeGen.DataAccess.Model.Storage;
-using CSCodeGen.Model;
-using CSCodeGen.Model.Args;
+﻿using CSCodeGen.Model.Args;
 using CSCodeGen.Model.Interfaces;
 using CSCodeGen.Model.Interfaces.View;
 using CSCodeGen.Model.Main;
 using CSCodeGen.Model.Settings;
-using NLog;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Text;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using static System.Net.Mime.MediaTypeNames;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CSCodeGen.Library.Controller
 {
     public class GenerateController
     {
-
         //IRepository<Result> _resultRepository;
         IRepository<Template> _templateRepository;
         IClassView _view;
@@ -35,7 +31,7 @@ namespace CSCodeGen.Library.Controller
             _view.LoadTemplates += OnLoadTemplates;
             _view.GenerateCode += OnGenerateCode;
         }
-
+        #region Events
         private void OnGenerateCode(object sender, GeneratorEventArgs args)
         {
             _ClassName = args.ClassName;
@@ -47,15 +43,17 @@ namespace CSCodeGen.Library.Controller
             {
                 return;
             }
+            
+            ;
             _view.ShowText(ret);
         }
-
         private void OnLoadTemplates(object sender, EventArgs e)
         {
             _templateRepository.LoadAll();
             _view.Show(_templateRepository.GetData());
         }
-
+        #endregion
+        #region Methods
         private string ReplaceUserValuesInTemplate(GeneratorEventArgs args)
         {
             if (args.UserValues == null || string.IsNullOrEmpty(args.TemplateName))
@@ -82,7 +80,6 @@ namespace CSCodeGen.Library.Controller
 
             return ReplaceDefaultString(args.ContentResult);
         }
-
         private string ReplaceDefaultString(string ret, UserValue userValue = null)
         {
             foreach (Textbaustein textbaustein in ConfigData.GetDefaults())
@@ -111,26 +108,6 @@ namespace CSCodeGen.Library.Controller
             }
             return ret;
         }
-
-
-        //public static string FormatCode(string code)
-        //{
-        //    var workspace = new AdhocWorkspace();
-        //    var syntaxTree = CSharpSyntaxTree.ParseText(code);
-        //    var root = syntaxTree.GetRoot();
-
-        //    var formattedRoot = Formatter.Format(root, workspace);
-        //    return formattedRoot.ToFullString();
-        //}
-
-        //var options = workspace.Options
-        // .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, false)
-        // .WithChangedOption(FormattingOptions.TabSize, LanguageNames.CSharp, 4);
-
-        //var formattedRoot = Formatter.Format(root, workspace, options);
-
-
-
         private static string PropertyNameToVariable(string name)
         {
             if (string.IsNullOrEmpty(name))
@@ -140,7 +117,7 @@ namespace CSCodeGen.Library.Controller
 
             return $"{name.Substring(0, 1).ToLower()}{name.Substring(1, checked(name.Length - 1))}";
         }
-
+        #endregion
 
     }
 

@@ -1,12 +1,12 @@
-
-using CSCodeGen.Model;
-using CSCodeGen.Library.Controller;
-using FastColoredTextBoxNS;
-using CSCodeGen.Model.Main;
-using System.ComponentModel;
-using CSCodeGen.Model.Interfaces.View;
-using System.Drawing.Design;
 using CSCodeGen.Model.Args;
+using CSCodeGen.Model.Interfaces.View;
+using CSCodeGen.Model.Main;
+using FastColoredTextBoxNS;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Formatting;
+using Microsoft.CodeAnalysis.Formatting;
+using System.ComponentModel;
 
 namespace CSCodeGenApp.CodeGen
 {
@@ -55,6 +55,36 @@ namespace CSCodeGenApp.CodeGen
         }
         #endregion
         #region Methods
+        public string Format(string code)
+        {
+            using (var workspace = new AdhocWorkspace())
+            {
+                // Einrückungseinstellungen
+               var workspaceOptions = workspace.Options
+
+                    .WithChangedOption(FormattingOptions.IndentationSize, LanguageNames.CSharp, 4)
+                    .WithChangedOption(FormattingOptions.TabSize, LanguageNames.CSharp, 4)
+                    .WithChangedOption(FormattingOptions.UseTabs, LanguageNames.CSharp, false);
+
+                workspaceOptions = workspaceOptions
+                    .WithChangedOption(CSharpFormattingOptions.IndentBlock, true)
+                    .WithChangedOption(CSharpFormattingOptions.IndentBraces, false);
+
+                // Ein SyntaxTree aus dem Code erstellen
+                var tree = CSharpSyntaxTree.ParseText(code);
+                var root = tree.GetCompilationUnitRoot().NormalizeWhitespace();
+
+                // Den Code formatieren
+                var formattedDocument = Formatter.Format(root, workspace, workspaceOptions);
+               
+
+                // Das Ergebnis ausgeben
+                string formattedCode = formattedDocument.ToString();
+                return formattedCode;
+            }
+            
+        }
+
         public void Initialize()
         {
             this.Load += OnLoad;
@@ -72,7 +102,7 @@ namespace CSCodeGenApp.CodeGen
         }
         public void ShowText(string text)
         {
-            fastColoredTextBox1.Text = text;
+            fastColoredTextBox1.Text = Format(text); ;
         }
         public void Show(BindingList<Template> templates)
         {
@@ -93,17 +123,22 @@ namespace CSCodeGenApp.CodeGen
 
             return template;
         }
-
         private void ChangeCurrentObjekt()
         {
             var template = GetSelectedTemplate();
 
             if (template == null) { return; }
 
-            ShowText(template.Content);
+            var uiData = GetUserData();
+            var args = new GeneratorEventArgs();
+            args.ClassName = uiData.ClassName;
+            args.Namespace = uiData.NameSpace;
+            args.UserValues = uiData.UserValues;
+            args.TemplateName = GetTemplateID();
+
+            GenerateCode?.Invoke(this, args);
 
         }
-
         private string GetTemplateID()
         {
             var template = GetSelectedTemplate();
@@ -115,7 +150,6 @@ namespace CSCodeGenApp.CodeGen
             return template.Name;
 
         }
-
         private GeneratorUIData GetUserData()
         {
             var result = (GeneratorUIData)bsDaten.DataSource;
@@ -123,8 +157,10 @@ namespace CSCodeGenApp.CodeGen
             return result;
         }
         #endregion
-
-
        
+       
+    
+
+
     }
 }
