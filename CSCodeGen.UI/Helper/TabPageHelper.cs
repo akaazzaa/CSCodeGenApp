@@ -15,11 +15,17 @@ namespace CSCodeGen.UI.UIKlassen
     public class TabPageHelper
     {
         public static Dictionary<TabPage, Template> Tabs = new Dictionary<TabPage, Template>();
+        /// <summary>
+        /// Erstellt eine neue TabPage mit dem Template und dem Editor
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="editor"></param>
+        /// <returns></returns>
         public static TabPage CreateTabPage(Template template, ucTemplateEditor editor)
         {
             if (template == null)
             {
-                throw new ArgumentNullException("Fehler! Tabpage konnte nicht erstellt werden!");
+                return null;
             }
 
             var tabPage = new TabPage(template.Name)
@@ -32,12 +38,20 @@ namespace CSCodeGen.UI.UIKlassen
 
             return tabPage;
         }
-
+        /// <summary>
+        /// Überprüft, ob die TabPage im Dictionary vorhanden ist
+        /// </summary>
+        /// <param name="tapPage"></param>
+        /// <returns></returns>
         public static bool DictonaryContaisTabPage(TabPage tapPage)
         {
             return Tabs.ContainsKey(tapPage);
         }
-
+        /// <summary>
+        /// Überprüft, ob das Template im Dictionary vorhanden ist
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
         public static bool DictonaryContainsTemplate(Template template)
         {
             return Tabs.ContainsValue(template);

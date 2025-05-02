@@ -27,6 +27,9 @@ namespace CSCodeGen.UI.Ui
         }
 
         #region Mthods
+        /// <summary>
+        /// Initialisiert die Form
+        /// </summary>
         public void Initialize()
         {
             ucEditor = new ucEditor();
@@ -36,7 +39,10 @@ namespace CSCodeGen.UI.Ui
             pnlRight.Controls.Add(ucEditor);
             ShowKeywords(_args.Template.Textbausteine);
         }
-
+        /// <summary>
+        /// Zeigt die Textbausteine in der Liste an
+        /// </summary>
+        /// <param name="keywords"></param>
         public void ShowKeywords(IEnumerable<Textbaustein> keywords)
         {
             textbausteinBindingSource.DataSource = keywords;
@@ -46,12 +52,22 @@ namespace CSCodeGen.UI.Ui
         }
         #endregion
         #region Events
+        /// <summary>
+        /// Wird aufgerufen, wenn der Code im Editor geändert wird
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CodeChanged(object sender, string e)
         {
             if (_textbaustein == null) { return; }
 
             _textbaustein.Code = e;
         }
+        /// <summary>
+        /// Wird aufgerufen, wenn der Benutzer eine Zeile in der Liste auswählt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gvDaten_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             this.Validate();
@@ -66,11 +82,20 @@ namespace CSCodeGen.UI.Ui
             }
             ucEditor.ShowContent(_textbaustein);
         }
+        /// <summary>
+        /// Wird aufgerufen, wenn der Benutzer den Button Hinzufügen klickt  
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             textbausteinBindingSource.Add(new Textbaustein());
         }
-
+        /// <summary>
+        /// Wird aufgerufen, wenn der Benutzer den Button Speichern klickt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if(textbausteinBindingSource.Current == null) { return; }
